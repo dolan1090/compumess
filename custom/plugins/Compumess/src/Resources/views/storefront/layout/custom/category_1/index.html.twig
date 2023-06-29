@@ -1,0 +1,12 @@
+{% sw_extends '@Storefront/storefront/layout/sidebar.html.twig' %}
+
+{% block content %}
+    <div class="custom-category-layout">
+        <h1>{{ category.translated.name }}</h1>
+        <ul>
+            {% for subCategory in categories %}
+                <li>{{ subCategory.translated.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

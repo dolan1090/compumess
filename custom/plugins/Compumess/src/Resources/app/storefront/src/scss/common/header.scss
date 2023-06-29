@@ -1,0 +1,260 @@
+.header-main {
+  padding-top: 30px;
+  background: $theme-header-bg;
+  position: relative;
+
+  .header-box-top {
+    max-width: 1020px;
+    margin: auto;
+    padding: 0;
+
+    .header-logo-main {
+      max-width: $compumess-base-logo-container-width;
+
+      .header-logo-picture {
+        min-width: unset;
+
+        img {
+          width: 82%;
+        }
+      }
+    }
+  }
+
+  .header-logo-col {
+    margin-top: 20px;
+    padding-right: 0;
+
+    @media (min-width: 481px) {
+      .column-hotline-header {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      padding-left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .header-search-col {
+    padding: 0;
+
+    .header-search {
+      max-width: 100%;
+
+      input.form-control.header-search-input {
+        box-shadow: unset;
+      }
+    }
+  }
+
+  .header-actions-col {
+    @media (max-width: 480px) {
+      padding-left: 5px;
+      padding-bottom: 15px;
+
+      .column-hotline-header {
+        display: none;
+      }
+    }
+    // .menu-button {
+    //   svg {
+    //     color: $theme-header-text-color;
+    //   }
+    // }
+
+    @media (max-width: 480px) {
+      .search-toggle {
+        max-height: 38px;
+        margin-right: 15px;
+
+        // svg {
+        //   color: $theme-header-text-color;
+        // }
+      }
+    }
+  }
+
+  .column-hotline-header {
+    color: $theme-header-text-color;
+    text-align: right;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 1rem;
+
+    .text-hotline {
+      margin-left: 20px;
+      position: relative;
+    }
+
+    a {
+      color: $theme-header-link-color;
+    }
+  }
+
+  ul.note-header {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li.navigation--entry.entry--notepad {
+      background: #fff;
+      border-radius: 5px;
+    }
+  }
+}
+
+.nav-main {
+  background: $theme-main-navigation-bg;
+
+  nav.nav.main-navigation-menu {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  a.nav-link {
+    color: #fff;
+    padding: 0 25px;
+    line-height: 30px;
+    font-size: 1.125rem;
+    margin: 0;
+
+    &:hover {
+      color: #fff;
+    }
+
+    &.active {
+      color: #fff;
+    }
+  }
+
+  .main-navigation-link {
+    position: relative;
+
+    .main-navigation-link-text {
+      border: none;
+      line-height: 71px;
+      padding: 0;
+    }
+
+    &:after {
+      border: 3px solid;
+      border-radius: 4px;
+      color: #fff;
+      content: "";
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      box-sizing: border-box;
+      opacity: 0;
+    }
+
+    &.active {
+      &:after {
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  .navigation-flyout-bar {
+    font-size: 1rem;
+    padding: 0;
+    background: #3f4c58;
+    color: #fff;
+    font-weight: bold;
+    margin: 0px;
+
+    .icon.icon-x {
+      color: #fff;
+    }
+  }
+
+  .row.navigation-flyout-categories.is-level-0 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    .box-is-level-0 {
+      padding-bottom: 20px;
+    }
+  }
+
+  .navigation-flyout-categories.is-level-1 {
+    box-shadow: unset;
+  }
+
+  .navigation-flyout-categories {
+    box-shadow: 0 10px 25px -15px #000;
+    margin: 0;
+
+    a.nav-item.nav-link.navigation-flyout-link.is-level-0 {
+      color: #330330;
+      font-size: 1rem;
+      padding-right: 0;
+
+      &:hover {
+        padding-left: 0;
+        color: #004b93;
+      }
+    }
+
+    &.is-level-0 > .navigation-flyout-col::before {
+      display: none;
+    }
+  }
+
+  .navigation-flyout-col.box-is-level-0:nth-child(2n + 2) {
+    padding-left: 0;
+  }
+
+  .navigation-flyout-col.box-is-level-0:nth-child(2n + 2) a {
+    padding-left: 0;
+  }
+
+  .menu--teaser {
+    position: relative;
+
+    &::before {
+      border-left: 1px solid #ecece7;
+      content: "";
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    .teaser--headline {
+      font-size: 1.3125rem;
+      margin: 0rem 0rem 1.25rem 0rem;
+      font-weight: bold;
+    }
+
+    .teaser--text-link {
+      color: #004b93;
+    }
+  }
+
+  a.nav-item.nav-link.navigation-flyout-link.is-level-1 {
+    color: #3f4c58;
+    padding-right: 0;
+
+    &:hover {
+      padding-left: 0;
+      color: #004b93;
+    }
+  }
+}
