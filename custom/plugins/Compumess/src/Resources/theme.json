@@ -777,7 +777,7 @@
           "de-DE": "Produktname Farbe"
         },
         "type": "color",
-        "value": "#484848",
+        "value": "#3f4c58",
         "editable": true,
         "tab": "product",
         "block": "product"

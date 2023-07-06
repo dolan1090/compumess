@@ -1,0 +1,62 @@
+{% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+    <div class="content--description">
+        <table class="product--properties-table">
+            <tbody>
+                <tr>
+                    <td style=" background: none; ">
+                        {{ page.product.translated.customFields.migration_ComuMess5_product_header_description|raw }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+        <div class="product--properties panel has--border">
+            <table class="product--properties-table">
+                <tbody>
+                    <tr class="product--properties-row">
+                        <td class="product--properties-label is--bold">
+                            Serie
+                        </td>
+                        <td class="product--properties-value">
+                            {{ page.product.translated.customFields.migration_ComuMess5_product_series }}
+                        </td>
+                    </tr>
+                    <tr class="product--properties-row">
+                        <td class="product--properties-label is--bold">
+                            Ausgangsspannung
+                        </td>
+                        <td class="product--properties-value">
+                            {{ page.product.translated.customFields.migration_ComuMess5_product_ausgangsspannung }}
+                        </td>
+                    </tr>
+                    <tr class="product--properties-row">
+                        <td class="product--properties-label is--bold">
+                            Ausgänge
+                        </td>
+                        <td class="product--properties-value">
+                            {{ page.product.translated.customFields.migration_ComuMess5_product_attr6 }}
+                        </td>
+                    </tr>
+                    <tr class="product--properties-row">
+                        <td class="product--properties-label is--bold">
+                            Kategorie
+                        </td>
+                        <td class="product--properties-value">
+                            {{ page.product.translated.customFields.migration_ComuMess5_product_kategorie }}
+                        </td>
+                    </tr>
+                    <tr class="product--properties-row">
+                        <td class="product--properties-label is--bold">
+                            Beschreibung
+                        </td>
+                        <td class="product--properties-value">
+                            {{ page.product.translated.customFields.migration_ComuMess5_product_bullet_point|raw }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

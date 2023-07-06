@@ -1,0 +1,75 @@
+{% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+    <div class="content--description">
+        <div class="content--title">
+            Produktinformationen "{{ page.product.translated.name }}"        
+        </div>
+        <table class="dcf-table dcf-table-responsive dcf-table-bordered dcf-table-striped dcf-w-10%">
+            <thead>
+                <tr>
+                    <th data-label="Serie" scope="col">
+                        Serie
+                    </th>
+                    <th data-label="Ausgangsspannung" scope="col">
+                        Ausgangsspannung
+                    </th>
+                    <th data-label="Phasen" scope="col">
+                        Phasen
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Serie">
+                        <a href="{{ app.request.attributes.parameters.get('sw-original-request-uri') }}">
+                            <u>
+                                {{ page.product.translated.customFields.migration_ComuMess5_product_series }}
+                            </u>
+                        </a>
+                    </td>
+                    <td data-label="Ausgangsspannung">
+                        {{ page.product.translated.customFields.migration_ComuMess5_product_ausgangsspannung }}
+                    </td>
+                    <td data-label="Phasen">
+                        {{ page.product.translated.customFields.migration_ComuMess5_product_attr6 }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="dcf-table dcf-table-responsive dcf-table-bordered dcf-table-striped dcf-w-10%">
+            <thead>
+                <tr>
+                    <th data-label="Modell" scope="col">
+                        Modell
+                    </th>
+                    <th data-label="Ausgangsspannung" scope="col">
+                        Ausgangsspannung
+                    </th>
+                    <th data-label="Phasen" scope="col">
+                        Phasen
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="content--title">
+            Weiterführende Links zu "{{ page.product.translated.name }}"        
+        </div>
+        <ul class="content--list list--unstyled pd-0">
+            <li class="list--entry">
+                <a href="/ihr-persoenliches-angebot/?sInquiry=detail&amp;sOrdernumber={{ page.product.productNumber }}" rel="nofollow" class="content--link link--contact" title="Fragen zum Artikel?">
+                    <i class="fa-solid fa-chevron-right"></i>
+                    Fragen zum Artikel?                
+                </a>
+            </li>
+            <li class="list--entry">
+                <a href="/chroma/" target="_parent" class="content--link link--supplier" title="Weitere Artikel von {{ page.product.manufacturer.name }}">
+                    <i class="fa-solid fa-chevron-right"></i>
+                    Weitere Artikel von {{ page.product.manufacturer.name }}
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
