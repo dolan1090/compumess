@@ -1,6 +1,6 @@
 @font-face {
   font-family: Lato;
-  src: url(./Lato/Lato-Regular.ttf);
+  src: url('/custom/plugins/Compumess/src/Resources/app/storefront/src/scss/common/Lato/Lato-Regular.ttf');
   font-display: swap;
 }
 
@@ -27,6 +27,10 @@
 body {
   font-family: Lato;
   font-size: 16px;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  font-family: Lato;
 }
 
 textarea, input[type="text"], input[type="search"], input[type="password"], input[type="number"], input[type="email"], input[type="tel"] {
@@ -76,6 +80,29 @@ textarea, input[type="text"], input[type="search"], input[type="password"], inpu
   border-color: #004b93;
 }
 
+.list--unstyled {
+  list-style: none;
+}
+
 .container-main {
   padding-top: 0;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 1px;
+}
+
+table th, table thead td {
+  background: #5f7285;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+}
+
+table td {
+  padding: 0.3125rem 0.625rem 0.3125rem 0.625rem;
+  background: #fff;
+  color: #5f7285;
+  border: 1px solid #fff;
 }
