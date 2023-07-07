@@ -1,6 +1,6 @@
 /.idea
 /vendor/
-/.vscode
+/.vscode/
 
 ###> shopware/core ###
 .env
