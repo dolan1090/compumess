@@ -1,0 +1,140 @@
+{% block component_product_box %}
+	{% if product %}
+		{% set name = product.translated.name %}
+		{% set id = product.id %}
+		{% set cover = product.cover.media %}
+		{% set variation = product.variation %}
+		{% set displayParent = product.variantListingConfig.displayParent and product.parentId === null %}
+
+		<div class="card product-box box-{{ layout }}">
+		{# {{ dump() }} #}
+			{% block component_product_box_content %}
+				<div class="card-body">
+
+					{% block component_product_box_image %}
+						<div
+							class="product-image-wrapper">
+							{# fallback if display mode is not set #}
+							{% set displayMode = displayMode ?: 'standard' %}
+
+							{# set display mode 'cover' for box-image with standard display mode #}
+							{% if layout == 'image' and displayMode == 'standard' %}
+								{% set displayMode = 'cover' %}
+							{% endif %}
+
+							{% block component_product_box_image_link %}
+								<a href="{{ seoUrl('frontend.detail.page', { 'productId': id }) }}" title="{{ name }}" class="product-image-link is-{{ displayMode }}">
+									{% block component_product_box_image_link_inner %}
+										{% if cover.url %}
+											{% set attributes = {
+                                            'class': 'product-image is-'~displayMode,
+                                            'alt': (cover.translated.alt ?: name),
+                                            'title': (cover.translated.title ?: name),
+                                            'loading': 'lazy'
+                                        } %}
+
+											{% if displayMode == 'cover' or displayMode == 'contain' %}
+												{% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+											{% endif %}
+
+											{% block component_product_box_image_thumbnail %}
+												{% sw_thumbnails 'product-image-thumbnails' with {
+                                                media: cover,
+                                                sizes: sizes
+                                            } %}
+											{% endblock %}
+										{% else %}
+											{% block component_product_box_image_placeholder %}
+												<div class="product-image-placeholder">
+													{% sw_icon 'placeholder' style {
+                                                    'size': 'fluid'
+                                                } %}
+												</div>
+											{% endblock %}
+										{% endif %}
+									{% endblock %}
+								</a>
+							{% endblock %}
+
+							{% if config('core.cart.wishlistEnabled') %}
+								{% block component_product_box_wishlist_action %}
+									{% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
+                                    appearance: 'circle',
+                                    productId: id
+                                } %}
+								{% endblock %}
+							{% endif %}
+						</div>
+					{% endblock %}
+
+					{% block component_product_box_info %}
+						<div class="product-info">
+
+							{% block component_product_box_name %}
+								<a href="{{ seoUrl('frontend.detail.page', {'productId': id}) }}" class="product-name" title="{{ name }}">
+									{{ name }}
+								</a>
+							{% endblock %}
+
+							{% block component_product_box_description %}
+								<div
+									class="product-description">
+									{# {{ product.translated.description|striptags|raw }} #}
+									{{ product.customFields.migration_ComuMess5_product_subtitle }}
+								</div>
+							{% endblock %}
+
+							{% block component_product_box_action %}
+								<div class="product--actions">
+									<form action="https://compumess.de/note/add/ordernumber/62000D" method="post">
+										<button type="submit" title="Auf den Merkzettel" aria-label="Auf den Merkzettel" class="product--action action--note" data-ajaxurl="https://compumess.de/note/ajaxAdd/ordernumber/62000D" data-text="">
+											<i class="icon--heart">
+												<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="25px" viewbox="0 0 935.801 935.801" style="enable-background:new 0 0 935.801 935.801;" xml:space="preserve">
+													<g>
+														<path d="M35.959,882.9c0,29.199,23.7,52.9,52.9,52.9h283.6h283.6c29.2,0,52.9-23.701,52.9-52.9V583.699L670.66,667
+															                                                                                    c-5.9,12.9-15.601,23.301-27.9,30.301l-0.2,0.1l-0.2,0.1L531.66,758c-6.7,3.699-14.301,5.6-22,5.6c-10.301,0-20.4-3.5-28.4-9.9
+															                                                                                    c-8.4-6.699-14.3-16.1-16.5-26.699l-20.5-98.5h-246.1c-13.8,0-25-11.199-25-25s11.2-25,25-25h240.8c1-5.4,2.7-10.699,5-15.699
+															                                                                                    l32.1-69.801h-277.9c-13.8,0-25-11.199-25-25c0-13.8,11.2-25,25-25h300.9l121.5-263.899l12.5-27.2l0.2,0.1l0.8-1.8l29-62.9
+															                                                                                    c-2.3-0.3-4.7-0.5-7.1-0.5h-283.5h-94.3v17.5c0.199,1.8,0.3,3.7,0.3,5.6v144.9c0,41.1-33.4,74.5-74.5,74.5h-145
+															                                                                                    c-1.5,0-3.1-0.1-4.6-0.2h-18.4V882.9z M198.159,706h185c13.8,0,25,11.199,25,25s-11.2,25-25,25h-185c-13.8,0-25-11.199-25-25
+															                                                                                    S184.359,706,198.159,706z"></path>
+														<path d="M203.959,299.2c24.6,0,44.5-19.9,44.5-44.5v-145c0-13.4-11-22.3-22.4-22.3c-5.5,0-11,2-15.6,6.6l-167.2,167.2
+															                                                                                    c-14,14-4.1,38,15.7,38H203.959z"></path>
+														<path d="M870.759,42l-81.3-37.4c-6.8-3.1-13.9-4.6-20.9-4.6c-18.899,0-37,10.8-45.5,29.1l-17,36.9l171.9,79l0.2,0.1l17-36.9
+															                                                                                    C906.859,83.2,895.859,53.5,870.759,42z"></path>
+														<polygon points="864.759,173.9 865.559,172.4 693.359,93.3 692.66,94.8 690.559,99.4 661.459,162.6 708.959,184.5 833.559,241.7
+															                                                                                    "></polygon>
+														<polygon points="708.959,511.9 819.959,270.7 708.959,219.7 647.859,191.6 532.16,442.9 509.16,492.9 475.859,565.199
+															                                                                                    503.759,578.5 588.059,618.5 647.059,646.5 	"></polygon>
+														<path d="M468.059,594.801c0.101,1.1,0.3,2.199,0.5,3.199l6.3,30.5l19.2,92.5c1.601,7.699,8.4,12.6,15.601,12.6c2.5,0,5.1-0.6,7.6-2
+															                                                                                    l110.7-60.5c0.2-0.1,0.3-0.199,0.5-0.299l-89.3-42.4L468.059,594.801z"></path>
+													</g>
+												</svg>
+											</i>
+											<span class="action--text">
+												Merken
+											</span>
+										</button>
+									</form>
+									<a href="/62000d-ac/dc-programmierbar-aus-1800-v-chroma/#download-tab" class="icon-mail-to">
+										<img src="{{ asset('bundles/compumess/assets/download-img.png') }}" alt="Download Image" class="image-dowload-tab">
+										Produktblätter
+									</a>
+									<a href="/62000d-ac/dc-programmierbar-aus-1800-v-chroma/#description-tab" class="icon-mail-to icon--search">
+										<i class="fa-solid fa-magnifying-glass"></i>
+										Serien- und Modellübersicht
+									</a>
+									<div class="zum-produkte">
+										<a class="btn is--primary" href="/62000d-ac/dc-programmierbar-aus-1800-v-chroma/">
+											Zum Produkt
+										</a>
+									</div>
+								</div>
+							{% endblock %}
+						</div>
+					{% endblock %}
+				</div>
+			{% endblock %}
+		</div>
+	{% endif %}
+{% endblock %}
