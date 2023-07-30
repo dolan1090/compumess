@@ -60,6 +60,7 @@
         display: none;
       }
     }
+
     // .menu-button {
     //   svg {
     //     color: $theme-header-text-color;
@@ -99,14 +100,12 @@
     }
   }
 
-  ul.note-header {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li.navigation--entry.entry--notepad {
-      background: #fff;
-      border-radius: 5px;
+  .header-wishlist {
+    #wishlist-basket {
+      background: unset;
+      color: unset;
+      border: 1px solid;
+      position: unset;
     }
   }
 }
@@ -171,6 +170,11 @@
     }
   }
 
+  .navigation-flyout.is-open {
+    background: unset;
+    box-shadow: unset;
+  }
+
   .navigation-flyout-bar {
     font-size: 1rem;
     padding: 0;
@@ -200,6 +204,7 @@
   .navigation-flyout-categories {
     box-shadow: 0 10px 25px -15px #000;
     margin: 0;
+    background: #fff;
 
     a.nav-item.nav-link.navigation-flyout-link.is-level-0 {
       color: #330330;
@@ -212,7 +217,7 @@
       }
     }
 
-    &.is-level-0 > .navigation-flyout-col::before {
+    &.is-level-0>.navigation-flyout-col::before {
       display: none;
     }
   }

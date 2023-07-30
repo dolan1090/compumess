@@ -27,13 +27,32 @@
 body {
   font-family: Lato;
   font-size: 16px;
+  background-color: #E6E6E4;
+  color: #5f7285;
 }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
   font-family: Lato;
 }
 
-textarea, input[type="text"], input[type="search"], input[type="password"], input[type="number"], input[type="email"], input[type="tel"] {
+textarea,
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="tel"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -93,7 +112,8 @@ table {
   border-spacing: 1px;
 }
 
-table th, table thead td {
+table th,
+table thead td {
   background: #5f7285;
   color: #fff;
   font-weight: 700;

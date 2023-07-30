@@ -46,7 +46,7 @@
   }
 
   .product-detail-buy {
-    .alert.is--info.is--rounded {      
+    .alert.is--info.is--rounded {
 
       @media (min-width: 768px) {
         width: 50%;
@@ -80,6 +80,35 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      .product-wishlist {
+        margin-top: 0;
+
+        .icon-wishlist-added {
+          color: #2ecc71;
+        }
+
+        .product-wishlist-not-added {
+          background: unset;
+          border: none;
+          align-items: center;
+          gap: 5px;
+          display: flex;
+        }
+
+        .product-wishlist-added {
+          background: unset;
+          border: none;
+          align-items: center;
+          gap: 5px;
+          display: flex;
+          color: #2ecc71;
+        }
+
+        .product-wishlist-btn-content {
+          text-decoration: none;
+        }
+      }
 
       .action--text,
       a {

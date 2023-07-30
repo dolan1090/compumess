@@ -127,11 +127,30 @@
         justify-content: space-between;
         align-items: center;
 
+        .product-wishlist {
+          margin-top: 0px;
+        }
+
         button.product--action.action--note {
           background: unset;
           border: none;
           align-items: center;
           gap: 5px;
+          display: flex;
+
+          &.product-wishlist-added {
+            .icon-wishlist-added {
+              color: #2ecc71;
+            }
+
+            .text-wishlist-remove {
+              color: #2ecc71;
+            }
+          }
+
+          .product-wishlist-btn-content {
+            text-decoration: none;
+          }
         }
 
         a.icon-mail-to {
