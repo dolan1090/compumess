@@ -71,7 +71,7 @@
 						<div class="product-info">
 
 							{% block component_product_box_name %}
-								<a href="{{ seoUrl('frontend.detail.page', {'productId': id}) }}" class="product-name" title="{{ name }}">
+								<a href="{{ seoUrl('frontend.detail.page', {'productId': id}) }}" class="product-name" title="{{ name }}" data-product-id='{{id}}'>
 									{{ name }}
 								</a>
 							{% endblock %}

@@ -40,7 +40,7 @@
 				<strong class="entry--label">
 					Artikel-Nr.:
 				</strong>
-				<meta itemprop="productID" content="36027">
+				<meta itemprop="productID" content="{{page.product.id}}">
 				<span class="entry--content" itemprop="sku">
 					{{ page.product.productNumber }}
 				</span>
@@ -160,10 +160,10 @@
 		{% endblock %}
 
 		{# {% block page_product_detail_price %}
-														<div class="product-detail-price-container">
-															{% sw_include '@Storefront/storefront/page/product-detail/buy-widget-price.html.twig' %}
-														</div>
-													{% endblock %} #}
+																<div class="product-detail-price-container">
+																	{% sw_include '@Storefront/storefront/page/product-detail/buy-widget-price.html.twig' %}
+																</div>
+															{% endblock %} #}
 
 		{# {% block page_product_detail_tax %}
 						<div class="product-detail-tax-container">

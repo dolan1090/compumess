@@ -1,1 +1,1 @@
-(self.webpackChunk=self.webpackChunk||[]).push([["compumess"],{3492:()=>{var e,t;e=document.querySelector(".filter-panel-wrapper .action--filter-btn"),t=document.querySelector(".filter-panel-wrapper .filter-panel .filter-panel-items-container"),e.addEventListener("click",(function(){e.classList.toggle("filter-actived"),t.classList.toggle("active")}))},2169:(e,t,l)=>{"use strict";l(3492)}},e=>{var t;t=2169,e(e.s=t)}]);
+(self.webpackChunk=self.webpackChunk||[]).push([["compumess"],{2169:()=>{}},s=>{var e;e=2169,s(s.s=e)}]);
