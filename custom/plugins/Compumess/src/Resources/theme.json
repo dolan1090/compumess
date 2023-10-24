@@ -5,12 +5,12 @@
   "style": [
     "app/storefront/src/scss/overrides.scss",
     "@Storefront",
-    "app/storefront/src/fontawesome-640/css/all.min.css",
     "app/storefront/src/scss/base.scss"
   ],
   "script": [
     "@Storefront",    
-    "app/storefront/src/fontawesome-640/js/all.min.js",
+    "app/storefront/src/assets/fontawesome-640/js/all.min.js",
+    "app/storefront/src/js/main.js",
     "app/storefront/dist/storefront/js/compumess.js"
   ],
   "asset": ["@Storefront", "app/storefront/src/assets"],

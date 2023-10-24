@@ -1,6 +1,6 @@
 @font-face {
   font-family: Lato;
-  src: url('/custom/plugins/Compumess/src/Resources/app/storefront/src/scss/common/Lato/Lato-Regular.ttf');
+  src: url('#{$my-asset-path}/fonts/Lato/Lato-Regular.ttf');
   font-display: swap;
 }
 
