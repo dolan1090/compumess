@@ -7,6 +7,8 @@ function filterBtnCustom() {
         filterTriggerBtn.classList.toggle('filter-actived');
         filterPanelItemsContainer.classList.toggle('active');
     });
+
+    console.log('js filterBtnCustom');
 }
 filterBtnCustom();
 
