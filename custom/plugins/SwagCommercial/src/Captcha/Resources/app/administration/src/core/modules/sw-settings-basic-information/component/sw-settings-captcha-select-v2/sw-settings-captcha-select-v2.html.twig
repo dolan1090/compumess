@@ -1,0 +1,35 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_settings_captcha_select_v2 %}
+    <sw-container class="sw-settings-captcha-select-v2">
+        {% parent %}
+
+        <sw-container
+            v-if="currentValue.friendlyCaptcha.isActive"
+            class="sw-settings-captcha-select-v2__friendly-captcha"
+        >
+            <p class="sw-settings-captcha-select-v2__description sw-settings-captcha-select-v2__friendly-captcha-description">
+                {{ $tc('sw-settings-basic-information.captcha.label.friendlyCaptchaDescription') }}
+            </p>
+
+            <sw-text-field
+                {% if VUE3 %}
+                    v-model:value="currentValue.friendlyCaptcha.config.siteKey"
+                {% else %}
+                    v-model="currentValue.friendlyCaptcha.config.siteKey"
+                {% endif %}
+                name="googleReCaptchaV2SiteKey"
+                :label="$tc('sw-settings-basic-information.captcha.label.friendlyCaptchaSiteKey')"
+            />
+
+            <sw-text-field
+                {% if VUE3 %}
+                    v-model:value="currentValue.friendlyCaptcha.config.secretKey"
+                {% else %}
+                    v-model="currentValue.friendlyCaptcha.config.secretKey"
+                {% endif %}
+                name="googleReCaptchaV2SecretKey"
+                :label="$tc('sw-settings-basic-information.captcha.label.friendlyCaptchaSecretKey')"
+            />
+        </sw-container>
+    </sw-container>
+{% endblock %}

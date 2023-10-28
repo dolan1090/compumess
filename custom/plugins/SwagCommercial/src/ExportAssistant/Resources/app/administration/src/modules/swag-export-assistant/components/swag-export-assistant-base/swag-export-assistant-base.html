@@ -1,0 +1,51 @@
+<div class="sw-import-export-assistant">
+    <h4 class="sw-import-export-assistant__title">
+        {{ $tc('swag-export-assistant.base.title') }}
+    </h4>
+
+    <p>{{ $tc('swag-export-assistant.base.subtitle') }}</p>
+
+    <ul class="sw-import-export-assistant__example">
+        <li
+            v-for="(item, index) in [
+                `${$tc('swag-export-assistant.base.example.exampleOne')}`,
+                `${$tc('swag-export-assistant.base.example.exampleTwo')}`,
+                `${$tc('swag-export-assistant.base.example.exampleThree')}`,
+            ]"
+            :key="index"
+        >
+            <sw-icon
+                name="regular-lightbulb"
+                color="#189eff"
+                size="16px"
+            />
+            "{{ item }}"
+        </li>
+    </ul>
+
+    <sw-text-field
+        v-model="searchTerm"
+        required
+        :label="$tc('swag-export-assistant.base.label')"
+        :help-text="$tc('swag-export-assistant.base.helpText')"
+        :placeholder="$tc('swag-export-assistant.base.placeholder')"
+        @keydown.enter="onEnter"
+    />
+
+    <sw-button
+        class="sw-import-export-assistant__button-preview"
+        size="small"
+        variant="primary"
+        :disabled="disabled"
+        @click="turnOnModalPreview"
+    >
+        {{ $tc('swag-export-assistant.default.preview') }}
+    </sw-button>
+
+    <swag-export-assistant-modal
+        v-if="showModalPreview"
+        :search-term="searchTerm"
+        @export-started="$emit('export-started', $event)"
+        @turn-off-modal-preview="turnOffModalPreview"
+    />
+</div>

@@ -1,0 +1,57 @@
+@import "~scss/variables.scss";
+
+.sw-condition-tree-override.is--preview-enabled {
+    .condition-tree-node-override {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0 10px;
+        align-items: center;
+
+        .container-condition-level__is--even,
+        .container-condition-level__is--odd {
+            padding-right: 10px;
+        }
+
+        .condition-all-line-items-container {
+            padding-right: 0;
+
+            & > .condition-tree-node-override {
+                display: block;
+
+                & > .sw-rule-builder-preview-indicator {
+                    display: none;
+                }
+            }
+        }
+
+        [class$="__actions"] {
+            padding-right: 64px;
+        }
+    }
+
+    .sw-condition-tree > .condition-tree-node-override {
+        display: block;
+
+        & > .container-condition-level__is--even {
+            padding-right: 32px;
+        }
+
+        & > .sw-rule-builder-preview-indicator {
+            display: none;
+        }
+    }
+
+    .sw-condition {
+        .sw-condition__container.has--error {
+            border-color: $color-gray-900;
+        }
+    }
+
+    .sw-condition-type-select.has--error {
+        background-color: $color-gray-900;
+    }
+
+    .sw-field__error {
+        color: $color-gray-900;
+    }
+}

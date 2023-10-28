@@ -1,0 +1,17 @@
+{% block sw_customer_detail_company %}
+<div class="sw-customer-detail-company">
+    {% block sw_customer_detail_company_employees %}
+    <sw-customer-employee-card
+        v-if="acl.can('b2b_employee_management.viewer')"
+        :customer="customer"
+    ></sw-customer-employee-card>
+    {% endblock %}
+
+    {% block sw_customer_detail_company_roles %}
+        <sw-customer-role-card
+            v-if="acl.can('b2b_employee_management.viewer')"
+            :customer="customer"
+        ></sw-customer-role-card>
+    {% endblock %}
+</div>
+{% endblock %}

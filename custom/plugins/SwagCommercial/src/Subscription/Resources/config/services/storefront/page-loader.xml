@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="Shopware\Storefront\Checkout\Cart\SalesChannel\StorefrontCartFacade" id="subscription.storefront.cart.facade">
+            <argument type="service" id="subscription.cart.service"/>
+            <argument type="service" id="Shopware\Storefront\Checkout\Shipping\BlockedShippingMethodSwitcher"/>
+            <argument type="service" id="Shopware\Storefront\Checkout\Payment\BlockedPaymentMethodSwitcher"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\SalesChannel\ContextSwitchRoute"/>
+            <argument type="service" id="subscription.cart.calculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\CartPersister"/>
+        </service>
+
+        <service class="Shopware\Storefront\Page\Checkout\Cart\CheckoutCartPageLoader" id="subscription.storefront.page.checkout-cart-page-loader">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="subscription.storefront.cart.facade"/>
+            <argument type="service" id="Shopware\Core\Checkout\Payment\SalesChannel\PaymentMethodRoute"/>
+            <argument type="service" id="Shopware\Core\Checkout\Shipping\SalesChannel\ShippingMethodRoute"/>
+            <argument type="service" id="Shopware\Core\System\Country\SalesChannel\CountryRoute"/>
+        </service>
+
+        <service class="Shopware\Storefront\Page\Checkout\Confirm\CheckoutConfirmPageLoader" id="subscription.storefront.page.checkout-confirm-page-loader">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="subscription.storefront.cart.facade"/>
+            <argument type="service" id="Shopware\Core\Checkout\Shipping\SalesChannel\ShippingMethodRoute"/>
+            <argument type="service" id="Shopware\Core\Checkout\Payment\SalesChannel\PaymentMethodRoute"/>
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="Shopware\Core\Checkout\Customer\Validation\AddressValidationFactory"/>
+            <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator"/>
+        </service>
+
+        <service class="Shopware\Storefront\Page\Checkout\Offcanvas\OffcanvasCartPageLoader" id="subscription.storefront.page.offcanvas-cart-page-loader">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="subscription.storefront.cart.facade"/>
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="Shopware\Core\Checkout\Shipping\SalesChannel\ShippingMethodRoute"/>
+        </service>
+
+        <service class="Shopware\Storefront\Page\Checkout\Register\CheckoutRegisterPageLoader" id="subscription.storefront.page.checkout-register-page-loader">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="Shopware\Core\Checkout\Customer\SalesChannel\ListAddressRoute"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="subscription.cart.service"/>
+            <argument type="service" id="Shopware\Core\System\Salutation\SalesChannel\SalutationRoute"/>
+            <argument type="service" id="Shopware\Core\System\Country\SalesChannel\CountryRoute"/>
+        </service>
+    </services>
+</container>

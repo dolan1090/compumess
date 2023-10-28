@@ -1,0 +1,68 @@
+<sw-page class="sw-ai-image-classification">
+    <template #smart-bar-actions>
+        <sw-button-process
+            variant="primary"
+            :processSuccess="false"
+            :is-loading="saving"
+            @click="onSave"
+        >
+            {{ $tc('sw-settings-address.general.buttonSave') }}
+        </sw-button-process>
+    </template>
+
+    <template #content>
+        <sw-card-view>
+            <sw-card
+                class="sw-ai-image-classification__settings-card"
+                :is-loading="isLoading"
+                positionIdentifier="sw-ai-image-classification-settings"
+            >
+                <div class="sw-ai-image-classification__card-content">
+                    <div class="sw-ai-image-classification__card-content-half">
+                        <p  class="sw-ai-image-classification__intro-text">
+                            {{ $tc('sw-ai-image-classification.settings.introductionText') }}
+                        </p>
+
+                        <h2 class="sw-ai-image-classification__subline">
+                            {{ $tc('sw-ai-image-classification.settings.sublineImageKeywordAssistant') }}
+                        </h2>
+
+                        <sw-switch-field
+                            v-model="useImageKeywordAssistantActive"
+                            :label="$tc('sw-ai-image-classification.settings.labelUseImageKeywordAssistantActive')"
+                        ></sw-switch-field>
+
+                        <sw-entity-single-select
+                            v-model="keywordLanguageId"
+                            entity="language"
+                            :label="$tc('sw-ai-image-classification.settings.labelKeywordLanguageId')"
+                        />
+
+                        <sw-switch-field
+                            v-model="addKeywordsToImageAltText"
+                            :label="$tc('sw-ai-image-classification.settings.labelAddKeywordsToImageAltText')"
+                        ></sw-switch-field>
+
+                        <sw-single-select
+                            v-model="altTextDataHandlingStrategy"
+                            :options="availableTextDataHandlingStrategies"
+                            :label="$tc('sw-ai-image-classification.settings.handlingStrategies.label')"
+                        />
+
+                        <p class="sw-ai-image-classification__footnote">
+                            {{ $tc('sw-ai-image-classification.settings.footnote') }}
+                        </p>
+                    </div>
+
+                    <div class="sw-ai-image-classification__card-content-half">
+                        <img
+                            class="sw-ai-image-classification__card-content-image"
+                            :src="'/swagcommercial/static/img/sw-ai-image-classification-hero-image.png' | asset"
+                            :alt="$tc('sw-ai-image-classification.settings.heroImageAlt')"
+                        >
+                    </div>
+                </div>
+            </sw-card>
+        </sw-card-view>
+    </template>
+</sw-page>

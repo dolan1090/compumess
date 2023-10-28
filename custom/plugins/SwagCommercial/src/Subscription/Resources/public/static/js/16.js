@@ -1,0 +1,1 @@
+(this.webpackJsonpPluginsubscription=this.webpackJsonpPluginsubscription||[]).push([[16],{nUJ7:function(i,n,s){"use strict";s.r(n),n.default=Shopware.Component.wrapComponentConfig({computed:{productCriteria:function(){var i=this.$super("productCriteria");return i.addAssociation("subscriptionPlans"),i.addIncludes({subscriptionPlans:["id","name"]}),i}}})}}]);

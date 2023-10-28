@@ -1,0 +1,30 @@
+{% block sw_order_detail_general_line_items_card %}
+    {% parent() %}
+
+    {% block sw_order_detail_general_checkout_sweetener %}
+        <sw-card
+            v-if="sweetener"
+            :helpText="$tc('sw-order-checkout-sweetener.helpText')"
+            position-identifier="sw-order-detail-general-checkout-sweetener"
+        >
+            <template #title>
+                <div class="sw-order-detail-general-title-container">
+                    <div class="sw-card__title">
+                        {{ $tc('commercial.checkout-sweetener.title') }}
+                        <sw-help-text :text="$tc('commercial.checkout-sweetener.orderHelpText')"></sw-help-text>
+                    </div>
+                    <sw-ai-copilot-badge />
+                </div>
+            </template>
+
+            <sw-textarea-field v-model="sweetener" disabled></sw-textarea-field>
+
+            <div class="sw-order-detail-general-checkout-sweetener__link">
+                <sw-internal-link
+                    :routerLink="{ name: 'sw.settings.cart.index' }">
+                    {{ $tc('commercial.checkout-sweetener.orderHelpText.orderSettingsLink') }}
+                </sw-internal-link>
+            </div>
+        </sw-card>
+    {% endblock %}
+{% endblock %}

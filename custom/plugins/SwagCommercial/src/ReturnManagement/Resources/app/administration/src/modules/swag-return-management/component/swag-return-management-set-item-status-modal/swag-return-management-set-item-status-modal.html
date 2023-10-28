@@ -1,0 +1,37 @@
+<sw-modal
+    class="swag-return-management-set-item-status-modal"
+    variant="small"
+    :title="modalTitle"
+    @modal-close="onCancel"
+>
+    <sw-order-state-select-v2
+        class="swag-return-management-set-item-status-modal__state-selection"
+        :transition-options="lineItemStateOptions"
+        rounded-style
+        state-type="item-status"
+        :placeholder="selectedState.name"
+        :label="$tc('swag-return-management.setStatusModal.labelStatus')"
+        :background-style="backgroundStyle('order_line_item')"
+        @state-select="onStateSelect"
+    />
+
+    <template #modal-footer>
+        <sw-button
+            class="swag-return-management-set-item-status-modal__button-cancel"
+            size="small"
+            @click="onCancel"
+        >
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+
+        <sw-button
+            class="swag-return-management-set-item-status-modal__button-save"
+            size="small"
+            variant="primary"
+            :is-loading="isLoading"
+            @click="onSave"
+        >
+            {{ $tc('global.default.save') }}
+        </sw-button>
+    </template>
+</sw-modal>

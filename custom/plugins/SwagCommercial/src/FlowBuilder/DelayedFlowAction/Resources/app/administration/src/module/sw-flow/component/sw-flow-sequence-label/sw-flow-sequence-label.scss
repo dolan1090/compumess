@@ -1,0 +1,22 @@
+@import "~scss/variables";
+
+.sw-flow-sequence-label {
+    &__icon-raw {
+        width: 12px;
+        height: 12px;
+    }
+    a {
+        color: $color-darkgray-200;
+        text-decoration: none;
+    }
+
+    &__action-name {
+        margin-right: 5px;
+    }
+
+    &__name {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+}

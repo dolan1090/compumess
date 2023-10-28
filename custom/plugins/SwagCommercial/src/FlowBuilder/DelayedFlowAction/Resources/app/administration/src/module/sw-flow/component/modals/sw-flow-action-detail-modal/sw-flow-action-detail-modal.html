@@ -1,0 +1,122 @@
+<sw-modal
+    class="sw-flow-action-detail-modal"
+    :title="$tc('sw-flow-delay.delay.itemDetail.details')"
+    :closable="false"
+    :is-loading="isLoading"
+    @modal-close="onCloseModal"
+>
+    <sw-container
+        v-if="isActionDetail"
+        class="sw-flow-action-detail-modal__actions"
+    >
+        <ul>
+            <span class="sw-flow-action-detail-modal__title">{{ getActionTitle }}</span>
+            <li v-for="(item, index) in sequenceTree" :key="index">
+                <div class="sw-flow-action-detail-modal__action-name">
+                    <sw-flow-sequence-label
+                        classes="sw-flow-action-detail-modal__label"
+                        :sequence="item"
+                        :app-flow-actions="appFlowActions"
+                    />
+                </div>
+                <div class="sw-flow-action-detail-modal__action-config">
+                    <span v-html="getActionDescriptions(item)" />
+                </div>
+            </li>
+        </ul>
+    </sw-container>
+
+    <sw-container
+        v-else
+        class="sw-flow-action-detail-modal__condition"
+    >
+        <ul>
+            <span class="sw-flow-action-detail-modal__title">
+                {{ $tc('sw-flow-delay.delay.itemDetail.condition') }}
+            </span>
+            <li class="sw-flow-action-detail-modal__condition-label">
+                <sw-icon
+                    class="sw-flow-action-detail-modal__condition-icon"
+                    size="14px"
+                    name="regular-rule-s"
+                />
+                <span class="sw-flow-action-detail-modal__condition-name">{{ conditionName }}</span>
+            </li>
+        </ul>
+
+        <div
+            v-if="actionCases(true).length > 0"
+            class="sw-flow-action-detail-modal__case"
+        >
+            <span class="sw-flow-action-detail-modal__case-title">
+                {{ $tc('sw-flow-delay.delay.itemDetail.conditionIf') }}
+            </span>
+            <sw-label
+                appearance="pill"
+                size="medium"
+                class="sw-flow-action-detail-modal__true-label"
+            >
+                {{ $tc('sw-flow.detail.sequence.labelTrue') }}
+            </sw-label>
+
+            <ul>
+                <li v-for="(item, index) in actionCases(true)" :key="index">
+                    <sw-flow-sequence-label
+                        classes="sw-flow-action-detail-modal__label"
+                        :sequence="item"
+                        :app-flow-actions="appFlowActions"
+                        @click=""
+                    />
+
+                    <div class="sw-flow-action-detail-modal__action-config">
+                        <span v-html="getActionDescriptions(item)" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div
+            v-if="actionCases(false).length > 0"
+            class="sw-flow-action-detail-modal__case"
+        >
+            <span class="sw-flow-action-detail-modal__case-title">
+                {{ $tc('sw-flow-delay.delay.itemDetail.conditionIf') }}
+            </span>
+            <sw-label
+                appearance="pill"
+                size="medium"
+                class="sw-flow-action-detail-modal__false-label"
+            >
+                {{ $tc('sw-flow.detail.sequence.labelFalse') }}
+            </sw-label>
+
+            <ul>
+                <li v-for="(item, index) in actionCases(false)" :key="index">
+                    <sw-flow-sequence-label
+                        classes="sw-flow-action-detail-modal__label"
+                        :sequence="item"
+                        :app-flow-actions="appFlowActions"
+                        @click=""
+                    />
+
+                    <div class="sw-flow-action-detail-modal__action-config">
+                        <span v-html="getActionDescriptions(item)" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </sw-container>
+
+    <template #modal-footer>
+        {% block swag_flow_detail_action_modal_cancel_button %}
+        <sw-button
+            size="small"
+            variant="primary"
+            class="sw-flow-action-detail-modal__button_close"
+            @click="onCloseModal"
+        >
+            {{ $tc('global.default.close') }}
+        </sw-button>
+        {% endblock %}
+    </template>
+</sw-modal>

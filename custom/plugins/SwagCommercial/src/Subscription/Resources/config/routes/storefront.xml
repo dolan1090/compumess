@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing
+        https://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="frontend.subscription.checkout.cart.page"
+           path="/subscription/checkout/cart/{subscriptionToken}"
+           methods="GET"
+           controller="subscription.storefront.controller.checkout::cartPage">
+        <default key="_noStore">true</default>
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_controllerName">checkout</default>
+        <default key="_controllerAction">cartpage</default>
+        <default key="_templateScopes">subscription</default>
+        <option key="seo">false</option>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+
+    <route id="frontend.subscription.checkout.confirm.page"
+           path="/subscription/checkout/confirm/{subscriptionToken}"
+           methods="GET"
+           controller="subscription.storefront.controller.checkout::confirmPage">
+        <default key="XmlHttpRequest">true</default>
+        <default key="_noStore">true</default>
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_controllerName">checkout</default>
+        <default key="_controllerAction">confirmpage</default>
+        <default key="_templateScopes">subscription</default>
+        <option key="seo">false</option>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+
+    <route id="frontend.subscription.checkout.finish.order"
+           path="/subscription/checkout/order/{subscriptionToken}"
+           methods="POST"
+           controller="subscription.storefront.controller.checkout::order">
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_controllerName">checkout</default>
+        <default key="_controllerAction">order</default>
+        <default key="_templateScopes">subscription</default>
+        <option key="seo">false</option>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+
+    <route id="frontend.subscription.checkout.register.page"
+           path="/subscription/checkout/register/{subscriptionToken}"
+           methods="GET"
+           controller="subscription.storefront.controller.register::checkoutRegisterPage">
+        <default key="_noStore">true</default>
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_controllerName">register</default>
+        <default key="_controllerAction">checkoutregisterpage</default>
+        <default key="_templateScopes">subscription</default>
+        <option key="seo">false</option>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+
+    <route id="frontend.subscription.account.register.save"
+           path="/subscription/account/register/{subscriptionToken}"
+           methods="POST"
+           controller="subscription.storefront.controller.register::register">
+        <default key="_captcha">true</default>
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_controllerName">register</default>
+        <default key="_controllerAction">checkoutregisterpage</default>
+        <default key="_templateScopes">subscription</default>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+
+    <route id="frontend.subscription.checkout.configure"
+           path="/subscription/checkout/configure/{subscriptionToken}"
+           methods="POST"
+           controller="subscription.storefront.controller.context::configure">
+        <default key="XmlHttpRequest">true</default>
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_templateScopes">subscription</default>
+        <option key="seo">false</option>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+
+    <route id="frontend.subscription.checkout.line-item.add"
+           path="/subscription/checkout/line-item/add"
+           methods="POST"
+           controller="subscription.storefront.controller.line-item::addLineItems">
+        <default key="XmlHttpRequest">true</default>
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_templateScopes">subscription</default>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+
+    <route id="frontend.subscription.checkout.line-item.delete"
+           path="/subscription/checkout/line-item/delete/{id}/{subscriptionToken}"
+           methods="POST|DELETE"
+           controller="subscription.storefront.controller.line-item::deleteLineItem">
+        <default key="XmlHttpRequest">true</default>
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_templateScopes">subscription</default>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+
+    <route id="frontend.subscription.checkout.line-item.change-quantity"
+           path="/subscription/checkout/line-item/change-quantity/{id}/{subscriptionToken}"
+           methods="POST"
+           controller="subscription.storefront.controller.line-item::changeQuantity">
+        <default key="XmlHttpRequest">true</default>
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_templateScopes">subscription</default>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+
+    <route id="frontend.subscription.account.login"
+           path="/subscription/account/login/{subscriptionToken}"
+           methods="POST"
+           controller="subscription.storefront.controller.auth::login">
+        <default key="XmlHttpRequest">true</default>
+        <default key="_routeScope"><list><string>storefront</string></list></default>
+        <default key="_subscriptionCart">true</default>
+        <default key="_subscriptionContext">true</default>
+        <default key="_templateScopes">subscription</default>
+        <condition>service('license').check('SUBSCRIPTIONS-2437281')</condition>
+    </route>
+</routes>

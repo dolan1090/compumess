@@ -1,0 +1,5 @@
+swag_export_assistant_controller:
+  resource:
+    path: ../../Api/
+    namespace: Shopware\Commercial\ExportAssistant\Api
+  type: attribute

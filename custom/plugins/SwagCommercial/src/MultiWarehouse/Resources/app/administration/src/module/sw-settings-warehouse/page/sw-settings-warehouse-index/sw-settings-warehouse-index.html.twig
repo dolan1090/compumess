@@ -1,0 +1,17 @@
+<sw-page class="sw-settings-warehouse-index">
+    <template #smart-bar-header>
+        <h2>{{ $tc('sw-settings.index.title') }} <sw-icon
+                name="regular-chevron-right-xs"
+                small
+            /> {{ $tc('sw-settings-warehouse.general.title') }}</h2>
+    </template>
+
+    <template #content>
+        <sw-card-view>
+            <sw-warehouse-messages v-if="acl.can('warehouse-group.viewer')"></sw-warehouse-messages>
+            <sw-settings-warehouse-list v-if="acl.can('warehouse.viewer')"></sw-settings-warehouse-list>
+
+            <sw-settings-warehouse-group-list v-if="acl.can('warehouse-group.viewer')"></sw-settings-warehouse-group-list>
+        </sw-card-view>
+    </template>
+</sw-page>

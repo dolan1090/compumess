@@ -1,0 +1,213 @@
+{% block sw_property_assistant_modal %}
+    <sw-modal class="sw-property-assistant-modal" @modal-close="onCancel">
+        <template #modal-header>
+            <div class="sw-property-assistant-modal__header-container">
+                <div class="sw-modal__titles">
+                    <h4
+                        id="modalTitleEl"
+                        class="sw-modal__title"
+                    >
+                        {{ $tc('property-extractor.assistant-modal.title') }}
+                    </h4>
+                </div>
+
+                <sw-ai-copilot-badge />
+            </div>
+
+            <button
+                class="sw-modal__close"
+                @click="onCancel"
+            >
+                <sw-icon name="regular-times-s" />
+            </button>
+        </template>
+
+        <template #body>
+            <div class="sw-property-assistant-modal__body">
+                <div class="sw-property-assistant-modal__body-selection">
+                    <p class="sw-property-assistant-modal__description">
+                        {{ $tc('property-extractor.assistant-modal.description') }}
+                    </p>
+
+                    <div class="sw-property-assistant-modal__textarea">
+                        <sw-help-text
+                            v-if="generateButtonHelpText !== ''"
+                            class="sw-property-assistant-modal__textarea-help"
+                            :text="generateButtonHelpText"
+                        />
+                        <sw-textarea-field
+                            v-model="description"
+                            class="sw-property-assistant-modal__textarea-field"
+                            :label="$tc('property-extractor.assistant-modal.textarea-label')"
+                            :placeholder="$tc('property-extractor.assistant-modal.textarea-placeholder')"
+                            @input="onChange"
+                            @change="onChange"
+                        />
+                        <span class="sw-property-assistant-modal__textarea-chars">
+                            {{ description.length }}/{{ descriptionLimit }}
+                        </span>
+                    </div>
+
+                    <span v-tooltip="generateButtonTooltip">
+                        <sw-button
+                            class="sw-property-assistant-modal__body-selection-generate-button"
+                            size="small"
+                            variant="primary"
+                            :is-loading="isLoading"
+                            :disabled="generateButtonDisabled"
+                            @click="onGenerate"
+                        >
+                            <sw-icon v-if="properties.length > 0" name="regular-shuffle" small />
+                            {{ generateButtonLabel }}
+                        </sw-button>
+                    </span>
+
+                    <sw-button
+                        v-if="showResetDescriptionButton"
+                        class="sw-property-assistant-modal__body-selection-reset-button"
+                        size="small"
+                        @click="setProductDescription"
+                    >
+                        {{ $tc('property-extractor.assistant-modal.reset-description-button-label') }}
+                    </sw-button>
+
+                    <p v-if="showPropertyTable && !generateButtonDisabled && !isLoading" class="sw-property-assistant-modal__body-selection-notice">
+                        {{ $tc('property-extractor.assistant-modal.button-description') }}
+                    </p>
+                </div>
+
+                <sw-alert
+                    class="sw-property-assistant-modal__alert"
+                    v-if="infoSnippet"
+                    :title="$tc(`${infoSnippet}.title`)"
+                    variant="info"
+                >
+                    {{ $tc(`${infoSnippet}.message`) }}
+                </sw-alert>
+
+                <div v-if="showPropertyTable" class="sw-property-assistant-modal__table">
+                    <sw-card-section divider="bottom" secondary>
+                        <sw-simple-search-field
+                            ref="searchField"
+                            v-model="searchTerm"
+                            size="small"
+                            variant="form"
+                            :placeholder="$tc('property-extractor.assistant-modal.search-placeholder')"
+                            :disabled="isLoading"
+                        />
+                    </sw-card-section>
+
+                    <sw-empty-state
+                        v-if="searchTerm && filteredProperties.length === 0"
+                        :absolute="false"
+                        :title="$tc('sw-property-search.noPropertiesFound')"
+                        :subline="$tc('sw-property-search.noPropertiesFoundDescription')"
+                    >
+                        <template #icon>
+                            <img
+                                :src="'/administration/static/img/empty-states/products-empty-state.svg' | asset"
+                                :alt="$tc('sw-empty-state.messageNoResultTitle')"
+                            >
+                        </template>
+                    </sw-empty-state>
+
+                    <sw-data-grid
+                        v-else
+                        ref="dataGrid"
+                        identifier="sw-property-assistant-modal-properties-data-grid"
+                        :columns="getAssistantColumns()"
+                        :data-source="paginatedProperties"
+                        :is-loading="isLoading"
+                        :skeleton-item-amount="3"
+                        :show-selection="false"
+                        show-actions
+                        show-header
+                        allow-inline-edit
+                        plain-appearance
+                    >
+                        <template #actions="{ item, itemIndex }">
+                            <sw-context-menu-item
+                                v-if="!item.isNew()"
+                                :router-link="{ name: 'sw.property.detail', params: { id: item.id } }"
+                            >
+                                {{ $tc('property-extractor.assistant-modal.table.edit-action') }}
+                            </sw-context-menu-item>
+
+                            <sw-context-menu-item
+                                class="sw-property-assistant-modal-properties-data-grid__delete"
+                                variant="danger"
+                                @click="onDelete(itemIndex)">
+                                {{ $tc('property-extractor.assistant-modal.table.delete-action') }}
+                            </sw-context-menu-item>
+                        </template>
+
+                        <template #column-name="{ item, column, isInlineEdit }">
+                            <sw-data-grid-inline-edit
+                                class="sw-property-assistant-modal-properties-data-grid__edit-group-name"
+                                v-if="isInlineEdit && item.isNew()"
+                                :column="column"
+                                :compact="true"
+                                :value="item.translated?.name || item.name"
+                                @input="item.name = $event"
+                            />
+
+                            <div v-else class="sw-property-assistant-modal__table-column">
+                                <span class="sw-property-assistant-modal__table-column__name">{{ item.translated?.name || item.name }}</span>
+                                <sw-label v-if="item.isNew()" class="sw-property-assistant-modal__table-new-indicator" variant="primary" size="small" appearance="pill">
+                                    {{ $tc('property-extractor.assistant-modal.table.new-indicator') }}
+                                </sw-label>
+                            </div>
+
+                        </template>
+
+                        <template #column-options="{ item, itemIndex }">
+                            <template v-for="(item, index) in item.options">
+                                <sw-label
+                                    :key="index"
+                                    class="sw-property-assistant-modal__table-label"
+                                    @dismiss="onDismiss(itemIndex, index)"
+                                    dismissable
+                                >
+                                    {{ item.translated?.name || item.name }}
+                                    <sw-label v-if="item.isNew()" class="sw-property-assistant-modal__table-new-indicator" variant="primary" size="small" appearance="pill">
+                                        {{ $tc('property-extractor.assistant-modal.table.new-indicator') }}
+                                    </sw-label>
+                                </sw-label>
+                            </template>
+                        </template>
+
+                        <template #pagination>
+                            <sw-pagination
+                                :page="page"
+                                :limit="limit"
+                                :total="filteredProperties.length"
+                                :steps="[5, 10, 25, 50]"
+                                @page-change="onPageChange"
+                            />
+                        </template>
+                    </sw-data-grid>
+                </div>
+            </div>
+        </template>
+
+        <template #modal-footer>
+            <sw-button
+                class="sw-property-assistant-modal__cancel-button"
+                size="small"
+                @click="onCancel"
+            >
+                {{ $tc('global.default.cancel') }}
+            </sw-button>
+
+            <sw-button
+                class="sw-property-assistant-modal__save-button"
+                :is-loading="isSaving"
+                v-if="showPropertyTable && properties.length > 0"
+                variant="primary" size="small"
+                @click="onSave"
+            >
+                {{ $tc('global.default.save') }}
+            </sw-button>
+        </template>
+    </sw-modal>
+{% endblock %}

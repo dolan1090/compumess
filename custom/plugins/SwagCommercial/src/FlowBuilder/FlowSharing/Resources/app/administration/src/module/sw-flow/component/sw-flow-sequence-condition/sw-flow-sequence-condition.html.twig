@@ -1,0 +1,16 @@
+{% block sw_flow_sequence_condition_content_custom %}
+<sw-flow-sequence-error
+    v-if="sequence.error && Object.keys(sequence.error).length"
+    :sequence="sequence"
+/>
+{% endblock %}
+
+{% block sw_flow_sequence_condition_rule_context_button_edit %}
+    <sw-context-menu-item
+        class="sw-flow-sequence-condition__rule-edit"
+        :disabled="hasMissingRule"
+        @click="onEditRule"
+    >
+        {{ $tc('sw-flow.rule.contextButton.editRule') }}
+    </sw-context-menu-item>
+{% endblock %}

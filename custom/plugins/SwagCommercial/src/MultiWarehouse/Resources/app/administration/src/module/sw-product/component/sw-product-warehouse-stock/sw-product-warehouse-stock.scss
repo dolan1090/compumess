@@ -1,0 +1,12 @@
+@import "~scss/variables";
+
+.sw-product-warehouse-stock {
+    &__toolbar {
+        padding: 20px 30px;
+        background-color: $color-gray-100;
+    }
+}
+
+.sw-product-warehouse-stock .sw-data-grid__actions-menu {
+    display: none;
+}

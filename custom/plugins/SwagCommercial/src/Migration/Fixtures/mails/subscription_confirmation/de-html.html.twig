@@ -1,0 +1,140 @@
+<div style="font-family:arial; font-size:12px;">
+
+{% set order = subscription.convertedOrder %}
+{% set currencyIsoCode = subscription.currency.isoCode %}
+{% set subscriptionPlanName = subscription.subscriptionPlan.activeStorefrontLabel ? subscription.subscriptionPlan.translated.label : subscription.subscriptionPlan.translated.name %}
+{% if subscription.subscriptionCustomer.salutation %}{{ subscription.subscriptionCustomer.salutation.translated.letterName ~ ' ' }}{% endif %}{{ subscription.subscriptionCustomer.firstName }} {{ subscription.subscriptionCustomer.lastName }},
+<br>
+Wir haben Ihr Abonnement vom {{ subscription.createdAt|format_datetime('medium', 'short', locale='de-DE') }} erhalten.
+<br>
+Abonnementnummer: {{ subscription.subscriptionNumber }}
+<br>
+Sobald Ihre Zahlung erfolgt ist, erhalten Sie eine separate Benachrichtigung und Ihr Abonnement wird bearbeitet.
+<br>
+Den aktuellen Status Ihres Abonnements können Sie jederzeit über diesen Link abrufen:
+Sie können die automatische Verlängerung Ihres Abonnements jederzeit in Ihren persönlichen Kontoeinstellungen pausieren oder kündigen.
+<br>
+<strong>Informationen zu Ihrem Abonnement:</strong>
+<br>
+Abonnement-Plan: {{ subscriptionPlanName }}
+Startdatum: {{ subscription.createdAt|format_datetime('medium', 'short', locale='de-DE') }}
+<br>
+
+<table border="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
+    <tr>
+        <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Pos.</strong></td>
+        <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Artikel-Nr.</strong></td>
+        <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Produktbild(Alt-Text)</strong></td>
+        <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Beschreibung</strong></td>
+        <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Menge</strong></td>
+        <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Preis</strong></td>
+        <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Summe</strong></td>
+    </tr>
+
+    {% for lineItem in order.lineItems %}
+        {% if lineItem.coverId is defined and lineItem.coverId is not null %}
+            {% set cover = searchMedia([lineItem.coverId], context).first %}
+        {% endif %}
+
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{% if lineItem.payload.productNumber is defined %}{{ lineItem.payload.productNumber|u.wordwrap(80) }}{% endif %}</td>
+            <td>{% if cover is defined and cover is not null %}<img src="{{ cover.url }}" width="75" height="auto"/>{% endif %}</td>
+            <td>
+                <div>{{ lineItem.label|u.wordwrap(80) }}</div>
+
+                {% if lineItem.payload.options is defined and lineItem.payload.options|length >= 1 %}
+                    <div>
+                        {% for option in lineItem.payload.options %}
+                            {{ option.group }}: {{ option.option }}
+                            {% if lineItem.payload.options|last != option %}
+                                {{ " | " }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if lineItem.payload.features is defined and lineItem.payload.features|length >= 1 %}
+                    {% set referencePriceFeatures = lineItem.payload.features|filter(feature => feature.type == 'referencePrice') %}
+                    {% if referencePriceFeatures|length >= 1 %}
+                        {% set referencePriceFeature = referencePriceFeatures|first %}
+                        <div>
+                            {{ referencePriceFeature.value.purchaseUnit }} {{ referencePriceFeature.value.unitName }}
+                            ({{ referencePriceFeature.value.price|currency(currencyIsoCode) }}* / {{ referencePriceFeature.value.referenceUnit }} {{ referencePriceFeature.value.unitName }})
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </td>
+            <td style="text-align: center">{{ lineItem.quantity }}</td>
+            <td>{{ lineItem.price.unitPrice|currency(currencyIsoCode) }}</td>
+            <td>{{ lineItem.price.totalPrice|currency(currencyIsoCode) }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br>
+Abonnement Kosten: {{ order.price.totalPrice|currency(currencyIsoCode,decimals=order.totalRounding.decimals) }}
+<br>
+Abrechnungszeitraum: {{ subscription.subscriptionInterval.translated.name }}
+
+{% set delivery = order.deliveries[0] | default(null) %}
+
+{% set displayRounded = order.totalRounding.interval != 0.01 or order.totalRounding.decimals != order.itemRounding.decimals %}
+{% set decimals = order.totalRounding.decimals %}
+{% set total = order.price.totalPrice %}
+{% if displayRounded %}
+    {% set total = order.price.rawTotal %}
+    {% set decimals = order.itemRounding.decimals %}
+{% endif %}
+<p>
+    <br>
+    <br>
+    {% for shippingCost in order.deliveries %}
+        Versandkosten: {{ shippingCost.shippingCosts.totalPrice|currency(currencyIsoCode) }}<br>
+    {% endfor %}
+    Gesamtkosten Netto:{{ order.price.netPrice|currency(currencyIsoCode) }}<br>
+    {% for calculatedTax in order.price.calculatedTaxes %}
+        {% if order.price.taxStatus is same as('net') %}zzgl.{% else %}inkl.{% endif %} {{ calculatedTax.taxRate }}% MwSt. {{ calculatedTax.tax|currency(currencyIsoCode) }}<br>
+    {% endfor %}
+    {% if not displayRounded %}<strong>{% endif %}Gesamtkosten Brutto: {{ total|currency(currencyIsoCode,decimals=decimals) }}{% if not displayRounded %}</strong>{% endif %}<br>
+    {% if displayRounded %}
+        <strong>Gesamtkosten Brutto gerundet: {{ order.price.totalPrice|currency(currencyIsoCode,decimals=order.totalRounding.decimals) }}</strong><br>
+    {% endif %}
+    <br>
+
+    {% if delivery %}
+        <strong>Gewählte Versandart:</strong> {{ subscription.shippingMethod.translated.name }}<br>
+        {{ subscription.shippingMethod.translated.description }}<br>
+        <br>
+    {% endif %}
+
+    {% set billingAddress = subscription.billingAddress %}
+    <strong>Rechnungsadresse:</strong><br>
+    {{ billingAddress.company }}<br>
+    {{ billingAddress.firstName }} {{ billingAddress.lastName }}<br>
+    {{ billingAddress.street }}<br>
+    {{ billingAddress.zipcode }} {{ billingAddress.city }}<br>
+    {{ billingAddress.country.translated.name }}<br>
+    <br>
+
+    {% set shippingAddress = subscription.shippingAddress %}
+    <strong>Lieferadresse:</strong>
+    {{ shippingAddress.company }}<br>
+    {{ shippingAddress.firstName }} {{ shippingAddress.lastName }}<br>
+    {{ shippingAddress.street }}<br>
+    {{ shippingAddress.zipcode}} {{ shippingAddress.city }}<br>
+    {{ shippingAddress.country.translated.name }}<br>
+    <br>
+
+    {% if subscription.subscriptionCustomer.vatIds %}
+        Ihre Umsatzsteuer-ID: {{ subscription.subscriptionCustomer.vatIds|first }}
+        Bei erfolgreicher Prüfung und sofern Sie aus dem EU-Ausland
+        bestellen, erhalten Sie Ihre Ware umsatzsteuerbefreit. <br>
+    {% endif %}
+    <br>
+    Den aktuellen Status Ihres Abonnements können Sie auch jederzeit auf unserer Webseite im Bereich "Mein Konto" - "Meine Abonnements" abrufen:
+    <br>
+    Für Rückfragen stehen wir Ihnen jederzeit gerne zur Verfügung.
+</p>
+<br>
+</div>

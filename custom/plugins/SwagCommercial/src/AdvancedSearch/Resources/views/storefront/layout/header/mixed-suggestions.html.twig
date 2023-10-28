@@ -1,0 +1,11 @@
+{% if completions|length > 0 %}
+	{% sw_include '@Storefront/storefront/layout/header/suggest-result/completion.html.twig' %}
+{% endif %}
+
+{% if manufacturers and manufacturers.total > 0  %}
+	{% sw_include '@Storefront/storefront/layout/header/suggest-result/manufacturer.html.twig' %}
+{% endif %}
+
+{% if categories and categories.total > 0  %}
+	{% sw_include '@Storefront/storefront/layout/header/suggest-result/category.html.twig' %}
+{% endif %}

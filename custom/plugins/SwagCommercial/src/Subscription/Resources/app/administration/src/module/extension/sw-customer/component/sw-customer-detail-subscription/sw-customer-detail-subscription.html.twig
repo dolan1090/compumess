@@ -1,0 +1,76 @@
+<sw-card
+    class="sw-customer-detail-subscription"
+    position-identifier="sw-customer-detail-subscription"
+    :show-header="true"
+    :title="$tc('commercial.subscriptions.subscriptions.customer-detail.subscriptionCardTitle')"
+>
+    <template #toolbar>
+        <sw-card-filter
+            v-if="(subscriptions && subscriptions.total > 0) || term"
+            :placeholder="$tc('commercial.subscriptions.subscriptions.customer-detail.searchbarPlaceholder')"
+            @sw-card-filter-term-change="onChangeTerm"
+        />
+    </template>
+
+    <template
+        v-if="(subscriptions && subscriptions.total > 0) || term"
+        #grid
+    >
+        <sw-entity-listing
+            :columns="subscriptionColumns"
+            :repository="subscriptionRepository"
+            :items="subscriptions"
+            :allow-column-edit="false"
+            :show-settings="false"
+            :show-selection="false"
+            :full-page="false"
+            :is-loading="isLoading"
+        >
+            <template #column-subscriptionNumber="{ item }">
+                <router-link :to="{ name: 'sw.subscription.detail', params: { id: item.id } }">
+                    {{ item.subscriptionNumber }}
+                </router-link>
+            </template>
+
+            <template #column-stateMachineState.name="{ item }">
+                <div class="sw-subscription-list__state text-left">
+                    <sw-color-badge
+                        :color="getVariantFromSubscriptionState(item)"
+                        rounded
+                    />
+
+                    {{ item.stateMachineState.translated.name }}
+                </div>
+            </template>
+
+            <template #column-nextSchedule="{ item }">
+                <sw-time-ago :date="item.nextSchedule" />
+            </template>
+
+            <template #actions="{ item }">
+                <sw-context-menu-item
+                    class="sw-subscription-list__subscription-view-action"
+                    :router-link="{ name: 'sw.subscription.detail', params: { id: item.id } }"
+                >
+                    {{ $tc('commercial.subscriptions.subscriptions.listing.contextMenuView') }}
+                </sw-context-menu-item>
+            </template>
+        </sw-entity-listing>
+    </template>
+
+    <template v-if="(!subscriptions || subscriptions.total === 0) && !isLoading && !term">
+        <sw-empty-state
+            :title="$tc('commercial.subscriptions.subscriptions.customer-detail.emptyTitle')"
+            :absolute="false"
+            :subline="$tc('commercial.subscriptions.subscriptions.customer-detail.emptySubline')"
+        >
+            <template #icon>
+                <img
+                    :src="'/administration/static/img/empty-states/order-empty-state.svg' | asset"
+                    :alt="$tc('commercial.subscriptions.subscriptions.customer-detail.emptyTitle')"
+                >
+            </template>
+        </sw-empty-state>
+    </template>
+</sw-card>
+

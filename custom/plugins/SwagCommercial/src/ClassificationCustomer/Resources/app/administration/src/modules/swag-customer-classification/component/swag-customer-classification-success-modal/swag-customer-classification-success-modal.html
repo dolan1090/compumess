@@ -1,0 +1,19 @@
+<div class="swag-customer-classification-success-modal">
+    <sw-label
+        class="swag-customer-classification-save-modal__icon"
+        appearance="pill"
+        variant="success"
+    >
+        <sw-icon
+            name="regular-check-circle"
+            size="30px"
+        />
+    </sw-label>
+
+    <p
+        class="swag-customer-classification-save-modal__help-text"
+    >
+        {{ $tc('swag-customer-classification.notificationModal.success.description',
+        itemTotal, { totalCustomer: itemTotal }) }}
+    </p>
+</div>

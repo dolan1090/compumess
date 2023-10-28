@@ -1,0 +1,42 @@
+{% block b2b_components_permission_group_select %}
+    <div class="b2b-tree-group-select">
+        {% block b2b_components_permission_group_select_button %}
+            <button
+                class="b2b-tree-collapse-button"
+                data-bs-toggle="collapse"
+                data-bs-target="#{{ target }}"
+                type="button"
+            >
+                {% block b2b_components_permission_group_select_button_icon %}
+                    {% sw_icon 'arrow-head-down' %}
+                {% endblock %}
+            </button>
+        {% endblock %}
+
+        {% block b2b_components_permission_group_select_button_input %}
+            <div class="form-check b2b-tree-select">
+                {% block b2b_components_permission_group_select_button_input_element %}
+                    <input
+                        id="b2b-permission-tree-group-{{ groupName }}"
+                        class="form-check-input"
+                        type="checkbox"
+                        value="{{ groupName }}"
+                        {% if editDisabled %}
+                            disabled="disabled"
+                        {% endif %}
+                        data-b2b-permission-group="{{ groupName }}"
+                    >
+                {% endblock %}
+
+                {% block b2b_components_permission_group_select_button_input_label %}
+                    <label
+                        class="form-check-label"
+                        for="b2b-permission-tree-group-{{ groupName }}"
+                    >
+                        {{ ('employee-management.roleEdit.permissionGroups.' ~ groupName)|trans|sw_sanitize }}
+                    </label>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

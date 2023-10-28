@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Shopware\Commercial\RuleBuilderPreview\Domain\Rule\Preview\RulePreview" public="true">
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Order\OrderConverter"/>
+            <argument type="service" id="Shopware\Core\Framework\Rule\Collector\RuleConditionRegistry"/>
+            <argument type="tagged" tag="shopware.cart.collector"/>
+            <argument type="service" id="validator"/>
+            <argument type="service" id="app_script_condition.repository"/>
+        </service>
+
+        <service id="Shopware\Commercial\RuleBuilderPreview\Command\RulePreviewCommand">
+            <argument type="service" id="Shopware\Commercial\RuleBuilderPreview\Domain\Rule\Preview\RulePreview"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="rule.repository"/>
+            <argument type="service" id="rule_condition.repository"/>
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Shopware\Commercial\RuleBuilderPreview\Api\AdminRuleBuilderController" public="true">
+            <argument type="service" id="Shopware\Commercial\RuleBuilderPreview\Domain\Rule\Preview\RulePreview"/>
+            <argument type="service" id="order.repository"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+    </services>
+</container>

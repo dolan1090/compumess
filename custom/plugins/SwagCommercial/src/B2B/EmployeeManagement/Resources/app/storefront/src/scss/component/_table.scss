@@ -1,0 +1,65 @@
+.b2b-table {
+    &-context-menu-button {
+        border: $b2b-default-border;
+        padding: 2px 8px;
+
+        &::after {
+            display: none;
+        }
+    }
+
+    &-context-menu-button {
+        &:hover,
+        &:focus {
+            border-color: $border-color-translucent;
+        }
+    }
+
+    .b2b-table > thead {
+        border-bottom: 4px solid $sw-color-brand-primary;
+
+        th {
+            white-space: nowrap;
+        }
+    }
+
+    &-actions {
+        padding: 0;
+
+        &.show {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &-action {
+        text-align: left;
+        padding: 4px 16px;
+
+        &:hover {
+            color: $sw-color-brand-primary;
+        }
+
+        &.is--danger:hover {
+            color: $sw-color-danger;
+        }
+    }
+
+    .b2b-table-column {
+        padding: $spacer-md;
+        border-left: none;
+        border-right: none;
+
+        &:first-child {
+            border-left: $b2b-default-border;
+        }
+
+        &:last-child {
+            border-right: $b2b-default-border;
+        }
+
+        &.has-no-role {
+            font-style: italic;
+        }
+    }
+}

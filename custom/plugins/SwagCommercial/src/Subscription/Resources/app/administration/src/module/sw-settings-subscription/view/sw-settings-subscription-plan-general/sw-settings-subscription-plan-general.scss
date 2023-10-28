@@ -1,0 +1,25 @@
+@import "~scss/variables";
+
+.sw-settings-subscription-plan-general {
+    .sw-field--textarea {
+        margin-bottom: 0;
+    }
+
+    &__availability,
+    &__intervals {
+        .sw-field {
+            margin-bottom: 0;
+        }
+        &-settings {
+            padding-top: 32px;
+        }
+    }
+
+    &__active {
+        margin-bottom: 0px;
+    }
+
+    &__label-active {
+        margin-bottom: 24px;
+    }
+}

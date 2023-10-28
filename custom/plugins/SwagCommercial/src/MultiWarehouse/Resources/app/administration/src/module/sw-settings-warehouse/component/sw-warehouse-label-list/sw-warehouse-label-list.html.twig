@@ -1,0 +1,15 @@
+<div class="sw-warehouse-label-list">
+    <sw-label
+        v-for="item in visibleItems"
+        :key="item.id"
+    >
+        {{ item }}
+    </sw-label>
+    <sw-label
+        v-if="items.length > limit && !expand"
+        class="sw-warehouse-label-list__expand"
+        @selected="onClickExpand"
+    >
+        {{ items.length - limit }}+
+    </sw-label>
+</div>

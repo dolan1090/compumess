@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="shopware.image-classification.client" class="GuzzleHttp\Client"/>
+
+        <service id="Shopware\Commercial\ImageClassification\Domain\Media\Aggregate\MediaAiTag\MediaAiTagDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="Shopware\Commercial\ImageClassification\Domain\Media\Aggregate\MediaAiTag\Aggregate\MediaAiTagTranslation\MediaAiTagTranslationDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="Shopware\Commercial\ImageClassification\Domain\Media\Extension\MediaExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\ImageClassification\Domain\Language\Extension\LanguageExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\ImageClassification\Domain\Media\Subscriber\MediaWrittenSubscriber">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="messenger.bus.shopware"/>
+            <argument type="service" id="Shopware\Commercial\ImageClassification\Domain\Media\Aggregate\MediaAiTag\MediaAiTagService"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\ImageClassification\Domain\Media\Aggregate\MediaAiTag\MediaAiTagService">
+            <argument type="service" id="media.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="language.repository"/>
+            <argument type="service" id="media_ai_tag.repository"/>
+            <argument type="service" id="Shopware\Commercial\ImageClassification\Domain\Media\Service\MediaAltTextService"/>
+            <argument type="service" id="shopware.image-classification.client"/>
+        </service>
+
+        <service id="Shopware\Commercial\ImageClassification\Domain\Media\Aggregate\MediaAiTag\MessageQueue\AnalyzeMediaAiTagHandler">
+            <argument type="service" id="Shopware\Core\Content\Media\MediaService"/>
+            <argument type="service" id="Shopware\Commercial\ImageClassification\Domain\Media\Aggregate\MediaAiTag\MediaAiTagService"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Shopware\Commercial\ImageClassification\Domain\Media\Service\MediaAltTextService">
+            <argument type="service" id="media.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="media_ai_tag.repository"/>
+        </service>
+    </services>
+</container>

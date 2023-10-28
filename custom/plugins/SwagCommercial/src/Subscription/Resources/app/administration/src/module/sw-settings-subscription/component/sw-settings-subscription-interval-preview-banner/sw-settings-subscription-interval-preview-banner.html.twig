@@ -1,0 +1,43 @@
+<div class="sw-settings-subscription-interval-preview-banner">
+    <div class="sw-settings-subscription-interval-preview-banner__icon">
+        <sw-icon name="regular-calendar" size="24" />
+    </div>
+
+    <div class="sw-settings-subscription-interval-preview-banner__body">
+        <div class="sw-settings-subscription-interval-preview-banner__body-title">
+            {{ $tc('commercial.subscriptions.settings.interval.preview.title') }}
+            <sw-help-text :text="$tc('commercial.subscriptions.settings.interval.preview.helpText')" />
+        </div>
+
+        <div class="sw-settings-subscription-interval-preview-banner__body-content">
+            <div v-if="loading" class="sw-settings-subscription-interval-preview-banner__loading_wrapper">
+                <sw-loader />
+            </div>
+
+            <div v-else-if="isError" class="sw-settings-subscription-interval-preview-banner__error">
+                {{ $tc('commercial.subscriptions.settings.interval.preview.impossibleIntervalError') }}
+            </div>
+
+            <div v-else v-for="date in dates.slice(0, 3)">
+                {{ date }}
+            </div>
+        </div>
+
+        <div class="sw-settings-subscription-interval-preview-banner__body-footer">
+            <sw-button
+                size="small"
+                :disabled="loading || isError"
+                @click="onOpenModal"
+            >
+                {{ $tc('commercial.subscriptions.settings.interval.preview.viewMoreDates') }}
+            </sw-button>
+        </div>
+    </div>
+
+    <sw-settings-subscription-interval-preview-modal
+        v-if="showMoreModal && !isError"
+        :dates="dates"
+        @modal-close="onCloseModal"
+    />
+</div>
+

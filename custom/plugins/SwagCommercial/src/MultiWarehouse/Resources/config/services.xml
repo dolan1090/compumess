@@ -1,0 +1,172 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- Definitions -->
+        <service id="Shopware\Commercial\MultiWarehouse\Entity\Warehouse\WarehouseDefinition">
+            <tag name="shopware.entity.definition" entity="warehouse"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Entity\WarehouseGroup\WarehouseGroupDefinition">
+            <tag name="shopware.entity.definition" entity="warehouse_group"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Entity\WarehouseGroup\Aggregate\WarehouseGroupWarehouse\WarehouseGroupWarehouseDefinition">
+            <tag name="shopware.entity.definition" entity="warehouse_group_warehouse"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Entity\Product\Aggregate\ProductWarehouse\ProductWarehouseDefinition">
+            <tag name="shopware.entity.definition" entity="product_warehouse"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Entity\Product\Aggregate\ProductWarehouseGroup\ProductWarehouseGroupDefinition">
+            <tag name="shopware.entity.definition" entity="product_warehouse_group"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Entity\Order\Aggregate\OrderWarehouseGroup\OrderWarehouseGroupDefinition">
+            <tag name="shopware.entity.definition" entity="order_warehouse_group"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Entity\Order\Aggregate\OrderProductWarehouse\OrderProductWarehouseDefinition">
+            <tag name="shopware.entity.definition" entity="order_product_warehouse"/>
+        </service>
+
+        <!-- Extensions -->
+        <service id="Shopware\Commercial\MultiWarehouse\Extension\Product\ProductExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Extension\Order\OrderExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Extension\Rule\RuleExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <!-- Commands -->
+        <service id="Shopware\Commercial\MultiWarehouse\Command\DemodataCommand">
+            <argument type="service" id="Shopware\Core\Framework\Demodata\DemodataService"/>
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Command\CleanupUnusedCommand">
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Command\Helper\CleanupUnusedHelper"/>
+            <tag name="console.command"/>
+        </service>
+
+        <!-- Generators -->
+        <service id="Shopware\Commercial\MultiWarehouse\Generator\WarehouseGenerator">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Write\EntityWriter"/>
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Entity\Warehouse\WarehouseDefinition"/>
+            <tag name="shopware.demodata_generator"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Generator\WarehouseGroupGenerator">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Write\EntityWriter"/>
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Entity\WarehouseGroup\WarehouseGroupDefinition"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <tag name="shopware.demodata_generator"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Generator\WarehouseGroupWarehouseGenerator">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Write\EntityWriter"/>
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Entity\WarehouseGroup\Aggregate\WarehouseGroupWarehouse\WarehouseGroupWarehouseDefinition"/>
+            <tag name="shopware.demodata_generator"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Generator\ProductWarehouseGenerator">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Write\EntityWriter"/>
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Entity\Product\Aggregate\ProductWarehouse\ProductWarehouseDefinition"/>
+            <tag name="shopware.demodata_generator"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Generator\ProductWarehouseGroupGenerator">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Write\EntityWriter"/>
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Entity\Product\Aggregate\ProductWarehouseGroup\ProductWarehouseGroupDefinition"/>
+            <tag name="shopware.demodata_generator"/>
+        </service>
+
+        <!-- Subscribers -->
+        <service id="Shopware\Commercial\MultiWarehouse\Subscriber\ProductLoadedSubscriber">
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Storage\StockStorage"/>
+            <argument type="service" id="Shopware\Core\Content\Product\AbstractProductMaxPurchaseCalculator"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Subscriber\CheckoutOrderPlacedSubscriber">
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Order\MultiWarehouseStockUpdater"/>
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Product\MultiWarehouseProductFilter"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Subscriber\ProductSalesSubscriber">
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Order\ProductSalesUpdater"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <!-- Decorators -->
+        <service
+            id="Shopware\Commercial\MultiWarehouse\Domain\Store\AvailableCombinationLoaderDecorator"
+            decorates="Shopware\Core\Content\Product\SalesChannel\Detail\AvailableCombinationLoader"
+        >
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Store\AvailableCombinationLoaderDecorator.inner"/>
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Storage\StockStorage"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Domain\Store\ProductCloseoutFilterFactoryDecorator"
+                 decorates="Shopware\Core\Content\Product\SalesChannel\ProductCloseoutFilterFactory"
+        >
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Store\ProductCloseoutFilterFactoryDecorator.inner"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Elasticsearch\ElasticsearchProductDefinitionDecorator"
+                 decorates="Shopware\Elasticsearch\Product\ElasticsearchProductDefinition"
+                 decoration-on-invalid="ignore"
+        >
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Elasticsearch\ElasticsearchProductDefinitionDecorator.inner"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <!-- Misc -->
+        <service id="Shopware\Commercial\MultiWarehouse\Command\Helper\CleanupUnusedHelper">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Domain\Cart\WarehouseGroupProcessor">
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Storage\StockStorage"/>
+            <tag name="shopware.cart.collector" priority="4999"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Domain\Product\MultiWarehouseProductFilter">
+            <argument type="service" id="product.repository"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Domain\Order\ExcludeMultiWarehouseStockUpdateFilter">
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Product\MultiWarehouseProductFilter"/>
+            <tag name="shopware.product.stock_filter"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Domain\Order\MultiWarehouseStockUpdater">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Commercial\MultiWarehouse\Domain\Storage\StockStorage"/>
+            <argument type="service" id="order_product_warehouse.repository"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Domain\Order\ProductSalesUpdater">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\MultiWarehouse\Domain\Storage\StockStorage">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+    </services>
+</container>

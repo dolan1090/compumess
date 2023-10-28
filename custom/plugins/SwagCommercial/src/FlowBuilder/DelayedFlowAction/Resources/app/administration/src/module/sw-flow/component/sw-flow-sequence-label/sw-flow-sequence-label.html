@@ -1,0 +1,31 @@
+<div class="sw-flow-sequence-label" :class="classes">
+    <span>
+        <a @click="$emit('click', sequence)" class="sw-flow-sequence-label__name">
+            <span v-if="sequence.actionName" class="sw-flow-sequence-label__action-name">
+                {# This is for app icon#}
+                <img
+                    v-if="convertSequence(sequence).iconRaw"
+                    class="sw-flow-sequence-label__icon-raw"
+                    alt=""
+                    :src="`data:image/png;base64, ${convertSequence(sequence).iconRaw}`"
+                />
+
+                <sw-icon
+                    v-else
+                    :name="`${convertSequence(sequence).icon}`"
+                    size="14px"
+                    class="sw-flow-sequence-label__action-icon"
+                />
+            </span>
+
+            <sw-icon
+                v-else
+                :name="`${convertSequence(sequence).icon}`"
+                size="14px"
+                class="sw-flow-sequence-label__condition-icon"
+            />
+
+            <span>{{ convertSequence(sequence).label }}</span>
+        </a>
+    </span>
+</div>

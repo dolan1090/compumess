@@ -1,0 +1,80 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+
+{% block page_account_main_content %}
+    {% if getLicense('SUBSCRIPTIONS-6549379') %}
+        {% block page_account_subscriptions %}
+            <div class="account-subscriptions">
+                {% block page_account_subscriptions_welcome %}
+                    <div class="account-welcome">
+                        {% block page_account_subscriptions_welcome_headline %}
+                            <h1>{{ "commercial.subscriptions.account.subscriptionsTitle"|trans|sw_sanitize }}</h1>
+                            <p>{{ "commercial.subscriptions.account.subscriptionsSubtitle"|trans|sw_sanitize }}</p>
+
+                            {% if activeRoute === 'frontend.account.subscription.detail.page' %}
+                                <a href="{{ path('frontend.account.subscription.page') }}">
+                                    {{ 'commercial.subscriptions.account.viewAllSubscriptions'|trans|sw_sanitize }}
+                                </a>
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+
+                {% block page_account_subscriptions_main %}
+                    <div class="account-subscriptions-main">
+                        {% if page.subscriptions.total == 0 %}
+                            {% block page_account_subscriptions_info_empty %}
+                                {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                    type: "warning",
+                                    content: "commercial.subscriptions.account.subscriptionsInfoEmpty"|trans|sw_sanitize
+                                } %}
+                            {% endblock %}
+                        {% else %}
+                            {% block page_account_subscriptions_overview %}
+                                <div class="account-subscriptions-overview">
+                                    {% block page_account_subscriptions_table %}
+                                        {% block page_account_subscriptions_table_body %}
+                                            {% for subscription in page.subscriptions.elements %}
+                                                <div class="subscription-table">
+                                                    {% sw_include '@Commercial/storefront/page/account/subscription/subscription-item.html.twig' %}
+                                                </div>
+                                            {% endfor %}
+                                        {% endblock %}
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+
+                            {% block page_account_subscriptions_paging %}
+                                {% if activeRoute is not same as ('frontend.account.subscription.detail.page') %}
+                                    {% set criteria = page.subscriptions.criteria %}
+                                    {% set totalPages = (page.subscriptions.total/criteria.limit)|round(0,'ceil') %}
+
+                                    {% if totalPages > 1 %}
+                                        {% set formAjaxSubmitOptions = {
+                                            replaceSelectors: ".account-subscriptions-main",
+                                            submitOnChange: true
+                                        } %}
+
+                                        {% block page_account_subscriptions_paging_form %}
+                                            <div class="account-subscriptions-pagination">
+                                                <form class="account-subscriptions-pagination-form"
+                                                      action="{{ path('frontend.account.subscription.page') }}"
+                                                      method="post"
+                                                      data-form-ajax-submit="true"
+                                                      data-form-ajax-submit-options='{{ formAjaxSubmitOptions|json_encode }}'>
+                                                    {% sw_include '@Storefront/storefront/component/pagination.html.twig' with {
+                                                        entities: page.subscriptions,
+                                                        criteria: criteria
+                                                    }  %}
+                                                </form>
+                                            </div>
+                                        {% endblock %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endblock %}
+                        {% endif %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,69 @@
+{% block sw_customer_role_create_header %}
+    <template #smart-bar-header>
+        <h2>{{ $tc('sw-customer.role.detail.title') }}</h2>
+    </template>
+{% endblock %}
+
+{% block sw_customer_employee_create_permissions_card %}
+    {% parent %}
+
+    {% block sw_customer_employee_detail_card_delete %}
+        <sw-card
+            v-if="acl.can('b2b_employee_management.deleter') && entity"
+            class="sw-customer-role-detail__delete-card"
+            positionIdentifier="sw-customer-role-detail__delete"
+            :title="$tc('sw-customer.role.delete.title')"
+            :isLoading="isLoading"
+        >
+            {% block sw_customer_role_detail_delete_card %}
+                <div class="sw-customer-role-detail__delete-card-container">
+                    <div>{{ $tc('sw-customer.role.delete.description') }}</div>
+
+                    <sw-button
+                        class="sw-customer-role-detail__delete-card-button"
+                        variant="ghost-danger"
+                        size="small"
+                        @click="showDeleteModal = true"
+                    >
+                        {{ $tc('global.default.delete') }}
+                    </sw-button>
+                </div>
+            {% endblock %}
+
+            {% block sw_customer_role_detail_delete_modal %}
+                <sw-modal
+                    v-if="showDeleteModal"
+                    :title="$tc('sw-customer.role.list.grid.modals.delete.title')"
+                    class="sw-customer-role-detail__delete-modal"
+                    variant="small"
+                    @modal-close="onCloseDeleteModal"
+                >
+                    <p>{{ $tc('sw-customer.role.list.grid.modals.delete.description', 0, { name: entity.name }) }}</p>
+
+                    <template #modal-footer>
+                        <sw-button
+                            class="sw-customer-role-detail__delete-modal-button-cancel"
+                            size="small"
+                            :disabled="isLoading"
+                            @click="onCloseDeleteModal"
+                        >
+                            {{ $tc('global.default.cancel') }}
+                        </sw-button>
+
+                        <sw-button-process
+                            class="sw-customer-role-detail__delete-modal-button"
+                            variant="danger"
+                            size="small"
+                            :is-loading="isLoading"
+                            :process-success="isDeleteSuccessful"
+                            @process-finish="onDeleteFinish"
+                            @click.prevent="onConfirmDelete"
+                        >
+                            {{ $tc('global.default.delete') }}
+                        </sw-button-process>
+                    </template>
+                </sw-modal>
+            {% endblock %}
+        </sw-card>
+    {% endblock %}
+{% endblock %}

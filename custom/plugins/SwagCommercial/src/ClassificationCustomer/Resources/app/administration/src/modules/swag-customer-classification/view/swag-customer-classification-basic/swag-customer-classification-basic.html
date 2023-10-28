@@ -1,0 +1,101 @@
+<div
+    class="swag-customer-classification-basic"
+>
+    <sw-card
+        position-identifier="swag-customer-classification-basic-info"
+        class="swag-customer-classification-basic__info-card"
+        :title="$tc('swag-customer-classification.cardTitleBasicInfo')"
+    >
+        <sw-textarea-field
+            v-model="additionalInfo"
+            :label="$tc('swag-customer-classification.labelAdditionalInfo')"
+            :placeholder="$tc('swag-customer-classification.placeholderAdditionalInfo')"
+            :helpText="$tc('swag-customer-classification.helpTextGenerateContent')"
+            :disabled="isGenerateLoading"
+        />
+
+        <sw-number-field
+            v-model="numberOfTags"
+            :label="$tc('swag-customer-classification.labelNumberOfTags')"
+            :placeholder="$tc('swag-customer-classification.placeholderNumberOfTags')"
+            :disabled="isGenerateLoading"
+            :min="1"
+            :max="5"
+        />
+
+        <sw-button-process
+            class="swag-customer-classification-basic__generate-button"
+            :is-loading="isGenerateLoading"
+            :disabled="isGenerateLoading"
+            :process-success="isGenerateSuccess"
+            @process-finish="generateFinish"
+            @click.prevent="generateTags"
+        >
+            {{ $tc('swag-customer-classification.buttonGenerate') }}
+        </sw-button-process>
+
+        <sw-ai-copilot-warning />
+    </sw-card>
+
+    <sw-card
+        v-if="hasTagData && !isGenerateLoading"
+        position-identifier="swag-customer-classification-basic-tag-card"
+        class="swag-customer-classification-index__tag-card"
+        :title="$tc('swag-customer-classification.cardTitleLabels')"
+    >
+        <sw-alert
+            class="swag-customer-classification-basic__tag-warning"
+            variant="warning"
+        >
+            {{ $tc('swag-customer-classification.tagWarning') }}
+        </sw-alert>
+
+        <template #grid>
+            <sw-data-grid
+                class="swag-customer-classification-basic__tag-grid"
+                :data-source="tagData"
+                :columns="tagColumns"
+                @selection-change="onTagSelectionChange"
+            >
+                <template #actions="{item}">
+                    <sw-context-menu-item
+                        class="swag-customer-classification-basic__edit-tag"
+                        @click="onEditTag(item)"
+                    >
+                        {{ $tc('swag-customer-classification.labelGrid.buttonEdit') }}
+                    </sw-context-menu-item>
+
+                    <sw-context-menu-item
+                        class="swag-customer-classification-basic__remove-tag"
+                        variant="danger"
+                        @click="onRemoveTag(item)"
+                    >
+                        {{ $tc('swag-customer-classification.labelGrid.buttonRemove') }}
+                    </sw-context-menu-item>
+                </template>
+            </sw-data-grid>
+        </template>
+
+        <template #footer>
+            <sw-button
+                v-tooltip="{
+                    message: $tc('swag-customer-classification.tooltipButtonStart'),
+                    disabled: !noSelectedTags,
+                    showOnDisabledElements: true
+                }"
+                class="swag-customer-classification-basic__start-button"
+                :disabled="noSelectedTags"
+                @click="onStartClick"
+            >
+                {{ $tc('swag-customer-classification.buttonStart') }}
+            </sw-button>
+        </template>
+    </sw-card>
+
+    <swag-customer-classification-edit-tag-modal
+        v-if="selectedTag"
+        :item="selectedTag"
+        @modal-apply="onSaveTag"
+        @modal-close="onCloseEditTagModal"
+    />
+</div>

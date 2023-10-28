@@ -1,0 +1,73 @@
+.account-subscriptions {
+    @extend .account-orders !optional;
+
+    &-main {
+        @extend .account-orders-main !optional;
+    }
+
+    &-overview {
+        @extend .account-orders-overview !optional;
+    }
+
+    &-pagination {
+        @extend .account-orders-pagination !optional;
+
+        &-form {
+            @extend .account-orders-pagination-form !optional;
+        }
+    }
+}
+
+.subscription-wrapper {
+    @extend .order-wrapper;
+}
+
+.subscription-table {
+    @extend .order-table;
+
+    &-header {
+        &-heading {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+            margin-bottom: 0;
+        }
+
+        &-status {
+            @extend .order-table-header-order-status;
+        }
+
+        &-alert {
+            margin-top: 16px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &-context-menu {
+            @extend .order-table-header-context-menu;
+
+            &-wrapper {
+                @extend .order-table-header-context-menu-wrapper;
+            }
+
+            &-content {
+                @extend .order-table-header-context-menu-content;
+
+                &-link {
+                    @extend .order-table-header-context-menu-content-link;
+                }
+            }
+        }
+
+        &-info-wrapper {
+            @extend .order-table-header-order-number;
+        }
+
+        &-label {
+            @extend .order-table-header-label;
+        }
+    }
+
+    &-body-value {
+        @extend .order-table-body-value;
+    }
+}

@@ -1,0 +1,10 @@
+<div class="swag-return-management-detail-returns">
+    <div v-for="item in orderReturns">
+        <swag-return-management-return-card
+            :key="item.id + '-' + order.versionId"
+            :item="item"
+            @reload-order="reloadOrder"
+            @save-order="saveOrder"
+        />
+    </div>
+</div>

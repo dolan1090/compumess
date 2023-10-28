@@ -1,0 +1,16 @@
+.sw-customer-employee-card {
+    .sw-card__toolbar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1.25rem;
+    }
+
+    &__role-select {
+        min-width: 10rem; // Arbitrary width, so we don't break the layout with unsupported inline selects
+    }
+
+    &__role-select .sw-entity-single-select__selection-input,
+    &__role-select .sw-entity-single-select__selection-input.is--expanded {
+        padding: 0.25rem 0;
+    }
+}

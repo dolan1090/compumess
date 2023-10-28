@@ -1,0 +1,20 @@
+{% sw_extends "@Storefront/storefront/page/checkout/finish/finish-details.html.twig" %}
+
+{% block page_checkout_finish_header %}
+    {{ parent() }}
+
+    {% set sweetenerActive = config('core.cart.aiCheckoutMessageActive') | default(false) %}
+    {% set sweetenerDisclaimerActive = config('core.cart.aiCheckoutMessageShowDisclaimer') | default(true) %}
+
+    {% set sweetener = page.order.customFields.swagCommercialCheckoutSweetener | default(null) %}
+
+    {% block page_checkout_finish_sweetener %}
+        {% if sweetenerActive %}
+            {% set sweetenerOptions = { endpoint: path('commercial.storefront.generate_checkout-sweetener.get'), orderId: page.order.id } %}
+
+            <div class="finish-sweetener"{% if not sweetener %} data-order-id="{{ page.order.id }}" data-checkout-sweetener data-checkout-sweetener-options="{{ sweetenerOptions | json_encode }}"{% endif %}>
+                <p class="finish-sweetener-text">{% if sweetener %}{{ sweetener }}{% endif %}</p>
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

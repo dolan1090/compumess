@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- GMV turnover reporting -->
+
+        <parameter key="swag.commercial.turnover_reporting_api_endpoint" type="string">/swplatform/gmvvalues</parameter>
+        <parameter key="swag.commercial.features" type="collection" />
+    </parameters>
+
+    <services>
+        <service id="Shopware\Commercial\Licensing\LicenseRouteChecker" autoconfigure="true"/>
+
+        <service id="Shopware\Commercial\Licensing\LicenseUpdater" public="true">
+            <argument type="service" id="shopware.store_client"/>
+            <argument type="service" id="Shopware\Core\Framework\Store\Authentication\StoreRequestOptionsProvider"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Subscriber\AdminLicenseListener">
+            <tag name="kernel.event_listener"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Subscriber\LicenseReportListener">
+            <argument type="service" id="Shopware\Commercial\Licensing\LicenseReporter"/>
+            <tag name="kernel.event_listener"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\LicenseReporter">
+            <argument type="service" id="shopware.store_client"/>
+            <argument type="service" id="Shopware\Core\Framework\Store\Authentication\StoreRequestOptionsProvider"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument>%kernel.project_dir%</argument>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\ScheduledTask\UpdateCommercialLicenseTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\ScheduledTask\UpdateCommercialLicenseTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="Shopware\Commercial\Licensing\LicenseUpdater"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Command\UpdateLicenseCommand">
+            <argument type="service" id="Shopware\Commercial\Licensing\LicenseUpdater"/>
+
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Command\SetLicenseCommand">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Command\FeatureDisableCommand">
+            <argument type="service" id="Shopware\Commercial\Licensing\Features"/>
+
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Command\FeatureEnableCommand">
+            <argument type="service" id="Shopware\Commercial\Licensing\Features"/>
+
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Command\FeatureListCommand">
+            <argument type="service" id="Shopware\Commercial\Licensing\Features"/>
+
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Api\AdminController" public="true">
+            <argument type="service" id="Shopware\Commercial\Licensing\Features"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\FeaturesFactory"/>
+        <service id="Shopware\Commercial\Licensing\Features" public="true">
+            <factory service="Shopware\Commercial\Licensing\FeaturesFactory"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument>%swag.commercial.features%</argument>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\LicenseTwigExtension">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Subscriber\LicenseHostChangedListener">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Shopware\Commercial\Licensing\LicenseUpdater"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <!-- GMV turnover reporting -->
+
+        <service id="Shopware\Commercial\Licensing\Reporting\TurnoverCollector" public="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Reporting\DefaultCurrencyCollector" public="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Reporting\OrderStatusChangedCollector" public="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Reporting\TurnoverReporter" public="true">
+            <argument type="service" id="Shopware\Commercial\Licensing\Reporting\TurnoverCollector"/>
+            <argument type="service" id="Shopware\Commercial\Licensing\Reporting\OrderStatusChangedCollector"/>
+            <argument type="service" id="Shopware\Commercial\Licensing\Reporting\DefaultCurrencyCollector"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\ScheduledTask\ReportTurnoverTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\ScheduledTask\ReportTurnoverTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="Shopware\Commercial\Licensing\Reporting\TurnoverReporter"/>
+            <argument type="service" id="Shopware\Commercial\Licensing\Reporting\TurnoverReportingClient"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Command\ReportTurnoverCommand">
+            <argument type="service" id="Shopware\Commercial\Licensing\Reporting\TurnoverReporter"/>
+            <argument type="service" id="Shopware\Commercial\Licensing\Reporting\TurnoverReportingClient"/>
+
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Shopware\Commercial\Licensing\Reporting\TurnoverReportingClient">
+            <argument>%swag.commercial.turnover_reporting_api_endpoint%</argument>
+            <argument type="service" id="shopware.store_client"/>
+            <argument type="service" id="Shopware\Core\Framework\Store\Authentication\StoreRequestOptionsProvider"/>
+        </service>
+    </services>
+</container>

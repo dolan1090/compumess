@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "lib": ["es2022", "DOM"],
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node",
+    "strict": false,
+    "allowSyntheticDefaultImports": true,
+  },
+  "include": [
+    "./global.d.ts",
+    "**/*.ts"
+  ],
+  "root": true
+}

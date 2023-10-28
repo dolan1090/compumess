@@ -1,0 +1,94 @@
+@import "~scss/variables";
+
+%action-list {
+    padding: 16px;
+    gap: 6px;
+    border: 1px solid $color-gray-300;
+    border-radius: 6px;
+    background: $color-gray-50;
+    height: auto;
+    margin-top: 10px;
+}
+
+.sw-flow-action-detail-modal {
+    &__title {
+        font-weight: $font-weight-semi-bold;
+    }
+
+    &__label {
+        font-weight: 600;
+        font-size: $font-size-s;
+    }
+
+    &__actions {
+        ul {
+            list-style-type: none;
+
+            li {
+                @extend %action-list;
+            }
+        }
+    }
+
+    &__action-config {
+        margin-top: 12px;
+        padding-left: 25px;
+        font-size: $font-size-s;
+
+        .entity {
+            text-transform: capitalize;
+        }
+
+        p {
+            font-size: $font-size-s;
+        }
+    }
+
+    &__case {
+        margin-top: 32px;
+    }
+
+    &__true-label {
+        &.sw-label {
+            background: $color-emerald-600;
+            color: $color-white;
+            border: none;
+            text-transform: uppercase;
+            font-weight: $font-weight-semi-bold;
+        }
+    }
+
+    &__false-label {
+        &.sw-label {
+            background: $color-crimson-600;
+            color: $color-white;
+            border: none;
+            text-transform: uppercase;
+            font-weight: $font-weight-semi-bold;
+        }
+    }
+
+    &__case-title {
+        font-weight: $font-weight-semi-bold;
+    }
+
+    &__condition {
+        ul {
+            list-style-type: none;
+
+            li {
+                @extend %action-list
+            }
+        }
+    }
+
+    &__condition-label {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &__condition-name {
+        font-size: $font-size-s;
+    }
+}

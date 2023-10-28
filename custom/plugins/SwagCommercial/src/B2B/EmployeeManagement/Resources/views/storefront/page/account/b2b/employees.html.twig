@@ -1,0 +1,406 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+
+{% set employees = page.getEmployees() %}
+{% set hasEmployees = employees.total > 0 %}
+{% set validTime = 'now'|date_modify('-2 hours') %}
+{% set employeeCreate = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::EMPLOYEE_CREATE') %}
+{% set employeeEdit = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::EMPLOYEE_EDIT') %}
+{% set employeeDelete = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::EMPLOYEE_DELETE') %}
+
+{% block page_account_main_content %}
+    {% block b2b_components_employees %}
+        <div class="b2b-employees b2b-listing">
+            {% block b2b_components_employees_title %}
+                <h1 class="d-flex">
+                    <div class="account-address">
+                        <div class="account-welcome">
+                            <h1>{{ 'employee-management.employees.title'|trans|sw_sanitize }}</h1>
+                        </div>
+                    </div>
+
+                    {% block b2b_components_employees_title_add %}
+                        {% if not hasEmployees and (isB2bAdmin() or isB2bAllowed(employeeCreate)) %}
+                            <div class="ms-auto align-self-center">
+                                <a
+                                    class="btn btn-primary ms-auto"
+                                    href="{{ path('frontend.business-partner.employees.create') }}"
+                                >
+                                    {{ 'employee-management.employees.buttonAdd'|trans|sw_sanitize }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                </h1>
+            {% endblock %}
+
+            {% block b2b_components_employees_table %}
+                <div class="b2b-listing-content">
+                    {% if hasEmployees %}
+                        <div class="d-md-none">
+                            <a
+                                href="{{ path('frontend.business-partner.employees.create') }}"
+                                class="btn btn-primary b2b-listing-employee-create-button"
+                            >
+                                {{ 'employee-management.employees.buttonAdd'|trans|sw_sanitize }}
+                            </a>
+
+                            <ul class="b2b-list">
+                                {% for employee in employees %}
+                                    <li class="b2b-list-item">
+                                        <a
+                                            href="{{ path('frontend.business-partner.employees.detail', { id: employee.id }) }}"
+                                            class="b2b-list-item-link"
+                                        >
+                                            {{ employee.firstName }} {{ employee.lastName }}
+                                        </a>
+
+                                        {% set hasRole = employee.role.name !== null %}
+                                        <span class="{% if not hasRole %}b2b-list-item-no-role{% endif %}">
+                                            {{ employee.role.name ?? 'employee-management.employees.noRole'|trans|sw_sanitize }}
+                                        </span>
+
+                                        {% if employee.active === false %}
+                                            <div class="mx-0 badge badge-lg bg-danger">{{ 'employee-management.employees.stateDeactivated'|trans|sw_sanitize }}</div>
+                                        {% elseif employee.recoveryTime is not empty and employee.recoveryTime < validTime %}
+                                            <div class="mx-0 badge badge-lg bg-dark bg-opacity-75">{{ 'employee-management.employees.stateInvitationExpired'|trans|sw_sanitize }}</div>
+                                        {% elseif employee.recoveryTime is not empty %}
+                                            <div class="mx-0 badge badge-lg bg-info">{{ 'employee-management.employees.stateInvitationSent'|trans|sw_sanitize }}</div>
+                                        {% else %}
+                                            <div class="mx-0 badge badge-lg bg-success">{{ 'employee-management.employees.stateActive'|trans|sw_sanitize }}</div>
+                                        {% endif %}
+
+                                        <span>{{ employee.email }}</span>
+
+                                        {% if isB2bAdmin() or isB2bAllowed(employeeEdit) %}
+                                            <div class="dropdown">
+                                                <button
+                                                    class="btn dropdown-toggle b2b-table-context-menu-button"
+                                                    type="button"
+                                                    id="b2b-table-context-menu"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-haspopup="true"
+                                                    aria-expanded="false"
+                                                >
+                                                   {% sw_icon 'more-horizontal' %}
+                                                </button>
+
+                                                <div
+                                                    class="dropdown-menu dropdown-menu-right b2b-table-actions"
+                                                    aria-labelledby="b2b-table-context-menu"
+                                                >
+                                                    {% if isB2bAdmin() or isB2bAllowed(employeeEdit) %}
+                                                        <a
+                                                            class="btn b2b-table-action b2b-table-action-edit"
+                                                            type="button"
+                                                            href="{{ path('frontend.business-partner.employees.detail', { id: employee.id }) }}"
+                                                        >
+                                                            {{ 'global.default.edit'|trans|sw_sanitize }}
+                                                        </a>
+                                                    {% endif %}
+
+                                                    {% if employee.password is empty and employee.active %}
+                                                        {% if isB2bAdmin() or isB2bAllowed(employeeCreate) %}
+                                                            <form
+                                                                action="{{ path('frontend.business-partner.employees.reinvite', { id: employee.id }) }}"
+                                                                method="post"
+                                                            >
+                                                                <button
+                                                                    class="btn b2b-table-action b2b-table-action-reinvite w-100"
+                                                                    type="submit"
+                                                                >
+                                                                    {{ 'employee-management.employees.resendInvitation'|trans|sw_sanitize }}
+                                                                </button>
+                                                            </form>
+                                                        {% endif %}
+                                                    {% endif %}
+
+                                                    {% if isB2bAdmin() or isB2bAllowed(employeeEdit) %}
+                                                        {% if employee.active %}
+                                                            {% set employeeOptions = {
+                                                                id: employee.id,
+                                                                firstName: employee.firstName,
+                                                                lastName: employee.lastName,
+                                                            } %}
+                                                            <button
+                                                                class="btn b2b-table-action b2b-table-action-deactivate"
+                                                                type="button"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#b2b-employee-deactivate-modal"
+                                                                data-employee="{{ employeeOptions|json_encode() }}"
+                                                                data-deactivate-action="{{ path('frontend.business-partner.employees.deactivate.submit', { id: employee.id }) }}"
+                                                                data-content-snippet="{{ 'employee-management.employeeDeactivate.text'|trans({
+                                                                    '%firstName%': employee.firstName,
+                                                                    '%lastName%': employee.lastName
+                                                                })|sw_sanitize }}"
+                                                            >
+                                                            {{ 'global.default.deactivate'|trans|sw_sanitize }}
+                                                            </button>
+                                                        {% else %}
+                                                            <a
+                                                                href="{{ path('frontend.business-partner.employees.activate.submit', { id: employee.id }) }}"
+                                                                class="btn b2b-table-action b2b-table-action-activate"
+                                                                type="button"
+                                                            >
+                                                                {{ 'global.default.activate'|trans|sw_sanitize }}
+                                                            </a>
+                                                        {% endif %}
+                                                    {% endif %}
+
+                                                    {% if employee.recoveryTime is empty %}
+                                                        {% if isB2bAdmin() or isB2bAllowed(employeeDelete) %}
+                                                            <button
+                                                                class="btn b2b-table-action b2b-table-action-delete is--danger"
+                                                                type="button"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#b2b-employee-delete-modal"
+                                                                data-b2b-employee-deleter
+                                                                data-content-snippet="{{ 'employee-management.employeeDelete.text'|trans({
+                                                                    '%firstName%': employee.firstName,
+                                                                    '%lastName%': employee.lastName
+                                                                })|sw_sanitize }}"
+                                                                data-delete-action="{{ path('frontend.business-partner.employees.delete.submit', { id: employee.id }) }}"
+                                                            >
+                                                                {{ 'global.default.delete'|trans|sw_sanitize }}
+                                                            </button>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {% if isB2bAdmin() or isB2bAllowed(employeeCreate) %}
+                                                            {% set contentSnippet %}
+                                                                {{ 'employee-management.employeeRevoke.text'|trans({
+                                                                    '%firstName%': employee.firstName,
+                                                                    '%lastName%': employee.lastName
+                                                                })|escape|sw_sanitize }}
+                                                            {% endset %}
+                                                            <button
+                                                                class="btn b2b-table-action b2b-table-action-revoke is--danger"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#b2b-employee-revoke-modal"
+                                                                data-delete-action="{{ path('frontend.business-partner.employees.delete.submit', { id: employee.id }) }}"
+                                                                data-content-snippet="{{ contentSnippet }}"
+                                                            >
+                                                              {{ 'employee-management.employees.buttonRevoke'|trans|sw_sanitize }}
+                                                            </button>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="d-none d-md-block">
+                            {% if isB2bAdmin() or isB2bAllowed(employeeCreate) %}
+                                {% sw_include '@Commercial/storefront/component/table-header.html.twig' with {
+                                    primaryHref: path('frontend.business-partner.employees.create'),
+                                    primaryPlaceholder: 'employee-management.employees.buttonAdd'|trans|sw_sanitize
+                                }  %}
+                            {% endif %}
+
+                            <table class="b2b-table table table-bordered align-middle">
+                                {% block b2b_components_employees_table_head %}
+                                    <thead>
+                                        <tr>
+                                            <th class="b2b-table-column b2b-table-column-first-name" scope="col">{{ 'employee-management.employees.tableHeaderFirstName'|trans|sw_sanitize }}</th>
+                                            <th class="b2b-table-column b2b-table-column-last-name" scope="col">{{ 'employee-management.employees.tableHeaderLastName'|trans|sw_sanitize }}</th>
+                                            <th class="b2b-table-column b2b-table-column-role" scope="col">{{ 'employee-management.employees.tableHeaderRole'|trans|sw_sanitize }}</th>
+                                            <th class="b2b-table-column b2b-table-column-status" scope="col">{{ 'employee-management.employees.tableHeaderStatus'|trans|sw_sanitize }}</th>
+                                            <th class="b2b-table-column b2b-table-column-email" scope="col">{{ 'employee-management.employees.tableHeaderEmail'|trans|sw_sanitize }}</th>
+                                            <th class="b2b-table-column b2b-table-column-actions" scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                {% endblock %}
+
+                                {% block b2b_components_employees_table_body %}
+                                    <tbody>
+                                        {% for employee in employees %}
+                                            {% set hasRole = employee.role.name !== null %}
+                                            {% set roleContent = employee.role.name ?? 'employee-management.roles.noRoleSelected'|trans|sw_sanitize %}
+                                            <tr>
+                                                <td class="b2b-table-column b2b-table-column-first-name">{{ employee.firstName }}</td>
+                                                <td class="b2b-table-column b2b-table-column-last-name">{{ employee.lastName }}</td>
+                                                <td class="b2b-table-column b2b-table-column-role{% if not hasRole %} has-no-role{% endif %}">{{ roleContent }}</td>
+                                                <td class="b2b-table-column b2b-table-column-status">
+                                                    {% if employee.active === false %}
+                                                        <div class="badge badge-lg bg-danger">{{ 'employee-management.employees.stateDeactivated'|trans|sw_sanitize }}</div>
+                                                    {% elseif employee.recoveryTime is not empty and employee.recoveryTime < validTime %}
+                                                        <div class="badge badge-lg bg-dark bg-opacity-75">{{ 'employee-management.employees.stateInvitationExpired'|trans|sw_sanitize }}</div>
+                                                    {% elseif employee.recoveryTime is not empty %}
+                                                        <div class="badge badge-lg bg-info">{{ 'employee-management.employees.stateInvitationSent'|trans|sw_sanitize }}</div>
+                                                    {% else %}
+                                                        <div class="badge badge-lg bg-success">{{ 'employee-management.employees.stateActive'|trans|sw_sanitize }}</div>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="b2b-table-column b2b-table-column-email">{{ employee.email }}</td>
+                                                <td class="b2b-table-column b2b-table-column-actions text-end">
+                                                    {% if isB2bAdmin() or isB2bAllowed(employeeEdit) %}
+                                                        <button
+                                                            class="btn dropdown-toggle b2b-table-context-menu-button"
+                                                            type="button"
+                                                            id="b2b-list-table-context-menu-button"
+                                                            data-bs-toggle="dropdown"
+                                                            aria-haspopup="true"
+                                                            aria-expanded="false"
+                                                        >
+                                                            {% sw_icon 'more-horizontal' %}
+                                                        </button>
+                                                    {% endif %}
+
+                                                    {% set employeeIsActive = employee.password is not null and employee.password is not empty %}
+                                                    <div
+                                                        class="dropdown-menu dropdown-menu-right b2b-table-actions"
+                                                        aria-labelledby="b2b-list-table-context-menu-button"
+                                                    >
+                                                        {% block b2b_components_employees_table_body_row_context_menu_actions %}
+                                                            {% if isB2bAdmin() or isB2bAllowed(employeeEdit) %}
+                                                                <a
+                                                                    class="btn b2b-table-action b2b-table-action-edit"
+                                                                    type="button"
+                                                                    href="{{ path('frontend.business-partner.employees.detail', { id: employee.id }) }}"
+                                                                >
+                                                                    {{ 'global.default.edit'|trans|sw_sanitize }}
+                                                                </a>
+                                                            {% endif %}
+
+                                                            {% if employee.password is empty and employee.active %}
+                                                                {% if isB2bAdmin() or isB2bAllowed(employeeCreate) %}
+                                                                    <form
+                                                                        action="{{ path('frontend.business-partner.employees.reinvite', { id: employee.id }) }}"
+                                                                        method="post"
+                                                                    >
+                                                                        <button
+                                                                            class="btn b2b-table-action b2b-table-action-reinvite w-100"
+                                                                            type="submit"
+                                                                        >
+                                                                            {{ 'employee-management.employees.resendInvitation'|trans|sw_sanitize }}
+                                                                        </button>
+                                                                    </form>
+                                                                {% endif %}
+                                                            {% endif %}
+
+                                                            {% if employee.recoveryTime is empty and (isB2bAdmin() or isB2bAllowed(employeeEdit)) %}
+                                                                {% if employee.active %}
+                                                                    {% set employeeOptions = {
+                                                                        id: employee.id,
+                                                                        firstName: employee.firstName,
+                                                                        lastName: employee.lastName,
+                                                                    } %}
+                                                                    <button
+                                                                        class="btn b2b-table-action b2b-table-action-deactivate"
+                                                                        type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#b2b-employee-deactivate-modal"
+                                                                        data-employee="{{ employeeOptions|json_encode() }}"
+                                                                        data-deactivate-action="{{ path('frontend.business-partner.employees.deactivate.submit', { id: employee.id }) }}"
+                                                                        data-content-snippet="{{ 'employee-management.employeeDeactivate.text'|trans({
+                                                                            '%firstName%': employee.firstName,
+                                                                            '%lastName%': employee.lastName
+                                                                        })|sw_sanitize }}"
+                                                                    >
+                                                                        {{ 'global.default.deactivate'|trans|sw_sanitize }}
+                                                                    </button>
+                                                                {% else %}
+                                                                    <a
+                                                                        href="{{ path('frontend.business-partner.employees.activate.submit', { id: employee.id }) }}"
+                                                                        class="btn b2b-table-action b2b-table-action-activate"
+                                                                        type="button"
+                                                                    >
+                                                                        {{ 'global.default.activate'|trans|sw_sanitize }}
+                                                                    </a>
+                                                                {% endif %}
+                                                            {% endif %}
+
+                                                            {% if employee.recoveryTime is empty %}
+                                                                {% if isB2bAdmin() or isB2bAllowed(employeeDelete) %}
+                                                                    <button
+                                                                        class="btn b2b-table-action b2b-table-action-delete is--danger"
+                                                                        type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#b2b-employee-delete-modal"
+                                                                        data-delete-action="{{ path('frontend.business-partner.employees.delete.submit', { id: employee.id }) }}"
+                                                                        data-content-snippet="{{ 'employee-management.employeeDelete.text'|trans({
+                                                                            '%firstName%': employee.firstName,
+                                                                            '%lastName%': employee.lastName
+                                                                        })|sw_sanitize }}"
+                                                                    >
+                                                                        {{ 'global.default.delete'|trans|sw_sanitize }}
+                                                                    </button>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                {% if isB2bAdmin() or isB2bAllowed(employeeCreate) %}
+                                                                    {% set contentSnippet %}
+                                                                        {{ 'employee-management.employeeRevoke.text'|trans({
+                                                                            '%firstName%': employee.firstName,
+                                                                            '%lastName%': employee.lastName
+                                                                        })|escape|sw_sanitize }}
+                                                                    {% endset %}
+                                                                    <button
+                                                                        class="btn b2b-table-action b2b-table-action-revoke is--danger"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#b2b-employee-revoke-modal"
+                                                                        data-delete-action="{{ path('frontend.business-partner.employees.delete.submit', { id: employee.id }) }}"
+                                                                        data-content-snippet="{{ contentSnippet }}"
+                                                                    >
+                                                                        {{ 'employee-management.employees.buttonRevoke'|trans|sw_sanitize }}
+                                                                    </button>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endblock %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                {% endblock %}
+                            </table>
+                        </div>
+
+                        {% block b2b_components_employees_table_pagination %}
+                            {% set criteria = page.employees.criteria %}
+                            {% set formAjaxSubmitOptions = {
+                                replaceSelectors: '.b2b-employees',
+                                submitOnChange: true
+                            } %}
+
+                            <form
+                                class="account-orders-pagination-form b2b-table-pagination"
+                                action="{{ path('frontend.business-partner.employees.list') }}"
+                                method="post"
+                                data-form-ajax-submit="true"
+                                data-form-ajax-submit-options='{{ formAjaxSubmitOptions|json_encode }}'
+                            >
+                                {% sw_include '@Storefront/storefront/component/pagination.html.twig' with {
+                                    entities: page.employees,
+                                    criteria: criteria
+                                }  %}
+                            </form>
+                        {% endblock %}
+                    {% else %}
+                        {% block b2b_components_employees_table_empty_state %}
+                            {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                type: 'info',
+                                content: 'employee-management.employees.emptyState'|trans|sw_sanitize
+                            } %}
+                        {% endblock %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+
+            {% block b2b_components_employee_delete_modal %}
+                {% sw_include '@Commercial/storefront/component/b2b/employee-confirm-delete-modal.html.twig' %}
+            {% endblock %}
+
+            {% block b2b_components_employee_revoke_invite_modal %}
+                {% sw_include '@Commercial/storefront/component/b2b/employee-confirm-delete-modal.html.twig' with {
+                    type: 'revoke',
+                    deleteSnippetKey: 'employee-management.employeeRevoke.buttonRevoke'
+                } %}
+            {% endblock %}
+
+            {% block b2b_components_employee_deactivate_modal %}
+                {% sw_include '@Commercial/storefront/component/b2b/employee-confirm-deactivate-modal.html.twig' %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

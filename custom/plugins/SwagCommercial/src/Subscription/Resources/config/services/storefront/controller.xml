@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="Shopware\Storefront\Controller\CheckoutController" id="subscription.storefront.controller.checkout" public="true">
+            <argument type="service" id="subscription.cart.service"/>
+            <argument type="service" id="subscription.storefront.page.checkout-cart-page-loader"/>
+            <argument type="service" id="subscription.storefront.page.checkout-confirm-page-loader"/>
+            <argument type="service" id="Shopware\Storefront\Page\Checkout\Finish\CheckoutFinishPageLoader"/>
+            <argument type="service" id="subscription.order.service"/>
+            <argument type="service" id="Shopware\Core\Checkout\Payment\PaymentService"/>
+            <argument type="service" id="subscription.storefront.page.offcanvas-cart-page-loader"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="Shopware\Core\Checkout\Customer\SalesChannel\LogoutRoute"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\SalesChannel\CartLoadRoute"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service class="Shopware\Storefront\Controller\CartLineItemController" id="subscription.storefront.controller.line-item" public="true">
+            <argument type="service" id="subscription.cart.service"/>
+            <argument type="service" id="Shopware\Core\Checkout\Promotion\Cart\PromotionItemBuilder"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\LineItemFactoryHandler\ProductLineItemFactory"/>
+            <argument type="service" id="Shopware\Core\Framework\Util\HtmlSanitizer"/>
+            <argument type="service" id="Shopware\Core\Content\Product\SalesChannel\ProductListRoute"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\LineItemFactoryRegistry"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service class="Shopware\Storefront\Controller\AuthController" id="subscription.storefront.controller.auth" public="true">
+            <argument type="service" id="Shopware\Storefront\Page\Account\Login\AccountLoginPageLoader"/>
+            <argument type="service" id="Shopware\Core\Checkout\Customer\SalesChannel\SendPasswordRecoveryMailRoute"/>
+            <argument type="service" id="Shopware\Core\Checkout\Customer\SalesChannel\ResetPasswordRoute"/>
+            <argument type="service" id="Shopware\Core\Checkout\Customer\SalesChannel\LoginRoute"/>
+            <argument type="service" id="Shopware\Core\Checkout\Customer\SalesChannel\LogoutRoute"/>
+            <argument type="service" id="subscription.storefront.cart.facade"/>
+            <argument type="service" id="Shopware\Storefront\Page\Account\RecoverPassword\AccountRecoverPasswordPageLoader"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextService"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service class="Shopware\Storefront\Controller\RegisterController" id="subscription.storefront.controller.register" public="true">
+            <argument type="service" id="Shopware\Storefront\Page\Account\Login\AccountLoginPageLoader"/>
+            <argument type="service" id="Shopware\Core\Checkout\Customer\SalesChannel\RegisterRoute"/>
+            <argument type="service" id="Shopware\Core\Checkout\Customer\SalesChannel\RegisterConfirmRoute"/>
+            <argument type="service" id="subscription.cart.service"/>
+            <argument type="service" id="subscription.storefront.page.checkout-register-page-loader"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="customer.repository"/>
+            <argument type="service" id="Shopware\Storefront\Page\Account\CustomerGroupRegistration\CustomerGroupRegistrationPageLoader"/>
+            <argument type="service" id="sales_channel_domain.repository"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service class="Shopware\Storefront\Controller\ContextController" id="subscription.storefront.controller.context" public="true">
+            <argument type="service" id="Shopware\Core\System\SalesChannel\SalesChannel\ContextSwitchRoute"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="router.default"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Storefront\Controller\AccountSubscriptionController" public="true">
+            <argument type="service" id="Shopware\Commercial\Subscription\Api\Route\Subscription\SubscriptionActivateRoute"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Api\Route\Subscription\SubscriptionCancelRoute"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Api\Route\Subscription\SubscriptionPauseRoute"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Storefront\Page\Account\Subscription\AccountSubscriptionPageLoader" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+    </services>
+</container>

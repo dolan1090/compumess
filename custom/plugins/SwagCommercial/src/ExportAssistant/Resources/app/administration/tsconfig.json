@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "target": "es2020",
+        "lib": ["ES2020", "DOM"],
+        "module": "commonjs",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "paths": {
+            "@administration/*": ["../../../../../../../../src/Administration/Resources/app/administration/*"],
+            "@shopware-ag/admin-extension-sdk/*": ["../../../../../../../../src/Administration/Resources/app/administration/node_modules/@shopware-ag/admin-extension-sdk/*"],
+            "axios": ["../../../../../../../../src/Administration/Resources/app/administration/node_modules/axios"],
+        },
+    },
+    "include": [
+        "src/**/*.ts",
+    ],
+    "exclude": [
+        "src/**/*.spec.ts",
+        "node_modules",
+    ],
+    "files": [
+        "../../../../../../../../src/Administration/Resources/app/administration/src/html-shim.d.ts",
+        "../../../../../../../../src/Administration/Resources/app/administration/src/global.types.ts",
+    ],
+}

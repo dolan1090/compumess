@@ -1,0 +1,272 @@
+{
+  "sw-privileges": {
+    "permissions": {
+      "parents": {
+        "subscription": "Abonnements"
+      },
+      "subscription": {
+        "label": "Abonnements"
+      },
+      "plans_and_intervals": {
+        "label": "Pläne & Intervalle"
+      }
+    }
+  },
+  "sw-flow": {
+    "triggers": {
+      "subscription": "Abonnement"
+    }
+  },
+  "global": {
+    "businessEvents": {
+      "state_enter_subscription_state_active": "Abonnement erreicht Status Aktiv",
+      "state_enter_subscription_state_cancelled": "Abonnement erreicht Status Storniert",
+      "state_enter_subscription_state_paused": "Abonnement erreicht Status Pausiert",
+      "state_enter_subscription_state_flagged_cancelled": "Abonnement erreicht Status Markiert für Löschung",
+      "state_leave_subscription_state_active": "Abonnement verlässt Status Aktiv",
+      "state_leave_subscription_state_cancelled": "Abonnement verlässt Status Storniert",
+      "state_leave_subscription_state_paused": "Abonnement verlässt Status Pausiert",
+      "state_leave_subscription_state_flagged_cancelled": "Abonnement verlässt Status Markiert für Löschung",
+      "checkout_subscription_placed": "Abonnement erstellt"
+    },
+    "entities": {
+      "subscription": "Abonnement",
+      "subscription_interval": "Abonnement-Intervall",
+      "subscription_plan": "Abonnement-Plan"
+    },
+    "sw-condition": {
+      "condition": {
+        "subscriptionCartRule": "Abonnement-Warenkorb",
+        "subscriptionIntervalRule": "Abonnement-Intervall",
+        "subscriptionPlanRule": "Abonnement-Plan"
+      },
+      "group": {
+        "subscription": "Abonnement"
+      }
+    }
+  },
+  "commercial": {
+    "subscriptions": {
+      "order": {
+        "labelSubscription": "Abonnement"
+      },
+      "subscriptions":  {
+        "general": {
+          "descriptionTextModule": "Abonnements verwalten",
+          "mainMenuItem": "Abonnements",
+          "mainMenuItemLabel": "Abonnements"
+        },
+        "listing": {
+          "buttonAddSubscription": "Abonnement hinzufügen",
+          "buttonAddPlan": "Plan hinzufügen",
+          "buttonAddInterval": "Intervall hinzufügen",
+          "buttonCancel": "Abbrechen",
+          "buttonTerminate": "Abonnement kündigen",
+          "columnProductName": "Produktname",
+          "columnProductNumber": "Produktnummer",
+          "columnCreatedAt": "Abschlussdatum",
+          "columnSubscriptionNumber": "Abonnement-Nummer",
+          "columnSubscriptionCustomerName": "Kunde",
+          "columnNextSchedule": "Nächster Termin",
+          "columnSalesChannelName": "Verkaufskanal",
+          "columnSubscriptionInterval": "Interval",
+          "columnSubscriptionPlanName": "Abonnement-Plan",
+          "columnState": "Status",
+          "columnActive": "Aktiv",
+          "contextMenuView": "Abonnement ansehen",
+          "contextMenuTerminate": "Abonnement kündigen",
+          "columnName": "Name",
+          "columnDescription": "Beschreibung",
+          "searchBarPlaceholder": "Suche nach Abonnement-Nummer, Kunde, Abonnement-Plan und mehr...",
+          "textSubscriptions": "Abonnements",
+          "textTerminateConfirm": "Möchtest Du wirklich dieses Abonnement kündigen ({subscriptionNumber})?"
+        },
+        "customer-detail": {
+          "buttonCreateSubscription": "Abonnement erstellen",
+          "contextMenuView": "Abonnement ansehen",
+          "emptySubline": "Es gibt bisher noch keine Abonnements für diesen Kunden.",
+          "emptyTitle": "Keine Abonnements gefunden",
+          "labelOrderCard": "Bestellungen & Abonnements",
+          "orderCardTitle": "Bestellungen",
+          "searchbarPlaceholder": "Suche nach Abonnement-Nummer, Abonnement-Plan und mehr...",
+          "subscriptionCardTitle": "Abonnements"
+        },
+        "detail": {
+          "headlineTitle": "Abonnement {number}",
+          "tabGeneral": "Allgemein",
+          "tabDetails": "Details",
+          "tabOrders": "Bestellungen",
+          "orders": {
+            "emptyOrdersTitle": "Keine Bestellungen gefunden",
+            "emptyOrdersSubline": "Es wurden keine Bestellungen für dieses Abonnement gefunden.",
+            "contextOpenOrder": "Bestellung anzeigen"
+          },
+          "details": {
+            "paymentCardTitle": "Bezahlung",
+            "billingAddressLabel": "Rechnungsaddresse",
+            "paymentMethodLabel": "Bezahlmethode",
+            "shippingCardTitle": "Versand",
+            "shippingAddressLabel": "Versandaddresse",
+            "shippingMethodLabel": "Versandmethode",
+            "shippingCostsLabel": "Versandkosten",
+            "nextOrderDateLabel": "Nächstes Bestelldatum",
+            "overviewCardTitle": "Übersicht",
+            "emailLabel": "Email",
+            "phoneNumberLabel": "Telefonnummer",
+            "salesChannelLabel": "Verkaufskanal",
+            "orderLanguageLabel": "Bestellsprache",
+            "orderRemaining": "Restbestellungen bis zum Ende der Mindestabonnementlaufzeit",
+            "orderNumberOfDeliveries": "Anzahl der Lieferungen"
+          },
+          "general": {
+            "infoCardTitle": "Info",
+            "itemsCardTitle": "Items",
+            "planLabel": "Plan",
+            "intervalLabel": "Intervall",
+            "tagsPlaceholder": "Tags hinzufügen ...",
+            "stateName": "Status: {name}",
+            "summarySubCreated": "am {date} mit {paymentMethod} und {shippingMethod}",
+            "summarySubUpdated": "Zuletzt geändert: {date}",
+            "stateDescription": "Status gesetzt am {date}",
+            "stateErrorStateChange": "Beim Setzen des Status ist ein Fehler aufgetreten: {message}",
+            "stateErrorNoAction": "Kein neuer Zustand gewählt.",
+            "itemGrid": {
+              "contextMenuOpenProduct": "Produkt anzeigen",
+              "columnProductName": "Name",
+              "columnQuantity": "Menge",
+              "columnPriceGross": "Bruttopreis",
+              "columnPriceTaxFree": "Preis (steuerfrei)",
+              "columnPrice": "Preis",
+              "columnTotalPrice": "Gesamt",
+              "columnTotalPriceGross": "Gesamt",
+              "columnTax": "Steuersatz",
+              "columnPriceNet": "Nettopreis",
+              "columnTotalPriceNet": "Gesamt",
+              "columnProductNumber": "Produktnummer",
+              "tax": "Enthaltene Steuern:",
+              "taxDetail": "{taxRate}%: {tax}",
+              "textCreditTax": "auto"
+            },
+            "itemSummary": {
+              "labelAmount": "Summe",
+              "labelAmountGrandTotal": "Gesamtsumme",
+              "labelAmountWithoutTaxes": "Gesamtsumme ohne MwSt.",
+              "labelAmountTotal": "Gesamtsumme inkl. MwSt.",
+              "labelAmountTotalRounded": "Gesamtsumme gerundet inkl. MwSt.",
+              "labelShippingCosts": "Versandkosten",
+              "labelDiscountShippingCosts": "Versandkostenrabatt",
+              "labelTaxes": "zzgl. {taxRate}% MwSt."
+            }
+          }
+        }
+      },
+      "settings": {
+        "subscriptions": "Abonnements",
+        "plans": "Pläne",
+        "intervals": "Intervalle",
+        "nameLabel": "Name",
+        "namePlaceholder": "Name hinzufügen...",
+        "descriptionLabel": "Beschreibung",
+        "descriptionPlaceholder": "Beschreibung hinzufügen...",
+        "discountPercentageLabel": "Rabatt (%)",
+        "discountPercentagePlaceholder": "Rabatt hinzufügen...",
+        "labelLabel": "Anzeigename",
+        "labelPlaceholder": "Anzeigename hinzufügen...",
+        "labelStorefrontLabel": "Anderen Namen in der Storefront anzeigen",
+        "activeLabel": "Aktiv",
+        "availability": "Verfügbarkeit",
+        "availabilityPlaceholder": "Wähle eine Verfügbarkeitsregel aus...",
+        "minimumExecutionCountLabel": "Mindestlaufzeit (Anzahl der Auftragsausführungen)",
+        "minimumExecutionCountPlaceholder": "Mindestlaufzeit eingeben...",
+        "generalTitle": "Allgemein",
+        "newFeatureInfoTitle": "Willkommen zu unserem neuesten Feature: Abonnements!",
+        "newFeatureInfo": "Mit Abonnements kannst Du wiederkehrende Bestellungen mit konfigurierbaren Intervallen erstellen. Wir werden in naher Zukunft weitere spannende Möglichkeiten für Abonnements hinzufügen. In der Zwischenzeit würden wir gerne Deine Meinung hören. Dein {feedback} wird uns dabei helfen, Abonnements weiter zu verbessern. Weitere Informationen findest Du in unserem {blogpost}.",
+        "newFeatureInfoBlogPost": "Blogbeitrag",
+        "newFeatureInfoFeedback": "Feedback",
+        "plan": {
+          "title": "Pläne",
+          "headlineNew": "Neuer Plan",
+          "tabGeneral": "General",
+          "tabProducts": "Produkte",
+          "emptySubline": "Es wurden keine Pläne gefunden",
+          "emptyTitle": "Keine Pläne gefunden",
+          "deleteModalInfoText": "Verknüpfte Abonnements und Intervalle bleiben unberührt.",
+          "emptyProductsSubline": "Es wurden keine Produkte gefunden",
+          "emptyProductsTitle": "Keine Produkte gefunden",
+          "addProducts": "Produkte hinzufügen",
+          "tabProductSelection": "Produkt auswählen",
+          "tabCategorySelection": "Kategorie auswählen",
+          "tabProductGroupSelection": "Produktgruppe auswählen",
+          "addProductsButton": "{selectedProductsLength} Produkte hinzufügen | {selectedProductsLength} Produkt hinzufügen | {selectedProductsLength} Produkte hinzufügen"
+        },
+        "interval": {
+          "deleteModalInfoText": "Wenn das Intervall mit einem Plan verknüpft ist, wird es aus diesem Plan gelöscht.",
+          "headlineNew": "Neues Intervall",
+          "frequency": "Frequenz",
+          "frequencyDescription": "Geben Sie ein Intervall an, in dem Ihre Bestellungen wiederholt werden sollen. Verwenden Sie die erweiterten Einstellungen, um bestimmte Datumsintervalle festzulegen, z. B. den ersten Montag im Monat oder bestimmte Daten.",
+          "frequencyLabel": "Frequenz",
+          "frequencyPlaceholder": "Frequenz hinzufügen...",
+          "frequencyDays": "Tage",
+          "frequencyWeeks": "Wochen",
+          "frequencyMonths": "Monate",
+          "advancedSettings": "Erweiterte Einstellungen",
+          "frequencyDisabled": "Die Frequenz ist deaktiviert, weil erweiterte Einstellungen konfiguriert sind.",
+          "advancedSettingsExclusiveSelections": "Die Auswahl von \"Tage des Monats\" und \"Tage der Woche\" schließen sich gegenseitig aus.",
+          "preview": {
+            "title": "Vorschau der Bestelltermine, wenn die Bestellung heute aufgegeben würde",
+            "helpText": "Die Frequenz wird als Grundlage für die Berechnung der Vorschaudaten verwendet. Alle anderen Filter sind sekundär.",
+            "viewMoreDates": "Weitere Bestelltermine anzeigen",
+            "modalTitle": "Bestelldaten-Vorschau",
+            "modalSubTitle": "Mit den von Dir gewählten Einstellungen könnten dies einige zukünftige Bestelltermine sein, wenn eine Bestellung heute aufgegeben würde",
+            "modalHelpText": "In dieser Vorschau werden 15 zukünftige Bestelltermine angezeigt, um einen Eindruck des Intervalls zu vermitteln.",
+            "impossibleIntervalError": "Bestelltermine können nicht mit den Intervalleinstellungen berechnet werden"
+          },
+          "cronOptions": {
+            "daysOfMonth": {
+              "label": "Tage des Monats",
+              "placeholder": "Tag(e) auswählen..."
+            },
+            "monthsOfYear": {
+              "label": "Monate im Jahr",
+              "placeholder": "Monat(e) auswählen...",
+              "january": "Januar",
+              "february": "Februar",
+              "march": "März",
+              "april": "April",
+              "may": "Mai",
+              "june": "Juni",
+              "july": "Juli",
+              "august": "August",
+              "september": "September",
+              "october": "Oktober",
+              "november": "November",
+              "december": "Dezember"
+            },
+            "daysOfWeek": {
+              "label": "Tage in der Woche",
+              "placeholder": "Wochentag(e) auswählen...",
+              "monday": "Montag",
+              "tuesday": "Dienstag",
+              "wednesday": "Mittwoch",
+              "thursday": "Donnerstag",
+              "friday": "Freitag",
+              "saturday": "Samstag",
+              "sunday": "Sonntag"
+            }
+          },
+          "emptySubline": "Es wurden keine Intervalle gefunden",
+          "emptyTitle": "Keine Intervalle gefunden"
+        }
+      },
+      "product": {
+        "card": {
+          "title": "Abonnements",
+          "description": "Weisen Sie Ihrem Produkt Abonnement-Pläne zu, um Ihren Kunden wiederkehrende Bestellungen anzubieten. Sie können Abonnementpläne und entsprechende Intervalle {link} einrichten.",
+          "descriptionLink": "hier",
+          "labelPlans": "Abonnement-Pläne",
+          "placeholderPlans": "Pläne wählen ..."
+        }
+      }
+    }
+  }
+}

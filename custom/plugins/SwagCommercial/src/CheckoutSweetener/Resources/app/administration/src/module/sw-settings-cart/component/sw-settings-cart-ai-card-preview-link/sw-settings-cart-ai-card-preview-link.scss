@@ -1,0 +1,9 @@
+@import "~scss/variables";
+
+.sw-settings-cart-ai-card-preview-button {
+    text-align:right;
+
+    .sw-icon.icon--solid-sparkles {
+        color: $color-shopware-brand-500;
+    }
+}

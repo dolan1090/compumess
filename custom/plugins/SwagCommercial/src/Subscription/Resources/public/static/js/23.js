@@ -1,0 +1,1 @@
+(this.webpackJsonpPluginsubscription=this.webpackJsonpPluginsubscription||[]).push([[23],{bD2f:function(n,i,s){"use strict";s.r(i);i.default=Shopware.Component.wrapComponentConfig({template:'<div class="sw-subscription-detail-general">\n    <sw-subscription-detail-general-info />\n\n    <sw-subscription-detail-general-items />\n</div>\n'})}}]);

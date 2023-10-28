@@ -1,0 +1,17 @@
+{% sw_extends {
+    template: "@Storefront/storefront/page/checkout/confirm/confirm-shipping.html.twig",
+    scopes: ['subscription']
+} %}
+
+{% block page_checkout_confirm_shipping_form %}
+    {% if getLicense('SUBSCRIPTIONS-6549379') %}
+        {% sw_include '@Storefront/storefront/component/shipping/shipping-form.html.twig' with {
+            'action': 'frontend.subscription.checkout.configure',
+            'actionPath': path('frontend.subscription.checkout.configure', {subscriptionToken: context.token}),
+            'redirect': 'frontend.subscription.checkout.confirm.page',
+            'redirectParameters': {redirected: 0, subscriptionToken: context.token}|json_encode,
+        } %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% sw_extends '@Storefront/storefront/page/account/b2b/role-create.html.twig' %}
+
+{% block b2b_components_role_create_form %}
+    {% block b2b_components_role_edit_form %}
+        <form
+            action="{{ path('frontend.business-partner.roles.detail.submit', { id: role.id }) }}"
+            method="post"
+            class="mt-4 b2b-edit-form b2b-edit-role-form"
+        >
+            {% block b2b_components_role_create_form_content %}
+                {{ parent() }}
+            {% endblock %}
+        </form>
+    {% endblock %}
+{% endblock %}
+
+{% block b2b_components_role_create_title %}
+    {% block b2b_components_role_edit_title %}
+        {{ 'employee-management.roleEdit.title'|trans|sw_sanitize }}
+    {% endblock %}
+{% endblock %}
+

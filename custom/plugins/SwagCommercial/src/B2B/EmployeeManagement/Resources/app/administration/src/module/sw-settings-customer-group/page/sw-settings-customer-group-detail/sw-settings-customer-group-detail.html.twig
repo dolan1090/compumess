@@ -1,0 +1,27 @@
+{% block sw_settings_customer_group_detail_content_registration_card_only_companies_can_register %}
+    <sw-switch-field
+        class="sw-settings-customer-group-detail__b2b-registration-only-company-registration"
+        v-model="customerGroup.registrationOnlyCompanyRegistration"
+        :label="$tc('sw-settings-customer-group.registration.onlyCompaniesCanRegister')"
+        :help-text="$tc('sw-settings-customer-group.registration.onlyCompaniesCanRegisterHelpText')"
+        :disabled="!acl.can('customer_groups.editor') || anyFeatureToggleActive"
+    />
+
+    <sw-switch-field
+        class="sw-settings-customer-group-detail__activate-feature_employee-management"
+        v-model="customerGroup.customFields.employee_management_activate_feature"
+        :label="$tc('sw-settings-customer-group.registration.activateCheckbox.employeeManagement')"
+        :help-text="$tc('sw-settings-customer-group.registration.activateHelptext.template', 0, { name: $tc('sw-settings-customer-group.registration.activateHelptext.features.employeeManagement') })"
+        :disabled="!acl.can('customer_groups.editor')"
+        @change="onChangeSwagActivateFeature"
+    />
+
+    <sw-switch-field
+        class="sw-settings-customer-group-detail__activate-feature_quick-order"
+        v-model="customerGroup.customFields.swag_quick_order_activate_feature"
+        :label="$tc('sw-settings-customer-group.registration.activateCheckbox.quickOrder')"
+        :help-text="$tc('sw-settings-customer-group.registration.activateHelptext.template', 0, { name: $tc('sw-settings-customer-group.registration.activateHelptext.features.quickOrder') })"
+        :disabled="!acl.can('customer_groups.editor')"
+        @change="onChangeSwagActivateFeature"
+    />
+{% endblock %}

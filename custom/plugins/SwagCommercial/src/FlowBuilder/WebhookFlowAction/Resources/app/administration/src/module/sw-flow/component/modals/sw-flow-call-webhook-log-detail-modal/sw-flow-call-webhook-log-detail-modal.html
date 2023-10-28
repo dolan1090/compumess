@@ -1,0 +1,74 @@
+<sw-modal
+    class="sw-flow-call-webhook-log-detail-modal"
+    :title="$tc('sw-flow-call-webhook.log.modal.title')"
+    @modal-close="onClose"
+>
+    <sw-tabs
+        default-item="request"
+        position-identifier=""
+    >
+        <template #default="{ active }">
+            <sw-tabs-item
+                class="sw-flow-call-webhook-log-detail-modal__tab-request"
+                name="request"
+                :active-tab="active"
+            >
+                {{ $tc('sw-flow-call-webhook.log.modal.tabRequest') }}
+            </sw-tabs-item>
+
+            <sw-tabs-item
+                class="sw-flow-call-webhook-log-detail-modal__tab-response"
+                name="response"
+                :active-tab="active"
+            >
+                {{ $tc('sw-flow-call-webhook.log.modal.tabResponse') }}
+            </sw-tabs-item>
+        </template>
+
+        <template #content="{ active }">
+            <template v-if="active === 'request'">
+                <p class="sw-flow-call-webhook-log-detail-modal__label">
+                    {{ $tc('sw-flow-call-webhook.log.modal.labelMethod') }}:
+                    <span>{{ method }}</span>
+                </p>
+
+                <p class="sw-flow-call-webhook-log-detail-modal__label">
+                    {{ $tc('sw-flow-call-webhook.log.modal.labelUrl') }}:
+                    <span>{{ logEntry.url }}</span>
+                </p>
+
+                <sw-textarea-field
+                    v-if="logEntry.requestContent"
+                    :label="$tc('sw-flow-call-webhook.log.modal.labelContent')"
+                    :value="displayString(logEntry.requestContent)"
+                />
+            </template>
+
+            <template v-if="active === 'response'">
+                <p class="sw-flow-call-webhook-log-detail-modal__label">
+                    {{ $tc('sw-flow-call-webhook.log.modal.labelHttpStatus') }}:
+                    <span>{{ logEntry.responseStatusCode }} {{ logEntry.responseReasonPhrase }}</span>
+                </p>
+
+                <p class="sw-flow-call-webhook-log-detail-modal__label">
+                    {{ $tc('sw-flow-call-webhook.log.modal.labelDuration') }}:
+                    <span>{{ logEntry.processingTime }}s</span>
+                </p>
+                <sw-textarea-field
+                    v-if="logEntry.responseContent"
+                    :label="$tc('sw-flow-call-webhook.log.modal.labelContent')"
+                    :value="displayString(logEntry.responseContent)"
+                />
+            </template>
+        </template>
+    </sw-tabs>
+    <template #modal-footer>
+        <sw-button
+            class="sw-flow-call-webhook-log-detail-modal__cancel-button"
+            size="small"
+            @click="onClose"
+        >
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+    </template>
+</sw-modal>

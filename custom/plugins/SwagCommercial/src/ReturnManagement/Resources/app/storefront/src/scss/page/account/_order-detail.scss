@@ -1,0 +1,10 @@
+.order-header-quantity {
+    white-space: nowrap;
+}
+
+@include media-breakpoint-up(md) {
+    .order-header-status,
+    .order-item-status {
+        text-align: center;
+    }
+}

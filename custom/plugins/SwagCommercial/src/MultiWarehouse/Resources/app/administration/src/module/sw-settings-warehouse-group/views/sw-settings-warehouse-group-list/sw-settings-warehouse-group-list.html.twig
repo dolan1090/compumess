@@ -1,0 +1,116 @@
+<sw-card
+    class="sw-settings-warehouse-group-list"
+    :title="$tc('sw-settings-warehouse-group.general.title')"
+    :subtitle="showListing ? $tc('sw-settings-warehouse-group.general.subtitle') : ''"
+    position-identifier="sw-settings-warehouse-group-list"
+>
+    <template
+        #toolbar
+        v-if="showListing"
+    >
+        <sw-card-filter
+            :disabled="isLoading"
+            @sw-card-filter-term-change="onChangeSearchTerm"
+        />
+
+        <sw-button
+            v-if="acl.can('warehouse-group.creator')"
+            variant="ghost"
+            size="small"
+            :router-link="{ name: 'sw.settings.warehouse.group.create' }"
+            :disabled="isLoading"
+        >
+            {{ $tc('sw-settings-warehouse-group.list.actionCreate') }}
+        </sw-button>
+    </template>
+
+    <template #grid>
+        <sw-entity-listing
+            v-if="showListing"
+            :repository="repository"
+            :columns="columns"
+            :items="warehouseGroups"
+            :plain-appearance="false"
+            :full-page="false"
+            :show-selection="false"
+            :is-loading="isLoading"
+            :criteria-limit="limit"
+            :allow-view="acl.can('warehouse-group.viewer')"
+            :allow-edit="acl.can('warehouse-group.editor')"
+            :allow-inline-edit="acl.can('warehouse-group.editor')"
+            :allow-delete="acl.can('warehouse-group.deleter')"
+            @update-records="onUpdateRecords"
+        >
+            <template #actions="{ item }">
+                <sw-context-menu-item :router-link="{ name: 'sw.settings.warehouse.group.detail', params: { id: item.id }}">
+                    {{ $tc('sw-settings-warehouse-group.list.actionDetail') }}
+                </sw-context-menu-item>
+
+                <sw-context-menu-item
+                    v-if="acl.can('warehouse-group.deleter')"
+                    @click="onClickDelete(item.id)"
+                    variant="danger"
+                >
+                    {{ $tc('sw-settings-warehouse-group.list.actionDelete') }}
+                </sw-context-menu-item>
+            </template>
+
+            <template #action-modals="{ item }">
+                <sw-modal
+                    v-if="showDeleteModal === item.id"
+                    :title="$tc('sw-settings-warehouse-group.general.titleDelete')"
+                    variant="small"
+                    @modal-close="onCloseDeleteModal"
+                >
+                    <p>
+                        {{ $tc('sw-settings-warehouse-group.list.textDeleteConfirm-1') }}<br>
+                        {{ $tc('sw-settings-warehouse-group.list.textDeleteConfirm-2') }}<b>{{ item.name }}</b>{{ $tc('sw-settings-warehouse-group.list.textDeleteConfirm-3') }}
+                    </p>
+
+                    <template #modal-footer>
+                        <sw-button
+                            size="small"
+                            @click="onCloseDeleteModal"
+                        >
+                            {{ $tc('sw-settings-warehouse-group.list.buttonCancel') }}
+                        </sw-button>
+
+                        <sw-button
+                            variant="danger"
+                            size="small"
+                            @click="onConfirmDelete(item.id)"
+                        >
+                            {{ $tc('sw-settings-warehouse-group.list.buttonDelete') }}
+                        </sw-button>
+                    </template>
+                </sw-modal>
+            </template>
+        </sw-entity-listing>
+
+        <sw-empty-state
+            v-if="!showListing"
+            class="sw-settings-warehouse-group-list__whitespace"
+            :title="$tc('sw-settings-warehouse-group.list.whitespaceTitle')"
+        >
+            <template #icon>
+                <img
+                    :src="'/administration/static/img/empty-states/settings-empty-state.svg' | asset"
+                    :alt="$tc('sw-empty-state.messageNoResultTitle')"
+                >
+            </template>
+
+            <template #default>
+                <p>{{ $tc('sw-settings-warehouse-group.list.whitespaceSubTitle') }}</p>
+
+                <sw-button
+                    v-if="acl.can('warehouse-group.creator')"
+                    variant="ghost"
+                    size="small"
+                    :router-link="{ name: 'sw.settings.warehouse.group.create' }"
+                >
+                    {{ $tc('sw-settings-warehouse-group.list.actionCreateShort') }}
+                </sw-button>
+            </template>
+        </sw-empty-state>
+    </template>
+</sw-card>

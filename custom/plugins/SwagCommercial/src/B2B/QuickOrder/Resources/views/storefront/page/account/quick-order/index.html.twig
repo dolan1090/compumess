@@ -1,0 +1,117 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+
+{% block base_head %}
+    {% if getLicense('QUICK_ORDER-9771104') %}
+        {% sw_include '@Storefront/storefront/page/account/quick-order/meta.html.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% set quickOrderListOptions = {
+    addToCartUrl: path('frontend.checkout.line-item.add'),
+    openCartOffCanvasUrl: path('frontend.cart.offcanvas'),
+    reloadPageMessage: 'quickOrder.reloadPageMessage'|trans|sw_sanitize
+} %}
+
+{% block page_account_main_content %}
+    {% if getLicense('QUICK_ORDER-9771104') %}
+        {% block page_account_quickorder %}
+            <div class="account-quick-orders">
+                {% block page_account_quickorder_welcome %}
+                    <div class="account-welcome">
+                        {% block page_account_quickorder_welcome_headline %}
+                            <h1>{{ "quickOrder.pageTitle"|trans|sw_sanitize }}</h1>
+                            <p>{{ "quickOrder.pageDescription"|trans|sw_sanitize }}</p>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+
+                {% block page_account_quickorder_main %}
+                    <div
+                        class="account-quick-order-card card"
+                        data-b2b-base-quick-order="true"
+                        data-b2b-quick-order-list="true"
+                        data-b2b-quick-order-list-options="{{ quickOrderListOptions|json_encode }}"
+                    >
+                        <div class="card-body">
+                            {% block page_account_quickorder_form %}
+                                {% block page_account_quickorder_actions_form %}
+                                    <div class="d-flex justify-content-between action-container">
+                                        {% block page_account_quickorder_actions %}
+                                            <div>
+                                                {% block page_account_quickorder_actions_clear %}
+                                                    <button class="btn btn-outline-dark btn-block btn-clear-list"
+                                                            title="{{ "quickOrder.buttonClearList"|trans|striptags }}"
+                                                            data-bs-target="#removeListModal"
+                                                            data-bs-toggle="modal"
+                                                            disabled
+                                                    >
+                                                        {% sw_icon 'trash' style {'size': 'xs', 'pack': 'default'}  %}
+                                                        {{ "quickOrder.buttonClearList"|trans|sw_sanitize }}
+                                                    </button>
+                                                {% endblock %}
+
+                                                {% block page_account_quickorder_actions_csv_upload %}
+                                                    <button type="button"
+                                                            class="btn btn-light btn-csv-upload"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#quickOrderUploadModal"
+                                                    >
+                                                        {% sw_icon 'cloud-upload' %}
+                                                        <span class="ms-2">{{ "quickOrder.buttonUploadCSV"|trans|sw_sanitize }}</span>
+                                                    </button>
+                                                {% endblock %}
+                                            </div>
+
+                                            {% block page_account_quickorder_actions_add_to_cart %}
+                                                <button class="btn btn-primary btn-add-to-cart"
+                                                        data-bs-target="#addToCartModal"
+                                                        title="{{ "quickOrder.buttonAddToCart"|trans|striptags }}"
+                                                        disabled
+                                                        data-bs-toggle="modal"
+                                                >
+                                                    {{ "quickOrder.buttonAddToCart"|trans|sw_sanitize }}
+                                                </button>
+                                            {% endblock %}
+                                        {% endblock %}
+                                    </div>
+                                {% endblock %}
+
+                                {% block page_account_quickorder_table %}
+                                    {% sw_include '@SwagQuickOrder/storefront/page/account/quick-order/item-table.html.twig' %}
+                                {% endblock %}
+                            {% endblock %}
+                        </div>
+
+                        {% block page_account_quickorder_upload_modal %}
+                            {% sw_include '@SwagQuickOrder/storefront/page/account/quick-order/file-upload-modal.html.twig' %}
+                        {% endblock %}
+
+                        {% block page_add_to_cart_modal %}
+                            {% sw_include '@SwagQuickOrder/storefront/page/account/quick-order/confirm-modal.html.twig' with {
+                                class: 'confirm-modal add-to-cart-modal',
+                                id: 'addToCartModal',
+                                btnConfirm: 'btn-confirm-add-to-cart',
+                                title: 'quickOrder.addToCartModal.title',
+                                description: 'quickOrder.addToCartModal.description',
+                                buttonCancel: 'global.default.cancel',
+                                buttonConfirm: 'quickOrder.buttonAddToCart'
+                            } %}
+                        {% endblock %}
+
+                        {% block page_remove_list_modal %}
+                            {% sw_include '@SwagQuickOrder/storefront/page/account/quick-order/confirm-modal.html.twig' with {
+                                class: 'confirm-modal remove-list-modal',
+                                id: 'removeListModal',
+                                btnConfirm: 'btn-confirm-remove',
+                                title: 'quickOrder.removeListModal.title',
+                                description: 'quickOrder.removeListModal.description',
+                                buttonCancel: 'global.default.cancel',
+                                buttonConfirm: 'quickOrder.buttonClearList'
+                            } %}
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    {% endif %}
+{% endblock %}

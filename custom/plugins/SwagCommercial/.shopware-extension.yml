@@ -1,0 +1,60 @@
+store:
+    availabilities:
+        - German
+        - International
+    default_locale: de_DE
+    localizations:
+        - de_DE
+        - en_GB
+    categories:
+        - System
+        - BackendBearbeitung
+    type: extension
+    icon: src/Resources/config/plugin.png
+    automatic_bugfix_version_compatibility: false
+    description:
+        de: "Diese Erweiterung beinhaltet alle Kommerziellen Features aus der Professional / Enterprise Version. Features werden mit der zugehörigen Lizenz aktiviert"
+        en: "This extension contains all commercial features from the professional or enterprise version. Features are activated by the correct license"
+    images:
+        - file: src/Resources/store/store1.png
+          priority: 0
+          activate:
+            de: true
+            en: true
+          preview:
+            de: true
+            en: true
+        - file: src/Resources/store/store2.png
+          priority: 0
+          activate:
+            de: true
+            en: true
+          preview:
+            de: true
+            en: true
+build:
+  extraBundles:
+    - path: CustomPricing
+    - path: FlowBuilder/FlowSharing
+    - path: FlowBuilder/DelayedFlowAction
+    - path: FlowBuilder/WebhookFlowAction
+    - path: MultiWarehouse
+    - path: PropertyExtractor
+    - path: ReturnManagement
+    - path: RuleBuilderPreview
+    - path: Subscription
+    - path: CheckoutSweetener
+    - path: TextGenerator
+    - path: ClassificationCustomer
+    - path: ReviewSummary
+    - path: ContentGenerator
+    - path: TextTranslator
+    - path: ExportAssistant
+    - path: B2B/QuickOrder
+    - path: B2B/EmployeeManagement
+    - path: ImageClassification
+    - path: AdvancedSearch
+    - path: Captcha
+  zip:
+    composer:
+      enabled: false

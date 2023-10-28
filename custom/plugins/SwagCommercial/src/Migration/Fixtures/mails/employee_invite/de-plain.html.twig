@@ -1,0 +1,9 @@
+Hallo {{ employee.firstName }} {{ employee.lastName }},
+
+Sie wurden{% if customer.company|length > 0 %} von {{ customer.company }}{% endif %} eingeladen, ein Mitarbeiter-Konto bei {{ shopName }} zu erstellen.
+
+Klicken Sie auf den folgenden Link, um ein Passwort festzulegen und die Registrierung abzuschließen.
+
+Einladung annehmen: {{ inviteLink }}
+
+Dieser Link ist für die nächsten 2 Stunden gültig. Nach Ablauf dieser Frist muss eine neue Einladung angefragt werden.

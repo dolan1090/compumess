@@ -1,0 +1,242 @@
+{% block sw_customer_employee_card %}
+<sw-card
+    class="sw-customer-employee-card"
+    positionIdentifier="sw-customer-employee-card"
+    :title="$tc('sw-customer.employee-management.employees')"
+    :subtitle="$tc('sw-customer.employee-management.warningEdit')"
+    toolbar
+    large
+>
+    {% block sw_customer_employee_card_toolbar %}
+    <template #toolbar>
+        <sw-card-filter
+            :disabled="isLoading"
+            @sw-card-filter-term-change="onChangeSearchTerm"
+        ></sw-card-filter>
+
+        <sw-button
+            :disabled="!acl.can('b2b_employee_management.creator') || !editMode"
+            class="sw-customer-employee-card__toolbar-create-button"
+            @click="onCreate"
+            variant="ghost"
+            size="small"
+        >
+            {{ $tc('sw-customer.businessPartner.buttonCreateEmployee') }}
+        </sw-button>
+    </template>
+    {% endblock %}
+
+    {% block sw_customer_employee_card_grid %}
+    <template #grid>
+        <sw-entity-listing
+            ref="listing"
+            v-if="showListing"
+            :repository="employeeRepository"
+            :items="collection"
+            :columns="columns"
+            :full-page="false"
+            :is-loading="isLoading"
+            :skeletonItemAmount="5"
+            :show-selection="editMode"
+            :allow-edit="!isEditDisabled"
+            :allow-inline-edit="!isEditDisabled"
+            :allow-delete="!isDeleteDisabled"
+            plain-appearance
+            disable-route-params
+            @update-records="onUpdateRecords"
+            @inline-edit-save="onInlineEditSave"
+        >
+            {% block sw_customer_employee_card_grid_column_role %}
+            <template #column-role="{ item, isInlineEdit }">
+                <template v-if="isInlineEdit">
+                    <div class="sw-data-grid-inline-edit is--compact">
+                        <sw-entity-single-select
+                            v-model="item.roleId"
+                            class="sw-customer-employee-card__role-select"
+                            entity="b2b_components_role"
+                            :criteria="roleCriteria"
+                            label-property="name"
+                            :placeholder="$tc('sw-customer.employee.labelRole')"
+                            :resetOption="$tc('sw-customer.employee.placeholderRole')"
+                        ></sw-entity-single-select>
+                    </div>
+                </template>
+                <template v-else>
+                    <span v-if="item.role">{{ item.role.name }}</span>
+                    <span v-else>{{ $tc('sw-customer.employee.placeholderRole') }}</span>
+                </template>
+            </template>
+            {% endblock %}
+
+            {% block sw_customer_employee_card_grid_column_status %}
+            <template #column-status="{ item }">
+                <span v-if="item.active === false">
+                    <sw-color-badge color="#94A6B8" rounded></sw-color-badge>
+
+                    {{ $tc('sw-customer.employee.status.inactive') }}
+                </span>
+                <span v-else-if="isInvitationExpired(item)">
+                    <sw-color-badge color="#DE294C" rounded></sw-color-badge>
+
+                    {{ $tc('sw-customer.employee.status.invitationExpired') }}
+                </span>
+                <span v-else-if="item.recoveryTime">
+                    <sw-color-badge color="#3CBCE5" rounded></sw-color-badge>
+
+                    {{ $tc('sw-customer.employee.status.invitationSent') }}
+                </span>
+                <span v-else>
+                    <sw-color-badge color="#37D046" rounded></sw-color-badge>
+
+                    {{ $tc('sw-customer.employee.status.active') }}
+                </span>
+            </template>
+            {% endblock %}
+
+            {% block sw_customer_employee_card_grid_actions %}
+            <template #actions="{ item }">
+                {% block sw_customer_employee_card_grid_actions_edit %}
+                <sw-context-menu-item
+                    class="sw-customer-employee__action-edit"
+                    :disabled="isEditDisabled"
+                    @click="onEdit(item)"
+                >
+                    {{ $tc('global.default.edit') }}
+                </sw-context-menu-item>
+                {% endblock %}
+
+                {% block sw_customer_employee_card_grid_actions_status %}
+                <sw-context-menu-item
+                    v-if="item.recoveryTime === null"
+                    class="sw-customer-employee__action-status"
+                    :disabled="isEditDisabled"
+                    @click="onToggleActive(item)"
+                >
+                    {{ $tc(`sw-customer.businessPartner.grid.actions.${item.active ? 'deactivate' : 'activate'}`) }}
+                </sw-context-menu-item>
+                {% endblock %}
+
+                {% block sw_customer_employee_card_grid_actions_resend %}
+                <sw-context-menu-item
+                    class="sw-customer-employee__action-resend"
+                    :disabled="isEditDisabled"
+                    v-if="item.recoveryTime"
+                    @click="onResendInvitation(item)"
+                >
+                    {{ $tc('sw-customer.businessPartner.grid.actions.resend') }}
+                </sw-context-menu-item>
+                {% endblock %}
+
+                {% block sw_customer_employee_card_grid_actions_delete %}
+                <sw-context-menu-item
+                    class="sw-customer-employee__action-delete"
+                    :disabled="isDeleteDisabled"
+                    variant="danger"
+                    @click="onDelete(item)"
+                >
+                    <span v-if="item.recoveryTime">
+                        {{ $tc('sw-customer.businessPartner.grid.actions.revoke') }}
+                    </span>
+                    <span v-else>
+                        {{ $tc('global.default.delete') }}
+                    </span>
+                </sw-context-menu-item>
+                {% endblock %}
+            </template>
+            {% endblock %}
+
+            {% block sw_customer_employee_card_grid_modals %}
+            <template #action-modals="{ item }">
+                {% block sw_customer_employee_card_grid_modals_status %}
+                <sw-modal
+                    class="sw-customer-employee__modal-status"
+                    v-if="['Activate', 'Deactivate'].includes(activeModal)  && selectedItem.id === item.id"
+                    :title="$tc(`sw-customer.businessPartner.grid.actions.title${activeModal}`)"
+                    variant="small"
+                    @modal-close="onModalClose"
+                >
+                    <template>
+                        <p>{{ $tc(`sw-customer.businessPartner.grid.actions.description${activeModal}`, 0, { name: getFullName(item) }) }}</p>
+                    </template>
+
+                    <template #modal-footer>
+                        <sw-button
+                            size="small"
+                            :disabled="isLoading"
+                            @click="onModalClose"
+                        >
+                            {{ $tc('global.default.cancel') }}
+                        </sw-button>
+
+                        <sw-button-process
+                            variant="primary"
+                            size="small"
+                            :is-loading="isLoading"
+                            :process-success="isActivationSuccessful"
+                            @process-finish="onModalClose"
+                            @click.prevent="onConfirmToggleActive(item)"
+                        >
+                            {{ $tc(`sw-customer.businessPartner.grid.actions.${item.active ? 'deactivate' : 'activate'}`) }}
+                        </sw-button-process>
+                    </template>
+                </sw-modal>
+                {% endblock %}
+
+                {% block sw_customer_employee_card_grid_modals_delete %}
+                <sw-modal
+                    class="sw-customer-employee__modal-delete"
+                    v-if="activeModal === 'Delete' && selectedItem.id === item.id"
+                    :title="deleteModalTitle(item.recoveryTime)"
+                    variant="small"
+                    @modal-close="onModalClose"
+                >
+                    <p v-if="item.recoveryTime">
+                       {{ $tc('sw-customer.employee.descriptionRevoke', 0, { name: getFullName(item) }) }}
+                    </p>
+                    <p v-else>
+                       {{ $tc('sw-customer.employee.descriptionDelete', 0, { name: getFullName(item) }) }}
+                    </p>
+
+                    <template #modal-footer>
+                        <sw-button
+                            size="small"
+                            :disabled="isLoading"
+                            @click="onModalClose"
+                        >
+                            {{ $tc('global.default.cancel') }}
+                        </sw-button>
+
+                        <sw-button-process
+                            variant="danger"
+                            size="small"
+                            :is-loading="isLoading"
+                            :process-success="isDeleteSuccessful"
+                            @process-finish="onModalClose"
+                            @click.prevent="onConfirmDelete(item)"
+                        >
+                            <span v-if="item.recoveryTime">
+                                {{ $tc('sw-customer.businessPartner.grid.actions.revoke') }}
+                            </span>
+                            <span v-else>
+                                {{ $tc('global.default.delete') }}
+                            </span>
+                        </sw-button-process>
+                    </template>
+                </sw-modal>
+                {% endblock %}
+            </template>
+            {% endblock %}
+        </sw-entity-listing>
+
+        {% block sw_customer_employee_card_grid_empty_state %}
+        <sw-empty-state
+            v-else
+            :showDescription="false"
+            :absolute="false"
+            :title="$tc('sw-customer.businessPartner.grid.titleEmptyState')"
+        ></sw-empty-state>
+        {% endblock %}
+    </template>
+    {% endblock %}
+</sw-card>
+{% endblock %}

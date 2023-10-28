@@ -1,0 +1,12 @@
+{% block sw_order_list_grid_label_manual_order %}
+    {% parent %}
+
+    <sw-label
+        v-if="item.subscriptionId"
+        appearance="pill"
+        size="small"
+        class="sw-order-list__subscription-order-label"
+    >
+        {{ $tc('commercial.subscriptions.order.labelSubscription') }}
+    </sw-label>
+{% endblock %}

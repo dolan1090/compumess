@@ -1,0 +1,77 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Shopware\Commercial\CustomPricing\Entity\CustomPrice\CustomPriceDefinition">
+            <tag name="shopware.entity.definition" entity="custom_pricing_extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Extension\Product\ProductCustomPriceExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Extension\Customer\CustomerCustomPriceExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Extension\CustomerGroup\CustomerGroupCustomPriceExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Entity\FieldSerializer\CustomPriceFieldSerializer">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="validator"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\FieldSerializer\PriceFieldSerializer"/>
+
+            <tag name="shopware.field_serializer"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Framework\Demodata\Generator\CustomPricingGenerator">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Commercial\CustomPricing\Domain\CustomPriceUpdater"/>
+
+            <tag name="shopware.demodata_generator" option-name="custom-prices" option-default="100"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Framework\Demodata\Subscriber\DemodataRequestCreatedEventSubscriber">
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Domain\CustomPriceUpdaterValidator"/>
+
+        <service id="Shopware\Commercial\CustomPricing\Domain\CustomPriceUpdater">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Commercial\CustomPricing\Domain\CustomPriceUpdaterValidator"/>
+            <argument type="service" id="messenger.bus.shopware"/>
+            <argument type="service" id="Shopware\Core\Content\Product\DataAbstractionLayer\ProductIndexer"/>
+            <argument type="service" id="Shopware\Commercial\CustomPricing\Entity\FieldSerializer\CustomPriceFieldSerializer"/>
+            <argument type="service" id="Shopware\Commercial\CustomPricing\Entity\CustomPrice\CustomPriceDefinition"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Subscriber\ProductSubscriber">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Commercial\CustomPricing\Entity\FieldSerializer\CustomPriceFieldSerializer"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Subscriber\CacheKeyEventSubscriber">
+            <argument type="service" id="Shopware\Commercial\CustomPricing\Domain\CustomPriceExistenceHelper"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Api\Controller\CustomPriceRoute" public="true">
+            <argument type="service" id="Shopware\Commercial\CustomPricing\Domain\CustomPriceUpdater"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Domain\CustomPriceExistenceHelper">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\CustomPricing\Framework\Checkout\Cart\CustomPricingRuleLoaderDecorator" decorates="Shopware\Core\Checkout\Cart\RuleLoader">
+            <argument type="service" id="Shopware\Commercial\CustomPricing\Framework\Checkout\Cart\CustomPricingRuleLoaderDecorator.inner"/>
+        </service>
+    </services>
+</container>

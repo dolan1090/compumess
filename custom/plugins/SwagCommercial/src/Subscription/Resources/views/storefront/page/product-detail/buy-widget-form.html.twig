@@ -1,0 +1,15 @@
+{% sw_extends "@Storefront/storefront/page/product-detail/buy-widget-form.html.twig" %}
+
+{% block page_product_detail_buy_form_inner %}
+
+
+    {% if getLicense('SUBSCRIPTIONS-6549379') %}
+        {# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
+        {% set product = page.product %}
+
+        {% sw_include '@SwagCommercial/storefront/subscriptions/product-box.html.twig' %}
+    {% endif %}
+
+    {{ parent() }}
+
+{% endblock %}

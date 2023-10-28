@@ -1,0 +1,34 @@
+{% block sw_flow_tabs_header_extension %}
+    {% parent %}
+    <sw-tabs-item
+        v-if="!isNewFlow && hasDelayedActions && getLicense('FLOW_BUILDER-8478732')"
+        class="sw-flow-detail__tab-delay"
+        :route="routeDetailTab('delay')"
+    >
+        {{ $tc('sw-flow-delay.tabDelay') }}
+    </sw-tabs-item>
+{% endblock %}
+{% block sw_flow_detail_modal_extension %}
+    <sw-modal
+        v-if="isOpenWarningModal"
+        class="sw-flow-detail__modal"
+        :title="$tc('global.default.warning')"
+        @modal-close="onCloseModal"
+    >
+        {% block sw_flow_detail_modal_extension_text_content %}
+            <sw-alert variant="warning">
+                {{ $tc('sw-flow-delay.delay.list.inactivateWarningMessage') }}
+            </sw-alert>
+        {% endblock %}
+
+        <template #modal-footer>
+            {% block sw_flow_detail_modal_extension_modal_buttons %}
+                {% block sw_flow_detail_modal_extension_cancel_button%}
+                    <sw-button size="small" @click="onCloseModal">
+                        {{ $tc('global.default.cancel') }}
+                    </sw-button>
+                {% endblock %}
+            {% endblock %}
+        </template>
+    </sw-modal>
+{% endblock %}

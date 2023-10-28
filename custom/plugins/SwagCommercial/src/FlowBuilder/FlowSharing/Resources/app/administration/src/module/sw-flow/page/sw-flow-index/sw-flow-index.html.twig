@@ -1,0 +1,32 @@
+{% block sw_flow_index_smart_bar_actions_extension %}
+    {% block sw_flow_index_smart_bar_actions_import %}
+    <sw-button
+        v-if="getLicense('FLOW_BUILDER-4142679')"
+        v-tooltip="{
+            message: $tc('sw-privileges.tooltip.warning'),
+            disabled: acl.can('flow.creator'),
+            position: 'bottom',
+            showOnDisabledElements: true
+        }"
+        class="sw-flow-list__import"
+        @click="openUploadModal"
+    >
+        <sw-icon
+            name="regular-upload"
+            color="#758CA3"
+            size="16"
+        />
+        {{ $tc('sw-flow-sharing.uploadButton') }}
+    </sw-button>
+    {% endblock %}
+{% endblock %}
+
+{% block sw_flow_index_modal_content_custom %}
+    {% block sw_flow_index_upload_modal %}
+        <sw-flow-upload-modal
+            v-if="showUploadModal"
+            @modal-upload-finished="onUploadFlowTemplateFile"
+            @modal-close="onCloseUploadModal"
+        />
+    {% endblock %}
+{% endblock %}

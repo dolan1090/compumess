@@ -1,0 +1,4 @@
+framework:
+    exceptions:
+        Shopware\Commercial\ExportAssistant\Exception\ExportAssistantException:
+            log_level: notice

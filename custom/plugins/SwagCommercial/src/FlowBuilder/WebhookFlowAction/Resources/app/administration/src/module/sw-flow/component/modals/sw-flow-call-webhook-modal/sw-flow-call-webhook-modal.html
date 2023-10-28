@@ -1,0 +1,186 @@
+<sw-modal
+    class="sw-flow-call-webhook-modal"
+    :title="$tc('sw-flow-call-webhook.modal.titleCallUrl')"
+    @modal-close="onClose"
+>
+    <sw-tabs
+        default-item="general"
+        position-identifier="sw-flow-call-webhook"
+    >
+        <template #default="{ active }">
+            <sw-tabs-item
+                class="sw-flow-call-webhook-modal__tab-general"
+                name="general"
+                :active-tab="active"
+            >
+                {{ $tc('sw-flow-call-webhook.modal.tabGeneral') }}
+            </sw-tabs-item>
+
+            <sw-tabs-item
+                class="sw-flow-call-webhook-modal__tab-header"
+                name="header"
+                :active-tab="active"
+            >
+                {{ $tc('sw-flow-call-webhook.modal.tabHeader') }}
+            </sw-tabs-item>
+
+            <sw-tabs-item
+                v-if="showTabBody"
+                class="sw-flow-call-webhook-modal__tab-body"
+                name="body"
+                :active-tab="active"
+            >
+                {{ $tc('sw-flow-call-webhook.modal.tabBody') }}
+            </sw-tabs-item>
+
+            <sw-tabs-item
+                class="sw-flow-call-webhook-modal__tab-auth"
+                name="basicAuth"
+                :active-tab="active"
+            >
+                {{ $tc('sw-flow-call-webhook.modal.tabBasicAuth') }}
+            </sw-tabs-item>
+        </template>
+
+        <template #content="{ active }">
+            <template v-if="active === 'general'">
+                <sw-select-field
+                    v-model="config.method"
+                    class="sw-flow-call-webhook-modal__method-select"
+                    :label="$tc('sw-flow-call-webhook.modal.general.labelMethod')"
+                >
+                    <option
+                        v-for="option in methodOptions"
+                        :key="option"
+                        :value="option"
+                    >
+                        {{ option }}
+                    </option>
+                </sw-select-field>
+
+                <sw-url-field
+                    v-model="config.baseUrl"
+                    required
+                    class="sw-flow-call-webhook-modal__base-url"
+                    :label="$tc('sw-flow-call-webhook.modal.general.labelBaseUrl')"
+                    :placeholder="$tc('sw-flow-call-webhook.modal.general.placeholderBaseUrl')"
+                    :error="error.baseUrl"
+                />
+
+                <sw-textarea-field
+                    v-model="config.description"
+                    class="sw-flow-call-webhook-modal__description"
+                    :label="$tc('sw-flow-call-webhook.modal.general.labelDescription')"
+                    :placeholder="$tc('sw-flow-call-webhook.modal.general.placeholderDescription')"
+                />
+
+                <h3
+                    class="sw-flow-call-webhook-modal__title-parameters"
+                >
+                    {{ $tc('sw-flow-call-webhook.modal.general.titleParameters') }}
+                </h3>
+
+                <sw-flow-call-webhook-parameter-grid
+                    v-model="query"
+                    class="sw-flow-call-webhook-modal__query-grid"
+                    :data-selection="dataSelection"
+                />
+
+                <sw-text-field
+                    v-model="testUrl"
+                    class="sw-flow-call-webhook-modal__url-preview"
+                    disabled
+                    :label="$tc('sw-flow-call-webhook.modal.general.labelUrlPreview')"
+                />
+            </template>
+
+            <template v-if="active === 'header'">
+                <sw-flow-call-webhook-parameter-grid
+                    v-model="headers"
+                    class="sw-flow-call-webhook-modal__header-grid"
+                    :data-selection="dataSelection"
+                />
+            </template>
+
+            <template v-if="active === 'body'">
+                <sw-select-field
+                    v-model="bodyType"
+                    class="sw-flow-call-webhook-modal__body-type"
+                    :label="$tc('sw-flow-call-webhook.modal.body.labelBodyType')"
+                >
+                    <option
+                        v-for="option in bodyOptions"
+                        :key="option"
+                        :value="option"
+                    >
+                        {{ option }}
+                    </option>
+                </sw-select-field>
+
+                <sw-code-editor
+                    v-if="bodyType === 'raw'"
+                    v-model="config.options.body"
+                    class="sw-flow-call-webhook-modal__body-editor"
+                    :label="$tc('sw-flow-call-webhook.modal.body.labelCode')"
+                />
+
+                <sw-flow-call-webhook-parameter-grid
+                    v-if="bodyType === 'x-www-form-urlencoded'"
+                    v-model="formParams"
+                    class="sw-flow-call-webhook-modal__body-grid"
+                    :data-selection="dataSelection"
+                />
+            </template>
+
+            <template v-if="active === 'basicAuth'">
+                <sw-switch-field
+                    v-model="config.authActive"
+                    class="sw-flow-call-webhook-modal__active-switch"
+                    :label="$tc('sw-flow-call-webhook.modal.basicAuth.labelActive')"
+                />
+
+                <sw-container
+                    columns="1fr 1fr"
+                    gap="32px"
+                >
+                    <sw-text-field
+                        v-model="config.options.auth[0]"
+                        class="sw-flow-call-webhook-modal__username"
+                        :label="$tc('sw-flow-call-webhook.modal.basicAuth.labelUsername')"
+                        :placeholder="$tc('sw-flow-call-webhook.modal.basicAuth.placeholderUsername')"
+                        :error="error.username"
+                    />
+
+                    <sw-password-field
+                        v-model="config.options.auth[1]"
+                        class="sw-flow-call-webhook-modal__password"
+                        :label="$tc('sw-flow-call-webhook.modal.basicAuth.labelPassword')"
+                        :placeholder="$tc('sw-flow-call-webhook.modal.basicAuth.placeholderPassword')"
+                        :error="error.password"
+                    />
+                </sw-container>
+            </template>
+        </template>
+    </sw-tabs>
+
+    <template #modal-footer>
+        <sw-button
+            class="sw-flow-call-webhook-modal__cancel-button"
+            size="small"
+            @click="onClose"
+        >
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+
+        <sw-button
+            class="sw-flow-call-webhook-modal__save-button"
+            variant="primary"
+            size="small"
+            @click="onAddAction"
+        >
+            {{ sequence.id
+            ? $tc('sw-flow-call-webhook.modal.buttonSaveAction')
+            : $tc('sw-flow-call-webhook.modal.buttonAddAction') }}
+        </sw-button>
+    </template>
+</sw-modal>

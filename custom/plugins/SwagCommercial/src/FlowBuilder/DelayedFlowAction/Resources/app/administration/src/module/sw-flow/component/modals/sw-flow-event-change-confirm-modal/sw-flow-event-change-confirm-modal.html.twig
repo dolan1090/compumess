@@ -1,0 +1,12 @@
+{% block sw_flow_event_change_confirm_modal_text_confirmation %}
+    <sw-alert
+        v-if="isShowConfirmOverride"
+        variant="warning"
+    >
+        {{ $tc('sw-flow-delay.trigger.modal.textConfirmChangeTrigger') }}
+    </sw-alert>
+
+    <div v-else>
+        {% parent %}
+    </div>
+{% endblock %}

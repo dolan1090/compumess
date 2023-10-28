@@ -1,0 +1,58 @@
+{% block b2b_components_permission_select %}
+    <div id="{{ target }}" class="collapse show b2b-tree-permission-select">
+        {% foreach permissions as child %}
+            {% block b2b_components_permission_select_child %}
+                {% block b2b_components_permission_select_child_tooltip %}
+                    {% set tooltipMessage %}
+                        {% if child.permissionDependencies %}
+                            <p class="b2b-tree-permission-tooltip-title">{{ 'employee-management.roleEdit.permissionTooltip'|trans|sw_sanitize }}</p>
+                            <ul class="b2b-tree-permission-tooltip-list">
+                            {% foreach child.permissionDependencies as dependency %}
+                                <li>{{ ('employee-management.roleEdit.permissions.' ~ dependency)|trans|sw_sanitize }}</li>
+                            {% endforeach %}
+                            </ul>
+                        {% endif %}
+                    {% endset %}
+                    {% set tooltipMessage = tooltipMessage|trim %}
+                {% endblock %}
+
+                <div class="form-check b2b-tree-select">
+                    {% block b2b_components_permission_select_child_content %}
+                        {% block b2b_components_permission_select_child_content_input %}
+                            <input
+                                id="b2b-permission-tree-permission-{{ child.permissionName }}"
+                                class="form-check-input"
+                                type="checkbox"
+                                name="permissions[]"
+                                value="{{ child.permissionName }}"
+                                {% if editDisabled %}
+                                    disabled="disabled"
+                                {% endif %}
+                                data-b2b-permission-group="{{ groupName }}"
+                                data-b2b-permission-dependencies="{{ child.permissionDependencies|json_encode() }}"
+                                {% if child.permissionName in activePermissions %}checked{% endif %}
+                            >
+                        {% endblock %}
+
+                        {% block b2b_components_permission_select_child_content_label %}
+                            <label
+                                class="form-check-label"
+                                for="b2b-permission-tree-permission-{{ child.permissionName }}"
+                                {% if tooltipMessage %}
+                                    data-bs-toggle="tooltip"
+                                    data-bs-html="true"
+                                    data-bs-title="{{ tooltipMessage }}"
+                                    data-bs-placement="right"
+                                    data-bs-offset="0,16"
+                                    data-bs-delay='{ "show": 500, "hide": 100 }'
+                                {% endif %}
+                            >
+                                {{ ('employee-management.roleEdit.permissions.' ~ child.permissionName)|trans|sw_sanitize }}
+                            </label>
+                        {% endblock %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        {% endforeach %}
+    </div>
+{% endblock %}

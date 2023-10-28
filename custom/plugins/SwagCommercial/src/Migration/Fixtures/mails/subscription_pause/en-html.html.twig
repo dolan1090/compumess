@@ -1,0 +1,75 @@
+{% set order = subscription.convertedOrder %}
+
+<div style="font-family:arial; font-size:12px;">
+    {% if subscription.subscriptionCustomer.salutation %}{{ subscription.subscriptionCustomer.salutation.translated.letterName ~ ' ' }}{% endif %}{{ subscription.subscriptionCustomer.firstName }} {{ subscription.subscriptionCustomer.lastName }},<br>
+    <br>
+    We wanted to let you know that your {{ subscription.subscriptionPlanName }} has been successfully paused as requested.<br>
+    <br>
+    Pause date: {{ subscription.updatedAt|format_datetime('medium', 'short', locale='en-GB') }}<br>
+    <br>
+    Information on your subscription:
+    <br>
+    Subscription plan: {{ subscription.subscriptionPlanName }}
+    Start date: {{ subscription.createdAt|format_datetime('medium', 'short', locale='de-DE') }}
+    <br>
+    <table border="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
+        <tr>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Pos.</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Prod. No.</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Product image(Alt text)</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Description</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Quantities</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Price</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Total</strong></td>
+        </tr>
+
+        {% for lineItem in order.lineItems %}
+            {% if lineItem.coverId is defined and lineItem.coverId is not null %}
+                {% set cover = searchMedia([lineItem.coverId], context).first %}
+            {% endif %}
+
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{% if lineItem.payload.productNumber is defined %}{{ lineItem.payload.productNumber|u.wordwrap(80) }}{% endif %}</td>
+                <td>{% if cover is defined and cover is not null %}<img src="{{ cover.url }}" width="75" height="auto"/>{% endif %}</td>
+                <td>
+                    <div>{{ lineItem.label|u.wordwrap(80) }}</div>
+
+                    {% if lineItem.payload.options is defined and lineItem.payload.options|length >= 1 %}
+                        <div>
+                            {% for option in lineItem.payload.options %}
+                                {{ option.group }}: {{ option.option }}
+                                {% if lineItem.payload.options|last != option %}
+                                    {{ " | " }}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% if lineItem.payload.features is defined and lineItem.payload.features|length >= 1 %}
+                        {% set referencePriceFeatures = lineItem.payload.features|filter(feature => feature.type == 'referencePrice') %}
+                        {% if referencePriceFeatures|length >= 1 %}
+                            {% set referencePriceFeature = referencePriceFeatures|first %}
+                            <div>
+                                {{ referencePriceFeature.value.purchaseUnit }} {{ referencePriceFeature.value.unitName }}
+                                ({{ referencePriceFeature.value.price|currency(subscription.currency.isoCode) }}* / {{ referencePriceFeature.value.referenceUnit }} {{ referencePriceFeature.value.unitName }})
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td style="text-align: center">{{ lineItem.quantity }}</td>
+                <td>{{ lineItem.price.unitPrice|currency(subscription.currency.isoCode) }}</td>
+                <td>{{ lineItem.price.totalPrice|currency(subscription.currency.isoCode) }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    Subscription costs: {{ order.price.totalPrice|currency(subscription.currency.isoCode,decimals=order.totalRounding.decimals) }}
+    <br>
+    Billing cycle: {{ subscription.subscriptionInterval.translated.name }}
+    <br>
+    You can activate your subscription on our website under "My account" - "My subscriptions" anytime:<br>
+    <br>
+    If you have any questions, do not hesitate to contact us.<br>
+    <br>
+</div>

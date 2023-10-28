@@ -1,0 +1,12 @@
+{% block sw_media_quickinfo_metadata_content_base %}
+    <sw-alert
+        v-if="showProcessingInfo"
+        class="sw-ai-image-classification__media-quickinfo-alert"
+        variant="info"
+        :showIcon="false"
+    >
+        {{ $tc('sw-ai-image-classification.media-quickinfo.infoText') }}
+    </sw-alert>
+
+    {% parent() %}
+{% endblock %}

@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="Shopware\Core\Checkout\Cart\SalesChannel\CartItemAddRoute" id="subscription.cart.route.line-item.add" public="true">
+            <argument type="service" id="subscription.cart.calculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\CartPersister"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\LineItemFactoryRegistry"/>
+            <argument type="service" id="shopware.rate_limiter"/>
+        </service>
+
+        <service class="Shopware\Core\Checkout\Cart\SalesChannel\CartItemRemoveRoute" id="subscription.cart.route.line-item.remove" public="true">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="subscription.cart.calculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\CartPersister"/>
+        </service>
+
+        <service class="Shopware\Core\Checkout\Cart\SalesChannel\CartItemUpdateRoute" id="subscription.cart.route.line-item.update" public="true">
+            <argument type="service" id="Shopware\Core\Checkout\Cart\CartPersister"/>
+            <argument type="service" id="subscription.cart.calculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\LineItemFactoryRegistry"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service class="Shopware\Core\Checkout\Cart\SalesChannel\CartLoadRoute" id="subscription.cart.route.load" public="true">
+            <argument type="service" id="Shopware\Core\Checkout\Cart\CartPersister"/>
+            <argument type="service" id="subscription.cart.factory"/>
+            <argument type="service" id="subscription.cart.calculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\TaxProvider\TaxProviderProcessor"/>
+        </service>
+
+        <service class="Shopware\Core\Checkout\Cart\SalesChannel\CartDeleteRoute" id="subscription.cart.route.delete" public="true">
+            <argument type="service" id="Shopware\Core\Checkout\Cart\CartPersister"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service class="Shopware\Core\Checkout\Cart\SalesChannel\CartOrderRoute" id="subscription.cart.route.order" public="true">
+            <argument type="service" id="subscription.cart.calculator"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Order\OrderPersister"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\CartPersister"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\Checkout\Payment\PreparedPaymentService"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\TaxProvider\TaxProviderProcessor"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Checkout\Cart\SalesChannel\SubscriptionCartOrderRoute"
+                 decorates="subscription.cart.route.order"
+                 public="true"
+        >
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Checkout\Payment\SubscriptionPaymentMethodRoute"
+                 decorates="Shopware\Core\Checkout\Payment\SalesChannel\PaymentMethodRoute"
+                 public="true"
+        >
+            <argument type="service" id=".inner"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,36 @@
+<sw-card
+    position-identifier="swag-advanced-search-hit-count"
+    :title="$tc('swag-advanced-search.hitCount.appearance.title')"
+>
+    <div class="swag-advanced-search-entity-config-search-appearance">
+        <h3>{{ $tc('swag-advanced-search.hitCount.appearance.suggestTitle') }}</h3>
+        <p>{{ $tc('swag-advanced-search.hitCount.appearance.suggestDescription') }}</p>
+        <br>
+        <sw-container columns="1fr 1fr 1fr" gap="0px 30px">
+            <sw-number-field
+                v-for="(entityConfig, entity) in advancedSearchConfig.hitCount"
+                numberType="int"
+                :key="`suggest-${entity}`"
+                :min="0"
+                :label="$tc(`swag-advanced-search.entity.${entity}`)"
+                v-model="entityConfig.maxSuggestCount"
+            />
+        </sw-container>
+
+        <h3>{{ $tc('swag-advanced-search.hitCount.appearance.searchTitle') }}</h3>
+        <p>{{ $tc('swag-advanced-search.hitCount.appearance.searchDescription') }}</p>
+        <br>
+        <sw-container columns="1fr 1fr 1fr" gap="0px 30px">
+            <sw-number-field
+                v-for="(entityConfig, entity) in advancedSearchConfig.hitCount"
+                numberType="int"
+                allow-empty
+                :key="`search-${entity}`"
+                :min="0"
+                :label="$tc(`swag-advanced-search.entity.${entity}`)"
+                :placeholder="$tc('swag-advanced-search.hitCount.appearance.allResults')"
+                v-model="entityConfig.maxSearchCount"
+            />
+        </sw-container>
+    </div>
+</sw-card>

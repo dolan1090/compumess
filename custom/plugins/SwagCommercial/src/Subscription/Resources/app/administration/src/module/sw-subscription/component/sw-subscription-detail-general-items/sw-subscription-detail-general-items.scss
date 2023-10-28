@@ -1,0 +1,24 @@
+@import "~scss/variables";
+
+.sw-subscription-detail-general-items {
+    &__footer-summary {
+        float: right;
+        padding-right: 38px;
+        display: grid;
+
+        dt, dd {
+            line-height: 40px;
+            border-bottom: 1px solid $color-gray-300;
+            color: $color-darkgray-200;
+            font-size: $font-size-xs;
+            font-weight: normal;
+            text-align: right;
+            padding: 0;
+        }
+
+        dd {
+            width: 160px;
+            padding-right: 40px;
+        }
+    }
+}

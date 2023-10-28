@@ -1,0 +1,21 @@
+{% block sw_settings_search_searchable_content_customfields_searchable_label %}
+<sw-data-grid-column-boolean
+    v-model="item.searchable"
+/>
+{% endblock %}
+
+{% block sw_settings_search_searchable_content_customfields_tokenize_label %}
+<sw-data-grid-column-boolean
+    v-model="item.tokenize"
+/>
+{% endblock %}
+
+{% block sw_settings_search_searchable_content_customfields_columns_actions_edit %}
+<sw-context-menu-item
+    class="sw-settings-search__searchable-content-list-action sw-settings-search__searchable-content-list-edit"
+    @click="onInlineEditItem(item)"
+>
+    {{ $tc('global.default.edit') }}
+</sw-context-menu-item>
+{% parent %}
+{% endblock %}

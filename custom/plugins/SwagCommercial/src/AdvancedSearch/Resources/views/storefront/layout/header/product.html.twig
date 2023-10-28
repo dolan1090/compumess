@@ -1,0 +1,72 @@
+{% block layout_search_suggest_result_product_header %}
+	<div class="row align-items-center">
+		<div class="col text-left">
+			<span class="suggest-result-header">{{ "general.product"|trans }}</span>
+		</div>
+	</div>
+{% endblock %}
+
+{% block layout_search_suggest_result_manufacture_listing %}
+	<ul class="suggest-product-listing">
+		{% for product in products %}
+			<li class="search-suggest-item px-2">
+				<a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
+                   title="{{ product.translated.name }}"
+                   class="search-suggest-product-link"
+                >
+					<div class="row align-items-center">
+						{% block layout_search_suggest_product_image %}
+							<div class="col-auto search-suggest-product-image-container">
+								{% if product.cover.media.url %}
+									{% sw_thumbnails 'search-suggest-product-image-thumbnails' with
+                                        {
+                                            media: product.cover.media,
+                                            sizes: {
+                                                'default': '100px'
+                                            },
+                                            attributes: {
+                                                'class': 'search-suggest-product-image',
+                                                'alt': (product.cover.media.translated.alt ?: ''),
+                                                'title': (product.cover.media.translated.title ?: '')
+                                            }
+                                        }
+                                    %}
+								{% else %}
+									{% sw_icon 'placeholder' style {'size': 'lg'} %}
+								{% endif %}
+							</div>
+						{% endblock %}
+
+						{% block layout_search_suggest_product_name %}
+							<div class="col search-suggest-product-name">
+								{{ product.translated.name }}
+							</div>
+						{% endblock %}
+
+						{% block layout_search_suggest_product_price %}
+							<div class="col-auto search-suggest-product-price">
+								{% if product.priceRange %}
+									{{ product.calculatedListingPrice.from.unitPrice|currency }}
+									-
+									{{ product.calculatedListingPrice.to.unitPrice|currency}}
+								{% elseif product.calculatedPrices|length == 1 %}
+									{{ product.calculatedPrices.first.unitPrice|currency }}
+								{% else %}
+									{{ product.calculatedPrice.unitPrice|currency }}
+								{% endif %}
+							</div>
+						{% endblock %}
+					</div>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
+
+{% block layout_search_suggest_no_result %}
+	{% if products.total == 0 %}
+		<li class="search-suggest-no-result text-left">
+			{{ "header.searchNoResult"|trans }}
+		</li>
+	{% endif %}
+{% endblock %}

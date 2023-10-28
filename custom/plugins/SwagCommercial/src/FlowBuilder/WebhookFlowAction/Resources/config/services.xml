@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Shopware\Commercial\FlowBuilder\WebhookFlowAction\Domain\Action\CallWebhookAction">
+            <argument type="service" id="shopware.app_system.guzzle" />
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Twig\StringTemplateRenderer"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+
+            <tag name="flow.action" priority="650" key="action.call.webhook"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\WebhookFlowAction\Entity\SequenceWebhookEventLogDefinition">
+            <tag name="shopware.entity.definition" entity="swag_sequence_webhook_event_log"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\WebhookFlowAction\Domain\Extension\FlowSequenceExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\WebhookFlowAction\Domain\Extension\WebhookEventLogExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+    </services>
+</container>

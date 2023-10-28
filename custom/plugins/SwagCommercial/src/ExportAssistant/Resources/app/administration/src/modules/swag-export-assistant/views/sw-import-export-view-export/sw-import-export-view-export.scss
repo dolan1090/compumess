@@ -1,0 +1,56 @@
+@import "~scss/variables";
+
+.sw-import-export-view-export {
+    &__card .sw-card__content {
+        padding: 25px;
+    }
+
+    &__card-title {
+        position: relative;
+    }
+
+    &__alert {
+        max-width: $content-width;
+        margin: 0 auto 40px;
+
+        .sw-alert__title,
+        .sw-alert__message {
+            color: $color-black;
+        }
+
+        @media screen and (max-width: 1360px) {
+            max-width: 770px;
+        }
+    }
+
+    &__alert-icon {
+        position: absolute;
+        left: 26px;
+        top: 28px;
+    }
+
+    &__alert-button {
+        color: $color-black;
+        margin-top: 10px;
+    }
+
+    &__warning-message {
+        max-width: $content-width;
+        margin: -30px auto 40px;
+
+        @media screen and (max-width: 1360px) {
+            max-width: 770px;
+        }
+    }
+
+    .sw-card .sw-card__header {
+        gap: 0;
+    }
+
+    .sw-card__titles {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

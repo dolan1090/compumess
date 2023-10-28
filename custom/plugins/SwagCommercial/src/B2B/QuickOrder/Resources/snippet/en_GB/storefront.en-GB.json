@@ -1,0 +1,43 @@
+{
+  "quickOrder": {
+    "pageTitle": "Quick orders",
+    "pageDescription": "Speed up your regular order process with trim, semi-automated order lists.",
+    "buttonAddToCart": "Add to shopping cart",
+    "buttonClearList": "Clear list",
+    "buttonUploadCSV": "Upload file",
+    "columnName": "Product",
+    "columnQuantity": "Quantity",
+    "placeholderNameField": "Enter product number or product name...",
+    "textNoProductsFound": "No products found",
+    "addToCartModal": {
+      "title": "Add to shopping cart",
+      "description": "Do you really want to add all products that are on this order list to your shopping cart?"
+    },
+    "removeListModal": {
+      "title": "Clear order list",
+      "description": "Do you really want to clear all products from your order list?"
+    },
+    "uploadCSVTitle": "Add products via CSV file",
+    "uploadCSVDescription": "Upload only CSV files that have columns for product numbers (product_number) and product quantities (quantity).",
+    "downloadTemplate": "Example file",
+    "uploadContent": "Drag file here to upload",
+    "uploadButton": "Select file",
+    "uploadErrorMessage": "File error. Make sure the file has the CSV format and the exact required columns.",
+    "uploadSuccessMessage": "Products successfully added.",
+    "uploading": "Uploading...",
+    "uploadRule": "Some of the products in the CSV file are already on your order list. Please select the quantities that meet your demands.",
+    "uploadAddBtn": "Add products",
+    "uploadSize": "(Max. 1 file)",
+    "productNotFound": "The following products could not be found:",
+    "productHasBeenAdded": "Product quantity increased:",
+    "uploadAddOption": "Keep existing order list",
+    "uploadOverwriteOption": "Overwrite existing order list",
+    "uploadProductHeader": "Product",
+    "uploadCSVHeader": "CSV file",
+    "uploadCombinedHeader": "Sum",
+    "uploadCurrentHeader": "Order list",
+    "uploadModalDuplicatedTitle": "Product quantities",
+    "uploadOptionsLabel": "Options",
+    "reloadPageMessage": "Are you sure you want to leave this page? The information you’ve entered may not be saved"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "swag-search-assistant": {
+    "default": {
+      "placeholderSearchBar": "Find all orders placed yesterday"
+    }
+  }
+}

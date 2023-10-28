@@ -1,0 +1,10 @@
+{% block sw_flow_tabs_header_extension %}
+    {% parent %}
+    <sw-tabs-item
+        v-if="getLicense('FLOW_BUILDER-6654893') && !isNewFlow && hasWebhookActions"
+        class="sw-flow-detail__tab-log"
+        :route="routeDetailTab('log')"
+    >
+        {{ $tc('sw-flow-call-webhook.tabLog') }}
+    </sw-tabs-item>
+{% endblock %}
