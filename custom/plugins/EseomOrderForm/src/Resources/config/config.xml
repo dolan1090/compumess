@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <!-- https://developer.shopware.com/docs/guides/plugins/plugins/plugin-fundamentals/add-plugin-configuration -->
+    <card>
+        <title>Default settings</title>
+        <title lang="de-DE">Allgemeine Einstellungen</title>
+
+        <input-field type="bool">
+            <name>eseomOrderFormBeforeLogin</name>
+            <label>Allow guest orders?</label>
+            <label lang="de-DE">Gastbestellungen erlauben?</label>
+            <helpText>Order form can be used if not logged in.</helpText>
+            <helpText lang="de-DE">Bestellformular kann auch von nicht angemeldeten Kunden genutzt werden.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <component name="sw-entity-multi-id-select">
+            <name>eseomOrderFormCustomerGroups</name>
+            <entity>customer_group</entity>
+            <label>Select customer groups which are allowed to use the order form</label>
+            <label lang="de-DE">Kundengruppen auswählen, die das Bestellformular nutzen können</label>
+            <helpText>If nothing is selected, all groups can use the form.</helpText>
+            <helpText lang="de-DE">Wenn keine Gruppe ausgewählt ist, haben alle Kundengruppen Zugriff.</helpText>
+        </component>
+        <input-field type="single-select">
+            <name>eseomOrderFormCartAction</name>
+            <label>Next action after finishing entries</label>
+            <label lang="de-DE">Folgeaktion beim Beenden der Eingabe</label>
+            <helpText>Open the offcanvas shopping cart after clicking "continue" or open a modal/pop-up? Or proceed the cart directly? Or proceed to the confirm page?</helpText>
+            <helpText lang="de-DE">Soll nach Klick auf "Weiter" der seitliche Warenkorb geöffnet werden oder ein Modal/PopUp erscheinen? Oder soll der große Warenkorb geöffnet werden? Oder soll direkt zur Kasse weitergeleitet werden?</helpText>
+            <options>
+                <option>
+                    <id>openOffcanvasCart</id>
+                    <name>Open offcanvas cart</name>
+                    <name lang="de-DE">Seitlichen Warenkorb öffnen</name>
+                </option>
+                <option>
+                    <id>openModal</id>
+                    <name>Open a modal/popup</name>
+                    <name lang="de-DE">Modal/PopUp öffnen</name>
+                </option>
+                <option>
+                    <id>openCart</id>
+                    <name>Open cart</name>
+                    <name lang="de-DE">Warenkorb öffnen</name>
+                </option>
+                <option>
+                    <id>openConfirm</id>
+                    <name>Go to confirm page</name>
+                    <name lang="de-DE">Direkt weiter zur Kasse</name>
+                </option>
+            </options>
+            <defaultValue>openOffcanvasCart</defaultValue>
+        </input-field>
+        <component name="sw-entity-single-select">
+            <name>eseomOrderFormShowInTopmenu</name>
+            <entity>category</entity>
+            <label>Show link to order-form in topbar-menu?</label>
+            <label lang="de-DE">Link zum Bestellformular im Topmenü anzeigen?</label>
+            <helpText>If a category is selected, the link will be shown in the topbar-menu.</helpText>
+            <helpText lang="de-DE">Falls eine Kategorie ausgewählt ist, wird der Link im Topmenü angezeigt.</helpText>
+        </component>
+        <component name="sw-entity-single-select">
+            <name>eseomOrderFormShowInAccount</name>
+            <entity>category</entity>
+            <label>Show link to order-form in customer-account?</label>
+            <label lang="de-DE">Link zum Bestellformular im Kundenkonto anzeigen?</label>
+            <helpText>If a category is selected, the link will be shown in the customer-account.</helpText>
+            <helpText lang="de-DE">Falls eine Kategorie ausgewählt ist, wird der Link im Kundenkonto angezeigt.</helpText>
+        </component>
+    </card>
+
+    <card>
+        <title>Product selection</title>
+        <title lang="de-DE">Produktauswahl</title>
+
+        <component name="sw-entity-multi-id-select">
+            <name>eseomOrderFormExcludeProducts</name>
+            <entity>product</entity>
+            <label>These products cannot be added via the order form</label>
+            <label lang="de-DE">Diese Produkte können im Bestellformular nicht genutzt werden</label>
+        </component>
+        <component name="sw-entity-multi-id-select">
+            <name>eseomOrderFormPreFilledProducts</name>
+            <entity>product</entity>
+            <label>These products are part of the order form when the page is loaded</label>
+            <label lang="de-DE">Diese Produkte sind im Bestellformular bereits ausgefüllt, wenn die Seite lädt</label>
+        </component>
+        <input-field type="bool">
+            <name>eseomOrderFormOnlyCategoryProducts</name>
+            <label>Only use products from the catogory of the order form</label>
+            <label lang="de-DE">Nur Produkte aus Kategorie des Bestellformulars verwenden</label>
+            <helpText>If activated, only products will be found, which are allocated to the category where the order form is installed. VIf the order form is installed on a landingpage therefore no products will be found if this setting is activated.</helpText>
+            <helpText lang="de-DE">Falls aktiviert, werden nur Produkte gefunden, die der Kategorie zugewiesen wurden, auf der sich das Bestellformular befindet. Falls das Bestellformular einer Landingpage zugeordnet wurde, werden bei aktiver Einstellung keine Produkte gefunden.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>eseomOrderFormTwoStepSearch</name>
+            <label>Two step product-search</label>
+            <label lang="de-DE">Zweistufige Produktsuche</label>
+            <helpText>If activated the first search finds the main products only. Variants will be searched in a second step.</helpText>
+            <helpText lang="de-DE">Falls aktiviert, werden zuerst nur Hauptprodukte gesucht und in einem zweiten Schritt dann die Variante gewählt.</helpText>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+    <title>Import / Export CSV</title>
+    <title lang="de-DE">Import / Export CSV</title>
+        <input-field type="bool">
+            <name>eseomOrderFormEnableImport</name>
+            <label>Enable import (upload) of .csv-file?</label>
+            <label lang="de-DE">CSV-Import (Upload) freischalten?</label>
+            <helpText>Allows importing an order-list as .csv-file.</helpText>
+            <helpText lang="de-DE">Ermöglicht den Import einer Bestellliste im .csv-Format.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>eseomOrderFormEnableExport</name>
+            <label>Enable export (download) of .csv-file?</label>
+            <label lang="de-DE">CSV-Export (Download) freischalten?</label>
+            <helpText>Allows exporting the order-list as .csv-file.</helpText>
+            <helpText lang="de-DE">Ermöglicht den Export der Bestellliste im .csv-Format.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>eseomOrderFormExportFilename</name>
+            <label>Name of the download-file</label>
+            <label lang="de-DE">Name der Download-Datei</label>
+            <helpText>Date/time and extension '.csv' will be added.</helpText>
+            <helpText lang="de-DE">Es wird das aktuelle Datum/Zeit sowie die Endung '.csv' angehängt.</helpText>
+            <defaultValue>Bestellliste</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>eseomOrderFormImportExportDelimiter</name>
+            <label>Delimiter between columns</label>
+            <label lang="de-DE">Spaltentrenner</label>
+            <helpText>';' or ','</helpText>
+            <helpText lang="de-DE">Es wird das aktuelle Datum/Zeit sowie die Endung '.csv' angehängt.</helpText>
+            <options>
+                <option>
+                    <id>semicolon</id>
+                    <name>Semicolon (';')</name>
+                    <name lang="de-DE">Semicolon (';')</name>
+                </option>
+                <option>
+                    <id>comma</id>
+                    <name>Comma (',')</name>
+                    <name lang="de-DE">Komma (',')</name>
+                </option>
+            </options>
+            <defaultValue>semicolon</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Form layout (elements)</title>
+        <title lang="de-DE">Gestaltung des Formulars (Elemente)</title>
+
+        <input-field type="bool">
+            <name>eseomOrderFormShowEanBelowDescription</name>
+            <label>Show the EAN below the description and in the info modal?</label>
+            <label lang="de-DE">EAN unter Beschreibung und im Info-Modal anzeigen?</label>
+            <helpText>Sould the EAN be shown below the description and in the info modal?</helpText>
+            <helpText lang="de-DE">Soll die EAN unter der Beschreibung und im Info-Modal angezeigt werden?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>eseomOrderFormShowCoverColumn</name>
+            <label>Show the image column?</label>
+            <label lang="de-DE">Spalte "Produktbild" anzeigen?</label>
+            <helpText>Should the column "Product image" be displayed?</helpText>
+            <helpText lang="de-DE">Soll die Spalte Produktbild angezeigt werden?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>eseomOrderFormShowTitleColumn</name>
+            <label>Show the title column?</label>
+            <label lang="de-DE">Spalte "Bezeichnung" anzeigen?</label>
+            <helpText>Should the column "Title" be displayed?</helpText>
+            <helpText lang="de-DE">Soll die Spalte Bezeichnung angezeigt werden?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>eseomOrderFormShowStockColumn</name>
+            <label>Show the stock column?</label>
+            <label lang="de-DE">Spalte "Lagerbestand" anzeigen?</label>
+            <helpText>Should the column "Stock" be displayed?</helpText>
+            <helpText lang="de-DE">Soll die Spalte Lagerbestand angezeigt werden?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>eseomOrderFormShowShippingTimeColumn</name>
+            <label>Show the shipping time column?</label>
+            <label lang="de-DE">Spalte "Lieferzeit" anzeigen?</label>
+            <helpText>Should the column "Shipping time" be displayed?</helpText>
+            <helpText lang="de-DE">Soll die Spalte Lieferzeit angezeigt werden?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>eseomOrderFormShowInformationColumn</name>
+            <label>Show the information column?</label>
+            <label lang="de-DE">Spalte "Informationen" anzeigen?</label>
+            <helpText>Should the column "Information" be displayed?</helpText>
+            <helpText lang="de-DE">Soll die Spalte "Informationen" angezeigt werden?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>eseomOrderFormShowDeleteColumn</name>
+            <label>Show the delete position column?</label>
+            <label lang="de-DE">Spalte "Position löschen" anzeigen?</label>
+            <helpText>Should the column "Delete position" be displayed?</helpText>
+            <helpText lang="de-DE">Soll die Spalte "Position löschen" angezeigt werden?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>eseomOrderFormShowStarBehindPrices</name>
+            <label>Show a star behind the prices?</label>
+            <label lang="de-DE">Einen Stern hinter den Preisen anzeigen?</label>
+            <helpText>Show a star behind the prices for legal reasons?</helpText>
+            <helpText lang="de-DE">Einen Stern hinter den Preisen anzeigen (für den MwSt. Hinweis)?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
+    
+    <card>
+        <title>Info Modal layout</title>
+        <title lang="de-DE">Gestaltung des Info-Modals/Pop-Ups</title>
+
+        <input-field type="bool">
+            <name>eseomOrderFormModalShowStock</name>
+            <label>Show the stock?</label>
+            <label lang="de-DE">Lagerbestand anzeigen?</label>
+            <helpText>Should the available stock be displayed?</helpText>
+            <helpText lang="de-DE">Soll der Lagerbestand angezeigt werden?</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Element styles (colors, borders, ...)</title>
+        <title lang="de-DE">Gestaltung der Elemente (Farben, Rahmen etc.)</title>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormImportButtonBgColor</name>
+            <label>"Import" button background color</label>
+            <label lang="de-DE">Hintergrundfarbe des "Import" Buttons</label>
+            <defaultValue>#26b6cf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormImportButtonBorderColor</name>
+            <label>"Import" button border color</label>
+            <label lang="de-DE">Randfarbe des "Import" Buttons</label>
+            <defaultValue>#26b6cf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormImportButtonTextColor</name>
+            <label>"Import" button text color</label>
+            <label lang="de-DE">Textfarbe des "Import" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormImportButtonHoverBgColor</name>
+            <label>"Import" button hover background color</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "Import" Buttons</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormImportButtonHoverBorderColor</name>
+            <label>"Import" button hover border color</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "Import" Buttons</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormImportButtonHoverTextColor</name>
+            <label>"Import" button hover text color</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "Import" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormExportButtonBgColor</name>
+            <label>"Export" button background color</label>
+            <label lang="de-DE">Hintergrundfarbe des "Export" Buttons</label>
+            <defaultValue>#26b6cf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormExportButtonBorderColor</name>
+            <label>"Export" button border color</label>
+            <label lang="de-DE">Randfarbe des "Export" Buttons</label>
+            <defaultValue>#26b6cf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormExportButtonTextColor</name>
+            <label>"Export" button text color</label>
+            <label lang="de-DE">Textfarbe des "Export" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormExportButtonHoverBgColor</name>
+            <label>"Export" button hover background color</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "Export" Buttons</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormExportButtonHoverBorderColor</name>
+            <label>"Export" button hover border color</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "Export" Buttons</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormExportButtonHoverTextColor</name>
+            <label>"Export" button hover text color</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "Export" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormInfoButtonBgColor</name>
+            <label>"Information" button background color</label>
+            <label lang="de-DE">Hintergrundfarbe des "Informationen" Buttons</label>
+            <defaultValue>#26b6cf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormInfoButtonBorderColor</name>
+            <label>"Information" button border color</label>
+            <label lang="de-DE">Randfarbe des "Informationen" Buttons</label>
+            <defaultValue>#26b6cf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormInfoButtonTextColor</name>
+            <label>"Information" button text color</label>
+            <label lang="de-DE">Textfarbe des "Informationen" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormInfoButtonHoverBgColor</name>
+            <label>"Information" button hover background color</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "Informationen" Buttons</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormInfoButtonHoverBorderColor</name>
+            <label>"Information" button hover border color</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "Informationen" Buttons</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormInfoButtonHoverTextColor</name>
+            <label>"Information" button hover text color</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "Informationen" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormDeleteButtonBgColor</name>
+            <label>"Delete" button background color</label>
+            <label lang="de-DE">Hintergrundfarbe des "Position löschen" Buttons</label>
+            <defaultValue>#df0000</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormDeleteButtonBorderColor</name>
+            <label>"Delete" button border color</label>
+            <label lang="de-DE">Randfarbe des "Position löschen" Buttons</label>
+            <defaultValue>#df0000</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormDeleteButtonTextColor</name>
+            <label>"Delete" button text color</label>
+            <label lang="de-DE">Textfarbe des "Position löschen" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormDeleteButtonHoverBgColor</name>
+            <label>"Delete" button hover background color</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "Position löschen" Buttons</label>
+            <defaultValue>#b90000</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormDeleteButtonHoverBorderColor</name>
+            <label>"Delete" button hover border color</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "Position löschen" Buttons</label>
+            <defaultValue>#b90000</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormDeleteButtonHoverTextColor</name>
+            <label>"Delete" button hover text color</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "Position löschen" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddPositionButtonBgColor</name>
+            <label>"Add position" button background color</label>
+            <label lang="de-DE">Hintergrundfarbe des "Position hinzufügen" Buttons</label>
+            <defaultValue>#2aab74</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddPositionButtonBorderColor</name>
+            <label>"Add position" button border color</label>
+            <label lang="de-DE">Randfarbe des "Position hinzufügen" Buttons</label>
+            <defaultValue>#2aab74</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddPositionButtonTextColor</name>
+            <label>"Add position" button text color</label>
+            <label lang="de-DE">Textfarbe des "Position hinzufügen" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddPositionButtonHoverBgColor</name>
+            <label>"Add position" button hover background color</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "Position hinzufügen" Buttons</label>
+            <defaultValue>#219061</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddPositionButtonHoverBorderColor</name>
+            <label>"Add position" button hover border color</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "Position hinzufügen" Buttons</label>
+            <defaultValue>#219061</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddPositionButtonHoverTextColor</name>
+            <label>"Add position" button hover text color</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "Position hinzufügen" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormClearPositionsButtonBgColor</name>
+            <label>"Clear positions" button background color</label>
+            <label lang="de-DE">Hintergrundfarbe des "Positionen leeren" Buttons</label>
+            <defaultValue>#df0000</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormClearPositionsButtonBorderColor</name>
+            <label>"Clear positions" button border color</label>
+            <label lang="de-DE">Randfarbe des "Positionen leeren" Buttons</label>
+            <defaultValue>#df0000</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormClearPositionsButtonTextColor</name>
+            <label>"Clear positions" button text color</label>
+            <label lang="de-DE">Textfarbe des "Positionen leeren" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormClearPositionsButtonHoverBgColor</name>
+            <label>"Clear positions" button hover background color</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "Positionen leeren" Buttons</label>
+            <defaultValue>#b90000</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormClearPositionsButtonHoverBorderColor</name>
+            <label>"Clear positions" button hover border color</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "Positionen leeren" Buttons</label>
+            <defaultValue>#b90000</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormClearPositionsButtonHoverTextColor</name>
+            <label>"Clear positions" button hover text color</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "Positionen leeren" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddToCartButtonBgColor</name>
+            <label>"Add to cart" button background color</label>
+            <label lang="de-DE">Hintergrundfarbe des "in den Warenkorb" Buttons</label>
+            <defaultValue>#28a646</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddToCartButtonBorderColor</name>
+            <label>"Add to cart" button border color</label>
+            <label lang="de-DE">Randfarbe des "in den Warenkorb" Buttons</label>
+            <defaultValue>#28a646</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddToCartButtonTextColor</name>
+            <label>"Add to cart" button text color</label>
+            <label lang="de-DE">Textfarbe des "in den Warenkorb" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddToCartButtonHoverBgColor</name>
+            <label>"Add to cart" button hover background color</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "in den Warenkorb" Buttons</label>
+            <defaultValue>#2aab74</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddToCartButtonHoverBorderColor</name>
+            <label>"Add to cart" button hover border color</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "in den Warenkorb" Buttons</label>
+            <defaultValue>#2aab74</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormAddToCartButtonHoverTextColor</name>
+            <label>"Add to cart" button hover text color</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "in den Warenkorb" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantButtonBgColor</name>
+            <label>"Variant selection" button background color</label>
+            <label lang="de-DE">Hintergrundfarbe des "Variantenauswahl" Buttons</label>
+            <defaultValue>#219061</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantButtonBorderColor</name>
+            <label>"Variant selection" button border color</label>
+            <label lang="de-DE">Randfarbe des "Variantenauswahl" Buttons</label>
+            <defaultValue>#219061</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantButtonTextColor</name>
+            <label>"Variant selection" button text color</label>
+            <label lang="de-DE">Textfarbe des "Variantenauswahl" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantButtonHoverBgColor</name>
+            <label>"Variant selection" button hover background color</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "Variantenauswahl" Buttons</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantButtonHoverBorderColor</name>
+            <label>"Variant selection" button hover border color</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "Variantenauswahl" Buttons</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantButtonHoverTextColor</name>
+            <label>"Variant selection" button hover text color</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "Variantenauswahl" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantUseButtonBgColor</name>
+            <label>"Select variant" button background color</label>
+            <label lang="de-DE">Hintergrundfarbe des "Variante auswählen" Buttons</label>
+            <defaultValue>#2aab74</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantUseButtonBorderColor</name>
+            <label>"Select variant" button border color</label>
+            <label lang="de-DE">Randfarbe des "Variante auswählen" Buttons</label>
+            <defaultValue>#2aab74</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantUseButtonTextColor</name>
+            <label>"Select variant" button text color</label>
+            <label lang="de-DE">Textfarbe des "Variante auswählen" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantUseButtonHoverBgColor</name>
+            <label>"Select variant" button hover background color</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "Variante auswählen" Buttons</label>
+            <defaultValue>#219061</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantUseButtonHoverBorderColor</name>
+            <label>"Select variant" button hover border color</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "Variante auswählen" Buttons</label>
+            <defaultValue>#219061</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantUseButtonHoverTextColor</name>
+            <label>"Select variant" button hover text color</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "Variante auswählen" Buttons</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantInfoButtonBgColor</name>
+            <label>"Information" button background color (variant selection)</label>
+            <label lang="de-DE">Hintergrundfarbe des "Informationen" Buttons bei der Variantenauswahl</label>
+            <defaultValue>#26b6cf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantInfoButtonBorderColor</name>
+            <label>"Information" button border color (variant selection)</label>
+            <label lang="de-DE">Randfarbe des "Informationen" Buttons bei der Variantenauswahl</label>
+            <defaultValue>#26b6cf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantInfoButtonTextColor</name>
+            <label>"Information" button text color (variant selection)</label>
+            <label lang="de-DE">Textfarbe des "Informationen" Buttons bei der Variantenauswahl</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantInfoButtonHoverBgColor</name>
+            <label>"Information" button hover background color (variant selection)</label>
+            <label lang="de-DE">Mouseover-Hintergrundfarbe des "Informationen" Buttons bei der Variantenauswahl</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantInfoButtonHoverBorderColor</name>
+            <label>"Information" button hover border color (variant selection)</label>
+            <label lang="de-DE">Mouseover-Randfarbe des "Informationen" Buttons bei der Variantenauswahl</label>
+            <defaultValue>#209aaf</defaultValue>
+        </input-field>
+        <input-field type="colorpicker">
+            <name>eseomOrderFormChooseVariantInfoButtonHoverTextColor</name>
+            <label>"Information" button hover text color (variant selection)</label>
+            <label lang="de-DE">Mouseover-Textfarbe des "Informationen" Buttons bei der Variantenauswahl</label>
+            <defaultValue>#ffffff</defaultValue>
+        </input-field>
+
+    </card>
+</config>

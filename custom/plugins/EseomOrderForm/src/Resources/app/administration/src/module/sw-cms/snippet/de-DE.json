@@ -1,0 +1,11 @@
+{
+    "sw-cms": {
+        "blocks": {
+            "text": {
+                "orderForm": {
+                    "label": "Bestellformular"
+                }
+            }
+        }
+    }
+}

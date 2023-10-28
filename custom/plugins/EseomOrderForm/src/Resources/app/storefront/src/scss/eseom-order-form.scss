@@ -1,0 +1,641 @@
+/* BEGIN - SET DEFAULT VALUES SO NO ERROR IS THROWN */
+$eseom-order-form-show-ean-below-description: 1 !default;
+$eseom-order-form-show-cover-column: 1 !default;
+$eseom-order-form-show-title-column: 1 !default;
+$eseom-order-form-show-stock-column: 1 !default;
+$eseom-order-form-show-shipping-time-column: 1 !default;
+$eseom-order-form-show-information-column: 1 !default;
+$eseom-order-form-show-delete-column: 1 !default;
+
+$eseom-order-form-import-button-bg-color: #26b6cf !default;
+$eseom-order-form-import-button-border-color: #26b6cf !default;
+$eseom-order-form-import-button-text-color: #ffffff !default;
+$eseom-order-form-import-button-hover-bg-color: #209aaf !default;
+$eseom-order-form-import-button-hover-border-color: #209aaf !default;
+$eseom-order-form-import-button-hover-text-color: #ffffff !default;
+
+$eseom-order-form-export-button-bg-color: #26b6cf !default;
+$eseom-order-form-export-button-border-color: #26b6cf !default;
+$eseom-order-form-export-button-text-color: #ffffff !default;
+$eseom-order-form-export-button-hover-bg-color: #209aaf !default;
+$eseom-order-form-export-button-hover-border-color: #209aaf !default;
+$eseom-order-form-export-button-hover-text-color: #ffffff !default;
+
+$eseom-order-form-info-button-bg-color: #26b6cf !default;
+$eseom-order-form-info-button-border-color: #26b6cf !default;
+$eseom-order-form-info-button-text-color: #ffffff !default;
+$eseom-order-form-info-button-hover-bg-color: #209aaf !default;
+$eseom-order-form-info-button-hover-border-color: #209aaf !default;
+$eseom-order-form-info-button-hover-text-color: #ffffff !default;
+
+$eseom-order-form-delete-button-bg-color: #df0000 !default;
+$eseom-order-form-delete-button-border-color: #df0000 !default;
+$eseom-order-form-delete-button-text-color: #ffffff !default;
+$eseom-order-form-delete-button-hover-bg-color: #b90000 !default;
+$eseom-order-form-delete-button-hover-border-color: #b90000 !default;
+$eseom-order-form-delete-button-hover-text-color: #ffffff !default;
+
+$eseom-order-form-add-position-button-bg-color: #2aab74 !default;
+$eseom-order-form-add-position-button-border-color: #2aab74 !default;
+$eseom-order-form-add-position-button-text-color: #ffffff !default;
+$eseom-order-form-add-position-button-hover-bg-color: #219061 !default;
+$eseom-order-form-add-position-button-hover-border-color: #219061 !default;
+$eseom-order-form-add-position-button-hover-text-color: #ffffff !default;
+
+$eseom-order-form-clear-positions-button-bg-color: #df0000 !default;
+$eseom-order-form-clear-positions-button-border-color: #df0000 !default;
+$eseom-order-form-clear-positions-button-text-color: #ffffff !default;
+$eseom-order-form-clear-positions-button-hover-bg-color: #b90000 !default;
+$eseom-order-form-clear-positions-button-hover-border-color: #b90000 !default;
+$eseom-order-form-clear-positions-button-hover-text-color: #ffffff !default;
+
+$eseom-order-form-add-to-cart-button-bg-color: #2aab74 !default;
+$eseom-order-form-add-to-cart-button-border-color: #2aab74 !default;
+$eseom-order-form-add-to-cart-button-text-color: #ffffff !default;
+$eseom-order-form-add-to-cart-button-hover-bg-color: #219061 !default;
+$eseom-order-form-add-to-cart-button-hover-border-color: #219061 !default;
+$eseom-order-form-add-to-cart-button-hover-text-color: #ffffff !default;
+
+$eseom-order-form-choose-variant-button-bg-color: #26b6cf !default;
+$eseom-order-form-choose-variant-button-border-color: #26b6cf !default;
+$eseom-order-form-choose-variant-button-text-color: #ffffff !default;
+$eseom-order-form-choose-variant-button-hover-bg-color: #209aaf !default;
+$eseom-order-form-choose-variant-button-hover-border-color: #209aaf !default;
+$eseom-order-form-choose-variant-button-hover-text-color: #ffffff !default;
+
+$eseom-order-form-choose-variant-use-button-bg-color: #2aab74 !default;
+$eseom-order-form-choose-variant-use-button-border-color: #2aab74 !default;
+$eseom-order-form-choose-variant-use-button-text-color: #ffffff !default;
+$eseom-order-form-choose-variant-use-button-hover-bg-color: #219061 !default;
+$eseom-order-form-choose-variant-use-button-hover-border-color: #219061 !default;
+$eseom-order-form-choose-variant-use-button-hover-text-color: #ffffff !default;
+
+$eseom-order-form-choose-variant-info-button-bg-color: #26b6cf !default;
+$eseom-order-form-choose-variant-info-button-border-color: #26b6cf !default;
+$eseom-order-form-choose-variant-info-button-text-color: #ffffff !default;
+$eseom-order-form-choose-variant-info-button-hover-bg-color: #209aaf !default;
+$eseom-order-form-choose-variant-info-button-hover-border-color: #209aaf !default;
+$eseom-order-form-choose-variant-info-button-hover-text-color: #ffffff !default;
+/* END - SET DEFAULT VALUES SO NO ERROR IS THROWN */
+
+@if $eseom-order-form-show-ean-below-description == "0" {
+    .ean-text{
+        display: none;
+    }
+}
+
+@if $eseom-order-form-show-cover-column == "0" {
+    .eseom-order-form-product-cover-td{
+        display: none;
+    }
+}
+
+@if $eseom-order-form-show-title-column == "0" {
+    .eseom-order-form-product-name-td{
+        display: none;
+    }
+}
+
+@if $eseom-order-form-show-stock-column == "0" {
+    .eseom-order-form-stock{
+        display: none;
+    }
+}
+
+@if $eseom-order-form-show-shipping-time-column == "0" {
+    .eseom-order-form-delivery-time{
+        display: none;
+    }
+}
+
+@if $eseom-order-form-show-information-column == "0" {
+    .eseom-order-form-information{
+        display: none;
+    }
+}
+
+@if $eseom-order-form-show-delete-column == "0" {
+    .eseom-order-form-delete{
+        display: none;
+    }
+}
+
+.eseom-order-form-import-export{
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    .btn {
+        .icon > svg {
+            top: 0;
+        }
+    }
+
+    .eseom-order-form-import{
+        @media(max-width: 668px) {
+            order: 2;
+        }
+        order: 3;
+        cursor: pointer;
+        display: inline-flex;
+        gap: 10px;
+        transition: all 0.25s linear;
+        background-color: $eseom-order-form-import-button-bg-color;
+        border-color: $eseom-order-form-import-button-border-color;
+        color: $eseom-order-form-import-button-text-color;
+
+        &:hover {
+            background-color: $eseom-order-form-import-button-hover-bg-color;
+            border-color: $eseom-order-form-import-button-hover-border-color;
+            color: $eseom-order-form-import-button-hover-text-color;
+
+            svg {
+                path {
+                    fill: $eseom-order-form-import-button-hover-text-color;
+                }
+            }
+        }
+
+        svg {
+            transition: all 0.25s linear;
+
+            path {
+                transition: all 0.25s linear;
+                fill: $eseom-order-form-import-button-text-color;
+            }
+        }
+    }
+
+    .eseom-order-form-export{
+        opacity: 0.5;
+        cursor: default;
+        display: inline-flex;
+        gap: 10px;
+        transition: all 0.25s linear;
+        background-color: $eseom-order-form-export-button-bg-color;
+        border-color: $eseom-order-form-export-button-border-color;
+        color: $eseom-order-form-export-button-text-color;
+
+        &.export-active{
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        &:hover {
+            background-color: $eseom-order-form-export-button-hover-bg-color;
+            border-color: $eseom-order-form-export-button-hover-border-color;
+            color: $eseom-order-form-export-button-hover-text-color;
+
+            svg{
+                path{
+                    fill: $eseom-order-form-export-button-hover-text-color;
+                }
+            }
+        }
+
+        svg{
+            transition: all 0.25s linear;
+            path{
+                transition: all 0.25s linear;
+                fill: $eseom-order-form-export-button-text-color;
+            }
+        }
+    }
+
+
+    &.custom-file {
+        @media(max-width: 668px) {
+            max-width: 100%;
+        }
+        max-width: 500px;
+
+        .eseom-order-form-import-label{
+            transition: all 0.25s linear;
+            border-radius: unset;
+            &:after {
+                content: attr(data-search);
+            }
+        }
+    }
+}
+
+.sw-cms-block-order-form-content{
+    overflow-x: auto;
+}
+
+#eseom-order-form-success-msg{
+    padding: 10px 20px;
+    color: #fff;
+}
+
+#eseom-order-form-error-msg{
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.eseom-order-form-action-button-wrapper{
+    gap: 10px;
+
+    @media(max-width: 668px){
+        flex-direction: column;
+    }
+
+    #eseom-order-form-add-position{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #eseom-order-form-clear-positions{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #eseom-order-form-add-to-cart-btn{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+    }
+
+    @media(max-width: 668px){
+        button{
+            width: 100%;
+            justify-content: center;
+        }
+    }
+}
+
+.eseom-order-form-total-price-sum-value{
+    font-weight: bold;
+}
+
+.eseom-order-form-total-price-sum-currency{
+    padding-left: 3px;
+    font-weight: bold;
+}
+
+.eseom-order-form-product-cover-td {
+    img {
+        max-width: 70px;
+        border: 1px solid #888;
+        padding: 5px;
+    }
+}
+
+.eseom-order-form-sku-input, .eseom-order-form-product-name-td {
+    min-width: 150px;
+}
+
+.eseom-order-form-product-name-td{
+    .eseom-order-form-main-product-name{
+        margin-right: 7px;
+    }
+    .ean-text {
+        font-size: 11px;
+    }
+}
+
+.eseom-order-form-quantity-input{
+    width: 80px;
+}
+
+.eseom-order-form-price, .eseom-order-form-total-price{
+    min-width: 100px;
+}
+
+.eseom-order-form-stock-alert-danger{
+    padding: 5px 10px;
+    color: #fff;
+    display: flex;
+    background-color: #df0000;
+    flex-direction: column;
+    text-align: center;
+}
+
+#eseom-order-form-info-modal{
+    overflow-y: auto !important;
+    @include media-breakpoint-down(lg) {
+        h3{
+            margin-top: 15px;
+        }
+    }
+}
+
+.eseom-order-form-action-btn-info{
+    transition: all 0.25s linear;
+    background-color: $eseom-order-form-info-button-bg-color;
+    border-color: $eseom-order-form-info-button-border-color;
+    color: $eseom-order-form-info-button-text-color;
+
+    &:hover{
+        background-color: $eseom-order-form-info-button-hover-bg-color;
+        border-color: $eseom-order-form-info-button-hover-border-color;
+        color: $eseom-order-form-info-button-hover-text-color;
+
+        svg{
+            path{
+                fill: $eseom-order-form-info-button-hover-text-color;
+            }
+        }
+    }
+
+    svg{
+        transition: all 0.25s linear;
+        path{
+            transition: all 0.25s linear;
+            fill: $eseom-order-form-info-button-text-color;
+        }
+    }
+}
+
+.eseom-order-form-action-btn-delete{
+    transition: all 0.25s linear;
+    background-color: $eseom-order-form-delete-button-bg-color;
+    border-color: $eseom-order-form-delete-button-border-color;
+    color: $eseom-order-form-delete-button-text-color;
+
+    &:hover{
+        background-color: $eseom-order-form-delete-button-hover-bg-color;
+        border-color: $eseom-order-form-delete-button-hover-border-color;
+        color: $eseom-order-form-delete-button-hover-text-color;
+
+        svg{
+            path{
+                fill: $eseom-order-form-delete-button-hover-text-color;
+            }
+        }
+    }
+
+    svg{
+        transition: all 0.25s linear;
+        path{
+            transition: all 0.25s linear;
+            fill: $eseom-order-form-delete-button-text-color;
+        }
+    }
+}
+
+#eseom-order-form-add-position{
+    transition: all 0.25s linear;
+    background-color: $eseom-order-form-add-position-button-bg-color;
+    border-color: $eseom-order-form-add-position-button-border-color;
+    color: $eseom-order-form-add-position-button-text-color;
+
+    &:hover{
+        background-color: $eseom-order-form-add-position-button-hover-bg-color;
+        border-color: $eseom-order-form-add-position-button-hover-border-color;
+        color: $eseom-order-form-add-position-button-hover-text-color;
+
+        svg{
+            path{
+                fill: $eseom-order-form-add-position-button-hover-text-color;
+            }
+        }
+    }
+
+    svg{
+        transition: all 0.25s linear;
+        path{
+            transition: all 0.25s linear;
+            fill: $eseom-order-form-add-position-button-text-color;
+        }
+    }
+}
+
+#eseom-order-form-clear-positions{
+    transition: all 0.25s linear;
+    background-color: $eseom-order-form-clear-positions-button-bg-color;
+    border-color: $eseom-order-form-clear-positions-button-border-color;
+    color: $eseom-order-form-clear-positions-button-text-color;
+
+    &:hover{
+        background-color: $eseom-order-form-clear-positions-button-hover-bg-color;
+        border-color: $eseom-order-form-clear-positions-button-hover-border-color;
+        color: $eseom-order-form-clear-positions-button-hover-text-color;
+
+        svg{
+            path{
+                fill: $eseom-order-form-clear-positions-button-hover-text-color;
+            }
+        }
+    }
+
+    svg{
+        transition: all 0.25s linear;
+        path{
+            transition: all 0.25s linear;
+            fill: $eseom-order-form-clear-positions-button-text-color;
+        }
+    }
+}
+
+#eseom-order-form-add-to-cart-btn{
+    transition: all 0.25s linear;
+    background-color: $eseom-order-form-add-to-cart-button-bg-color;
+    border-color: $eseom-order-form-add-to-cart-button-border-color;
+    color: $eseom-order-form-add-to-cart-button-text-color;
+
+    &:hover{
+        background-color: $eseom-order-form-add-to-cart-button-hover-bg-color;
+        border-color: $eseom-order-form-add-to-cart-button-hover-border-color;
+        color: $eseom-order-form-add-to-cart-button-hover-text-color;
+
+        svg{
+            path{
+                fill: $eseom-order-form-add-to-cart-button-hover-text-color;
+            }
+        }
+    }
+
+    svg{
+        transition: all 0.25s linear;
+        path{
+            transition: all 0.25s linear;
+            fill: $eseom-order-form-add-to-cart-button-text-color;
+        }
+    }
+}
+
+#foundProductsDiv {
+    position: absolute;
+    z-index: 100;
+    background: #fff;
+    border: 1px solid #888;
+    max-height: 600px;
+    overflow-y: auto;
+    box-shadow: 0px 0px 2px 2px #bbb;
+
+    @media(max-width: 668px) {
+        left: 10px!important;
+        width: calc(100% - 20px);
+    }
+
+   &.fade {
+        -webkit-transition: opacity .3s linear;
+        transition: opacity .3s linear;
+    }
+
+    .eseom-order-form-found-products-header{
+        border-bottom: 1px solid #888;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .eseom-order-form-found-products-header-search{
+            font-weight: 600;
+            margin-left: 10px
+        }
+
+        #eseom-order-form-found-products-button-close {
+            padding:10px;
+        }
+        #eseom-order-form-found-products-corresponding-input {
+            display: none;
+        }
+    }
+
+    .eseom-order-form-found-products-product{
+        padding: 10px;
+        display: flex;
+        cursor: pointer;
+        &:not(:last-child) {
+            border-bottom: 1px solid #888;
+        }
+        &:hover{
+            color: #2aab74;
+        }
+        .eseom-order-form-found-products-product-img {
+            img {
+                max-width: 70px;
+                max-height: 70px;
+                border: 1px solid #888;
+                padding: 5px;
+            }
+        }
+        .eseom-order-form-found-products-product-name {
+            font-weight: 600;
+            padding-left: 10px;
+            padding-bottom: 10px;
+        }
+        .eseom-order-form-found-products-product-number {
+            font-size: 12px;
+            padding-left: 10px;
+        }
+        .eseom-order-form-found-products-product-ean {
+            font-size: 12px;
+            padding-left: 10px;
+        }
+        .eseom-order-form-found-products-product-options {
+            font-size: 12px;
+            padding-left: 10px;
+        }
+    }
+}
+
+.eseom-order-form-choose-variant-btn{
+    transition: all 0.25s linear;
+    background-color: $eseom-order-form-choose-variant-button-bg-color;
+    border-color: $eseom-order-form-choose-variant-button-border-color;
+    color: $eseom-order-form-choose-variant-button-text-color;
+
+    &:hover{
+        background-color: $eseom-order-form-choose-variant-button-hover-bg-color;
+        border-color: $eseom-order-form-choose-variant-button-hover-border-color;
+        color: $eseom-order-form-choose-variant-button-hover-text-color;
+
+        svg{
+            path{
+                fill: $eseom-order-form-choose-variant-button-hover-text-color;
+            }
+        }
+    }
+
+    svg{
+        transition: all 0.25s linear;
+        path{
+            transition: all 0.25s linear;
+            fill: $eseom-order-form-choose-variant-button-text-color;
+        }
+    }
+}
+
+#eseom-order-form-choose-variant-modal{
+    table{
+        max-height: 480px;
+        overflow-y: auto;
+
+        tbody{
+            img{
+                max-width: 90px;
+            }
+
+            tr:first-child .eseom-order-form-choose-variant-action-btns-td {
+                border-top: 0;
+            }
+
+            .ean-text {
+                font-size: 11px;
+            }
+
+            .eseom-order-form-choose-variant-action-btns-td{
+                display: flex;
+                gap: 7px;
+
+                .eseom-order-form-choose-variant-product-detail-btn{
+                    transition: all 0.25s linear;
+                    background-color: $eseom-order-form-choose-variant-info-button-bg-color;
+                    border-color: $eseom-order-form-choose-variant-info-button-border-color;
+                    color: $eseom-order-form-choose-variant-info-button-text-color;
+
+                    &:hover{
+                        background-color: $eseom-order-form-choose-variant-info-button-hover-bg-color;
+                        border-color: $eseom-order-form-choose-variant-info-button-hover-border-color;
+                        color: $eseom-order-form-choose-variant-info-button-hover-text-color;
+
+                        svg{
+                            path{
+                                fill: $eseom-order-form-choose-variant-info-button-hover-text-color;
+                            }
+                        }
+                    }
+
+                    svg{
+                        transition: all 0.25s linear;
+                        path{
+                            transition: all 0.25s linear;
+                            fill: $eseom-order-form-choose-variant-info-button-text-color;
+                        }
+                    }
+                }
+
+                .eseom-order-form-choose-variant-use-btn{
+                    transition: all 0.25s linear;
+                    background-color: $eseom-order-form-choose-variant-use-button-bg-color;
+                    border-color: $eseom-order-form-choose-variant-use-button-border-color;
+                    color: $eseom-order-form-choose-variant-use-button-text-color;
+
+                    &:hover{
+                        background-color: $eseom-order-form-choose-variant-use-button-hover-bg-color;
+                        border-color: $eseom-order-form-choose-variant-use-button-hover-border-color;
+                        color: $eseom-order-form-choose-variant-use-button-hover-text-color;
+
+                        svg{
+                            path{
+                                fill: $eseom-order-form-choose-variant-use-button-hover-text-color;
+                            }
+                        }
+                    }
+
+                    svg{
+                        transition: all 0.25s linear;
+                        path{
+                            transition: all 0.25s linear;
+                            fill: $eseom-order-form-choose-variant-use-button-text-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

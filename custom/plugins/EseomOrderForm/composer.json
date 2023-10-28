@@ -1,0 +1,39 @@
+{
+    "name": "eseom/eseom-order-form",
+    "description": "Eseom Order Form",
+    "version": "v1.3.0",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "eseom",
+            "homepage": "https://eseom.de",
+            "role": "owner"
+        },
+        {
+            "name": "eseom",
+            "homepage": "https://eseom.de",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Eseom\\OrderForm\\": "src/"
+        }
+    },
+    "require": {
+        "shopware/core": ">=6.5"
+    },
+    "extra": {
+        "shopware-plugin-class": "Eseom\\OrderForm\\EseomOrderForm",
+        "copyright": "(c) by eseom",
+        "label": {
+            "de-DE": "eseom Bestellformular",
+            "en-GB": "eseom Order Form"
+        },
+        "description": {
+            "de-DE": "Plugin fügt ein Einkaufswelten-Element hinzu, um ein spezielles Bestellformular anzeigen zu können.",
+            "en-GB": "The plugin adds a shopping-experience element to be able to display a custom order form."
+        }
+    }
+}
