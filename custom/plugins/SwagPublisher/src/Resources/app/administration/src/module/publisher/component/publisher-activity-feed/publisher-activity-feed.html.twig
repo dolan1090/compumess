@@ -1,0 +1,26 @@
+<sw-sidebar-item
+    icon="regular-history"
+    :title="$tc('publisher.activity.feed.title')"
+    :disabled="!acl.can('cms_page_activity:read') || pageLocked"
+>
+    <div class="publisher-activity-feed">
+        <div class="publisher-activity-feed__section">
+            <p
+                v-if="!hasActivity"
+                class="publisher-activity-feed__whitespace"
+            >
+                {{ $tc('publisher.activity.feed.whitespace') }}
+            </p>
+            <div
+                v-else
+                class="publisher-activity-feed__listing"
+            >
+                <publisher-activity-item
+                    v-for="log in activity"
+                    :key="`publisher-log-${log.id}`"
+                    :log="log"
+                ></publisher-activity-item>
+            </div>
+        </div>
+    </div>
+</sw-sidebar-item>

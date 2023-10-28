@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Log Configuration</title>
+        <title lang="de-DE">Log Konfiguration</title>
+
+        <input-field type="int">
+            <name>maxEntriesPerPage</name>
+            <label>Maximum Log-Entries per CMS-Page</label>
+            <label lang="de-DE">Maximal Einträge pro CMS-Seite</label>
+            <defaultValue>150</defaultValue>
+        </input-field>
+        <input-field type="int">
+            <name>maxEntriesWithDetailsPerPage</name>
+            <label>Maximum Log-Entries with details per CMS-Page</label>
+            <label lang="de-DE">Maximal Einträge pro CMS-Seite mit Details</label>
+            <defaultValue>100</defaultValue>
+        </input-field>
+    </card>
+</config>

@@ -1,0 +1,135 @@
+.publisher-activity-item {
+  $size-user-icon: 40px;
+  $padding-entry-v: 20px;
+  $border-color: rgb(209, 217,  224);
+  $badge-background-main: rgb(231, 249, 233);
+  $badge-background-draft: rgb(249, 250, 251);
+  $badge-color-main: rgb(22, 195, 108);
+  $badge-color-draft: rgb(82, 102, 122);
+  $badge-padding: 4px;
+  $name-background: rgb(249, 250, 251);
+  $link-background-hover: rgb(227, 243, 255);
+  $link-color-hover: rgb(24, 158, 255);
+  $detail-icon-color: rgb(179, 191, 204);
+
+  position: relative;
+  padding: $padding-entry-v 0 $padding-entry-v 50px;
+  font-size: 14px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $border-color;
+  }
+
+  &--loading {
+    margin: $padding-entry-v 0;
+  }
+
+  &__meta {
+
+    &-badge {
+      background: $badge-background-draft;
+      color: $badge-color-draft;
+      border-radius: 12px;
+      height: 20px;
+      display: inline-block;
+      padding: 4px 8px;
+      position: absolute;
+      top: $padding-entry-v;
+      right: 0;
+      font-size: 12px;
+      line-height: 12px;
+
+      .sw-icon {
+        margin-top: -2px;
+      }
+
+      &--main {
+        color: $badge-color-main;
+        background: $badge-background-main;
+      }
+    }
+
+    &-user {
+      position: absolute;
+      top: $padding-entry-v;
+      left: 0;
+      height: $size-user-icon;
+      width: $size-user-icon;
+      border-radius: 50%;
+    }
+
+    &-date {
+      color: rgb(170, 191, 204);
+      font-size: 12px;
+    }
+  }
+
+  &__name {
+    margin: 5px 0;
+    padding: 15px 10px;
+    line-height: 14px;
+    background: $name-background;
+    transition: background .3s ease, color .3s ease;
+
+    &:not(:last-child) {
+      margin: 5px 0 10px;
+    }
+
+    .sw-icon {
+      opacity: 0;
+      float: right;
+      transition: opacity .3s ease;
+    }
+
+    &--link {
+      cursor: pointer;
+
+      &:hover {
+        background: $link-background-hover;
+        color: $link-color-hover;
+        text-decoration: underline;
+
+        .sw-icon {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__description {
+    margin-top: 10px;
+  }
+
+  &__changes {
+
+    &--toggle {
+      cursor: pointer;
+      user-select: none;
+
+      .sw-icon {
+        transition: transform .3s ease;
+      }
+
+      &.active {
+        .sw-icon {
+          transform: rotateX(180deg);
+        }
+      }
+    }
+
+    &--detail {
+      border-bottom: 1px solid $border-color;
+      padding: 10px 0;
+      cursor: pointer;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .sw-icon {
+        margin-top: -3px;
+        color: $detail-icon-color;
+      }
+    }
+  }
+}

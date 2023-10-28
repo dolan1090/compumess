@@ -1,0 +1,43 @@
+{% block sw_cms_list_item_info %}
+    {% parent %}
+
+    <template v-if="page">
+        {% block publisher_cms_list_item_info_draft_count %}
+            <span
+                v-if="hasDrafts"
+                class="sw-cms-list-item__publisher--draft-count"
+                @click="onDraftsClick"
+            >
+                {{ $tc('publisher.listing.drafts', page.extensions.drafts.length) }}
+
+                <sw-icon
+                    name="regular-chevron-right-xs"
+                    size="8px"
+                ></sw-icon>
+            </span>
+        {% endblock %}
+
+        {% block publisher_cms_list_item_info_is_draft %}
+            <span
+                v-if="!page.locked && isDraft"
+                class="sw-cms-list-item__publisher sw-cms-list-item__publisher--is-draft"
+            >
+                {{ $tc('publisher.listing.draft') }}
+            </span>
+        {% endblock %}
+
+        {% block publisher_cms_list_item_info_activities %}
+            <span
+                v-else-if="!page.locked && hasActivities"
+                class="sw-cms-list-item__publisher sw-cms-list-item__publisher--activities"
+            >
+                <sw-icon
+                    name="regular-history"
+                    size="14"
+                ></sw-icon>
+
+                {{ page.extensions.activities.length }}
+            </span>
+        {% endblock %}
+    </template>
+{% endblock %}
