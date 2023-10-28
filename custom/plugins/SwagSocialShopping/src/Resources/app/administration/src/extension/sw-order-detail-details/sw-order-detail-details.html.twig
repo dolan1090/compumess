@@ -1,0 +1,9 @@
+{% block sw_order_detail_details_order_campaign %}
+
+    <sw-text-field
+        :value="order.extensions?.swagSocialShoppingOrder?.salesChannel?.name"
+        class="sw-order-detail-details__referral-code"
+        :label="$tc('swag-social-shopping.extension.sw-order.list.columnReferral')"
+        disabled
+    />
+{% endblock %}
