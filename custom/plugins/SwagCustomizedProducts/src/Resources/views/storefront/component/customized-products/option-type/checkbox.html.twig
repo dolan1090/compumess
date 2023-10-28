@@ -1,0 +1,28 @@
+{% block swag_customized_products_option_type_template_checkbox %}
+    <div class="swag-customized-products-option-type__checkbox-wrapper">
+
+        {% block swag_customized_products_option_type_template_checkbox_content %}
+            <div class="swag-customized-products__boolean form-check form-switch rounded">
+
+                {% block swag_customized_products_option_type_template_checkbox_input_checkbox %}
+                    <input type="checkbox"
+                           id="swag-customized-products-option-id-{{ option.id }}"
+                           name="{{ constant('Swag\\CustomizedProducts\\Storefront\\Controller\\CustomizedProductsCartController::CUSTOMIZED_PRODUCTS_TEMPLATE_REQUEST_PARAMETER') }}[options][{{ option.id }}][value]"
+                           {% if configurationExtension.configuration[option.id] and configurationExtension.configuration[option.id].value %}
+                               checked
+                           {% endif %}
+                           class="form-check-input swag-customized-products-form-control">
+                {% endblock %}
+
+                {% block swag_customized_products_option_type_template_checkbox_input_label %}
+                    <label class="form-check-label ms-2"
+                           for="swag-customized-products-option-id-{{ option.id }}">
+                        {{ option.translated.displayName }}
+                    </label>
+                {% endblock %}
+
+            </div>
+        {% endblock %}
+
+    </div>
+{% endblock %}

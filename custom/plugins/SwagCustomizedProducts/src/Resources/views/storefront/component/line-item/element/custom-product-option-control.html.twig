@@ -1,0 +1,31 @@
+{% block swag_customized_products_product_option_control %}
+    <div
+        class="swag-customized-products__line-item-options-control-wrapper"
+        data-bs-toggle="collapse"
+        data-bs-target="#{{ childrenCollapseId }}"
+    >
+        <div class="swag-customized-products__line-item-control-headline">
+            {{ 'customizedProducts.lineItem.showConfiguration'|trans }}
+        </div>
+
+        {% block swag_customized_products_product_option_icon %}
+            <div class="swag-customized-products__line-item-control-icon-container">
+                <button
+                    class="collapsed line-item-collapse-button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#{{ childrenCollapseId }}"
+                    aria-controls="{{ childrenCollapseId }}"
+                    aria-expanded="false"
+                    type="button"
+                >
+                    <div class="line-item-collapse-icon">
+                        {% sw_icon 'arrow-down' style {
+                            'color': 'primary',
+                            'pack':'solid'
+                        } %}
+                    </div>
+                </button>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

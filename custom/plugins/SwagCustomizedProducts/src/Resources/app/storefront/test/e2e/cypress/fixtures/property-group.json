@@ -1,0 +1,10 @@
+{
+    "name": "Some colors",
+    "options": [{
+        "name": "Red"
+    }, {
+        "name": "Yellow"
+    }, {
+        "name": "Green"
+    }]
+}

@@ -1,0 +1,2454 @@
+parameters:
+	ignoreErrors:
+		-
+			message: """
+				#^Call to deprecated method setPayloadValue\\(\\) of class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\LineItem\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:new\\-optional\\-parameter \\- Parameter \\$protected will be added in v6\\.6\\.0$#
+			"""
+			count: 2
+			path: src/Core/Checkout/Cart/CustomizedProductsCartService.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class Shopware\\\\Core\\\\Framework\\\\Routing\\\\Exception\\\\MissingRequestParameterException\\:
+				tag\\:v6\\.6\\.0 \\- will be removed, use RoutingException\\:\\:missingRequestParameter instead$#
+			"""
+			count: 3
+			path: src/Core/Checkout/Cart/Route/AddCustomizedProductsToCartRoute.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$product has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Core/Checkout/Cart/Route/AddCustomizedProductsToCartRoute.php
+
+		-
+			message: """
+				#^Parameter \\$cartService of method Swag\\\\CustomizedProducts\\\\Core\\\\Checkout\\\\Cart\\\\Route\\\\AddCustomizedProductsToCartRoute\\:\\:__construct\\(\\) has typehint with deprecated class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\SalesChannel\\\\CartService\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:becomes\\-final \\- Should not be extended and is only intended as cache$#
+			"""
+			count: 1
+			path: src/Core/Checkout/Cart/Route/AddCustomizedProductsToCartRoute.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Core\\\\Checkout\\\\Cart\\\\Route\\\\ReOrderCustomizedProductsRoute\\:\\:sanitizeQuantities\\(\\) has parameter \\$referenceIdQuantityMap with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Core/Checkout/Cart/Route/ReOrderCustomizedProductsRoute.php
+
+		-
+			message: """
+				#^Parameter \\$cartService of method Swag\\\\CustomizedProducts\\\\Core\\\\Checkout\\\\Cart\\\\Route\\\\ReOrderCustomizedProductsRoute\\:\\:__construct\\(\\) has typehint with deprecated class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\SalesChannel\\\\CartService\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:becomes\\-final \\- Should not be extended and is only intended as cache$#
+			"""
+			count: 1
+			path: src/Core/Checkout/Cart/Route/ReOrderCustomizedProductsRoute.php
+
+		-
+			message: """
+				#^Call to deprecated method setPayloadValue\\(\\) of class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\LineItem\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:new\\-optional\\-parameter \\- Parameter \\$protected will be added in v6\\.6\\.0$#
+			"""
+			count: 11
+			path: src/Core/Checkout/CustomizedProductsCartDataCollector.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Swag\\\\CustomizedProducts\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriber\\:\\:__invoke\\(\\) has typehint with deprecated class Shopware\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\MailBeforeValidateEvent\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:class\\-hierarchy\\-change \\- TemplateDataAware and DataAware are deprecated and will be removed in v6\\.6\\.0$#
+			"""
+			count: 1
+			path: src/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriber.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriber\\:\\:parentHasTemplateAssociated\\(\\) has parameter \\$fetchedParentIds with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Core/Content/Product/ProductWrittenSubscriber.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Migration\\\\Migration1583737095BasicOperators\\:\\:buildOperator\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Migration/Migration1583737095BasicOperators.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Migration\\\\Migration1583737095BasicOperators\\:\\:getLanguageIdLocaleMapping\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Migration/Migration1583737095BasicOperators.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Migration\\\\Migration1583737095BasicOperators\\:\\:getOperatorSet\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Migration/Migration1583737095BasicOperators.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Migration\\\\Migration1595737095FileUploadOperators\\:\\:buildOperator\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Migration/Migration1595737095FileUploadOperators.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Migration\\\\Migration1595737095FileUploadOperators\\:\\:getLanguageIdLocaleMapping\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Migration/Migration1595737095FileUploadOperators.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Migration\\\\Migration1595737095FileUploadOperators\\:\\:getOperatorSet\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Migration/Migration1595737095FileUploadOperators.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Migration\\\\Migration1602060888TemplateConfigurationVersionId\\:\\:fillVersionIdWithDefaultForTable\\(\\) has parameter \\$fieldsToUpdate with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Migration/Migration1602060888TemplateConfigurationVersionId.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$updateData has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Migration/Migration1602060888TemplateConfigurationVersionId.php
+
+		-
+			message: "#^Access to constant MAX_LENGTH_NAME on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V1\\\\Api\\\\Payment\\\\Transaction\\\\ItemList\\\\Item\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Access to constant MAX_LENGTH_NAME on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Access to constant MAX_LENGTH_SKU on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V1\\\\Api\\\\Payment\\\\Transaction\\\\ItemList\\\\Item\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Access to constant MAX_LENGTH_SKU on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Contracts\\\\EventDispatcher\\\\Event\\:\\:getOriginalShopwareLineItem\\(\\)\\.$#"
+			count: 2
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Contracts\\\\EventDispatcher\\\\Event\\:\\:getPayPalLineItem\\(\\)\\.$#"
+			count: 2
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Call to method setName\\(\\) on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V1\\\\Api\\\\Payment\\\\Transaction\\\\ItemList\\\\Item\\.$#"
+			count: 2
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Call to method setName\\(\\) on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item\\.$#"
+			count: 2
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Call to method setSku\\(\\) on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V1\\\\Api\\\\Payment\\\\Transaction\\\\ItemList\\\\Item\\.$#"
+			count: 3
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Call to method setSku\\(\\) on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item\\.$#"
+			count: 3
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Class Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromCartEvent not found\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Class Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromOrderEvent not found\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Class Swag\\\\PayPal\\\\PaymentsApi\\\\Builder\\\\Event\\\\PayPalV1ItemFromCartEvent not found\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Class Swag\\\\PayPal\\\\PaymentsApi\\\\Builder\\\\Event\\\\PayPalV1ItemFromOrderEvent not found\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:processOptionLineItems\\(\\) has parameter \\$optionNames with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:processOptionLineItems\\(\\) has parameter \\$optionNumbers with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^PHPDoc tag @param for parameter \\$event with type Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromCartEvent\\|Swag\\\\PayPal\\\\PaymentsApi\\\\Builder\\\\Event\\\\PayPalV1ItemFromCartEvent is not subtype of native type Symfony\\\\Contracts\\\\EventDispatcher\\\\Event\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^PHPDoc tag @param for parameter \\$event with type Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromOrderEvent\\|Swag\\\\PayPal\\\\PaymentsApi\\\\Builder\\\\Event\\\\PayPalV1ItemFromOrderEvent is not subtype of native type Symfony\\\\Contracts\\\\EventDispatcher\\\\Event\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Parameter \\$event of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:adjustPayPalItemFromCart\\(\\) has invalid type Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromCartEvent\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Parameter \\$event of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:adjustPayPalItemFromCart\\(\\) has invalid type Swag\\\\PayPal\\\\PaymentsApi\\\\Builder\\\\Event\\\\PayPalV1ItemFromCartEvent\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Parameter \\$event of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:adjustPayPalItemFromOrder\\(\\) has invalid type Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromOrderEvent\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Parameter \\$event of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:adjustPayPalItemFromOrder\\(\\) has invalid type Swag\\\\PayPal\\\\PaymentsApi\\\\Builder\\\\Event\\\\PayPalV1ItemFromOrderEvent\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Parameter \\$item of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:setName\\(\\) has invalid type Swag\\\\PayPal\\\\RestApi\\\\V1\\\\Api\\\\Payment\\\\Transaction\\\\ItemList\\\\Item\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Parameter \\$item of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:setName\\(\\) has invalid type Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Parameter \\$item of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:setSku\\(\\) has invalid type Swag\\\\PayPal\\\\RestApi\\\\V1\\\\Api\\\\Payment\\\\Transaction\\\\ItemList\\\\Item\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Parameter \\$item of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:setSku\\(\\) has invalid type Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item\\.$#"
+			count: 1
+			path: src/PayPal/PayPalLineItemSubscriber.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Framework\\\\Media\\\\Validator\\\\AbstractMediaUploadValidator\\:\\:getFilteredExtensionsWithMimeTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Framework/Media/Validator/AbstractMediaUploadValidator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsLoadValidMimeTypes\\:\\:getValidMimeTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Framework/Twig/Extension/CustomizedProductsLoadValidMimeTypes.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsPriceTagTwigFilter\\:\\:generatePriceTag\\(\\) has parameter \\$twigContext with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilter.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\Extensions\\\\EditConfigurationExtension\\:\\:getConfiguration\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/Extensions/EditConfigurationExtension.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\Extensions\\\\EditConfigurationExtension\\:\\:\\$configuration type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/Extensions/EditConfigurationExtension.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\Extensions\\\\ShareConfigurationExtension\\:\\:getConfiguration\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/Extensions/ShareConfigurationExtension.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\Extensions\\\\ShareConfigurationExtension\\:\\:\\$configuration type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/Extensions/ShareConfigurationExtension.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailResponse\\:\\:__construct\\(\\) has parameter \\$oneTimeSurcharges with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/PriceDetail/Route/PriceDetailResponse.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailResponse\\:\\:__construct\\(\\) has parameter \\$surcharges with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/PriceDetail/Route/PriceDetailResponse.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailResponse\\:\\:getOneTimeSurcharges\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/PriceDetail/Route/PriceDetailResponse.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailResponse\\:\\:getSurcharges\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/PriceDetail/Route/PriceDetailResponse.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailService\\:\\:getSurcharges\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/PriceDetail/Route/PriceDetailService.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailService\\:\\:splitSurcharges\\(\\) has parameter \\$oneTimeSurcharges with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/PriceDetail/Route/PriceDetailService.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailService\\:\\:splitSurcharges\\(\\) has parameter \\$surcharges with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Storefront/Page/Product/PriceDetail/Route/PriceDetailService.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class Shopware\\\\Core\\\\Framework\\\\Routing\\\\Exception\\\\MissingRequestParameterException\\:
+				tag\\:v6\\.6\\.0 \\- will be removed, use RoutingException\\:\\:missingRequestParameter instead$#
+			"""
+			count: 3
+			path: src/Storefront/Upload/UploadCustomizedProductsMediaRoute.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\SwagCustomizedProducts\\:\\:enrichPrivileges\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/SwagCustomizedProducts.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationService\\:\\:getConfigurationArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationService.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationService\\:\\:getOptionValue\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationService.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationService\\:\\:getSelectionValue\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationService.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationService\\:\\:getTemplateConfiguration\\(\\) should return Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\TemplateConfigurationEntity\\|null but returns Shopware\\\\Core\\\\Framework\\\\DataAbstractionLayer\\\\Entity\\|null\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationService.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationService\\:\\:getUploadValue\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationService.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\TemplateConfigurationEntity\\:\\:getConfiguration\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateConfiguration/TemplateConfigurationEntity.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\TemplateConfigurationEntity\\:\\:setConfiguration\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateConfiguration/TemplateConfigurationEntity.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\TemplateConfigurationEntity\\:\\:\\$configuration type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateConfiguration/TemplateConfigurationEntity.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionEntity\\:\\:getTypeProperties\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionEntity.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionEntity\\:\\:setTypeProperties\\(\\) has parameter \\$typeProperties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionEntity.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionEntity\\:\\:\\$typeProperties type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionEntity.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionService\\:\\:getSupportedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionService.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionServiceInterface\\:\\:getSupportedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionServiceInterface.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidator\\:\\:buildViolation\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionValidator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidator\\:\\:extractValue\\(\\) has parameter \\$payload with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionValidator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidator\\:\\:extractValue\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionValidator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidator\\:\\:postValidatePriceOnInsert\\(\\) has parameter \\$payload with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionValidator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidator\\:\\:setTypeIfNotSetDuringUpdate\\(\\) has parameter \\$payload with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionValidator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidator\\:\\:setTypeIfNotSetDuringUpdate\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionValidator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidator\\:\\:validateConsistence\\(\\) has parameter \\$fieldValidations with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionValidator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidator\\:\\:validateConsistence\\(\\) has parameter \\$payload with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/TemplateOptionValidator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\Checkbox\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/Checkbox.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\ColorPicker\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/ColorPicker.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\DateTime\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/DateTime.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\FileUpload\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/FileUpload.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\FileUpload\\:\\:getExcludedExtensions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/FileUpload.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\FileUpload\\:\\:getFiles\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/FileUpload.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\FileUpload\\:\\:setExcludedExtensions\\(\\) has parameter \\$excludedExtensions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/FileUpload.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\FileUpload\\:\\:setFiles\\(\\) has parameter \\$files with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/FileUpload.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\FileUpload\\:\\:\\$excludedExtensions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/FileUpload.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\FileUpload\\:\\:\\$files type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/FileUpload.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\HtmlEditor\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/HtmlEditor.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\NumberField\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/NumberField.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\OptionType\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/OptionType.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\OptionTypeCollection\\:\\:getNames\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/OptionTypeCollection.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\OptionTypeInterface\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/OptionTypeInterface.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\Select\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/Select.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\Select\\:\\:getElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/Select.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\Select\\:\\:setElements\\(\\) has parameter \\$elements with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/Select.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\Select\\:\\:\\$elements type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/Select.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\TextField\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/TextField.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Type\\\\Timestamp\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOption/Type/Timestamp.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\TemplateOptionValueEntity\\:\\:getValue\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOptionValue/TemplateOptionValueEntity.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\TemplateOptionValueEntity\\:\\:setValue\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOptionValue/TemplateOptionValueEntity.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\TemplateOptionValueEntity\\:\\:\\$value type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/Aggregate/TemplateOptionValue/TemplateOptionValueEntity.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\TemplateDecisionTreeGenerator\\:\\:generate\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/TemplateDecisionTreeGenerator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\TemplateDecisionTreeGenerator\\:\\:getTreeLeaf\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/TemplateDecisionTreeGenerator.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\TemplateDecisionTreeGeneratorInterface\\:\\:generate\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/TemplateDecisionTreeGeneratorInterface.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\TemplateEntity\\:\\:getDecisionTree\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/TemplateEntity.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Template\\\\TemplateEntity\\:\\:setDecisionTree\\(\\) has parameter \\$decisionTree with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/TemplateEntity.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Template\\\\TemplateEntity\\:\\:\\$decisionTree type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Template/TemplateEntity.php
+
+		-
+			message: """
+				#^Call to deprecated method setPayloadValue\\(\\) of class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\LineItem\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:new\\-optional\\-parameter \\- Parameter \\$protected will be added in v6\\.6\\.0$#
+			"""
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: """
+				#^Fetching class constant class of deprecated class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\SalesChannel\\\\CartService\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:becomes\\-final \\- Should not be extended and is only intended as cache$#
+			"""
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:buildLineItem\\(\\) has parameter \\$optionIds with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductCartCalculationTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductCartCalculationTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartServiceTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Core\\\\Checkout\\\\Cart\\\\CustomizedProductsCartService\" is private\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/CustomizedProductsCartServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\Event\\\\LineItemAddedSubscriberTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/Event/LineItemAddedSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\Group\\\\RulesMatcher\\\\AnyRuleLineItemMatcherDecoratorTest\\:\\:buildProductsRule\\(\\) has parameter \\$ids with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/LineItem/Group/RulesMatcher/AnyRuleLineItemMatcherDecoratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\Group\\\\RulesMatcher\\\\AnyRuleLineItemMatcherDecoratorTest\\:\\:lineItemProvider\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/LineItem/Group/RulesMatcher/AnyRuleLineItemMatcherDecoratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\Group\\\\RulesMatcher\\\\AnyRuleLineItemMatcherDecoratorTest\\:\\:testMatching\\(\\) has parameter \\$productIds with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Cart/LineItem/Group/RulesMatcher/AnyRuleLineItemMatcherDecoratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Customer\\\\SalesChannel\\\\SalesChannelWishListSubscriberTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Storefront\\\\Page\\\\Wishlist\\\\WishlistPageLoader\" is private\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Storefront\\\\Pagelet\\\\Wishlist\\\\GuestWishlistPageletLoader\" is private\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Customer/SalesChannel/SalesChannelWishListSubscriberTest.php
+
+		-
+			message: """
+				#^Call to deprecated method setPayloadValue\\(\\) of class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\LineItem\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:new\\-optional\\-parameter \\- Parameter \\$protected will be added in v6\\.6\\.0$#
+			"""
+			count: 3
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: """
+				#^Fetching class constant class of deprecated class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\SalesChannel\\\\CartService\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:becomes\\-final \\- Should not be extended and is only intended as cache$#
+			"""
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:dataCollectGeneratesConfiguration\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:testCollectGeneratesConfiguration\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollectorTest\\:\\:testCollectGeneratesConfiguration\\(\\) has parameter \\$payloadValues with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Core\\\\Checkout\\\\CustomizedProductsCartDataCollector\" is private\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartDataCollectorTest.php
+
+		-
+			message: """
+				#^Call to deprecated method setPayload\\(\\) of class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\LineItem\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:new\\-optional\\-parameter \\- Parameter \\$protection will be added in v6\\.6\\.0$#
+			"""
+			count: 2
+			path: tests/Core/Checkout/CustomizedProductsCartProcessorTest.php
+
+		-
+			message: """
+				#^Call to deprecated method setPayloadValue\\(\\) of class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\LineItem\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:new\\-optional\\-parameter \\- Parameter \\$protected will be added in v6\\.6\\.0$#
+			"""
+			count: 9
+			path: tests/Core/Checkout/CustomizedProductsCartProcessorTest.php
+
+		-
+			message: """
+				#^Fetching class constant class of deprecated class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\SalesChannel\\\\CartService\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:becomes\\-final \\- Should not be extended and is only intended as cache$#
+			"""
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartProcessorTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Core\\\\Checkout\\\\Cart\\\\Price\\\\AmountCalculator\" is private\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartProcessorTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Core\\\\Checkout\\\\Promotion\\\\Cart\\\\PromotionProcessor\" is private\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartProcessorTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Core\\\\Checkout\\\\CustomizedProductsCartProcessor\" is private\\.$#"
+			count: 1
+			path: tests/Core/Checkout/CustomizedProductsCartProcessorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\DummyPriceDefinition\\:\\:getConstraints\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/DummyPriceDefinition.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Promotion\\\\Cart\\\\Discount\\\\Filter\\\\AdvancedPackageRulesDecoratorTest\\:\\:getDiscountPackageCollection\\(\\) has parameter \\$lineItems with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Promotion/Cart/Discount/Filter/AdvancedPackageRulesDecoratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Checkout\\\\Promotion\\\\Cart\\\\Discount\\\\Filter\\\\AdvancedPackageRulesDecoratorTest\\:\\:packagesRuleProvider\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Promotion/Cart/Discount/Filter/AdvancedPackageRulesDecoratorTest.php
+
+		-
+			message: """
+				#^Fetching class constant class of deprecated class Shopware\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\MailBeforeValidateEvent\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:class\\-hierarchy\\-change \\- TemplateDataAware and DataAware are deprecated and will be removed in v6\\.6\\.0$#
+			"""
+			count: 4
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class Shopware\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\MailBeforeValidateEvent\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:class\\-hierarchy\\-change \\- TemplateDataAware and DataAware are deprecated and will be removed in v6\\.6\\.0$#
+			"""
+			count: 6
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:dataProviderLabel\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:dataProviderMailTemplate\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:getNestedStructure\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriberTest\\:\\:testValueAddedToLabel\\(\\) has parameter \\$payload with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Core\\\\Content\\\\MailTemplate\\\\Service\\\\Event\\\\OrderConfirmationSubscriber\" is private\\.$#"
+			count: 1
+			path: tests/Core/Content/MailTemplate/Service/Event/OrderConfirmationSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getTemplateData\\(\\) has parameter \\$optionData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getTemplateData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\ProductWrittenSubscriberTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/ProductWrittenSubscriberTest.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Test\\\\Core\\\\Content\\\\Product\\\\SalesChannel\\\\SalesChannelProductSubscriberTest\\:\\:\\$salesChannelProductDefinition is never read, only written\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/SalesChannel/SalesChannelProductSubscriberTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Core\\\\Content\\\\Product\\\\SalesChannel\\\\SalesChannelProductSubscriber\" is private\\.$#"
+			count: 1
+			path: tests/Core/Content/Product/SalesChannel/SalesChannelProductSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:getColorSelectTemplateData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Test\\\\Migration\\\\ModifyTemplateOptionValuePriceConstraintTest\\:\\:\\$connection is never read, only written\\.$#"
+			count: 1
+			path: tests/Migration/ModifyTemplateOptionValuePriceConstraintTest.php
+
+		-
+			message: "#^Call to method getOriginalShopwareLineItem\\(\\) on an unknown class Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromCartEvent\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Call to method getPayPalLineItem\\(\\) on an unknown class Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromCartEvent\\.$#"
+			count: 3
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Call to method getPayPalLineItem\\(\\) on an unknown class Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromOrderEvent\\.$#"
+			count: 3
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Call to method setName\\(\\) on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Call to method setSku\\(\\) on an unknown class Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Class Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromCartEvent not found\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Class Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromOrderEvent not found\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Class Swag\\\\PayPal\\\\PaymentsApi\\\\Builder\\\\Event\\\\PayPalV1ItemFromCartEvent not found\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Class Swag\\\\PayPal\\\\PaymentsApi\\\\Builder\\\\Event\\\\PayPalV1ItemFromOrderEvent not found\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Class Swag\\\\PayPal\\\\SwagPayPal not found\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Instantiated class Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromCartEvent not found\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Instantiated class Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromOrderEvent not found\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Instantiated class Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item not found\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\PayPal\\\\PayPalLineItemSubscriberTest\\:\\:createCartEvent\\(\\) has invalid return type Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromCartEvent\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\PayPal\\\\PayPalLineItemSubscriberTest\\:\\:createOrderEvent\\(\\) has invalid return type Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromOrderEvent\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\PayPal\\\\PayPalLineItemSubscriberTest\\:\\:createPayPalItem\\(\\) has invalid return type Swag\\\\PayPal\\\\RestApi\\\\V2\\\\Api\\\\Order\\\\PurchaseUnit\\\\Item\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:adjustPayPalItemFromCart\\(\\) expects Symfony\\\\Contracts\\\\EventDispatcher\\\\Event, Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromCartEvent given\\.$#"
+			count: 3
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$event of method Swag\\\\CustomizedProducts\\\\PayPal\\\\PayPalLineItemSubscriber\\:\\:adjustPayPalItemFromOrder\\(\\) expects Symfony\\\\Contracts\\\\EventDispatcher\\\\Event, Swag\\\\PayPal\\\\OrdersApi\\\\Builder\\\\Event\\\\PayPalV2ItemFromOrderEvent given\\.$#"
+			count: 3
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: "#^Service \"Swag\\\\PayPal\\\\SwagPayPal\" is not registered in the container\\.$#"
+			count: 1
+			path: tests/PayPal/PayPalLineItemSubscriberTest.php
+
+		-
+			message: """
+				#^Fetching class constant class of deprecated class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\SalesChannel\\\\CartService\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:becomes\\-final \\- Should not be extended and is only intended as cache$#
+			"""
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: """
+				#^Fetching class constant class of deprecated class Shopware\\\\Core\\\\Framework\\\\Routing\\\\Exception\\\\MissingRequestParameterException\\:
+				tag\\:v6\\.6\\.0 \\- will be removed, use RoutingException\\:\\:missingRequestParameter instead$#
+			"""
+			count: 3
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getOrderData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getTemplateData\\(\\) has parameter \\$optionData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getTemplateData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Controller\\\\CustomizedProductsCartControllerTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Core\\\\System\\\\StateMachine\\\\Loader\\\\InitialStateIdLoader\" is private\\.$#"
+			count: 1
+			path: tests/Storefront/Controller/CustomizedProductsCartControllerTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\) with true will always evaluate to true\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Media/Validator/FileUploadMediaValidatorTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Storefront\\\\Framework\\\\Media\\\\Validator\\\\FileMediaUploadValidator\" is private\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Media/Validator/FileUploadMediaValidatorTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\) with true will always evaluate to true\\.$#"
+			count: 7
+			path: tests/Storefront/Framework/Media/Validator/ImageUploadMediaValidatorTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Storefront\\\\Framework\\\\Media\\\\Validator\\\\ImageMediaUploadValidator\" is private\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Media/Validator/ImageUploadMediaValidatorTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsLoadValidMimeTypes\" is private\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsLoadValidMimeTypesTest.php
+
+		-
+			message: """
+				#^Call to deprecated method setPayload\\(\\) of class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\LineItem\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:new\\-optional\\-parameter \\- Parameter \\$protection will be added in v6\\.6\\.0$#
+			"""
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsPriceTagTwigFilterTest\\:\\:dataProviderTestPriceTagDe\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsPriceTagTwigFilterTest\\:\\:dataProviderTestPriceTagDefault\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsPriceTagTwigFilterTest\\:\\:dataProviderTestQuantityPriceTags\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsPriceTagTwigFilterTest\\:\\:testPriceTagsDe\\(\\) has parameter \\$input with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsPriceTagTwigFilterTest\\:\\:testPriceTagsDefault\\(\\) has parameter \\$input with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsPriceTagTwigFilterTest\\:\\:testQuantityPriceTags\\(\\) has parameter \\$input with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsPriceTagTwigFilterTest\\:\\:\\$twigMockContext type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Core\\\\Checkout\\\\Cart\\\\Price\\\\QuantityPriceCalculator\" is private\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Core\\\\Framework\\\\Adapter\\\\Translation\\\\Translator\" is private\\.$#"
+			count: 2
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsPriceTagTwigFilter\" is private\\.$#"
+			count: 1
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsPriceTagTwigFilterTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Storefront\\\\Framework\\\\Twig\\\\Extension\\\\CustomizedProductsTruncateEllipsisFilter\" is private\\.$#"
+			count: 2
+			path: tests/Storefront/Framework/Twig/Extension/CustomizedProductsTruncateEllipsisFilterTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:createRequest\\(\\) has parameter \\$anotherOptionWithOptionValues with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:createRequest\\(\\) has parameter \\$optionWithOptionValues with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailRouteTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\PriceDetail\\\\Route\\\\PriceDetailService\" is private\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/PriceDetail/Route/PriceDetailRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:createMockSalesChannelContextWithDifferentCurrency\\(\\) has parameter \\$currencyProperties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:getOptionAndValueDisplaySurchargeWithDifferentCurrencyProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:prepareAdditionalTemplateData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriberTest\\:\\:testGetOptionDisplaySurchargeWithDifferentCurrency\\(\\) has parameter \\$input with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Storefront\\\\Page\\\\Product\\\\ProductPageSubscriber\" is private\\.$#"
+			count: 1
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Template\\\\SalesChannel\\\\Price\\\\PriceService\" is private\\.$#"
+			count: 4
+			path: tests/Storefront/Page/Product/ProductPageSubscriberTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Route\\\\CreateConfigurationShareRouteTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Route/CreateConfigurationShareRouteTest.php
+
+		-
+			message: """
+				#^Call to deprecated method setPayloadValue\\(\\) of class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\LineItem\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:new\\-optional\\-parameter \\- Parameter \\$protected will be added in v6\\.6\\.0$#
+			"""
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\SalesChannel\\\\TemplateConfigurationListRouteTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationService\" is private\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/SalesChannel/TemplateConfigurationListRouteTest.php
+
+		-
+			message: """
+				#^Call to deprecated method setPayloadValue\\(\\) of class Shopware\\\\Core\\\\Checkout\\\\Cart\\\\LineItem\\\\LineItem\\:
+				tag\\:v6\\.6\\.0 \\- reason\\:new\\-optional\\-parameter \\- Parameter \\$protected will be added in v6\\.6\\.0$#
+			"""
+			count: 6
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationServiceTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Template\\\\Aggregate\\\\TemplateConfiguration\\\\Service\\\\TemplateConfigurationService\" is private\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateConfiguration/Service/TemplateConfigurationServiceTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionDataStructureTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionDataStructureTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusion\\\\TemplateExclusionVersioningTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusion/TemplateExclusionVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateExclusionOperator\\\\TemplateExclusionOperatorTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateExclusionOperator/TemplateExclusionOperatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\Api\\\\TemplateOptionControllerTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/Api/TemplateOptionControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\SalesChannel\\\\TemplateOptionListRouteTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/SalesChannel/TemplateOptionListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:createCommands\\(\\) has parameter \\$option with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:createTemplate\\(\\) has parameter \\$templateData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:dataProviderTestTemplateOptionHasValidType\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getColorSelectTemplateData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getImageSelectTemplateData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getTypeNames\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:getTypesOfCollection\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:testInsertValidWithoutTypeProperties\\(\\) has parameter \\$option with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Property Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOption\\\\TemplateOptionValidatorTest\\:\\:\\$templateOptionValueDefinition is never read, only written\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Service \"validator\" is private\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOption/TemplateOptionValidatorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Aggregate\\\\TemplateOptionValue\\\\SalesChannel\\\\TemplateOptionValueListRouteTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Aggregate/TemplateOptionValue/SalesChannel/TemplateOptionValueListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\Api\\\\TemplateControllerTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/Api/TemplateControllerTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\SalesChannel\\\\TemplateListRouteTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/SalesChannel/TemplateListRouteTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateApiTest\\:\\:createTemplate\\(\\) has parameter \\$templateData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateApiTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateApiTest\\:\\:createTemplateVariousTypesProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateApiTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateCleanVersionsTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Template\\\\ScheduledTask\\\\CleanVersionsTaskHandler\" is private\\.$#"
+			count: 1
+			path: tests/Template/TemplateCleanVersionsTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:assertTree\\(\\) has parameter \\$tree with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:getBenchmarkData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateDecisionTreeGeneratorTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Service \"Swag\\\\CustomizedProducts\\\\Template\\\\TemplateDecisionTreeGenerator\" is private\\.$#"
+			count: 1
+			path: tests/Template/TemplateDecisionTreeGeneratorTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:createProduct\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:createTemplate\\(\\) has parameter \\$additionalData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:getExpectedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:getTemplateOptionArray\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:getTemplateOptionArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:getTemplateOptionValuesArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:getTemplateOptionsArrayForCreation\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Method Swag\\\\CustomizedProducts\\\\Test\\\\Template\\\\TemplateVersioningTest\\:\\:getTestCurrency\\(\\) has parameter \\$additionalOptions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Template/TemplateVersioningTest.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 2
+			path: tests/Template/TemplateVersioningTest.php

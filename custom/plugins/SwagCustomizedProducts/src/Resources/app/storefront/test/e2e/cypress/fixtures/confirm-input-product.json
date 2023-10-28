@@ -1,0 +1,50 @@
+{
+    "id": "60f34542b54146298ebf05e226ab8d3c",
+    "name": "Confirm Input Product Name",
+    "stock": 10,
+    "isCloseout": false,
+    "purchaseSteps": 1,
+    "minPurchase": 1,
+    "shippingFree": false,
+    "restockTime": 3,
+    "productNumber": "SEG-1337",
+    "description": "Product description",
+    "taxName": "Standard rate",
+    "price": [
+        {
+            "currencyId": "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+            "net": 8.40,
+            "linked": true,
+            "gross": 10
+        }
+    ],
+    "url": "/confirm-input-product-name.html",
+    "swagCustomizedProductsTemplate": {
+        "id": "b4f1bcbcb23e41f996b8e16e052b5d29",
+        "productId": "71f45644c54146298ebf05e226ab8d3b",
+        "internalName": "E2E Template",
+        "displayName": "E2E Template",
+        "active": true,
+        "stepByStep": false,
+        "confirmInput": true,
+        "optionsAutoCollapse": true,
+        "options": [
+            {
+                "type": "checkbox",
+                "displayName": "Example Checkbox",
+                "typeProperties": {},
+                "required": false,
+                "oneTimeSurcharge": true,
+                "relativeSurcharge": false,
+                "advancedSurcharge": false,
+                "position": 1,
+                "price": [{
+                    "currencyId": "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+                    "net": 8.4,
+                    "gross": 10,
+                    "linked": true
+                }]
+            }
+        ]
+    }
+}

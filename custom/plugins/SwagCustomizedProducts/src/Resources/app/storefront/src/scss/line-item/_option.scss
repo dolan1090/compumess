@@ -1,0 +1,395 @@
+/*
+More information about css grid layouts:
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
+https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area
+*/
+
+.swag-customized-products__line-item-image-container {
+    text-align: center;
+    width: 70px;
+    padding-right: .25rem;
+    padding-left: .25rem;
+}
+
+.swag-customized-products__line-item-label {
+    padding-top: 8px;
+}
+
+.swag-customized-products__line-item-unit-price {
+    text-align: right;
+
+    .line-item-unit-price-label,
+    .line-item-tax-price-label {
+        display: none;
+    }
+}
+
+.swag-customized-products__line-item-total-price {
+    text-align: right;
+    font-weight: 700;
+
+    .line-item-total-price-label {
+        display: none;
+    }
+}
+
+.swag-customized-products__line-item-remove {
+    text-align: right;
+}
+
+.swag-customized-products__line-item-collapse-options {
+    font-size: $font-size-sm;
+
+    .swag-customized-products__line-item-option-elements {
+        margin-top: .5rem;
+    }
+}
+
+.swag-customized-products__line-item-collapse-unit-price {
+    margin-top: 2rem;
+    font-size: $font-size-sm;
+
+    .swag-customized-products__line-item-option-elements {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.swag-customized-products__line-item-collapse-total-price {
+    margin-top: 2rem;
+    font-size: $font-size-sm;
+    display: block;
+
+    .swag-customized-products__line-item-option-elements {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.swag-customized-products__line-item-details {
+    padding-bottom: 1rem;
+}
+
+.swag-customized-products__line-item-options-control-wrapper {
+    height: 1.5rem;
+
+    .swag-customized-products__line-item-control-headline,
+    .swag-customized-products__line-item-control-icon-container {
+        display: inline-block;
+    }
+
+    .line-item-collapse-button,
+    .line-item-child-remove-icon {
+        background-color: transparent;
+        border-style: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .line-item-collapse-button > .line-item-collapse-icon > .icon-arrow-down {
+        height: 16px;
+    }
+
+    .line-item-collapse-button > .line-item-collapse-icon {
+        transform: rotate(0deg);
+        transition: all 0.2s ease-out;
+    }
+
+    .line-item-collapse-button.collapsed > .line-item-collapse-icon {
+        transform: rotate(-90deg);
+    }
+}
+
+.swag-customized-products__line-item-option-element {
+    .line-item-unit-price-label,
+    .line-item-tax-price-label,
+    .line-item-total-price-label {
+        display: none;
+    }
+
+    .line-item-total-price-value {
+        font-weight: 700;
+    }
+
+    .line-item-unit-price-value,
+    .line-item-tax-price-value,
+    .line-item-total-price-value {
+        text-align: right;
+    }
+}
+
+.swag-customized-products__line-item-option-element-detailed-price {
+    margin-left: calc(var(--bs-gutter-x) * .5);
+    display: none;
+
+    .line-item-unit-price-label,
+    .line-item-tax-price-label,
+    .line-item-total-price-label {
+        display: inline-block;
+        margin: 0;
+        text-align: left;
+        font-weight: normal;
+        font-size: $font-size-sm;
+    }
+
+    .line-item-total-price-label {
+        font-weight: 700;
+    }
+
+    .line-item-unit-price-value,
+    .line-item-tax-price-value,
+    .line-item-total-price-value {
+        display: inline-block;
+        text-align: right;
+        float: right;
+    }
+}
+
+.swag-customized-products__line-item-image {
+    grid-area: image;
+}
+
+.swag-customized-products__line-item-label {
+    grid-area: label;
+}
+
+.swag-customized-products__line-item-quantity {
+    grid-area: quantity;
+}
+
+.swag-customized-products__line-item-unit-price {
+    grid-area: unit-price;
+}
+
+.swag-customized-products__line-item-total-price {
+    grid-area: total-price;
+}
+
+.swag-customized-products__line-item-remove {
+    grid-area: remove;
+}
+
+.swag-customized-products__line-item-collapse-options {
+    grid-area: collapse-options;
+}
+
+.swag-customized-products__line-item-collapse-unit-price {
+    grid-area: collapse-unit;
+}
+
+.swag-customized-products__line-item-collapse-total-price {
+    grid-area: collapse-total;
+}
+
+.swag-customized-products__line-item-details {
+    grid-area: details;
+}
+
+// when on cart page
+*:not(.cart-offcanvas) {
+
+    .swag-customized-products__line-item-label {
+        @include media-breakpoint-up(sm) {
+            padding-left: .25rem;
+        }
+    }
+
+    .swag-customized-products__line-item-quantity {
+
+        @include media-breakpoint-up(sm) {
+            text-align: right;
+            .line-item-quantity {
+                text-align: right;
+                width: 100%;
+            }
+        }
+
+        @include media-breakpoint-up(md) {
+            .line-item-quantity-label {
+                display: none;
+                width: 100%;
+            }
+        }
+    }
+
+    .swag-customized-products__line-item-unit-price {
+        .line-item-unit-price-label,
+        .line-item-tax-price-label {
+            display: none;
+            @include media-breakpoint-up(sm) {
+                display: block;
+            }
+            @include media-breakpoint-up(md) {
+                display: none;
+            }
+        }
+    }
+
+    .swag-customized-products__line-item-total-price {
+        .line-item-total-price-label {
+            display: none;
+            @include media-breakpoint-up(sm) {
+                display: block;
+            }
+            @include media-breakpoint-up(md) {
+                display: none;
+            }
+        }
+    }
+
+    .swag-customized-products__line-item-collapse-options {
+        @include media-breakpoint-up(sm) {
+            padding-left: .25rem;
+        }
+    }
+
+    .swag-customized-products__line-item-details {
+        @include media-breakpoint-up(sm) {
+            padding-left: .25rem;
+        }
+    }
+
+    .swag-customized-products__line-item-option-element-detailed-price {
+        display: none;
+
+        @include media-breakpoint-up(sm) {
+            display: block;
+        }
+        @include media-breakpoint-up(md) {
+            display: none;
+        }
+    }
+
+    // grid layout mobile
+
+    .swag-customized-products__line-item-grid_component {
+        display: grid;
+        grid-template-columns: 5fr 1fr;
+        grid-template-rows: repeat(6, auto);
+        grid-template-areas:
+            "image            remove"
+            "label            label"
+            "collapse-options collapse-total"
+            "details          details"
+            "quantity         quantity"
+            "total-price      total-price";
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+    .swag-customized-products__line-item-image {
+        grid-area: image;
+    }
+
+    .swag-customized-products__line-item-unit-price {
+        display: none;
+    }
+
+    .swag-customized-products__line-item-collapse-unit-price {
+        display: none;
+    }
+
+    // grid layout tablet
+
+    @include media-breakpoint-up(sm) {
+        .swag-customized-products__line-item-grid_component {
+            grid-template-columns: 2fr/3 4fr/3 2fr 2fr;
+            grid-template-rows: repeat(3, auto);
+            grid-template-areas:
+            "image label            label            remove"
+            "image collapse-options collapse-options collapse-options"
+            "image details          details          ."
+            "image quantity         unit-price       total-price";
+        }
+        .swag-customized-products__line-item-unit-price {
+            display: unset;
+        }
+        .swag-customized-products__line-item-collapse-unit-price {
+            display: none;
+        }
+        .swag-customized-products__line-item-collapse-total-price {
+            display: none;
+        }
+    }
+
+    // grid layout desktop
+
+    @include media-breakpoint-up(md) {
+        .swag-customized-products__line-item-grid_component {
+            grid-template-columns: 5fr/4 5fr/4*3 2fr 2fr 2fr 1fr;
+            grid-template-rows: repeat(3, auto);
+            grid-template-areas:
+            "image label            quantity         unit-price    total-price    remove"
+            "image collapse-options collapse-options collapse-unit collapse-total remove"
+            "image details          .                .             .              remove";
+        }
+        .swag-customized-products__line-item-collapse-unit-price {
+            display: unset;
+        }
+        .swag-customized-products__line-item-collapse-total-price {
+            display: unset;
+        }
+    }
+}
+
+// when in cart flyout
+.cart-offcanvas {
+
+    .swag-customized-products__line-item-quantity {
+        text-align: left;
+
+        .line-item-quantity {
+            text-align: right;
+            width: auto;
+        }
+
+        .line-item-quantity-select-wrapper {
+            flex-grow: 1;
+        }
+
+        .line-item-quantity-label {
+            display: inline-block;
+            width: auto;
+        }
+    }
+
+    .swag-customized-products__line-item-option-element-detailed-price {
+        display: none;
+    }
+
+    // grid layout offcanvas
+
+    .swag-customized-products__line-item-grid_component {
+        display: grid;
+        grid-template-columns: 5fr 1fr;
+        grid-template-rows: repeat(6, auto);
+        grid-template-areas:
+            "image            remove"
+            "label            label"
+            "collapse-options collapse-total"
+            "details          details"
+            "quantity         quantity"
+            "total-price      total-price";
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .swag-customized-products__line-item-total-price {
+        .line-item-total-price-label {
+            display: none;
+        }
+    }
+
+    .swag-customized-products__line-item-unit-price {
+        display: none; // Hide unit Price
+    }
+
+    .swag-customized-products__line-item-collapse-unit-price {
+        display: none; // Hide unit Price
+    }
+
+    .swag-customized-products__line-item-collapse-total-price {
+        display: block;
+    }
+}

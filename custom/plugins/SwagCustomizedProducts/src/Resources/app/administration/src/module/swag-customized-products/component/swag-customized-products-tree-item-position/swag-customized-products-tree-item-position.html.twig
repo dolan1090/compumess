@@ -1,0 +1,30 @@
+{% block swag_customized_products_tree_item_position %}
+    <sw-button-group class="swag-customized-product-tree-item-position__group">
+
+        {% block swag_customized_products_tree_item_position_button_up %}
+            <sw-button class="swag-customized-product-tree-item-position__arrow arrow_up"
+                       size="x-small"
+                       :disabled="disabled || itemMin"
+                       square
+                       @click="onLowerPositionValue(item)">
+
+                {% block swag_customized_products_tree_item_position_button_up_content %}
+                    <sw-icon name="regular-chevron-up-s" size="12"></sw-icon>
+                {% endblock %}
+            </sw-button>
+        {% endblock %}
+
+        {% block swag_customized_products_tree_item_position_button_down %}
+            <sw-button class="swag-customized-product-tree-item-position__arrow arrow_down"
+                       size="x-small"
+                       :disabled="disabled || itemMax"
+                       square
+                       @click="onRaisePositionValue(item)">
+
+                {% block swag_customized_products_tree_item_position_button_down_content %}
+                    <sw-icon name="regular-chevron-down-s" size="12"></sw-icon>
+                {% endblock %}
+            </sw-button>
+        {% endblock %}
+    </sw-button-group>
+{% endblock %}

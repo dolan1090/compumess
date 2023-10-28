@@ -1,0 +1,63 @@
+.swag-custommized-product-html-editor {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid $border-color;
+    overflow: hidden;
+
+    &__editor-wrapper {
+        position: relative;
+    }
+
+    &__placeholder {
+        top: 16px;
+        left: 16px;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        color: $gray-600;
+        cursor: text;
+    }
+
+    &__toolbar {
+        background: #eee;
+        border-bottom: 1px solid $border-color;
+    }
+
+    &__toolbar-button {
+        appearance: none;
+        border: 0 none;
+        margin: 0;
+        padding: 4px 12px;
+
+        &[aria-pressed="true"] .icon {
+            color: #000;
+        }
+
+        & > .icon {
+            width: 12px;
+            height: 12px;
+
+            & > svg {
+                top: 2px;
+            }
+        }
+    }
+
+    &__editor {
+        padding: 16px;
+        min-height: 75px;
+        height: 150px;
+        max-height: 250px;
+        resize: vertical;
+        border-radius: 0;
+        overflow-y: scroll;
+
+        & > div {
+            margin-bottom: 12px;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

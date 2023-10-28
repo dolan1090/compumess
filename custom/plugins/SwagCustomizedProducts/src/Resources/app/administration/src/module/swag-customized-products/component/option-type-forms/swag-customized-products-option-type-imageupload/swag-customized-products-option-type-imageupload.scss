@@ -1,0 +1,10 @@
+.swag-customized-products-option-type-imageupload {
+    &__field_excluded_extensions {
+        grid-column: span 2;
+
+        .sw-select-selection-list__input {
+            min-width: 80px;
+            width: 80px;
+        }
+    }
+}
