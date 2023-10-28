@@ -1,1 +1,0 @@
-(self.webpackChunk=self.webpackChunk||[]).push([["sc-d-b2-b-inquiry"],{871:()=>{}},s=>{var b;b=871,s(s.s=b)}]);
