@@ -1,0 +1,32 @@
+{
+    "sw-settings-rule": {
+      "list": {
+        "columnSwagDynamicAccessProducts": "Dynamic Access product assignments",
+        "columnSwagDynamicAccessCategories": "Dynamic Access category assignments",
+        "columnSwagDynamicAccessLandingPages": "Dynamic Access landing page assignments",
+        "assignments": {
+          "swagDynamicAccessProducts": "Dynamic Access product | Dynamic Access products",
+          "swagDynamicAccessCategories": "Dynamic Access category | Dynamic Access categories",
+          "swagDynamicAccessLandingPages": "Dynamic Access landing page | Dynamic Access landing pages"
+        }
+      }
+    },
+    "swag-dynamic-access": {
+      "sw-settings-rule": {
+        "detail": {
+          "associations": {
+            "productVisibility": "Dynamic Access: Products",
+            "categoryVisibility": "Dynamic Access: Categories",
+            "landingPageVisibility": "Dynamic Access: Landing pages"
+          }
+        }
+      }
+    },
+    "sw-restricted-rules": {
+      "restrictedAssignment": {
+        "swagDynamicAccessProducts": "Dynamic Access: Products",
+        "swagDynamicAccessCategories": "Dynamic Access: Categories",
+        "swagDynamicAccessLandingPages": "Dynamic Access: Landing pages"
+      }
+    }
+}

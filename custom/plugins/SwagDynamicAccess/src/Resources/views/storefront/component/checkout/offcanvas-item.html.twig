@@ -1,0 +1,39 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-item.html.twig' %}
+
+{% set invalidProduct = constant('Swag\\DynamicAccess\\Core\\Checkout\\Cart\\LineItem\\LineItemValidator::INVALID_PRODUCT') %}
+
+{% block component_offcanvas_product_image_inner %}
+    {% if lineItem.hasExtension(invalidProduct) %}
+        <div class="cart-item-img">
+            {% if lineItem.cover.url %}
+                {% sw_thumbnails 'cart-item-img-thumbnails' with {
+                    media: lineItem.cover,
+                    sizes: {
+                        'default': '100px'
+                    },
+                    attributes: {
+                        'class': 'img-fluid cart-item-img-source',
+                        'alt': label,
+                        'title': label
+                    }
+                } %}
+            {% else %}
+                {% sw_icon 'placeholder' style {
+                    'size': 'fluid'
+                } %}
+            {% endif %}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block component_offcanvas_product_label %}
+    {% if lineItem.hasExtension(invalidProduct) %}
+        <div class="cart-item-label">
+            {{ label|u.truncate(60, '...', false) }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

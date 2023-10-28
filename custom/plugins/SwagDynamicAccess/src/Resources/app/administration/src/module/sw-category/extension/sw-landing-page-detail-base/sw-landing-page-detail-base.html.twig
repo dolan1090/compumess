@@ -1,0 +1,33 @@
+{% block sw_landing_page_detail_base_information_tags %}
+    {% parent %}
+
+    {% block sw_landing_page_detail_base_information_tags_customer_restrictions %}
+        <sw-container class="sw-landing-page-detail-base__customer-restrictions">
+
+            {% block sw_landing_page_detail_base_information_tags_customer_restrictions_title %}
+                <span class="sw-landing-page-detail-base__customer-restrictions-title">
+                    {{ $tc('swag-dynamic-access.landingPage.title') }}
+                </span>
+            {% endblock %}
+
+            {% block sw_landing_page_detail_base_information_tags_customer_restrictions_body %}
+                <p class="sw-landing-page-detail-base__customer-restrictions-body">
+                    {{ $tc('swag-dynamic-access.landingPage.body') }}
+                </p>
+            {% endblock %}
+
+            {% block sw_landing_page_detail_base_information_tags_customer_restrictions_field %}
+                <sw-select-rule-create
+                    v-if="!isLoading"
+                    :rules="dynamicAccessRulesValue"
+                    :disabled="!acl.can('landing_page.editor')"
+                    :label="$tc('swag-dynamic-access.landingPage.fieldLabel')"
+                    :placeholder="$tc('swag-dynamic-access.landingPage.fieldPlaceholder')"
+                    rule-aware-group-key="swagDynamicAccessLandingPages"
+                    class="sw-landing-page-detail-base__customer-restrictions-field"
+                />
+            {% endblock %}
+
+        </sw-container>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% sw_extends '@Storefront/storefront/page/checkout/checkout-item.html.twig' %}
+
+{% set invalidProduct = constant('Swag\\DynamicAccess\\Core\\Checkout\\Cart\\LineItem\\LineItemValidator::INVALID_PRODUCT') %}
+
+{% block page_checkout_item_info_image_link %}
+    {% if lineItem.hasExtension(invalidProduct) %}
+        {% block page_checkout_item_info_image_element %}
+            {{ parent() }}
+        {% endblock %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_checkout_item_info_label %}
+    {% if lineItem.hasExtension(invalidProduct) %}
+        {{ lineItem.label|u.truncate(60, '...', false) }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
