@@ -1,0 +1,280 @@
+{% block block_order_form %}
+    {% set customerGroups = config('EseomOrderForm.config.eseomOrderFormCustomerGroups') %}
+    {% if (not customerGroups or context.currentCustomerGroup.id() in customerGroups) and (config('EseomOrderForm.config.eseomOrderFormBeforeLogin') or context.customer) %}
+    <div class="col-12" data-eseom-order-form="true">
+        <input type="hidden" name="eseom-order-form-add-to-cart-ajax-path" id="eseom-order-form-add-to-cart-ajax-path" value="{{ path('frontend.eseomorderform.addtocart') }}">
+        <input type="hidden" name="eseom-order-form-get-product-info-ajax-path" id="eseom-order-form-get-product-info-ajax-path" value="{{ path('frontend.eseomorderform.getproductinfo') }}">
+        <input type="hidden" name="eseom-order-form-get-product-price-ajax-path" id="eseom-order-form-get-product-price-ajax-path" value="{{ path('frontend.eseomorderform.getproductprice') }}">
+        <input type="hidden" name="eseom-order-form-get-product-variations-ajax-path" id="eseom-order-form-get-product-variations-ajax-path" value="{{ path('frontend.eseomorderform.getproductvariations') }}">
+            
+        <div class="sw-cms-order-form">
+            <div class="sw-cms-order-form-headline">
+                {% set element = block.slots.getSlot('headline') %}
+                {% set id = element.id %}
+                <div data-cms-element-id="{{ id }}">
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                </div>
+            </div>
+
+            <div class="sw-cms-order-form-description">
+                {% set element = block.slots.getSlot('description') %}
+                {% set id = element.id %}
+                <div data-cms-element-id="{{ id }}">
+                    {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+                </div>
+            </div>
+
+            <div class="sw-cms-block-order-form-content">
+                <h2>{{ "eseom-order-form.header.headline" | trans | sw_sanitize}}</h2>
+                <p>{{ "eseom-order-form.header.description" | trans | sw_sanitize}}</p>
+
+                {% if config('EseomOrderForm.config.eseomOrderFormEnableExport') or config('EseomOrderForm.config.eseomOrderFormEnableImport') %}
+                    <div class="eseom-order-form-import-export eseom-order-form-action-button-wrapper">
+                        {% if config('EseomOrderForm.config.eseomOrderFormEnableExport') %}
+                            <button class="eseom-order-form-export btn align-items-center mr-auto"
+                                 data-filename="{{ config('EseomOrderForm.config.eseomOrderFormExportFilename') }}"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><path d="m13 19.5858 1.2929-1.293c.3905-.3904 1.0237-.3904 1.4142 0 .3905.3906.3905 1.0238 0 1.4143l-3 3c-.3905.3905-1.0237.3905-1.4142 0l-3-3c-.3905-.3905-.3905-1.0237 0-1.4142.3905-.3905 1.0237-.3905 1.4142 0L11 19.5858V8c0-.5523.4477-1 1-1s1 .4477 1 1v11.5858zM13 1c2.8074 0 5.2963 1.6679 6.402 4.1647C22.061 5.8004 24 8.1925 24 11c0 3.3137-2.6863 6-6 6h-2c-.5523 0-1-.4477-1-1s.4477-1 1-1h2c2.2091 0 4-1.7909 4-4 0-2.0081-1.489-3.6983-3.4593-3.9639l-.611-.0824-.2009-.583C17.0398 4.3704 15.1506 3 13 3c-1.5047 0-2.8983.6674-3.8434 1.8016l-.3963.4756-.6025-.1427A5.0166 5.0166 0 0 0 7 5c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h1c.5523 0 1 .4477 1 1s-.4477 1-1 1H7c-3.866 0-7-3.134-7-7s3.134-7 7-7c.3455 0 .6881.0251 1.0257.0747A6.982 6.982 0 0 1 13 1z"></path></svg>
+                                {{ "eseom-order-form.csv.export.name"|trans }}
+                            </button>
+                        {% endif %}
+
+                        {% if config('EseomOrderForm.config.eseomOrderFormEnableImport') %}
+                            <button class="eseom-order-form-import btn align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><path d="M13 10.4142V22c0 .5523-.4477 1-1 1s-1-.4477-1-1V10.4142l-1.2929 1.293c-.3905.3904-1.0237.3904-1.4142 0-.3905-.3906-.3905-1.0238 0-1.4143l3-3c.3905-.3905 1.0237-.3905 1.4142 0l3 3c.3905.3905.3905 1.0237 0 1.4142-.3905.3905-1.0237.3905-1.4142 0L13 10.4142zM13 1c2.8074 0 5.2963 1.6679 6.402 4.1647C22.061 5.8004 24 8.1925 24 11c0 3.3137-2.6863 6-6 6h-2c-.5523 0-1-.4477-1-1s.4477-1 1-1h2c2.2091 0 4-1.7909 4-4 0-2.0081-1.489-3.6983-3.4593-3.9639l-.611-.0824-.2009-.583C17.0398 4.3704 15.1506 3 13 3c-1.5047 0-2.8983.6674-3.8434 1.8016l-.3963.4756-.6025-.1427A5.0166 5.0166 0 0 0 7 5c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h1c.5523 0 1 .4477 1 1s-.4477 1-1 1H7c-3.866 0-7-3.134-7-7s3.134-7 7-7c.3455 0 .6881.0251 1.0257.0747A6.982 6.982 0 0 1 13 1z"></path></svg>
+                                {{ "eseom-order-form.csv.import.name"|trans }}
+                            </button>
+                        {% endif %}
+                    </div>
+                    <div class="eseom-order-form-import-export custom-file d-none eseom-order-form-action-button-wrapper ml-auto">
+                        <input id="upload-file" type="file" name="file" accept=".csv"
+                               class="eseom-order-form-import-file custom-file-input" required/>
+                        <label class="eseom-order-form-import-label custom-file-label" for="upload-file"
+                               data-search="{{ "eseom-order-form.csv.import.search"|trans }}" data-label="{{ "eseom-order-form.csv.import.label"|trans }}">
+                            {{ "eseom-order-form.csv.import.label"|trans }}
+                        </label>
+                    </div>
+                {% endif %}
+
+                <div class="table-responsive">
+                    <table id="eseom-order-form-table" class="table"
+                           data-skuPlaceholder="{{ "eseom-order-form.formTable.tbody.skuPlaceholder" | trans | sw_sanitize }}"
+                           data-quantityPlaceholder="{{ "eseom-order-form.formTable.tbody.quantityPlaceholder" | trans | sw_sanitize }}"
+                           data-titleDelete="{{ "eseom-order-form.formTable.tbody.delete" | trans | sw_sanitize }}"
+                           data-delimiter="{{ config('EseomOrderForm.config.eseomOrderFormImportExportDelimiter') }}"
+                    >
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th class="eseom-order-form-product-cover-td" scope="col">{{ "eseom-order-form.formTable.thead.cover" | trans | sw_sanitize}}</th>
+                                <th scope="col">{{ "eseom-order-form.formTable.thead.sku" | trans | sw_sanitize}}</th>
+                                <th class="eseom-order-form-product-name-td" scope="col">{{ "eseom-order-form.formTable.thead.name" | trans | sw_sanitize}}</th>
+                                <th scope="col">{{ "eseom-order-form.formTable.thead.quantity" | trans | sw_sanitize}}</th>
+                                <th class="eseom-order-form-stock" scope="col">{{ "eseom-order-form.formTable.thead.stock" | trans | sw_sanitize}}</th>
+                                <th class="eseom-order-form-delivery-time" scope="col">{{ "eseom-order-form.formTable.thead.devliveryTime" | trans | sw_sanitize}}</th>
+                                <th class="eseom-order-form-price" scope="col">{{ "eseom-order-form.formTable.thead.price" | trans | sw_sanitize}}</th>
+                                <th class="eseom-order-form-total-price" scope="col">{{ "eseom-order-form.formTable.thead.totalPrice" | trans | sw_sanitize}}</th>
+                                <th class="eseom-order-form-information" scope="col">{{ "eseom-order-form.formTable.thead.infos" | trans | sw_sanitize}}</th>
+                                <th class="eseom-order-form-delete" scope="col">{{ "eseom-order-form.formTable.thead.delete" | trans | sw_sanitize}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set minRows = 5 %}
+                            {% set insertedRowsCounter = 0 %}
+                            {% set preFilledProductsData = eseomGetProductSkusByIds(config('EseomOrderForm.config.eseomOrderFormPreFilledProducts'), context) %}
+                            {% set preFilledProductsCounter = preFilledProductsData.productSkusArr|length %}
+                            {% set emptyRowsToInsert = minRows - preFilledProductsCounter %}
+
+                            {% if preFilledProductsData.productSkusArr|length > 0 %}
+                                {% for key, value in preFilledProductsData %}
+                                    {% if key == "productSkusArr" %}
+                                        {% for key2, value2 in value %}
+                                            {% for key3, sku in value2 %}
+                                                {% if key3 == "sku" %}
+                                                    {% set insertedRowsCounter = insertedRowsCounter + 1 %}
+                                                    <tr class="eseom-order-form-table-tbody-tr">
+                                                        <th class="eseom-order-form-number align-middle" scope="row"> {{ insertedRowsCounter }}</th>
+                                                        <td class="eseom-order-form-product-cover-td align-middle">-</td>
+                                                        <td class="align-middle"><input class="eseom-order-form-sku-input form-control" type="text" placeholder="{{ "eseom-order-form.formTable.tbody.skuPlaceholder" | trans | sw_sanitize}}" value="{{ sku }}"></td>
+                                                        <td class="eseom-order-form-product-name-td align-middle">-</td>
+                                                        <td class="align-middle"><input class="eseom-order-form-quantity-input form-control" type="number" value="1" min="1" step="1" placeholder="{{ "eseom-order-form.formTable.tbody.quantityPlaceholder" | trans | sw_sanitize}}"></td>
+                                                        <td class="eseom-order-form-stock align-middle">-</td>
+                                                        <td class="eseom-order-form-delivery-time align-middle">-</td>
+                                                        <td class="eseom-order-form-price align-middle">-</td>
+                                                        <td class="eseom-order-form-total-price align-middle">-</td>
+                                                        <td class="eseom-order-form-information align-middle">
+                                                            <button class="eseom-order-form-action-btn-info btn btn-info" type="button" aria-label="info button">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" fill-rule="evenodd" d="M12,7 C12.5522847,7 13,7.44771525 13,8 C13,8.55228475 12.5522847,9 12,9 C11.4477153,9 11,8.55228475 11,8 C11,7.44771525 11.4477153,7 12,7 Z M13,16 C13,16.5522847 12.5522847,17 12,17 C11.4477153,17 11,16.5522847 11,16 L11,11 C11,10.4477153 11.4477153,10 12,10 C12.5522847,10 13,10.4477153 13,11 L13,16 Z M24,12 C24,18.627417 18.627417,24 12,24 C5.372583,24 6.14069502e-15,18.627417 5.32907052e-15,12 C-8.11624501e-16,5.372583 5.372583,4.77015075e-15 12,3.55271368e-15 C18.627417,5.58919772e-16 24,5.372583 24,12 Z M12,2 C6.4771525,2 2,6.4771525 2,12 C2,17.5228475 6.4771525,22 12,22 C17.5228475,22 22,17.5228475 22,12 C22,6.4771525 17.5228475,2 12,2 Z"></path></svg>
+                                                            </button>
+                                                        </td>
+                                                        <td class="eseom-order-form-delete align-middle">
+                                                            <button class="eseom-order-form-action-btn-delete btn btn-delete" type="button" aria-label="delete button" title="{{ "eseom-order-form.formTable.tbody.delete" | trans | sw_sanitize }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 18"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path></svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if emptyRowsToInsert > 0 %}
+                                {% for i in 0..emptyRowsToInsert-1 %}
+                                    {% set insertedRowsCounter = insertedRowsCounter + 1 %}
+                                    <tr class="eseom-order-form-table-tbody-tr">
+                                        <th class="eseom-order-form-number align-middle" scope="row"> {{ insertedRowsCounter }}</th>
+                                        <td class="eseom-order-form-product-cover-td align-middle">-</td>
+                                        <td class="align-middle"><input class="eseom-order-form-sku-input form-control" type="text" placeholder="{{ "eseom-order-form.formTable.tbody.skuPlaceholder" | trans | sw_sanitize}}"></td>
+                                        <td class="eseom-order-form-product-name-td align-middle">-</td>
+                                        <td class="align-middle"><input class="eseom-order-form-quantity-input form-control" type="number" value="1" min="1" step="1" placeholder="{{ "eseom-order-form.formTable.tbody.quantityPlaceholder" | trans | sw_sanitize}}"></td>
+                                        <td class="eseom-order-form-stock align-middle">-</td>
+                                        <td class="eseom-order-form-delivery-time align-middle">-</td>
+                                        <td class="eseom-order-form-price align-middle">-</td>
+                                        <td class="eseom-order-form-total-price align-middle">-</td>
+                                        <td class="eseom-order-form-information align-middle">
+                                            <button class="eseom-order-form-action-btn-info btn btn-info" type="button" aria-label="info button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" fill-rule="evenodd" d="M12,7 C12.5522847,7 13,7.44771525 13,8 C13,8.55228475 12.5522847,9 12,9 C11.4477153,9 11,8.55228475 11,8 C11,7.44771525 11.4477153,7 12,7 Z M13,16 C13,16.5522847 12.5522847,17 12,17 C11.4477153,17 11,16.5522847 11,16 L11,11 C11,10.4477153 11.4477153,10 12,10 C12.5522847,10 13,10.4477153 13,11 L13,16 Z M24,12 C24,18.627417 18.627417,24 12,24 C5.372583,24 6.14069502e-15,18.627417 5.32907052e-15,12 C-8.11624501e-16,5.372583 5.372583,4.77015075e-15 12,3.55271368e-15 C18.627417,5.58919772e-16 24,5.372583 24,12 Z M12,2 C6.4771525,2 2,6.4771525 2,12 C2,17.5228475 6.4771525,22 12,22 C17.5228475,22 22,17.5228475 22,12 C22,6.4771525 17.5228475,2 12,2 Z"></path></svg>
+                                            </button>
+                                        </td>
+                                        <td class="eseom-order-form-delete align-middle">
+                                            <button class="eseom-order-form-action-btn-delete btn btn-delete" type="button" aria-label="delete button" title="{{ "eseom-order-form.formTable.tbody.delete" | trans | sw_sanitize }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 18"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="eseom-order-form-product-name-td align-middle"></td>
+                                <td></td>
+                                <td class="eseom-order-form-stock align-middle"></td>
+                                <td class="eseom-order-form-delivery-time align-middle"></td>
+                                <td class="eseom-order-form-price align-middle"></td>
+                                <td class="eseom-order-form-total-price-sum align-middle"><span class="eseom-order-form-total-price-sum-value">-</span><span class="eseom-order-form-total-price-sum-currency">-</span></td>
+                                <td class="eseom-order-form-information align-middle"></td>
+                                <td class="eseom-order-form-delete align-middle"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <p class="d-flex eseom-order-form-action-button-wrapper">
+                    <button id="eseom-order-form-add-position" class="btn btn-secondary" type="button" aria-label="add position">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" fill-rule="evenodd" d="M11,11 L11,3 C11,2.44771525 11.4477153,2 12,2 C12.5522847,2 13,2.44771525 13,3 L13,11 L21,11 C21.5522847,11 22,11.4477153 22,12 C22,12.5522847 21.5522847,13 21,13 L13,13 L13,21 C13,21.5522847 12.5522847,22 12,22 C11.4477153,22 11,21.5522847 11,21 L11,13 L3,13 C2.44771525,13 2,12.5522847 2,12 C2,11.4477153 2.44771525,11 3,11 L11,11 Z"></path></svg>
+                        {{ "eseom-order-form.footer.addPosition" | trans | sw_sanitize}}
+                    </button>
+                    <button id="eseom-order-form-clear-positions" class="btn btn-danger" type="button" aria-label="clear positions">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path></svg>
+                        {{ "eseom-order-form.footer.clearPositions" | trans | sw_sanitize}}
+                    </button>
+
+                    {% if config('EseomOrderForm.config.eseomOrderFormCartAction') %}
+                        {% set actionName = config('EseomOrderForm.config.eseomOrderFormCartAction') %}
+                    {% endif %}
+                    <button id="eseom-order-form-add-to-cart-btn" data-success-action="{{ actionName|raw }}" class="btn btn-primary ml-auto" type="button" aria-label="add to cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" fill-rule="evenodd" d="M7.83409843,20.9863016 C7.42615464,22.158644 6.31133193,23 5,23 C3.34314575,23 2,21.6568542 2,20 C2,18.6030124 2.95485988,17.4290442 4.24752357,17.0951516 L4.69038867,15.7665563 C3.68248994,15.3428262 2.9496145,14.3833933 2.86089882,13.2300895 L2.15633851,4.07080547 C2.10985937,3.46657661 1.60601388,3 1,3 C0.44771525,3 1.08663177e-16,2.55228475 0,2 C-1.08663177e-16,1.44771525 0.44771525,1 1,1 C2.6510865,1 4.02381493,2.27118927 4.15044748,3.91741247 L23,3.94461486 C23.6306142,3.94461486 24.1038063,4.52119321 23.9807879,5.139692 L22.3009836,13.5852314 C22.0217818,14.9889724 20.789858,16 19.3586199,16 L6.72075922,16 L6.29044246,17.2909503 C7.00909189,17.6338892 7.56987096,18.2543657 7.83409843,19.0136984 C7.88805868,19.0046887 7.94348179,19 8,19 L16.1707057,19 C16.5825421,17.8348076 17.6937812,17 19,17 C20.6568542,17 22,18.3431458 22,20 C22,21.6568542 20.6568542,23 19,23 C17.6937812,23 16.5825421,22.1651924 16.1707057,21 L8,21 C7.94348179,21 7.88805868,20.9953113 7.83409843,20.9863016 Z M4.98354988,19.0001326 C4.43885229,19.0089176 4,19.4532091 4,20 C4,20.5522847 4.44771525,21 5,21 C5.55228475,21 6,20.5522847 6,20 C6,19.453257 5.56122457,19.0089954 5.01659322,19.0001349 C5.00559915,19.0003172 4.99458336,19.0003171 4.98354988,19.0001326 Z M6.02305932,14 L19.3586199,14 C19.8356993,14 20.2463406,13.6629908 20.3394078,13.1950771 L21.7815132,5.94461486 L4.30638613,5.94461486 L4.85500779,13.0766965 C4.8950845,13.5976937 5.32952597,14 5.85206228,14 L5.97665767,14 C5.99208425,13.9996392 6.00755514,13.9996373 6.02305932,14 Z M19,21 C19.5522847,21 20,20.5522847 20,20 C20,19.4477153 19.5522847,19 19,19 C18.4477153,19 18,19.4477153 18,20 C18,20.5522847 18.4477153,21 19,21 Z"></path></svg>
+                        {{ "eseom-order-form.footer.addToCartBtn" | trans | sw_sanitize}}
+                    </button>
+                </p>
+            </div>
+        </div>
+        {% if config('EseomOrderForm.config.eseomOrderFormShowStarBehindPrices') != "" and config('EseomOrderForm.config.eseomOrderFormShowStarBehindPrices') == true %}
+            <span id="eseom-order-form-show-star-behind-prices" class="d-none"></span>
+        {% endif %}
+    </div>
+
+    <div id="foundProductsDiv"
+         data-navigationId="{{ page.navigationId }}"
+         data-productSearchText="{{ "eseom-order-form.foundProductsDiv.productSearchText" | trans | sw_sanitize }}"
+         data-productNumberText="{{ "eseom-order-form.foundProductsDiv.productNumberText" | trans | sw_sanitize }}"
+         class="fade"></div>
+
+    <div class="modal" id="eseom-order-form-loading-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="eseom-order-form-loading-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eseom-order-form-loading-modal-label">{{ "eseom-order-form.loadingModal.headline" | trans | sw_sanitize}}</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="eseom-order-form-success-modal" tabindex="-1" role="dialog" aria-labelledby="eseom-order-form-success-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eseom-order-form-success-modal-label">{{ "eseom-order-form.successModal.headline" | trans | sw_sanitize}}</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ "eseom-order-form.successModal.continueShoppingBtn" | trans | sw_sanitize}}</button>
+                    <a href="{{ path('frontend.checkout.cart.page') }}" class="btn btn-primary">{{ "eseom-order-form.successModal.toTheCartBtn" | trans | sw_sanitize}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="eseom-order-form-info-modal" tabindex="-1" role="dialog" aria-labelledby="eseom-order-form-info-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eseom-order-form-info-modal-label">{{ "eseom-order-form.infoModal.headline" | trans | sw_sanitize}}</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ "eseom-order-form.infoModal.closeBtn" | trans | sw_sanitize}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="eseom-order-form-error-modal" tabindex="-1" role="dialog" aria-labelledby="eseom-order-form-error-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eseom-order-form-error-modal-label">{{ "eseom-order-form.errorModal.headline" | trans | sw_sanitize}}</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ "eseom-order-form.errorModal.closeBtn" | trans | sw_sanitize}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="eseom-order-form-choose-variant-modal" tabindex="-1" role="dialog" aria-labelledby="eseom-order-form-choose-variant-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eseom-order-form-choose-variant-modal-label">{{ "eseom-order-form.chooseVariantModal.headline" | trans | sw_sanitize}}</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ "eseom-order-form.chooseVariantModal.closeBtn" | trans | sw_sanitize}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+

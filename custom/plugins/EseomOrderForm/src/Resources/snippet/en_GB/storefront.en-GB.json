@@ -1,0 +1,112 @@
+{
+    "eseom-order-form": {
+        "header": {
+            "headline": "eseom-order-form.header.headline - Order form",
+            "description": "eseom-order-form.header.description - Add description in this snippet."
+        },
+        "formTable": {
+            "thead": {
+                "cover": "Image",
+                "sku": "SKU",
+                "stock": "Stock",
+                "devliveryTime": "Delivery time",
+                "name": "Title",
+                "quantity": "Quantity",
+                "price": "Price",
+                "totalPrice": "Total",
+                "infos": "Information",
+                "delete": "Delete pos."
+            },
+            "tbody": {
+                "skuPlaceholder": "Enter sku",
+                "quantityPlaceholder": "Enter quantity",
+                "delete": "Delete position"
+            }
+        },
+        "footer": {
+            "addPosition": "add position",
+            "clearPositions": "clear positions",
+            "addToCartBtn": "add to cart"
+        },
+        "foundProductsDiv": {
+            "productSearchText": "Select product",
+            "productNumberText": "Product-No.:"
+        },
+        "loadingModal": {
+            "headline": "A moment please..."
+        },
+        "infoModal": {
+            "headline": "Request successful",
+            "closeBtn": "close",
+            "availableStock": "Available stock:",
+            "productVariationOptions": "<strong>Options:</strong>",
+            "productProperties": "<strong>Attributes:</strong>",
+            "productUrlLinkText": "View product details",
+            "ean": "<strong>EAN:</strong>"
+        },
+        "successModal": {
+            "headline": "Request successful",
+            "continueShoppingBtn": "continue shopping",
+            "toTheCartBtn": "to the cart",
+            "successMsg1": "Articles successfully added to the cart.",
+            "successMsg2": "%productDeliveryInformation%<br /><small>(stock item)</small><br />%productRestockTime% days<br /><small>(refill time)</small>"
+        },
+        "errorModal": {
+            "headline": "Error occurred",
+            "closeBtn": "close",
+            "errorMsg1": "Please enter an article number.",
+            "errorMsg2": "No product found with the specified article number.",
+            "errorMsg3": "Please define article numbers.",
+            "errorMsg4": "Article number cannot be empty.",
+            "errorMsg5": "Quantity of product %productNumber% must not be less than 1.",
+            "errorMsg6": "Product with article number %productNumber% not found.",
+            "errorMsg7": "The article number %productNumber% is a main product with variants. Please enter the article number of a variant.",
+            "errorMsg8": "Stock for product with article number %productNumber% is too low. (Current Stock: %availableStock%)",
+            "errorMsg9": "Stock for product with article number %productNumber% is too low. (Current stock: %availableStock%, quantity of product already in cart: %qtyStockAlreadyInCart%)",
+            "errorMsg10": "In cart: %qtyStockAlreadyInCart%", 
+            "errorMsg11": "The product with article number %productNumber% has a minimum order quantity of %productMinPurchase%.",
+            "errorMsg12": "Quantity cart: %qtyStockAlreadyInCart%<br />Minimum order quantity: %productMinPurchase%",
+            "errorMsg13": "The product with article number %productNumber% can only be ordered in steps of %productPurchaseSteps%.",
+            "errorMsg14": "Steps: %productPurchaseSteps% from minimum order quantity<br />Minimum order quantity: %productMinPurchase%",
+            "errorMsg15": "Maximum sale quantity for article number %productNumber% exceeded. (Current stock: %availableStock%, Quantity that is already in the cart: %qtyStockAlreadyInCart%, maximum sale quantity: %productMaxPurchase%)",
+            "errorMsg16": "Quantity in cart: %qtyStockAlreadyInCart%<br />Maximum sale quantity: %productMaxPurchase%",
+            "errorMsg17": "Product is a main product - please enter a article number of a variation.",
+            "errorMsg18": "No valid article number.",
+            "errorMsg19": "No valid variations found for this product."
+        },
+        "chooseVariantModal": {
+            "successMsg1": "Request successful",
+            "headline": "Choose variation",
+            "closeBtn": "close",
+            "chooseBtn": "choose",
+            "thead": {
+                "productImage": "Image",
+                "productName": "Title",
+                "options": "Options",
+                "properties": "Attributes",
+                "actions": "Actions"
+            }
+        },
+        "twigExtensions": {
+            "successMsg1": "Products found that should be pre-filled.",
+            "errorMsg1": "No products found that should be pre-filled."
+        },
+        "topbar": {
+            "name": "Orderform"
+        },
+        "account": {
+            "name": "Orderform"
+        },
+        "csv": {
+            "import": {
+                "name": "Import CSV",
+                "label": "Select file",
+                "search": "Search",
+                "load": "Upload"
+            },
+            "export": {
+                "name": "Export CSV"
+            }
+        }
+    }
+}

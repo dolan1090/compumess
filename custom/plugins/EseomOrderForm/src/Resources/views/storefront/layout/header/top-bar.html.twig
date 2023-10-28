@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/layout/header/top-bar.html.twig' %}
+
+{% block layout_header_top_bar_language %}
+    {% set customerGroups = config('EseomOrderForm.config.eseomOrderFormCustomerGroups') %}
+    {% if config('EseomOrderForm.config.eseomOrderFormShowInTopmenu') and (not customerGroups or context.currentCustomerGroup.id() in customerGroups) and (config('EseomOrderForm.config.eseomOrderFormBeforeLogin') or context.customer) %}
+        <div class="top-bar-nav-item top-bar-eseom-order-form">
+            <a href="{{ seoUrl('frontend.navigation.page', { navigationId: config('EseomOrderForm.config.eseomOrderFormShowInTopmenu') }) }}" title="{{ "eseom-order-form.topbar.name"|trans }}" class="top-bar-list-item">
+                {% sw_icon 'text-table' style { 'size': 'xs' } %}
+                {{ "eseom-order-form.topbar.name"|trans }}
+            </a>
+        </div>
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}
