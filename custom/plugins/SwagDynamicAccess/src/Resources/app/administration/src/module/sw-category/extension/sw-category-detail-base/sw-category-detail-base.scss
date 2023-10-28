@@ -1,0 +1,16 @@
+@import "~scss/variables";
+
+.sw-category-detail-base {
+    &__customer-restrictions {
+        margin-top: 32px;
+    }
+
+    &__customer-restrictions-title {
+        font-weight: $font-weight-semi-bold;
+        margin-bottom: 8px;
+    }
+
+    &__customer-restrictions-field {
+        margin: 20px 0 0 0;
+    }
+}

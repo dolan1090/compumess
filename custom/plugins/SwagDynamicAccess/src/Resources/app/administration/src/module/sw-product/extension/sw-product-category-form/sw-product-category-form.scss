@@ -1,0 +1,12 @@
+@import "~scss/variables";
+
+.sw-product-category-form {
+    &__customer-restrictions-title {
+        font-weight: $font-weight-semi-bold;
+        margin-bottom: 8px;
+    }
+
+    &__customer-restrictions-field {
+        margin-top: 20px;
+    }
+}

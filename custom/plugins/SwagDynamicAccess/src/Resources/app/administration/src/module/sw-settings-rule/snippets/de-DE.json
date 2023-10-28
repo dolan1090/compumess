@@ -1,0 +1,32 @@
+{
+    "sw-settings-rule": {
+      "list": {
+        "columnSwagDynamicAccessProducts": "Dynamic-Access-Produktzuweisungen",
+        "columnSwagDynamicAccessCategories": "Dynamic-Access-Kategoriezuweisungen",
+        "columnSwagDynamicAccessLandingPages": "Dynamic-Access-Landingpagezuweisungen",
+        "assignments": {
+          "swagDynamicAccessProducts": "Dynamic-Access-Produkt | Dynamic-Access-Produkte",
+          "swagDynamicAccessCategories": "Dynamic-Access-Kategorie | Dynamic-Access-Kategorien",
+          "swagDynamicAccessLandingPages": "Dynamic-Access-Landingpage | Dynamic-Access-Landingpages"
+        }
+      }
+    },
+    "swag-dynamic-access": {
+      "sw-settings-rule": {
+        "detail": {
+          "associations": {
+            "productVisibility": "Dynamic Access: Produkte",
+            "categoryVisibility": "Dynamic Access: Kategorien",
+            "landingPageVisibility": "Dynamic Access: Landingpages"
+          }
+        }
+      }
+    },
+    "sw-restricted-rules": {
+      "restrictedAssignment": {
+        "swagDynamicAccessProducts": "Dynamic Access: Produkte",
+        "swagDynamicAccessCategories": "Dynamic Access: Kategorien",
+        "swagDynamicAccessLandingPages": "Dynamic Access: Landingpages"
+      }
+    }
+}
