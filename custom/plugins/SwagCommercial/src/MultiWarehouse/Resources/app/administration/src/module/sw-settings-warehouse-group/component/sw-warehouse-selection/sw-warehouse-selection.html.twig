@@ -1,0 +1,66 @@
+<sw-modal
+    :title="$tc('sw-settings-warehouse-group.warehouseAssignment.titleWarehouseSelect')"
+    @modal-close="onCancel"
+    class="sw-warehouse-selection"
+>
+    <template v-if="showListing">
+        <div class="sw-warehouse-selection__toolbar">
+            <sw-simple-search-field
+                v-model="term"
+                size="small"
+                variant="form"
+                @search-term-change="onChangeSearchTerm"
+            />
+        </div>
+        <sw-entity-listing
+            :repository="repository"
+            :columns="columns"
+            :items="warehouses"
+            :plain-appearance="true"
+            :full-page="false"
+            :show-selection="true"
+            :show-settings="false"
+            :show-actions="false"
+            :is-loading="isLoading"
+            :criteria-limit="limit"
+            :allow-delete="false"
+            :allow-column-edit="false"
+            @update-records="onUpdateRecords"
+            @selection-change="onSelectionChange"
+        ></sw-entity-listing>
+    </template>
+
+    <template>
+        <sw-empty-state
+            v-if="!showListing"
+            class="sw-warehouse-selection__whitespace"
+            :title="$tc('sw-settings-warehouse-group.warehouseAssignment.whitespaceTitleWarehouseSelection')"
+            subline=""
+        >
+            <template #icon>
+                <img
+                    :src="'/administration/static/img/empty-states/settings-empty-state.svg' | asset"
+                    :alt="$tc('sw-empty-state.messageNoResultTitle')"
+                >
+            </template>
+        </sw-empty-state>
+    </template>
+
+    <template #modal-footer>
+        <sw-button
+            size="small"
+            @click="onCancel"
+        >
+            {{ $tc('sw-settings-warehouse-group.warehouseAssignment.buttonCancel') }}
+        </sw-button>
+
+        <sw-button
+            variant="primary"
+            size="small"
+            @click="onConfirmSelection"
+            :disabled="!selection.length"
+        >
+            {{ $tc('sw-settings-warehouse-group.warehouseAssignment.buttonConfirmSelection', 0, { count: selection.length }) }}
+        </sw-button>
+    </template>
+</sw-modal>

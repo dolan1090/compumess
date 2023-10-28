@@ -1,0 +1,131 @@
+{% block sw_flow_sequence_action %}
+    <div
+        class="sw-flow-delay-action__wrapper"
+        v-tooltip="{
+            message: $tc('sw-flow.actions.tooltipActionDisabled'),
+            disabled: getLicense('FLOW_BUILDER-8478732')
+        }"
+        :class="{'sw-flow-delay-action__disabled': !getLicense('FLOW_BUILDER-8478732')}"
+    >
+        <div
+            class="sw-flow-sequence-action__card sw-flow-delay-action__delay_card"
+            :class="arrowClasses(sequence.config?.delay)"
+        >
+            <div class="sw-flow-sequence-action__header">
+                <h3 class="sw-flow-sequence-action__title">
+                    {{ $tc('sw-flow-delay.detail.sequence.delayActionTitle') }}
+                </h3>
+
+                <sw-context-button class="sw-flow-sequence-action__context-button">
+                    <sw-context-menu-item
+                        v-if="sequence.config?.delay"
+                        class="sw-flow-delay-action__edit"
+                        @click="onEditDelay"
+                    >
+                        {{ $tc('sw-flow-delay.action.contextButton.editDelayAction') }}
+                    </sw-context-menu-item>
+
+                    <sw-context-menu-item
+                        variant="danger"
+                        class="sw-flow-delay-action__delete"
+                        @click="onDeleteDelay"
+                    >
+                        {{ $tc('sw-flow-delay.action.contextButton.deleteDelayAction') }}
+                    </sw-context-menu-item>
+                </sw-context-button>
+            </div>
+
+            <div class="sw-flow-sequence-action__content">
+                <div class="sw-flow-sequence-action__actions">
+                    <div
+                        v-if="!sequence.config?.delay"
+                        class="sw-flow-sequence-action__actions-empty"
+                    >
+                        <sw-icon
+                            size="16px"
+                            name="regular-hourglass"
+                        />
+                        <span class="sw-flow-sequence-action__no-action">
+                        {{ $tc('sw-flow-delay.detail.sequence.noDelayAction') }}
+                    </span>
+                    </div>
+
+                    <div v-else class="sw-flow-sequence-action__action-list">
+                        <li class="sw-flow-sequence-action__action-item">
+                            <div class="sw-flow-delay-action__action-header">
+                                <div class="sw-flow-delay-action__action-name">
+                                    <sw-icon
+                                        size="16px"
+                                        name="regular-hourglass"
+                                    />
+
+                                    <h3 v-if="showCustomDescription">{{ customTimeDescription }}</h3>
+                                    <h3 v-else>{{ timeDescription }}</h3>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+
+                <div
+                    v-if="showDelayElement && !sequence.config?.delay"
+                    class="sw-flow-sequence-action__add-action"
+                >
+                    <div class="sw-flow-sequence-action__select">
+                        <sw-single-select
+                            class="sw-flow-sequence-action__selection-action"
+                            size="small"
+                            value=""
+                            :placeholder="$tc('sw-flow.actions.placeholderSelectAction')"
+                            :options="actionDelayOptions"
+                            :popover-classes="['sw-flow-delay-action__popover']"
+                            :error="fieldError"
+                            @change="onSelectDelay"
+                        >
+                        </sw-single-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            v-if="sequence.config?.delay"
+            class="sw-flow-delay-action__then-arrow"
+        >
+            <div class="sw-flow-delay-action__then-line"></div>
+
+            <div class="sw-flow-delay-action__then-oval"></div>
+
+            <sw-icon
+                name="regular-chevron-right-s"
+                small
+            />
+            <sw-label
+                appearance="pill"
+                size="medium"
+                class="sw-flow-delay-action__true-label"
+            >
+                {{ $tc('sw-flow-delay.detail.sequence.labelThen') }}
+            </sw-label>
+        </div>
+
+        <div
+            v-if="showDelayElement && !sequence.config?.delay"
+            class="sw-flow-delay-action__help-text"
+        >
+            <h3>{{ $tc('sw-flow-delay.detail.sequence.delayActionExplainsTitle') }}</h3>
+
+            <p v-html="$tc('sw-flow-delay.detail.sequence.delayActionExplainsDescription')"></p>
+        </div>
+
+        <sw-flow-delay-modal
+            v-if="showDelayModal"
+            :sequence="sequence"
+            :type="delayType"
+            :is-update-delay="isUpdateDelay"
+            @type-change="onChangeType"
+            @modal-save="onSaveDelay"
+            @modal-close="onCloseDelayModal"
+        />
+    </div>
+{% endblock %}

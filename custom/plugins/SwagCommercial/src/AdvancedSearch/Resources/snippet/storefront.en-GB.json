@@ -1,0 +1,11 @@
+{
+    "general": {
+        "categories": "Categories",
+        "manufacturer": "Manufacturer",
+        "product": "Products",
+        "completion": "Suggestions"
+    },
+    "search": {
+        "headline": "Search results for \"%searchTerm%\" "
+    }
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Shopware\Commercial\Subscription\Framework\Event\SubscriptionEventRegistry"/>
+
+        <service id="Shopware\Commercial\Subscription\Framework\Event\SubscriptionEventDispatcher" decorates="event_dispatcher"
+                 decoration-priority="10000">
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Framework\Event\SubscriptionEventRegistry"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Framework\Event\SubscriptionBusinessEventCollectorSubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Event\BusinessEventCollector"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Framework\Event\SubscriptionEventRegistry"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Content\Flow\Dispatching\Storer\SubscriptionStorer">
+            <argument type="service" id="subscription.repository"/>
+            <argument type="service" id="event_dispatcher"/>
+
+            <tag name="flow.storer"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Framework\Flow\SubscriptionStateChangeEventSubscriber">
+            <argument type="service" id="subscription.repository"/>
+            <argument type="service" id="event_dispatcher"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

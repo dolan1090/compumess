@@ -1,0 +1,28 @@
+@import "~scss/variables";
+
+.sw-system-config--field-core-cart-ai-checkout-message-show-disclaimer,
+.sw-system-config--field-core-cart-ai-checkout-message-active {
+    .sw-field--switch {
+        &.sw-field--switch-bordered .sw-field--switch__content {
+            border-radius: 0;
+            border: 0;
+            padding: 0;
+        }
+
+        .sw-field__label label {
+            margin-right: 10px;
+        }
+
+        .sw-field .sw-field__help-text {
+            align-self: normal;
+            top: 15px;
+            position: relative;
+        }
+
+        .sw-field__label-hint {
+            display: inline-block;
+            margin-top: 3px;
+            color: $color-gray-500;
+        }
+    }
+}

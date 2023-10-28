@@ -1,0 +1,13 @@
+{% block sw_settings_search_excluded_search_terms_card %}
+<sw-settings-search-excluded-search-terms
+    v-if="!esEnabled"
+    v-on="$listeners"
+    :search-configs="productSearchConfigs"
+    :is-excluded-terms-loading="isLoading"
+    @data-load="loadData"
+/>
+
+<swag-advanced-search-hit-count
+    v-if="esEnabled"
+/>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% sw_extends {
+    template: "@Storefront/storefront/component/account/register.html.twig",
+    scopes: ['subscription']
+} %}
+
+{% block component_account_register_form %}
+    {% if getLicense('SUBSCRIPTIONS-6549379') %}
+        {% set redirectTo = 'frontend.subscription.checkout.confirm.page' %}
+        {% set redirectParameters = { subscriptionToken: context.token } | json_encode %}
+        {% set errorParameters = { subscriptionToken: context.token } | json_encode %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

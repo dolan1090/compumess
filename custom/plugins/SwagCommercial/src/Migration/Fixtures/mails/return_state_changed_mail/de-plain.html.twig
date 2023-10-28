@@ -1,0 +1,9 @@
+{# Currently, it only support for the first return, will be changed in the future#}
+{% set return = order.extensions.returns|first %}
+{% if order.orderCustomer.salutation %}{{ order.orderCustomer.salutation.translated.letterName ~ ' ' }}{% endif %}{{ order.orderCustomer.firstName }} {{ order.orderCustomer.lastName }},
+
+der Status für Ihre Rücksendung bei {{ salesChannel.translated.name }} (Number: {{ return.returnNumber}}) vom {{ return.createdAt|format_datetime('medium', 'short', locale='de-DE') }} hat sich geändert!
+Die Rücksendung hat jetzt den Status: {{ return.stateMachineState.translated.name }}.
+
+Den aktuellen Status Ihrer Rücksendung können Sie auch jederzeit auf unserer Webseite im  Bereich "Mein Konto" - "Meine Bestellungen" abrufen: {{ rawUrl('frontend.account.order.single.page', { 'deepLinkCode': order.deepLinkCode }, salesChannel.domains|first.url) }}
+Sollten Sie allerdings den Kauf ohne Registrierung, also ohne Anlage eines Kundenkontos, gewählt haben, steht Ihnen diese Möglichkeit nicht zur Verfügung.

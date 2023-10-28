@@ -1,0 +1,11 @@
+@import "~scss/variables";
+
+.swag-return-management-delete-return-modal {
+    &__text {
+        font-size: 18px;
+        line-height: 24px;
+    }
+    &__text--bold  {
+        font-weight: $font-weight-bold;
+    }
+}

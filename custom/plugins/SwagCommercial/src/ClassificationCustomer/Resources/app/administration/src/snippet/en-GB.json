@@ -1,0 +1,54 @@
+{
+  "swag-customer-classification": {
+    "mainMenuItemIndex": "Customer classification",
+    "textTitle": "Classification: {totalCustomer} customer | Classification: {totalCustomer} customers",
+    "buttonClassify": "Classify",
+    "alertPageIntroduction": "Create classifications of customers based on their order data and add these to the customers as tags.",
+    "buttonStart": "Start",
+    "tooltipButtonStart": "Select tags to start classification",
+    "cardTitleLabels": "Tags",
+    "cardTitleBasicInfo": "General information",
+    "buttonGenerate": "Generate tags",
+    "tagWarning": "Keep in mind that the specific conditions for each tag may vary depending on your business and industry, so it's important to adjust the conditions accordingly to ensure accurate classification.",
+    "labelGrid": {
+      "columnTag": "Tag name",
+      "columnDescription": "Description",
+      "columnCondition": "Condition",
+      "buttonRemove": "Remove",
+      "buttonEdit": "Edit"
+    },
+    "labelAdditionalInfo": "Generate content",
+    "helpTextGenerateContent": "Add more information such as the purposes of the classifications, the marketing campaign, the evaluation or let the AI choose it itself.",
+    "placeholderAdditionalInfo": "Group customer lifetime value in the last 3 months",
+    "labelNumberOfTags": "Number of tags",
+    "placeholderNumberOfTags": "Enter number of tags",
+    "editTagModal": {
+      "title": "Edit tag"
+    },
+    "notificationModal": {
+      "messageBeforeTabLeave": "The classification is being processed. If you close the tab, not all changes may be applied.",
+      "confirm": {
+        "title": "Classification - Confirm?",
+        "description": "Start classifying {totalCustomer} customer? This action cannot be undone.",
+        "warning": "We will utilize the following data for customer classification: customer number, order count, last order date, total order amount, last login, and first login.<br><br>Once the customer classification process starts, old AI generated labels tags will be removed and overwritten by newly generated labels.",
+        "buttonContinue": "Continue"
+      },
+      "process": {
+        "title": "Classification - In process",
+        "description": "Your customer list is being classified. Please wait!"
+      },
+      "success": {
+        "title": "Classification - Success",
+        "description": "Successfully classify {totalCustomer} customers."
+      },
+      "error": {
+        "title": "Classification - Error",
+        "description": "Classify customer failed."
+      }
+    },
+    "emptyState": {
+      "messageEmptyTitle": "No customers selected",
+      "messageEmptySubline": "Go back and select customers."
+    }
+  }
+}

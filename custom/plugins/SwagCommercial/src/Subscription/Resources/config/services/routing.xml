@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Shopware\Commercial\Subscription\Framework\Routing\Mapping\SubscriptionContextStructBuilder">
+            <argument type="service" id="subscription_plan.repository"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Framework\Routing\Mapping\SubscriptionCartMappingResolver"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Interval\IntervalCalculator"/>
+        </service>
+        <service id="Shopware\Commercial\Subscription\Framework\Routing\Mapping\SubscriptionCartMappingResolver">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Framework\Routing\SalesChannelRequestContextResolver"
+                 decorates="Shopware\Core\Framework\Routing\ApiRequestContextResolver">
+            <argument type="service" id="Shopware\Core\Checkout\Cart\ApiOrderCartService"/>
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextService"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Framework\Routing\Mapping\SubscriptionContextStructBuilder"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Framework\Event\SubscriptionEventDispatcher"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Framework\Routing\ValueResolver\SubscriptionCartValueResolver">
+            <argument type="service" id="subscription.cart.service"/>
+
+            <tag name="controller.argument_value_resolver" priority="1501"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Framework\Routing\ValueResolver\SubscriptionSalesChannelContextValueResolver">
+            <tag name="controller.argument_value_resolver" priority="1500"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Api\Route\Subscription\SubscriptionRoute" public="true">
+            <argument type="service" id="subscription.repository" />
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Storefront\Page\Account\Subscription\AccountSubscriptionPageLoader">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader" />
+            <argument type="service" id="Shopware\Commercial\Subscription\Api\Route\Subscription\SubscriptionRoute" />
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+    </services>
+</container>

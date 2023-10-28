@@ -1,0 +1,56 @@
+{% block sw_permission_tree %}
+    <div class="sw-permission-tree">
+        {% block sw_permission_tree_all_checkbox %}
+            <sw-checkbox-field
+                class="sw-permission-tree__switch-all"
+                :label="$tc('sw-customer.role.create.permissions.tree.switchAllLabel')"
+                :value="permissionTree.isEverythingSelected()"
+                :partly-checked="permissionTree.isGroupPartialSelected(permissions)"
+                @change="(event) => onChange(event, permissions)"
+            ></sw-checkbox-field>
+        {% endblock %}
+
+        {% block sw_permission_tree_content %}
+            <template v-for="(permissionArray, groupName, index) in tree">
+                <div :key="groupName">
+                    {% block sw_permission_tree_content_group %}
+                        <hr class="sw-permission-tree__group-divider" v-if="index < permissions.length - 1">
+
+                        <div
+                            class="sw-permission-tree__group"
+                            :class="`sw-permission-group__${groupName}`"
+                        >
+                            {% block sw_permission_tree_content_group_checkbox %}
+                                <sw-checkbox-field
+                                    class="sw-permission-tree__group-switch"
+                                    :label="getPermissionGroupLabel(groupName)"
+                                    :value="permissionTree.isGroupSelected(permissionArray)"
+                                    :partly-checked="permissionTree.isGroupPartialSelected(permissionArray)"
+                                    @change="(event) => onChange(event, permissionArray)"
+                                ></sw-checkbox-field>
+                            {% endblock %}
+
+                            {% block sw_permission_tree_content_group_permissions %}
+                                <template v-for="permission in permissionArray">
+                                    <sw-checkbox-field
+                                        :key="permission.permissionName"
+                                        class="sw-permission-tree__group-permission-switch"
+                                        :class="getPermissionClass(permission.permissionName)"
+                                        :value="permissionTree.isSelected(permission.permissionName)"
+                                        @change="(event) => onChange(event, [permission])"
+                                    >
+                                        <template #label>
+                                            <span v-tooltip="getDependenciesTooltip(permission.permissionDependencies)">
+                                                {{ getPermissionLabel(permission.permissionName) }}
+                                            </span>
+                                        </template>
+                                    </sw-checkbox-field>
+                                </template>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </div>
+            </template>
+        {% endblock %}
+    </div>
+{% endblock %}

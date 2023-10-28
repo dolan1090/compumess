@@ -1,0 +1,57 @@
+<sw-text-field
+    v-model="currentValue"
+    v-bind="$attrs"
+    v-on="$listeners"
+    class="sw-text-field-ai"
+    :value="currentValue"
+    :error="errorField"
+    :readonly="isLoading"
+    @input="onInput"
+>
+    <template #prefix>
+        <sw-loader v-if="isLoading" class="sw-text-field-ai__loader" size="16px"/>
+    </template>
+
+    <template #suffix>
+        <div class="sw-text-field-ai__btn-area">
+            <sw-icon
+                v-if="isRetryAble"
+                v-tooltip="{
+                    message: $tc('sw-text-field-ai.retry'),
+                    width: 75,
+                    position: 'top',
+                    showDelay: 300,
+                    hideDelay: 0
+                }"
+                name="regular-undo-xs"
+                class="sw-text-field-ai__btn-retry"
+                @click="onRetry"
+            />
+            <sw-icon
+                v-if="isLoading"
+                v-tooltip="{
+                    message: $tc('sw-text-field-ai.cancel'),
+                    width: 80,
+                    position: 'top',
+                    showDelay: 300,
+                    hideDelay: 0
+                }"
+                name="regular-times-xs"
+                class="sw-text-field-ai__btn-cancel"
+                @click="onCancel"
+            />
+            <sw-icon
+                v-tooltip="{
+                    message: $tc('sw-text-field-ai.ai'),
+                    width: 50,
+                    position: 'top',
+                    showDelay: 300,
+                    hideDelay: 0
+                }"
+                name="solid-sparkles"
+                size="14"
+                class="sw-text-field-ai__btn-submit"
+            />
+        </div>
+    </template>
+</sw-text-field>

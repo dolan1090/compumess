@@ -1,0 +1,61 @@
+@import "~scss/variables";
+
+.sw-product-generated-description-modal {
+    .sw-ai-copilot-badge {
+        margin: auto 8px;
+    }
+
+    .sw-modal__titles {
+        display: flex;
+    }
+
+    .sw-product-generated-description-modal__disclaimer-text {
+        margin-bottom: 32px;
+
+        .sw-product-generated-description-modal__disclaimer-link {
+            margin-top: 5px;
+            display: flex;
+
+            a {
+                margin-left: 5px;
+            }
+        }
+    }
+
+
+    .sw-product-generated-description-modal__generation-form {
+        margin-bottom: 32px;
+    }
+
+    .sw-product-generated-description-modal__text-output {
+        border: 1px solid $color-gray-300;
+        border-radius: 4px;
+        background: $color-gray-100;
+        height: 300px;
+
+        p {
+            animation: fadeIn 1s;
+            margin: 20px;
+        }
+    }
+
+    .sw-product-generated-description-modal__text-ellipsis {
+        margin: 20px;
+    }
+
+    .sw-product-generated-description-modal__copy {
+        display: flex;
+        justify-content: center;
+        margin-top: 8px;
+
+        .sw-product-generated-description-modal__copy-action {
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}

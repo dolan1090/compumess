@@ -1,0 +1,102 @@
+<sw-modal
+    :title="$tc('commercial.subscriptions.settings.interval.advancedSettings')"
+    class="sw-settings-subscription-interval-advanced-settings-modal"
+    @modal-close="closeModal"
+>
+    <sw-container
+        columns="4fr 1fr"
+        gap="0px 30px"
+        class="sw-settings-subscription-dateinterval-form"
+    >
+        <sw-number-field
+            v-model="frequency"
+            class="sw-settings-subscription-interval-advanced-settings-modal__frequency"
+            :min="1"
+            :step="1"
+            number-type="int"
+            :label="$tc('commercial.subscriptions.settings.interval.frequencyLabel')"
+            :placeholder="$tc('commercial.subscriptions.settings.interval.frequencyPlaceholder')"
+			:disabled="!acl.can('plans_and_intervals.editor')"
+        />
+        <sw-single-select
+            v-model="unit"
+            class="sw-settings-subscription-interval-advanced-settings-modal__unit"
+            :options="dateIntervalOptions"
+            :disabled="!acl.can('plans_and_intervals.editor')"
+        />
+    </sw-container>
+
+    <sw-multi-select
+        v-model="daysOfWeek"
+        class="sw-settings-subscription-interval-advanced-settings-modal__days-of-week"
+        :disabled="isDaysOfWeekDisabled"
+        :options="daysOfWeekOptions"
+        :label="$tc('commercial.subscriptions.settings.interval.cronOptions.daysOfWeek.label')"
+        :placeholder="$tc('commercial.subscriptions.settings.interval.cronOptions.daysOfWeek.placeholder')"
+        @select-expanded="onMultiSelectExpanded"
+        @select-collapsed="onMultiSelectCollapsed"
+        @change="onMultiSelectChanged"
+    >
+        <template v-if="isDaysOfWeekDisabled" #hint>
+            <span class="sw-settings-subscription-interval-advanced-settings-modal__disabled-hint">
+                <sw-icon name="solid-clock" size="12" />
+                {{ $tc('commercial.subscriptions.settings.interval.advancedSettingsExclusiveSelections') }}
+            </span>
+        </template>
+    </sw-multi-select>
+
+    <sw-multi-select
+        v-model="daysOfMonth"
+        class="sw-settings-subscription-interval-advanced-settings-modal__days-of-month"
+        :disabled="isDaysOfMonthDisabled"
+        :options="daysOfMonthOptions"
+        :label="$tc('commercial.subscriptions.settings.interval.cronOptions.daysOfMonth.label')"
+        :placeholder="$tc('commercial.subscriptions.settings.interval.cronOptions.daysOfMonth.placeholder')"
+        @select-expanded="onMultiSelectExpanded"
+        @select-collapsed="onMultiSelectCollapsed"
+        @change="onMultiSelectChanged"
+    >
+        <template v-if="isDaysOfMonthDisabled" #hint>
+            <span class="sw-settings-subscription-interval-advanced-settings-modal__disabled-hint">
+                <sw-icon name="solid-clock" size="12" />
+                {{ $tc('commercial.subscriptions.settings.interval.advancedSettingsExclusiveSelections') }}
+            </span>
+        </template>
+    </sw-multi-select>
+
+    <sw-multi-select
+        v-model="monthsOfYear"
+        class="sw-settings-subscription-interval-advanced-settings-modal__months-of-year"
+        :options="monthsOfYearOptions"
+        :label="$tc('commercial.subscriptions.settings.interval.cronOptions.monthsOfYear.label')"
+        :placeholder="$tc('commercial.subscriptions.settings.interval.cronOptions.monthsOfYear.placeholder')"
+        @select-expanded="onMultiSelectExpanded"
+        @select-collapsed="onMultiSelectCollapsed"
+        @change="onMultiSelectChanged"
+        :disabled="!acl.can('plans_and_intervals.editor')"
+    />
+
+    <sw-settings-subscription-interval-preview-banner
+        v-if="showPreviewBanner"
+        :frequency="frequency"
+        :frequency-unit="unit"
+        :cron-interval="previewCronInterval"
+    />
+
+    <template #modal-footer>
+        <sw-button
+            class="sw-settings-subscription-interval-advanced-settings-modal__cancel-btn"
+            @click="closeModal"
+        >
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+        <sw-button
+            class="sw-settings-subscription-interval-advanced-settings-modal__save-btn"
+            variant="primary"
+            @click="onSave"
+            :disabled="!acl.can('plans_and_intervals.editor')"
+        >
+            {{ $tc('global.default.save') }}
+        </sw-button>
+    </template>
+</sw-modal>

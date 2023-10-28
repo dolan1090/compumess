@@ -1,0 +1,30 @@
+.sw-text-field-ai {
+    .sw-field__addition {
+        .sw-text-field-ai__btn-area {
+            display: flex;
+            gap: 13px;
+        }
+    }
+
+    .sw-block-field__block {
+        .sw-field__addition {
+            background: none;
+            border-left: none;
+            border-right: none;
+            min-width: 40px;
+
+            &.is--prefix {
+                padding-right: 0;
+            }
+
+            .sw-text-field-ai__btn-cancel,
+            .sw-text-field-ai__btn-retry {
+                width: 12px;
+            }
+
+            &+input[type="text"] {
+                padding-left: 0;
+            }
+        }
+    }
+}

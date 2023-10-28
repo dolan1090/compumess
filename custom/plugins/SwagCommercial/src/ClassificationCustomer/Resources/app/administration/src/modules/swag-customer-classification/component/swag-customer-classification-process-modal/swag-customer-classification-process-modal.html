@@ -1,0 +1,23 @@
+<div class="swag-customer-classification-process-modal">
+    <sw-label
+        class="swag-customer-classification-save-modal__icon"
+        appearance="pill"
+        variant="info"
+    >
+        <sw-loader
+            class="swag-customer-classification-save-modal__loading-icon"
+            size="30px"
+        />
+    </sw-label>
+
+    <p class="swag-customer-classification-save-modal__help-text">
+        {{ $tc('swag-customer-classification.notificationModal.process.description') }}
+    </p>
+
+    <sw-alert
+        variant="warning"
+        class="swag-customer-classification-save-modal__warning"
+    >
+        <p v-html="$tc('swag-customer-classification.notificationModal.confirm.warning')" />
+    </sw-alert>
+</div>

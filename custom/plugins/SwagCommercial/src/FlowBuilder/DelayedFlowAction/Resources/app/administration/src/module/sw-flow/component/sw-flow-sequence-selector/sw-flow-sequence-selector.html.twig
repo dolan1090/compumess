@@ -1,0 +1,18 @@
+{% block sw_flow_sequence_selector_extension_options %}
+    <div class="sw-flow-sequence-selector__actions">
+        <sw-button
+            v-if="getLicense('FLOW_BUILDER-8478732')"
+            class="sw-flow-sequence-selector__delay-action"
+            @click="addDelayAction"
+        >
+            {% block sw_flow_sequence_selector_delay_action_icon_rule %}
+                <sw-icon
+                    size="16px"
+                    name="regular-hourglass"
+                />
+            {% endblock %}
+
+            {{ $tc('sw-flow-delay.detail.sequence.selectorDelayAction') }}
+        </sw-button>
+    </div>
+{% endblock %}

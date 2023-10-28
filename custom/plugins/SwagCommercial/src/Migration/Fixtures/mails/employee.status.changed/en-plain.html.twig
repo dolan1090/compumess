@@ -1,0 +1,5 @@
+Hello {{ employee.firstName }} {{ employee.lastName }},
+
+Your employee account's status at {{ shopName ?: '' }} has been changed.
+
+Current status: {{ employee.active ? 'Active' : 'Inactive' }}

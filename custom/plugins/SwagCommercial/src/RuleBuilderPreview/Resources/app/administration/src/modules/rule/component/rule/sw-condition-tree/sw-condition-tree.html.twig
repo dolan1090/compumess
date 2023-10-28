@@ -1,0 +1,14 @@
+{% block sw_condition_tree %}
+<div
+    class="sw-condition-tree-override"
+    :class="previewClasses"
+>
+    <sw-rule-builder-preview
+        v-if="displayPreview"
+        :condition-tree="conditionTree"
+        @preview-results="onPreviewResults"
+        @preview-enabled="onPreviewToggle"
+    />
+    {% parent %}
+</div>
+{% endblock %}

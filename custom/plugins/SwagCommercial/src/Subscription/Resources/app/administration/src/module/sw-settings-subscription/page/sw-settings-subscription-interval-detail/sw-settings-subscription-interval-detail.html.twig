@@ -1,0 +1,159 @@
+<sw-page class="sw-settings-subscription-interval-detail">
+
+    <template #smart-bar-header>
+        <h2>{{ placeholder(interval, 'name', $tc('commercial.subscriptions.settings.interval.headlineNew')) }}</h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button
+            class="sw-settings-subscription-interval-detail__cancel-btn"
+            @click="onCancel"
+        >
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+
+        <sw-button-process
+            class="sw-settings-subscription-interval-detail__save-btn"
+            variant="primary"
+            :is-loading="isProcessLoading"
+            :process-success="isSaveSuccessful"
+            @click.prevent="onSave"
+            :disabled="!acl.can('plans_and_intervals.editor')"
+        >
+            {{ $tc('global.default.save') }}
+        </sw-button-process>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch @on-change="onChangeLanguage" />
+    </template>
+
+    <template #content>
+        <sw-card-view class="sw-settings-subscription-intervals-detail__card-view">
+
+            <sw-alert
+                v-if="isSaveSuccessful && hasSubscriptions"
+                class="sw-settings-subscription-intervals__save-alert"
+            >
+                {{ $tc('commercial.subscriptions.settings.interval.saveInfoMessage') }}
+            </sw-alert>
+
+            <template v-if="isIntervalLoading">
+                <sw-skeleton variant="detail-bold" />
+                <sw-skeleton />
+                <sw-skeleton />
+            </template>
+
+            <template v-else>
+                <sw-card
+                    position-identifier="sw-settings-subscription-intervals-detail-general"
+                    :title="$tc('commercial.subscriptions.settings.generalTitle')"
+                    class="sw-settings-subscription-interval-detail__general"
+                >
+                    <sw-container
+                        columns="1fr 1fr"
+                        gap="0px 30px"
+                    >
+                        <sw-field
+                            v-model="interval.name"
+                            class="sw-settings-subscription-interval-detail__name"
+                            type="text"
+                            required
+                            :error="intervalNameError"
+                            :label="$tc('commercial.subscriptions.settings.nameLabel')"
+                            :placeholder="$tc('commercial.subscriptions.settings.namePlaceholder')"
+                            :disabled="!acl.can('plans_and_intervals.editor')"
+                        />
+                        <sw-switch-field
+                            v-model="interval.active"
+                            class="sw-settings-subscription-interval-detail__active"
+                            :label="$tc('commercial.subscriptions.settings.activeLabel')"
+                            :disabled="!acl.can('plans_and_intervals.editor')"
+                        />
+                    </sw-container>
+                </sw-card>
+
+                <sw-card
+                    position-identifier="sw-settings-subscription-intervals-detail-availability"
+                    :title="$tc('commercial.subscriptions.settings.availability')"
+                    class="sw-settings-subscription-interval-detail__availability"
+                >
+                    <sw-select-rule-create
+                        class="sw-settings-subscription-interval-detail__rule"
+                        rule-aware-group-key="subscriptionIntervals"
+                        :label="$tc('commercial.subscriptions.settings.availability')"
+                        :placeholder="$tc('commercial.subscriptions.settings.availabilityPlaceholder')"
+                        :rule-id="interval.availabilityRuleId"
+                        @save-rule="onSaveRule"
+                        :disabled="!acl.can('plans_and_intervals.editor')"
+                    />
+                </sw-card>
+
+                <sw-card
+                    position-identifier="sw-settings-subscription-intervals-detail-deliver-frequency"
+                    :title="$tc('commercial.subscriptions.settings.interval.frequency')"
+                    class="sw-settings-subscription-interval-detail__frequency"
+                >
+                    <p class="sw-settings-subscription-interval-detail__frequency-description">
+                        {{ $tc('commercial.subscriptions.settings.interval.frequencyDescription') }}
+                    </p>
+
+                    <sw-container
+                        columns="4fr 1fr"
+                        gap="0px 30px"
+                        class="sw-settings-subscription-interval-detail__dateinterval-form"
+                    >
+                        <sw-number-field
+                            v-model="dateInterval.frequency"
+                            class="sw-settings-subscription-interval-detail__dateinterval-frequency"
+                            :disabled="hasAdvancedSettings || !acl.can('plans_and_intervals.editor')"
+                            :min="1"
+                            :step="1"
+                            number-type="int"
+                            :label="$tc('commercial.subscriptions.settings.interval.frequencyLabel')"
+                            :placeholder="$tc('commercial.subscriptions.settings.interval.frequencyPlaceholder')"
+                        >
+                            <template v-if="hasAdvancedSettings" #hint>
+                                <span class="sw-settings-subscription-interval-detail__disabled-hint">
+                                    <sw-icon name="solid-clock" size="12" />
+                                    {{ $tc('commercial.subscriptions.settings.interval.frequencyDisabled') }}
+                                </span>
+                            </template>
+                        </sw-number-field>
+
+                        <sw-single-select
+                            v-model="dateInterval.unit"
+                            class="sw-settings-subscription-interval-detail__dateinterval-unit"
+                            :disabled="hasAdvancedSettings || !acl.can('plans_and_intervals.editor')"
+                            :options="dateIntervalOptions"
+                        />
+                    </sw-container>
+
+                     <sw-settings-subscription-interval-preview-banner
+                         v-if="interval"
+                         class="sw-settings-subscription-interval-detail__interval-preview"
+                         :frequency="dateInterval.frequency"
+                         :frequency-unit="dateInterval.unit"
+                         :cron-interval="interval.cronInterval"
+                     />
+
+                    <sw-external-link
+                        class="sw-settings-subscription-interval-detail__advanced-settings-btn"
+                        icon="regular-long-arrow-right"
+                        @click="toggleAdvancedSettingsModal"
+                    >
+                        {{ $tc('commercial.subscriptions.settings.interval.advancedSettings') }}
+                    </sw-external-link>
+                </sw-card>
+
+                <sw-settings-subscription-interval-advanced-settings-modal
+                    v-if="isAdvancedSettingsModalOpen"
+                    :date-interval-options="dateIntervalOptions"
+                    @modal-close="toggleAdvancedSettingsModal"
+                />
+            </template>
+
+        </sw-card-view>
+    </template>
+
+</sw-page>

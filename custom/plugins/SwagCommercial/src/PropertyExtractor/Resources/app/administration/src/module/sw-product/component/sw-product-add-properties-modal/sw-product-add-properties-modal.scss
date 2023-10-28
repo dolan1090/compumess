@@ -1,0 +1,28 @@
+@import "~scss/variables";
+
+.sw-product-add-properties-modal {
+    .sw-modal__footer {
+        display: flex;
+        justify-content: end;
+    }
+
+    &__search {
+        .sw-block-field {
+            height: 100%;
+
+            &__block {
+                height: 100%;
+            }
+        }
+    }
+
+    &__assistant-link {
+        font-size: $font-size-xxs;
+        font-weight: $font-weight-semi-bold;
+        padding: 0 14px;
+
+        .sw-icon {
+            color: $color-shopware-brand-900;
+        }
+    }
+}

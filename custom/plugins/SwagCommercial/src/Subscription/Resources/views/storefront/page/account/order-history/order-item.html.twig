@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/page/account/order-history/order-item.html.twig' %}
+
+{% block page_account_order_item_order_number_col %}
+    {% if order.extensions.subscription and getLicense('SUBSCRIPTIONS-6549379') %}
+        {% set subscriptionDetailLink = seoUrl('frontend.account.subscription.detail.page', { 'subscriptionId': order.extensions.subscription.id}) %}
+
+        {% block page_account_oder_item_subscription_detail_link %}
+            <a class="subscription-link" href="{{ subscriptionDetailLink }}">
+                {{ "commercial.subscriptions.account.viewSubscription"|trans|sw_sanitize }}
+            </a>
+        {% endblock %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

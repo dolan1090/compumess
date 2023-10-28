@@ -1,0 +1,11 @@
+{% block sw_order_detail_content_tabs_extension %}
+    {% parent %}
+    <sw-tabs-item
+        v-if="hasOrderReturn"
+        class="sw-order-detail__tabs-tab-returns"
+        :route="{ name: 'swag.return.management.order.detail.returns', params: { id: $route.params.id } }"
+        :title="$tc('swag-return-management.tabReturns')"
+    >
+        {{ $tc('swag-return-management.tabReturns') }}
+    </sw-tabs-item>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/review/review-item.html.twig' %}
+
+{% block page_product_detail_review_item_comment %}
+    {{ parent() }}
+
+    {% if config('TextTranslator.reviewTranslator.showReviewTranslateOption') %}
+        {% if context.languageId != review.languageId and review.status %}
+
+            <span class="swag-text-translator_translated-from d-block fw-bold"></span>
+            <button data-review-id="{{ review.id }}" type="button" class="btn btn-link ps-0">
+                {{ 'swag-text-translator.button.translateTo'|trans({'%language%': translateTo})|sw_sanitize }}
+            </button>
+        {% endif %}
+    {% endif %}
+{% endblock %}

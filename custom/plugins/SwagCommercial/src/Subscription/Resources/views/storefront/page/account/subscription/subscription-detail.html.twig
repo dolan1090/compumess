@@ -1,0 +1,153 @@
+{% block page_account_subscription_item_detail_overview %}
+    <div class="subscription-item-detail">
+        <div class="subscription-detail-content">
+            {% block page_account_subscription_item_detail_table_header %}
+                <div class="subscription-detail-content-header">
+                    <div class="row">
+                        {% block page_account_subscription_item_detail_table_header_name %}
+                            <div class="col-6 subscription-detail-content-header-cell subscription-header-name">
+                                {{ "commercial.subscriptions.account.subscriptionColumnName"|trans|sw_sanitize }}
+                            </div>
+                        {% endblock %}
+
+                        {% block page_account_subscription_item_detail_table_header_quantity %}
+                            <div class="col-2 subscription-detail-content-header-cell subscription-header-quantity">
+                                {{ "commercial.subscriptions.account.subscriptionColumnQuantity"|trans|sw_sanitize }}
+                            </div>
+                        {% endblock %}
+
+                        {% block page_account_subscription_item_detail_table_header_price %}
+                            <div class="col-2 subscription-detail-content-header-cell subscription-header-price">
+                                {{ "commercial.subscriptions.account.subscriptionColumnPrice"|trans|sw_sanitize }}
+                            </div>
+                        {% endblock %}
+
+                        {% block page_account_subscription_item_detail_table_header_total %}
+                            <div class="col-2 subscription-detail-content-header-cell subscription-header-total">
+                                {{ "commercial.subscriptions.account.subscriptionColumnTotal"|trans|sw_sanitize }}
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block page_account_subscription_item_detail_table_body %}
+                <div class="subscription-detail-content-body">
+                    <div class="subscription-detail-content-list">
+                        {% block page_account_subscription_item_detail_line_items %}
+                            {% for lineItem in subscription.convertedOrder.lineItems %}
+                                {% block page_account_subscription_item_detail_line_item %}
+                                    {% sw_include '@Storefront/storefront/component/line-item/line-item.html.twig' with {
+                                        displayMode: 'order',
+                                        showRemoveButton: false
+                                    } %}
+                                {% endblock %}
+                            {% endfor %}
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block page_account_subscription_item_detail_table_footer %}
+                {% set isTaxFree = subscription.convertedOrder.price.taxStatus == "tax-free" %}
+
+                <div class="subscription-detail-content-footer">
+                    {% block page_account_subscription_item_detail_table_labels_summary %}
+                        <div class="subscription-item-detail-footer">
+                            <div class="row g-0">
+                                <div class="col-12 col-md-7 col-xl-6">
+                                    <dl class="row g-0 subscription-item-detail-labels">
+                                        {% block page_account_subscription_item_detail_date %}
+                                            {% block page_account_subscription_item_detail_date_label %}
+                                                <dt class="col-6 col-md-5">
+                                                    {{ "commercial.subscriptions.account.subscriptionFrom"|trans|sw_sanitize }}
+                                                </dt>
+                                            {% endblock %}
+
+                                            {% block page_account_subscription_item_detail_date_value %}
+                                                <dd class="col-6 col-md-7 subscription-item-detail-labels-value">
+                                                    {{ subscription.createdAt|format_date('short', locale=app.request.locale) }}
+                                                </dd>
+                                            {% endblock %}
+                                        {% endblock %}
+
+                                        {% block page_account_subscription_item_detail_payment_method %}
+                                            {% block page_account_subscription_item_detail_payment_method_label %}
+                                                <dt class="col-6 col-md-5">
+                                                    {{ "commercial.subscriptions.account.subscriptionPaymentMethod"|trans|sw_sanitize }}
+                                                </dt>
+                                            {% endblock %}
+
+                                            {% block page_account_subscription_item_detail_payment_method_value %}
+                                                <dd class="col-6 col-md-7 subscription-item-detail-labels-value">
+                                                    {{ subscription.paymentMethod.translated.name }}
+                                                </dd>
+                                            {% endblock %}
+                                        {% endblock %}
+
+                                        {% block page_account_subscription_item_detail_shipping_method %}
+                                            {% block page_account_subscription_item_detail_shipping_method_label %}
+                                                <dt class="col-6 col-md-5">
+                                                    {{ "commercial.subscriptions.account.subscriptionShippingMethod"|trans|sw_sanitize }}
+                                                </dt>
+                                            {% endblock %}
+
+                                            {% block page_account_subscription_item_detail_shipping_method_value %}
+                                                <dd class="col-6 col-md-7 subscription-item-detail-labels-value">
+                                                    {{ subscription.shippingMethod.translated.name }}
+                                                </dd>
+                                            {% endblock %}
+                                        {% endblock %}
+                                    </dl>
+                                </div>
+
+                                <div class="col-12 col-md-5 col-xl-6">
+                                    {% block page_account_subscription_item_detail_summary %}
+                                        <dl class="row g-0 subscription-item-detail-summary">
+                                            {% block page_account_subscription_item_detail_shipping_costs %}
+                                                {% if subscription.convertedOrder.deliveries|length > 0 %}
+                                                    {% block page_account_subscription_item_detail_shipping_costs_label %}
+                                                        <dt class="col-6 col-md-8">
+                                                            {{ "commercial.subscriptions.account.subscriptionShippingCosts"|trans|sw_sanitize }}</dt>
+                                                    {% endblock %}
+
+                                                    {% block page_account_order_item_detail_shipping_costs_value %}
+                                                        <dd class="col-6 col-md-4">
+                                                            {{ subscription.convertedOrder.shippingCosts.totalPrice|currency(subscription.currency.isoCode) }}
+                                                        </dd>
+                                                    {% endblock %}
+                                                {% endif %}
+                                            {% endblock %}
+
+                                            {% block page_account_subscription_item_detail_amount %}
+                                                {% block page_account_subscription_item_detail_amount_label %}
+                                                    <dt class="col-6 col-md-8">
+                                                        {% if isTaxFree %}
+                                                            {{ "commercial.subscriptions.account.recurringTotal.net"|trans|sw_sanitize }}
+                                                        {% else %}
+                                                            {{ "commercial.subscriptions.account.recurringTotal.gross"|trans|sw_sanitize }}
+                                                        {% endif %}
+                                                    </dt>
+                                                {% endblock %}
+
+                                                {% block page_account_order_item_detail_amount_value %}
+                                                    <dd class="col-6 col-md-4">
+                                                        {% if isTaxFree %}
+                                                            {{ subscription.convertedOrder.price.netPrice|currency(subscription.currency.isoCode) }}
+                                                        {% else %}
+                                                            {{ subscription.convertedOrder.price.totalPrice|currency(subscription.currency.isoCode) }}
+                                                        {% endif %}
+                                                    </dd>
+                                                {% endblock %}
+                                            {% endblock %}
+                                        </dl>
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

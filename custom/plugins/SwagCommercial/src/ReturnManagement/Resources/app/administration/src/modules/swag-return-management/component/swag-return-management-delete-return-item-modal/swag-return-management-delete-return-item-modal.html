@@ -1,0 +1,41 @@
+<sw-modal
+    class="swag-return-management-delete-return-item-modal"
+    variant="small"
+    :title="$tc('global.default.warning')"
+    @modal-close="onCancel"
+>
+    <p class="swag-return-management-delete-return-item-modal__text"> {{ description }} </p>
+
+    <ul
+        class="swag-return-management-delete-return-item-modal__item-list"
+    >
+        <li v-for="item in items">
+            {{ item.lineItem.label }}
+        </li>
+    </ul>
+
+    <p
+        class="swag-return-management-delete-return-item-modal__text swag-return-management-delete-return-item-modal__text--bold"
+        v-html="$sanitize($tc('swag-return-management.deleteReturnModal.warning'))"
+    />
+
+    <template #modal-footer>
+        <sw-button
+            class="swag-return-management-delete-return-item-modal__button-cancel"
+            size="small"
+            @click="onCancel"
+        >
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+
+        <sw-button
+            class="swag-return-management-delete-return-item-modal__button-delete"
+            size="small"
+            variant="danger"
+            :is-loading="isLoading"
+            @click="onSave"
+        >
+            {{ $tc('global.default.delete') }}
+        </sw-button>
+    </template>
+</sw-modal>

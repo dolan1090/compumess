@@ -1,0 +1,50 @@
+{% block sw_search_bar_slot_input %}
+<input
+    ref="searchInput"
+    v-model="searchTerm"
+    class="sw-search-bar__input"
+    :placeholder="placeholderSearchInput"
+    @input="onSearchTermChange"
+    @focus="onFocusInput"
+    @blur="onBlur"
+    @keydown.delete="resetSearchType"
+    @keydown.enter="onEnter"
+>
+
+<swag-export-assistant-modal
+    v-if="showModalPreview"
+    :search-term="searchTerm"
+    @export-started="onExport"
+    @turn-off-modal-preview="turnOffModalPreview"
+/>
+{% endblock %}
+
+{% block sw_search_bar_icon %}
+<button
+    class="sw-search-bar__field-icon sw-search-bar__field-close"
+    @click="hideSearchBar"
+>
+    <sw-icon
+        small
+        name="regular-times-s"
+    />
+</button>
+
+<span class="sw-search-bar__field-icon sw-search-bar__field-search-icon">
+    <sw-icon
+        v-if="currentSearchType !== 'search_assistant'"
+        name="regular-search-s"
+        small
+    />
+    <sw-icon
+        v-else-if="!isLoadingCriteria"
+        name="solid-sparkles"
+        color="#0870ff"
+    />
+    <sw-loader
+        v-else
+        class="sw-button_loader"
+        size="20px"
+    />
+</span>
+{% endblock %}

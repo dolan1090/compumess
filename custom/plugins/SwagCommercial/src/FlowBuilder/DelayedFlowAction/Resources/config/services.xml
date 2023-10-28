@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Entity\DelayActionDefinition">
+            <tag name="shopware.entity.definition" entity="swag_delay_action"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\Extension\OrderEntityExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\Extension\CustomerEntityExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\Extension\FlowEntityExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\Extension\FlowSequenceEntityExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Api\DelayController" public="true">
+            <argument type="service" id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\Handler\DelayActionHandler"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\Action\DelayAction">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="swag_delay_action.repository" />
+
+            <tag name="flow.action" priority="10" key="action.delay"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\Handler\DelayActionHandler" public="true">
+            <argument type="service" id="Shopware\Core\Content\Flow\Dispatching\FlowLoader"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextService" />
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextRestorer" />
+            <argument type="service" id="Shopware\Core\Content\Flow\Dispatching\FlowFactory" />
+            <argument type="service" id="Shopware\Core\Content\Flow\Dispatching\FlowExecutor" />
+            <argument type="service" id="swag_delay_action.repository" />
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\ScheduledTask\DelayActionTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+
+        <service id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\Handler\DelayActionTaskHandler">
+            <argument type="service" id="scheduled_task.repository"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Commercial\FlowBuilder\DelayedFlowAction\Domain\Handler\DelayActionHandler"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+    </services>
+</container>

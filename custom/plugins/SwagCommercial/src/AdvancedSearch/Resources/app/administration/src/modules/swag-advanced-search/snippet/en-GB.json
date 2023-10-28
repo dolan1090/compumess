@@ -1,0 +1,206 @@
+{
+    "swag-advanced-search": {
+        "generalTab": {
+            "labelEnableAdvancedSearch": "Enable Advanced Search",
+            "helpTextEnableAdvancedSearch": "When disable Advanced Search, the search configuration will be language-based instead of sales channel based.",
+            "labelInfoCrossSearch": "When enabling each advanced search config field here, the search will do an extra query to the OpenSearch server, making the search speed a little slower.",
+            "resetConfirm": "Are you sure you want to reset these configurations?"
+        },
+        "liveSearchTab": {
+            "field": "Field",
+            "term": "Term"
+        },
+        "boostingTab": {
+            "title": "Boostings",
+            "addBoosting": "Add Boosting",
+            "searchPlaceholder": "Search boosting",
+            "messageEmptyTitle": "No boostings yet",
+            "messageEmptySubline": "Manage boostings here.",
+            "messageBoostingSaved": "Boosting saved",
+            "type": {
+                "product_stream": "Product Stream",
+                "entity_stream": "Entity Stream"
+            },
+            "column": {
+                "name": "Name",
+                "type": "Type",
+                "boost": "Boost",
+                "active": "Active",
+                "validFrom": "Active from",
+                "validTo": "Active to"
+            },
+            "detail": {
+                "name": "Name",
+                "boost": "Boost",
+                "active": "Active",
+                "validFrom": "Active from",
+                "validTo": "Active to",
+                "productStream": "Product Stream",
+                "entityStream": "Entity Stream",
+                "category": "Category",
+                "manufacturer": "Manufacturer",
+                "cancelModal": "Cancel",
+                "streamType": "Stream type",
+                "type": "Type",
+                "typeId": "Dynamic product group",
+                "typeIdPlaceholder": "Select a dynamic product group",
+                "newBoosting": "New boosting"
+            },
+            "filter": {
+                "placeholderFieldSelect": "Choose a property",
+                "placeholderOperatorSelect": "Choose an operator"
+            }
+        },
+        "entity": {
+            "category": "Category",
+            "product": "Product",
+            "product_manufacturer": "Manufacturer"
+        },
+        "hitCount": {
+            "appearance": {
+                "title": "Hit count",
+                "suggestTitle": "Quicksearch",
+                "suggestDescription": "Define the numbers of elements shown per category in the quicksearch.",
+                "searchTitle": "Result Page",
+                "searchDescription": "Define the numbers of elements shown per category in the result page.",
+                "allResults": "Show all results"
+            }
+        },
+        "advancedSearchConfigField": {
+            "product": {
+                "availableStock": "Available stock",
+                "categories": {
+                    "name": "Categories name"
+                },
+                "crossSellings": {
+                    "name": "Cross selling name",
+                    "type": "Cross selling type"
+                },
+                "customSearchKeywords": "Custom search keywords",
+                "description": "Description",
+                "ean": "GTIN/EAN",
+                "height": "Height",
+                "keywords": "Keywords",
+                "length": "Length",
+                "manufacturer": {
+                    "name": "Manufacturer name"
+                },
+                "manufacturerNumber": "Manufacturer product number",
+                "metaDescription": "Meta description",
+                "metaTitle": "Meta title",
+                "name": "Name",
+                "options": {
+                    "name": "Variant values"
+                },
+                "packUnit": "Packing unit",
+                "packUnitPlural": "Packing unit plural",
+                "productNumber": "Product number",
+                "maxPurchase": "Max purchase",
+                "minPurchase": "Min purchase",
+                "properties": {
+                    "name": "Property values"
+                },
+                "purchasePrices": {
+                    "gross": "Purchase prices (gross)",
+                    "net": "Purchase prices (net)"
+                },
+                "purchaseUnit": "Purchase unit",
+                "referenceUnit": "Reference unit",
+                "sales": "Sales",
+                "stock": "Stock",
+                "tags": {
+                    "name": "Tags"
+                },
+                "unit": {
+                    "name": "Unit name",
+                    "shortCode": "Unit short code"
+                },
+                "weight": "Weight",
+                "width": "Width"
+            },
+            "category": {
+                "description": "Description",
+                "keywords": "Keywords",
+                "metaDescription": "Meta description",
+                "metaTitle": "Meta title",
+                "name": "Name",
+                "tags": {
+                    "name": "Tags"
+                },
+                "type": "Type",
+                "products": {
+                    "customSearchKeywords": "Product custom search keywords",
+                    "description": "Product description",
+                    "ean": "Product GTIN/EAN",
+                    "keywords": "Product keywords",
+                    "manufacturerNumber": "Product manufacturer number",
+                    "metaDescription": "Product meta description",
+                    "metaTitle": "Product meta title",
+                    "productNumber": "Product number",
+                    "name": "Product name",
+                    "states": "Product states"
+                }
+            },
+            "product_manufacturer": {
+                "description": "Description",
+                "name": "Name",
+                "products": {
+                    "customSearchKeywords": "Product custom search keywords",
+                    "description": "Product description",
+                    "ean": "Product GTIN/EAN",
+                    "keywords": "Product keywords",
+                    "manufacturerNumber": "Product manufacturer number",
+                    "metaDescription": "Product meta description",
+                    "metaTitle": "Product meta title",
+                    "name": "Product name",
+                    "productNumber": "Product number",
+                    "states": "Product states"
+                }
+            }
+        },
+        "searchConfigField": {
+            "name": "Product name",
+            "description": "Product description",
+            "productNumber": "Product number",
+            "manufacturerNumber": "Manufacturer number",
+            "ean": "GTIN/EAN",
+            "customSearchKeywords": "Custom search terms",
+            "manufacturer": {
+                "customFields": "Manufacturer custom fields",
+                "name": "Manufacturer name"
+            },
+            "categories": {
+                "customFields": "Category custom fields",
+                "name": "Category name"
+            },
+            "tags": {
+                "name": "Product tag"
+            },
+            "metaTitle": "Product meta title",
+            "metaDescription": "Product meta description",
+            "properties": {
+                "name": "Property values"
+            },
+            "options": {
+                "name": "Variant values"
+            }
+        },
+        "entityStream": {
+            "filter": {
+                "type": {
+                    "equals": "Is equal to",
+                    "equalsAny": "Is equal to any of",
+                    "contains": "Contains",
+                    "greaterThan": "Is greater than",
+                    "lessThan": "Is less than",
+                    "greaterThanEquals": "Is greater than/equal to",
+                    "lessThanEquals": "Is less than/equal to",
+                    "notEquals": "Is not equal to",
+                    "notEqualsAny": "Is not equal to any of",
+                    "notContains": "Does not contain",
+                    "range": "Range"
+                }
+            }
+        }
+    }
+}

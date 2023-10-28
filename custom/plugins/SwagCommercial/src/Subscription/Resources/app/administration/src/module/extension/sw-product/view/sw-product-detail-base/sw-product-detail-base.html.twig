@@ -1,0 +1,7 @@
+{% block sw_product_detail_base_price_card %}
+    {% parent %}
+
+    <sw-product-subscription-card
+        :allow-edit="acl.can('product.editor')"
+    />
+{% endblock %}

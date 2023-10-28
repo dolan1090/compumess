@@ -1,0 +1,22 @@
+@import "~scss/variables";
+
+.sw-order-line-items-grid {
+    .sw-data-grid__bulk-selected .sw-tooltip--wrapper {
+        display: inline-block;
+    }
+
+    &__return-items.is--disabled {
+        pointer-events: none;
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &__return-items .sw-help-text {
+        margin-left: 4px;
+    }
+
+    &__status-warning {
+        color: $color-pumpkin-spice-500;
+        margin-left: 4px;
+    }
+}

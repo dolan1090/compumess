@@ -1,0 +1,83 @@
+<sw-modal
+    :title="$tc('swag-return-management.returnModal.title')"
+    :subtitle="subtitle"
+    :variant="hasNoItems ? 'default' : 'large'"
+    class="swag-return-management-create-return-modal"
+    @modal-close="onCancel"
+>
+    <sw-alert
+        v-if="hasNoItems"
+        variant="info"
+        class="swag-return-management-create-return-modal__warning"
+    >
+        {{ $tc('swag-return-management.detail.messageErrorCreateReturnModal') }}
+    </sw-alert>
+
+    <sw-data-grid
+        v-else
+        class="swag-return-management-create-return-modal-grid"
+        :show-actions="false"
+        :show-selection="false"
+        :data-source="lineItems"
+        :columns="getLineItemColumns"
+    >
+        <template #column-label="{ item }">
+            <router-link
+                v-if="item.payload && item.payload.options"
+                class="swag-return-management-create-return-modal-grid__item-payload-options"
+                :to="{ name: 'sw.product.detail', params: { id: item.productId } }"
+            >
+                <sw-product-variant-info :variations="item.payload.options">
+                    <div class="swag-return-management-create-return-modal-grid__item-label">
+                        {{ item.label }}
+                    </div>
+                </sw-product-variant-info>
+            </router-link>
+        </template>
+
+        <template #column-returnQuantity="{ item }">
+            <sw-number-field
+                v-model="item.returnQuantity"
+                size="small"
+                :min="0"
+                :max="item.quantity"
+                :disabled="hasReturnLineItems(item) || hasInvalidStates(item) || isNotCreatorPermission"
+            />
+        </template>
+
+        <template #column-comment="{ item }">
+            <sw-text-field
+                v-if="!hasReturnLineItems(item) && !hasInvalidStates(item)"
+                v-model="item.comment"
+                :placeholder="$tc('swag-return-management.returnModal.placeholderComment')"
+                size="small"
+                :disabled="isNotCreatorPermission"
+            />
+            <p v-else>
+                {{ $tc('swag-return-management.returnModal.messagePreventAddItem') }}
+            </p>
+        </template>
+    </sw-data-grid>
+
+    <template #modal-footer>
+        <sw-button
+            class="swag-return-management-create-return-modal-grid__button-cancel"
+            size="small"
+            @click="onCancel"
+        >
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+
+        <sw-button
+            v-tooltip="tooltipSaveButton"
+            class="swag-return-management-create-return-modal-grid__button-save"
+            size="small"
+            variant="primary"
+            :disabled="hasNoItems || hasNoAvailableItems || isNotCreatorPermission"
+            :is-loading="isLoading"
+            @click="onSave"
+        >
+            {{ orderReturn ? $tc('swag-return-management.returnModal.buttonAddItemToReturn') : $tc('swag-return-management.returnModal.buttonCreateReturn') }}
+        </sw-button>
+    </template>
+</sw-modal>

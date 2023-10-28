@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="shopware.openai.client" class="GuzzleHttp\Client"/>
+
+        <service id="Shopware\Commercial\TextTranslator\Domain\Product\ReviewTranslator" public="true">
+            <argument type="service" id="shopware.openai.client"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <service id="Shopware\Commercial\TextTranslator\Storefront\ReviewTranslatorController" public="true">
+            <argument type="service" id="Shopware\Commercial\TextTranslator\Domain\Product\ReviewTranslator"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Shopware\Commercial\TextTranslator\Entity\Review\ProductReviewTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="product_review_translation"/>
+        </service>
+
+        <service id="Shopware\Commercial\TextTranslator\Extension\ProductReview\ProductReviewExtension">
+            <tag name="shopware.entity.extension" entity="product_review"/>
+        </service>
+
+        <service id="Shopware\Commercial\TextTranslator\Extension\Language\LanguageExtension">
+            <tag name="shopware.entity.extension" entity="language"/>
+        </service>
+
+        <service id="Shopware\Commercial\TextTranslator\Subscriber\ProductReviewWrittenSubscriber">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+
+        <service id="Shopware\Commercial\TextTranslator\Subscriber\StorefrontRenderEventSubscriber">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

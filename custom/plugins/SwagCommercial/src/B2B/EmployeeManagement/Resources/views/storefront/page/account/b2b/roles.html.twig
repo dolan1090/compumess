@@ -1,0 +1,167 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+
+{% set roles = page.getRoles() %}
+{% set hasRoles = roles.total > 0 %}
+{% set defaultRoleId = page.getDefaultRoleId() %}
+{% set roleCreate = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::ROLE_CREATE') %}
+{% set roleEdit = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::ROLE_EDIT') %}
+{% set roleDelete = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::ROLE_DELETE') %}
+
+{% block page_account_main_content %}
+    {% block b2b_components_roles %}
+        <div class="b2b-roles b2b-listing">
+            <div class="d-flex align-items-center">
+                <div class="account-address">
+                    <div class="account-welcome">
+                        <h1>{{ 'employee-management.roles.title'|trans|sw_sanitize }}</h1>
+                    </div>
+                </div>
+
+                {% block b2b_components_roles_add %}
+                    {% if not hasRoles and (isB2bAdmin() or isB2bAllowed(roleCreate)) %}
+                        <div class="ms-auto align-self-center">
+                            <a
+                                class="btn btn-primary ms-auto"
+                                href="{{ path('frontend.business-partner.roles.create') }}"
+                            >
+                                {{ 'employee-management.roles.buttonAdd'|trans|sw_sanitize }}
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+            </div>
+
+
+            {% block b2b_components_roles_table %}
+                <div class="b2b-listing-content">
+                    {% if hasRoles %}
+                        {% if isB2bAdmin() or isB2bAllowed(roleCreate) %}
+                            {% sw_include '@Commercial/storefront/component/table-header.html.twig' with {
+                                primaryHref: path('frontend.business-partner.roles.create'),
+                                primaryPlaceholder: 'employee-management.roles.buttonAdd'|trans|sw_sanitize
+                            }  %}
+                        {% endif %}
+
+                        <table class="b2b-table table table-bordered align-middle">
+                            {% block b2b_components_roles_table_head %}
+                                <thead>
+                                <tr>
+                                    <th class="b2b-table-column b2b-table-action-column-name" scope="col">{{ 'employee-management.roles.tableHeaderName'|trans|sw_sanitize }}</th>
+                                    <th class="b2b-table-column b2b-table-action-column-actions" scope="col"></th>
+                                </tr>
+                                </thead>
+                            {% endblock %}
+
+                            {% block b2b_components_roles_table_body %}
+                                <tbody>
+                                    {% for role in roles %}
+                                        {% set hasEmployees = role.employees|length > 0 %}
+                                        <tr>
+                                            <td class="b2b-table-column b2b-table-action-column-name">
+                                                <a class="b2b-listing-role-name-link" href="{{ path('frontend.business-partner.roles.detail', { id: role.id }) }}">
+                                                    {{ role.name }}
+                                                </a>
+                                                {% if defaultRoleId === role.id %}
+                                                    <div class="badge badge-lg bg-light text-body">{{ 'employee-management.roles.defaultRoleLabel'|trans|sw_sanitize }}</div>
+                                                {% endif %}
+                                            </td>
+                                            <td class="b2b-table-column b2b-table-action-column-actions text-end">
+                                                {% if isB2bAdmin() or isB2bAllowed(roleEdit) %}
+                                                    <button
+                                                        class="btn dropdown-toggle b2b-table-context-menu-button"
+                                                        type="button"
+                                                        id="b2b-list-table-context-menu-button"
+                                                        data-bs-toggle="dropdown"
+                                                        aria-haspopup="true"
+                                                        aria-expanded="false"
+                                                    >
+                                                        {% sw_icon 'more-horizontal' %}
+                                                    </button>
+                                                {% endif %}
+
+                                                <div
+                                                    class="b2b-table-actions-wrapper"
+                                                    aria-labelledby="b2b-list-table-context-menu-button"
+                                                >
+                                                    <div class="dropdown-menu dropdown-menu-right b2b-table-actions">
+                                                        {% block b2b_components_roles_table_body_row_context_menu_actions %}
+                                                            {% if isB2bAdmin() or isB2bAllowed(roleEdit) %}
+                                                                <a
+                                                                    class="btn b2b-table-action b2b-table-action-edit"
+                                                                    type="button"
+                                                                    href="{{ path('frontend.business-partner.roles.detail', { id: role.id }) }}"
+                                                                >
+                                                                    {{ 'global.default.edit'|trans|sw_sanitize }}
+                                                                </a>
+                                                            {% endif %}
+
+                                                            {% if isB2bAdmin() or isB2bAllowed(roleDelete) %}
+                                                                {% set contentSnippet %}
+                                                                    {{ 'employee-management.roleDelete.text'|trans({'%name%': role.name,})|escape|sw_sanitize }}
+
+                                                                    {% if hasEmployees %}
+                                                                        <div class='b2b-role-delete-modal-content-warning'>
+                                                                            {{ 'employee-management.roleDelete.hasEmployeesWarningText'|trans|sw_sanitize }}
+                                                                        </div>
+                                                                    {% endif %}
+                                                                {% endset %}
+
+                                                                <button
+                                                                    class="btn b2b-table-action b2b-table-action-delete is--danger"
+                                                                    type="button"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#b2b-role-delete-modal"
+                                                                    data-delete-action="{{ path('frontend.business-partner.roles.delete.submit', { id: role.id }) }}"
+                                                                    data-content-snippet="{{ contentSnippet }}"
+                                                                >
+                                                                    {{ 'global.default.delete'|trans|sw_sanitize }}
+                                                                </button>
+                                                            {% endif %}
+                                                        {% endblock %}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            {% endblock %}
+                        </table>
+
+                        {% block b2b_components_roles_table_pagination %}
+                            {% set criteria = page.roles.criteria %}
+
+                            {% set formAjaxSubmitOptions = {
+                                replaceSelectors: '.b2b-roles',
+                                submitOnChange: true
+                            } %}
+
+                            <form
+                                class="account-orders-pagination-form b2b-table-pagination"
+                                action="{{ path('frontend.business-partner.roles.list') }}"
+                                method="post"
+                                data-form-ajax-submit="true"
+                                data-form-ajax-submit-options='{{ formAjaxSubmitOptions|json_encode }}'
+                            >
+                                {% sw_include '@Storefront/storefront/component/pagination.html.twig' with {
+                                    entities: page.roles,
+                                    criteria: criteria
+                                }  %}
+                            </form>
+                        {% endblock %}
+                    {% else %}
+                        {% block b2b_components_roles_table_empty_state %}
+                            {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                                type: 'info',
+                                content: 'employee-management.roles.emptyState'|trans|sw_sanitize
+                            } %}
+                        {% endblock %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+
+            {% block b2b_components_role_delete_modal %}
+                {% sw_include '@Commercial/storefront/component/b2b/role-confirm-delete-modal.html.twig' %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

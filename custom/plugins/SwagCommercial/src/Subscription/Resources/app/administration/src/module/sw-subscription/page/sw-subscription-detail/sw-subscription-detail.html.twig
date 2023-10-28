@@ -1,0 +1,70 @@
+<sw-page class="sw-subscription-detail">
+    <template #smart-bar-header>
+        <h2>{{ headlineTitle }}</h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button
+            class="sw-subscription-detail__cancel-btn"
+            @click="onCancel"
+        >
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+
+        <sw-button-process
+            class="sw-subscription-detail__save-btn"
+            variant="primary"
+            :is-loading="isProcessLoading"
+            :process-success="isSaveSuccessful"
+            @click.prevent="onSave"
+            :disabled="!acl.can('subscription.editor')"
+        >
+            {{ $tc('global.default.save') }}
+        </sw-button-process>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch @on-change="onChangeLanguage" />
+    </template>
+
+    <template #content>
+        <sw-card-view class="sw-subscription-detail__card-view">
+            <sw-tabs
+                class="sw-subscription-detail__tabs"
+                position-identifier="sw-subscription-detail"
+            >
+                <sw-tabs-item
+                    class="sw-subscription-detail__tab-general"
+                    :route="{ name: `${routeBaseName}.general` }"
+                    :title="$tc('commercial.subscriptions.subscriptions.detail.tabGeneral')"
+                >
+                    {{ $tc('commercial.subscriptions.subscriptions.detail.tabGeneral') }}
+                </sw-tabs-item>
+
+                <sw-tabs-item
+                    class="sw-subscription-detail__tab-details"
+                    :route="{ name: `${routeBaseName}.details` }"
+                    :title="$tc('commercial.subscriptions.subscriptions.detail.tabDetails')"
+                >
+                    {{ $tc('commercial.subscriptions.subscriptions.detail.tabDetails') }}
+                </sw-tabs-item>
+
+                <sw-tabs-item
+                    class="sw-subscription-detail__tab-orders"
+                    :route="{ name: `${routeBaseName}.orders` }"
+                    :title="$tc('commercial.subscriptions.subscriptions.detail.tabOrders')"
+                >
+                    {{ $tc('commercial.subscriptions.subscriptions.detail.tabOrders') }}
+                </sw-tabs-item>
+            </sw-tabs>
+
+            <template v-if="isLoading">
+                <sw-skeleton variant="detail-bold" />
+                <sw-skeleton />
+                <sw-skeleton />
+            </template>
+
+            <router-view v-else />
+        </sw-card-view>
+    </template>
+</sw-page>

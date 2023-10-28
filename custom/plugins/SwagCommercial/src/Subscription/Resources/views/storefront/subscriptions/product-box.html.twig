@@ -1,0 +1,225 @@
+{% block subscription_product_box %}
+
+    {% set price = product.calculatedPrice %}
+
+    {% if product.calculatedPrices|length == 1 %}
+        {% set price = product.calculatedPrices.first %}
+    {% elseif product.calculatedPrices|length > 1 %}
+        {% set price = null %}
+    {% endif %}
+
+    {% if product.extensions.subscriptionPlans.count > 0 %}
+        <form
+            id="productDetailPageSubscriptionBuyProductForm"
+            action="{{ path('frontend.subscription.checkout.line-item.add') }}"
+            method="post"
+            data-subscription-product-box="true">
+
+            {% block subscription_product_box_select %}
+            <div class="sw-card subscription-product-box-select">
+
+                {% block subscription_product_box_select_title %}
+                <h5 class="subscription-product-box-select-title">{{ 'commercial.subscriptions.detail.frequencyTitle' | trans }}</h5>
+                {% endblock %}
+
+                {% block subscription_product_box_select_options %}
+                <ul class="subscription-product-box-select-options">
+
+                    {% block subscription_product_box_select_options_onetime %}
+                    <li class="subscription-product-box-select-options-option">
+                        <input type="radio"
+                               checked
+                               name="subscription-plan-option"
+                               value=""
+                               id="subscription-interval-option-one-time-buy"
+                               class="form-check-input subscription-product-box-select-options-option-radio">
+                        <label class="form-group form-check-label subscription-product-box-select-options-option-label"
+                               for="subscription-interval-option-one-time-buy">
+                                <span class="subscription-product-box-select-options-option-label-description">
+                                    <span class="subscription-product-box-select-options-option-label-description-product">
+                                        <span class="subscription-product-box-select-options-option-label-description-product-plan">{{ 'commercial.subscriptions.detail.oneTimePurchase' | trans }}</span>
+                                        {% if price is not null %}
+                                            <span class="subscription-product-box-select-options-option-label-description-product-price">{{ price.unitPrice | currency }}</span>
+                                        {% endif %}
+                                    </span>
+                                </span>
+                        </label>
+                    </li>
+                    {% endblock %}
+
+                    {% for plan in product.extensions.subscriptionPlans %}
+                        {% set discountPrice = plan.discountPrice.unitPrice %}
+                        {% set hasDiscount = plan.discountPercentage > 0 %}
+                        {% set hasMinimumExecutionCount = plan.minimumExecutionCount > 0 %}
+
+                        {% block subscription_product_box_select_options_plan %}
+                        <li class="subscription-product-box-select-options-option">
+                            <input type="radio"
+                                   name="subscription-plan-option"
+                                   value="{{ plan.id }}"
+                                   id="subscription-plan-option-{{ plan.id }}"
+                                   class="form-check-input subscription-product-box-select-options-option-radio">
+                            <label class="form-group form-check-label subscription-product-box-select-options-option-label"
+                                   for="subscription-plan-option-{{ plan.id }}">
+                                {% block subscription_product_box_select_options_plan_description %}
+                                <span class="subscription-product-box-select-options-option-label-description">
+                                    <span class="subscription-product-box-select-options-option-label-description-product">
+                                        {% block subscription_product_box_select_options_plan_description_name %}
+                                        <span class="subscription-product-box-select-options-option-label-description-product-plan">
+                                            {% if plan.activeStorefrontLabel %}
+                                                {{ plan.translated.label | default(plan.translated.name) }}
+                                            {% else %}
+                                                {{ plan.translated.name }}
+                                            {% endif %}
+                                        </span>
+                                        {% endblock %}
+
+                                        {% block subscription_product_box_select_options_plan_description_price %}
+                                            {% if price is not null %}
+                                                <div class="subscription-product-box-select-options-option-label-description-product-price-container">
+                                                    <span class="subscription-product-box-select-options-option-label-description-product-price{{ hasDiscount ? '-strikethrough' : '' }}">{{ price.unitPrice | currency }}</span>
+                                                    {% if hasDiscount %}
+                                                        <span class="subscription-product-box-select-options-option-label-description-product-price-discount fw-bold">{{ discountPrice | currency }}</span>
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+                                        {% endblock %}
+                                    </span>
+
+                                    {% block subscription_product_box_select_options_plan_intervals %}
+                                        {% if plan.subscriptionIntervals.count == 1 %}
+                                            <label for="subscription-plan-option-{{ plan.id }}-interval" class="subscription-product-box-select-options-interval-select-label form-label">{{ plan.subscriptionIntervals.first.translated.name }}</label>
+                                            <input type="hidden" name="subscription-plan-option-{{ plan.id }}-interval" value="{{ plan.subscriptionIntervals.first.id }}">
+                                        {% else %}
+                                            <label for="subscription-plan-option-{{ plan.id }}-interval" class="subscription-product-box-select-options-interval-select-label form-label">{{ 'commercial.subscriptions.detail.frequencyTitle' | trans }}*</label>
+                                            <select class="subscription-product-box-select-options-interval-select form-select" name="subscription-plan-option-{{ plan.id }}-interval" id="subscription-product-box-select-options-{{ plan.id }}-interval-select">
+                                            {% for interval in plan.subscriptionIntervals %}
+                                                <option value="{{ interval.id }}">{{ interval.translated.name }}</option>
+                                            {% endfor %}
+                                            </select>
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block subscription_product_box_select_options_plan_minimumcontractterm %}
+                                        {% if hasMinimumExecutionCount %}
+                                            <p class="subscription-minimum-execution-label">{{ 'commercial.subscriptions.detail.expectedMinimumTerm'|trans({"%count%": plan.minimumExecutionCount}) }}</p>
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block subscription_product_box_select_options_plan_discount %}
+                                        {% if hasDiscount %}
+                                            <span class="badge badge-sm subscription-badge bg-info m-0 mt-2 px-2 fw-normal">
+                                                {{ "commercial.subscriptions.detail.discountBadge"|trans({"%discountPercentage%": plan.discountPercentage})|sw_sanitize }}
+                                            </span>
+                                        {% endif %}
+                                    {% endblock %}
+                                </span>
+                                {% endblock %}
+                            </label>
+                        </li>
+                        {% endblock %}
+                    {% endfor %}
+                </ul>
+                {% endblock %}
+            </div>
+            {% endblock %}
+
+            {% block subscription_product_box_buy_widget %}
+            <div class="subscription-product-box-buy-widget buy-widget d-none">
+
+                {% set DOWNLOAD_STATE = constant('Shopware\\Core\\Content\\Product\\State::IS_DOWNLOAD') %}
+                {% set showQuantitySelect = not product.states is defined or DOWNLOAD_STATE not in product.states or (DOWNLOAD_STATE in product.states and product.maxPurchase !== 1) %}
+                {% set buyable = product.available and product.childCount <= 0 and product.calculatedMaxPurchase > 0 %}
+                {% block buy_widget_buy_container %}
+                    {% if buyable %}
+                        <div class="row g-2 buy-widget-container ">
+                            {% block subscription_buy_widget_quantity_container %}
+                                {% if showQuantitySelect %}
+                                    <div class="col-4 d-flex justify-content-end subscription-buy-widget-container">
+                                        {% set selectQuantityThreshold = 100 %}
+                                        {% block subscription_buy_widget_buy_quantity_input_group %}
+                                            <div class="input-group product-detail-quantity-group quantity-selector-group" data-quantity-selector="true">
+                                                <button type="button" class="btn btn-outline-light btn-minus js-btn-minus">
+                                                    {% sw_icon 'minus' style {'size': 'xs'} %}
+                                                </button>
+                                                <input
+                                                    type="number"
+                                                    name="lineItems[{{ product.id }}][quantity]"
+                                                    class="form-control js-quantity-selector quantity-selector-group-input"
+                                                    min="{{ product.minPurchase }}"
+                                                    max="{{ product.calculatedMaxPurchase }}"
+                                                    step="{{ product.purchaseSteps }}"
+                                                    value="{{ product.minPurchase }}"
+                                                />
+                                                <button type="button" class="btn btn-outline-light btn-plus js-btn-plus">
+                                                    {% sw_icon 'plus' style {'size': 'xs'}  %}
+                                                </button>
+                                                {% if product.translated.packUnit %}
+                                                    <span class="input-group-text">
+                                                        {% if product.minPurchase > 1 and product.translated.packUnitPlural %}
+                                                            {{ product.translated.packUnitPlural }}
+                                                        {% elseif product.translated.packUnit %}
+                                                            {{ product.translated.packUnit }}
+                                                        {% endif %}
+                                                    </span>
+                                                {% endif %}
+                                            </div>
+                                        {% endblock %}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block subscription_buy_widget_product_buy_info %}
+                                <input type="hidden"
+                                       name="lineItems[{{ product.id }}][id]"
+                                       value="{{ product.id }}">
+                                <input type="hidden"
+                                       name="lineItems[{{ product.id }}][type]"
+                                       value="product">
+                                <input type="hidden"
+                                       name="lineItems[{{ product.id }}][referencedId]"
+                                       value="{{ product.id }}">
+                                <input type="hidden"
+                                       name="lineItems[{{ product.id }}][stackable]"
+                                       value="1">
+                                <input type="hidden"
+                                       name="lineItems[{{ product.id }}][removable]"
+                                       value="1">
+                            {% endblock %}
+
+                            {% block subscription_buy_widget_product_buy_meta %}
+                                <input type="hidden"
+                                       name="product-name"
+                                       value="{{ product.translated.name }}">
+                                <input type="hidden"
+                                       name="brand-name"
+                                       value="{{ product.manufacturer.getName() }}">
+                            {% endblock %}
+
+                            {% block subscription_buy_widget_product_buy_redirect %}
+                                <input type="hidden"
+                                       name="redirectTo"
+                                       value="frontend.subscription.checkout.register.page">
+                            {% endblock %}
+
+                            {% block subscription_buy_widget_buy_button_container %}
+                                <div class="{% if showQuantitySelect %}col-8 subscription-buy-widget-buy-button-container-show-quantity-select{% else %}col-12 subscription-buy-widget-buy-button-container{% endif %}">
+                                    {% block subscription_buy_widget_buy_button %}
+                                        <div class="d-grid">
+                                            <button class="btn btn-primary btn-buy"
+                                                    title="{{ 'commercial.subscriptions.detail.subscribe'|trans|striptags }}"
+                                                    aria-label="{{ 'commercial.subscriptions.detail.subscribe'|trans|striptags }}">
+                                                {{ 'commercial.subscriptions.detail.subscribe'|trans|sw_sanitize }}
+                                            </button>
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+            </div>
+            {% endblock %}
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+@import "~scss/variables";
+@import "~scss/mixins";
+
+.sw-flow-sequence-error {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 9px;
+        margin-top: 14px;
+    }
+
+    &__name {
+        @include flex-centering-vertical;
+
+        color: $color-crimson-500;
+    }
+
+    &__heading {
+        font-size: 15px;
+        font-weight: $font-weight-semi-bold;
+        margin-left: 8px;
+        margin-bottom: 0;
+        color: $color-crimson-500;
+    }
+
+    &__description {
+        font-size: $font-size-s;
+        margin-left: 20px;
+        color: $color-crimson-500;
+    }
+
+    &--rule &, &--missing-rule & {
+        &__header {
+            margin-top: -10px;
+        }
+
+        &__name {
+            margin-left: 24px;
+        }
+
+        &__description {
+            margin: 0 24px 14px 44px;
+        }
+    }
+}

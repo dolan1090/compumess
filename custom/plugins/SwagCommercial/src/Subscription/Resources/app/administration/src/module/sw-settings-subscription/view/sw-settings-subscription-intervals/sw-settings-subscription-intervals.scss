@@ -1,0 +1,28 @@
+@import "~scss/variables";
+
+.sw-settings-subscription-intervals {
+
+    .sw-data-grid__cell-content:not(.sw-data-grid__cell--actions) {
+        .is--inactive {
+            width: 16px;
+            height: 16px;
+            color: $color-crimson-500;
+            padding-top: 3px;
+            padding-right: 3px;
+            padding-bottom: 3px;
+            padding-left: 3px;
+            margin: 0 auto;
+        }
+
+        .is--active {
+            width: 16px;
+            height: 16px;
+            color: $color-emerald-500;
+            padding-top: 4px;
+            padding-right: 2px;
+            padding-bottom: 3px;
+            padding-left: 2px;
+            margin: 0 auto;
+        }
+    }
+}

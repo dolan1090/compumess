@@ -1,0 +1,17 @@
+{
+  "sw-settings-customer-group": {
+    "registration": {
+      "activateCheckbox": {
+        "employeeManagement": "Mitarbeiterverwaltung aktivieren",
+        "quickOrder": "Schnellbestellungen aktivieren"
+      },
+      "activateHelptext": {
+        "template": "Aktiviert {name} für alle Kunden dieser Kundengruppe. Für diese Option wird das Firmen-Registrierungsformular benötigt.",
+        "features": {
+          "employeeManagement": "die Mitarbeiterverwaltung",
+          "quickOrder": "die Schnellbestellungen"
+        }
+      }
+    }
+  }
+}

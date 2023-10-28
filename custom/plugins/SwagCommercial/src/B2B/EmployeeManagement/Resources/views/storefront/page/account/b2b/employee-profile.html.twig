@@ -1,0 +1,221 @@
+{% set employeeEdit = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::EMPLOYEE_EDIT') %}
+{% set roleId = page.extensions.b2bEmployee.roleId %}
+{% set roles = page.extensions.b2bAvailableRoles %}
+
+{% block b2b_components_employee_profile %}
+    {% if isB2bAllowed(employeeEdit) %}
+        {% block b2b_components_employee_profile_edit %}
+            {% block b2b_components_employee_profile_edit_name %}
+                <div class="row">
+                    {% block b2b_components_employee_profile_edit_first_name %}
+                        <div class="form-group col-sm-6 b2b-profile-form-first-name">
+                            {% if formViolations.getViolations("/firstName") is not empty %}
+                                {% set violationPath = "/firstName" %}
+                            {% else %}
+                                {% set requiredMessage = "error.VIOLATION::IS_BLANK_ERROR"|trans({ '%field%': "employee-management.employeeProfile.labelFirstName"|trans|sw_sanitize }) %}
+                            {% endif %}
+
+                            {% block b2b_components_employee_profile_edit_first_name_label %}
+                                <label class="form-label" for="b2b-profile-form-first-name-input">
+                                    {{ "employee-management.employeeProfile.labelFirstName"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                                </label>
+                            {% endblock %}
+
+                            {% block b2b_components_employee_profile_edit_first_name_input %}
+                                <input
+                                    type="text"
+                                    id="b2b-profile-form-first-name-input"
+                                    class="form-control{% if violationPath is not empty %} is-invalid{% endif %}"
+                                    name="{% if prefix %}{{ prefix }}[firstName]{% else %}firstName{% endif %}"
+                                    value="{{ employee.get('firstName') }}"
+                                    placeholder="{{ "employee-management.employeeProfile.placeholderFirstName"|trans|striptags }}"
+                                    autocomplete="section-personal given-name"
+                                    required="required"
+                                    data-form-validation-required
+                                    {% if requiredMessage is defined %}
+                                        data-form-validation-required-message="{{ requiredMessage }}"
+                                    {% endif %}
+                                />
+                            {% endblock %}
+
+                            {% if violationPath %}
+                                {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' %}
+                            {% endif %}
+                        </div>
+                    {% endblock %}
+
+                    {% block b2b_components_employee_profile_edit_last_name %}
+                        <div class="form-group col-sm-6 b2b-profile-form-last-name">
+                            {% if formViolations.getViolations("/lastName") is not empty %}
+                                {% set violationPath = "/lastName" %}
+                            {% else %}
+                                {% set requiredMessage = "error.VIOLATION::IS_BLANK_ERROR"|trans({ '%field%': "employee-management.employeeProfile.labelLastName"|trans|sw_sanitize }) %}
+                            {% endif %}
+
+                            {% block b2b_components_employee_profile_edit_last_name_label %}
+                                <label class="form-label" for="b2b-profile-form-last-name-input">
+                                    {{ "employee-management.employeeProfile.labelLastName"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+                                </label>
+                            {% endblock %}
+
+                            {% block b2b_components_employee_profile_edit_last_name_input %}
+                                <input
+                                    type="text"
+                                    id="b2b-profile-form-last-name-input"
+                                    class="form-control{% if violationPath %} is-invalid{% endif %}"
+                                    name="{% if prefix %}{{ prefix }}[lastName]{% else %}lastName{% endif %}"
+                                    value="{{ employee.get('lastName') }}"
+                                    placeholder="{{ "employee-management.employeeProfile.placeholderLastName"|trans|striptags }}"
+                                    autocomplete="section-personal family-name"
+                                    required="required"
+                                    data-form-validation-required
+                                    {% if requiredMessage is defined %}
+                                        data-form-validation-required-message="{{ requiredMessage }}"
+                                    {% endif %}
+                                />
+                            {% endblock %}
+
+                            {% if violationPath %}
+                                {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' %}
+                            {% endif %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% block b2b_components_employee_profile_edit_email %}
+                <div class="row">
+                    {% block b2b_components_employee_profile_edit_email_content %}
+                        <div class="form-group col-sm-6 col-md-12 b2b-profile-form-email">
+                            {% block b2b_components_employee_profile_edit_email_label %}
+                                <label class="form-label" for="b2b-profile-form-email-input">
+                                    {{ 'employee-management.employeeProfile.labelEmail'|trans|sw_sanitize }}{{ 'general.required'|trans|sw_sanitize }}
+                                </label>
+                            {% endblock %}
+
+                            {% block b2b_components_employee_profile_edit_email_input %}
+                                <input
+                                    type="email"
+                                    id="b2b-profile-form-email-input"
+                                    class="form-control{% if formViolations.getViolations('/email') is not empty %} is-invalid{% endif %}"
+                                    name="email"
+                                    value="{{ employee.email }}"
+                                    placeholder="{{ 'employee-management.employeeProfile.placeholderEmail'|trans|sw_sanitize }}"
+                                    autocomplete="email"
+                                />
+                            {% endblock %}
+
+                            {% if formViolations.getViolations('/email') is not empty %}
+                                {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                                    violationPath: '/email'
+                                } %}
+                            {% endif %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% block b2b_components_employee_profile_edit_role %}
+                <div class="row">
+                    {% block b2b_components_employee_profile_edit_role_content %}
+                        <div class="form-group col-sm-6 col-md-12 b2b-profile-form-role">
+                            {% block b2b_components_employee_profile_edit_role_label %}
+                                <label class="form-label" for="b2b-profile-form-role-input">{{ 'employee-management.employeeProfile.labelRole'|trans|sw_sanitize }}</label>
+                            {% endblock %}
+
+                            {% block b2b_components_employee_profile_edit_role_input %}
+                                <select
+                                    id="b2b-profile-form-role-input"
+                                    class="form-select{% if formViolations.getViolations('/roleId') is not empty %} is-invalid{% endif %}"
+                                    name="roleId"
+                                >
+                                    {% block b2b_components_employee_profile_edit_role_input_none %}
+                                        <option
+                                            class="b2b-profile-form-role-option no-selected-role"
+                                            value=""
+                                            {% if roleId is empty %}selected="selected"{% endif %}
+                                        >
+                                            {{ 'employee-management.roles.noRoleSelected'|trans|sw_sanitize }}
+                                        </option>
+                                    {% endblock %}
+
+                                    {% block b2b_components_employee_profile_edit_role_input_all %}
+                                        {% for role in roles %}
+                                            <option
+                                                class="b2b-profile-form-role-option"
+                                                value="{{ role.id }}"
+                                                {% if role.id == roleId %}selected="selected"{% endif %}
+                                            >
+                                                {{ role.name }}
+                                            </option>
+                                        {% endfor %}
+                                    {% endblock %}
+                                </select>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            <p>{{ "global.default.noteRequiredFields"|trans|sw_sanitize }}</p>
+
+            <div class="card-actions">
+                {% block b2b_components_employee_profile_edit_actions %}
+                    <button
+                        type="submit"
+                        class="btn btn-primary b2b-profile-actions-save"
+                        title="{{ "global.default.save"|trans|striptags }}"
+                    >
+                        {{ "global.default.save"|trans|sw_sanitize }}
+                    </button>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    {% else %}
+        {% block b2b_components_employee_profile_data %}
+            {% block b2b_components_employee_profile_data_personal %}
+                <div class="row">
+                    <div class="col-lg-6 card-col b2b-profile-overview-name">
+                        <div class="card">
+                            <div class="card-body">
+                                {% block b2b_components_employee_profile_data_personal_name %}
+                                    <h2 class="card-title">{{ "employee-management.employeeProfile.labelName"|trans|sw_sanitize }}</h2>
+                                    <p>{{ employee.firstName }} {{ employee.lastName }}</p>
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 card-col b2b-profile-overview-email">
+                        <div class="card">
+                            <div class="card-body">
+                                {% block b2b_components_employee_profile_data_personal_email %}
+                                    <h2 class="card-title">{{ "employee-management.employeeProfile.labelEmail"|trans|sw_sanitize }}</h2>
+                                    <p>{{ employee.email }}</p>
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block b2b_components_employee_profile_data_role %}
+                <div class="row">
+                    <div class="col-lg-12 card-col b2b-profile-overview-role">
+                        <div class="card">
+                            <div class="card-body">
+                                {% block b2b_components_employee_profile_data_role_name %}
+                                    <h2 class="card-title">{{ "employee-management.employeeProfile.labelRole"|trans|sw_sanitize }}</h2>
+                                    {% if employee.role.name is empty %}
+                                        {{ "employee-management.roles.noRoleSelected"|trans|sw_sanitize }}
+                                    {% else %}
+                                        {{ employee.role.name }}
+                                    {% endif %}
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        {% endblock %}
+    {% endif %}
+{% endblock %}

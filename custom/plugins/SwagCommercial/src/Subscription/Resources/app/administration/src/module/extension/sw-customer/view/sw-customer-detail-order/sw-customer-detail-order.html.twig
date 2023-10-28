@@ -1,0 +1,31 @@
+{% block sw_customer_detail_order_card %}
+<div class="sw-customer-detail-order-card-container">
+    <sw-customer-detail-subscription :customer="customer" />
+
+    <sw-card
+        class="sw-customer-detail-order-card"
+        position-identifier="sw-customer-detail-order"
+        :show-header="true"
+        :title="$tc('commercial.subscriptions.subscriptions.customer-detail.orderCardTitle')"
+    >
+        {% parent %}
+    </sw-card>
+</div>
+{% endblock %}
+
+{% block sw_customer_detail_order_card_grid_columns_number %}
+    <template #column-orderNumber="{ item }">
+        <router-link :to="{ name: 'sw.order.detail', params: { id: item.id } }">
+            {{ item.orderNumber }}
+        </router-link>
+
+        <sw-label
+            v-if="item.subscriptionId"
+            appearance="pill"
+            size="small"
+            class="sw-customer-detail-order__subscription-order-label"
+        >
+            {{ $tc('commercial.subscriptions.order.labelSubscription') }}
+        </sw-label>
+    </template>
+{% endblock %}

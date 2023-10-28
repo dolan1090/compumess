@@ -1,0 +1,113 @@
+<sw-card position-identifier="sw-settings-subscription-plan-general">
+
+    <template #toolbar>
+        <sw-card-filter
+            v-if="total > 0 || term"
+            @sw-card-filter-term-change="onChangeTerm"
+        >
+            <template #filter>
+                <sw-button
+                    class="sw-settings-subscription-plan-general-add-product"
+                    variant="ghost"
+                    size="small"
+                    @click="openProductsModal"
+                    :disabled="!acl.can('plans_and_intervals.editor')"
+                >
+                    {{ $tc('commercial.subscriptions.settings.plan.addProducts') }}
+                </sw-button>
+            </template>
+        </sw-card-filter>
+    </template>
+
+    <template
+        v-if="total > 0 || term"
+        #grid
+    >
+        <sw-entity-listing
+            ref="entityListing"
+            :repository="productRepository"
+            :is-loading="isLoading"
+            :columns="productColumns"
+            :items="products"
+            :show-settings="false"
+            :allow-column-edit="false"
+            :show-selection="acl.can('plans_and_intervals.editor')"
+            :allow-delete="acl.can('plans_and_intervals.editor')"
+            :allow-view="acl.can('plans_and_intervals.viewer')"
+            :allow-edit="false"
+            :full-page="false"
+            detail-route="sw.product.detail"
+            :plain-appearance="true"
+        >
+            <template #column-name="{ item }">
+                <router-link
+                    :to="{ name: 'sw.product.detail', params: { id: item.id } }"
+                >
+                    <sw-product-variant-info :variations="item.variation">
+                        {{ item.name || item.translated.name }}
+                    </sw-product-variant-info>
+                </router-link>
+            </template>
+
+            <template #pagination>
+                <sw-pagination
+                    :page="page"
+                    :limit="limit"
+                    :total="total"
+                    @page-change="onChangePage"
+                />
+            </template>
+
+            <template #delete-action="{ item }">
+                <sw-context-menu-item
+                    variant="warning"
+                    @click="onRemoveProduct(item.id)"
+                    :disabled="!acl.can('plans_and_intervals.editor')"
+                >
+                    {{ $tc('global.default.remove') }}
+                </sw-context-menu-item>
+            </template>
+
+            <template #bulk>
+                <a
+                    class="link link-warning"
+                    @click="onRemoveProducts"
+                >
+                    {{ $tc('global.default.remove') }}
+                </a>
+            </template>
+        </sw-entity-listing>
+    </template>
+
+    <sw-empty-state
+        v-if="total === 0 && !isLoading && !term"
+        :title="$tc('commercial.subscriptions.settings.plan.emptyProductsTitle')"
+        :absolute="false"
+        :subline="$tc('commercial.subscriptions.settings.plan.emptyProductsSubline')"
+    >
+        <template #icon>
+            <img
+                :src="'/administration/static/img/empty-states/order-empty-state.svg' | asset"
+                :alt="$tc('commercial.subscriptions.settings.plan.emptyProductsTitle')"
+            >
+        </template>
+
+        <template #actions>
+            <sw-button
+                variant="ghost"
+                class="sw-settings-subscription-plan-products__empty-state-add"
+                @click="openProductsModal"
+                :disabled="!acl.can('plans_and_intervals.editor')"
+            >
+                {{ $tc('commercial.subscriptions.settings.plan.addProducts') }}
+            </sw-button>
+        </template>
+    </sw-empty-state>
+
+    <sw-settings-subscription-plan-products-modal
+        v-if="showProductsModal"
+        class="sw-settings-subscription-plan-products-modal"
+        @save="onProductsModalSave"
+        @close="closeProductsModal"
+    />
+</sw-card>

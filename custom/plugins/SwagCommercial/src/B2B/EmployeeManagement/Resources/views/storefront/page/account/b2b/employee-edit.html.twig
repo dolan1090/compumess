@@ -1,0 +1,51 @@
+{% sw_extends '@Storefront/storefront/page/account/b2b/employee-create.html.twig' %}
+
+{% block b2b_components_employee_create_form %}
+    {% block b2b_components_employee_edit_form %}
+        <form
+            action="{{ path('frontend.business-partner.employees.detail.submit', { id: employee.id }) }}"
+            method="post"
+            class="mt-4 b2b-edit-form b2b-edit-employee-form"
+        >
+            {% block b2b_components_employee_create_form_content %}
+                {{ parent() }}
+            {% endblock %}
+        </form>
+    {% endblock %}
+{% endblock %}
+
+{% block b2b_components_employee_create_title %}
+    {% block b2b_components_employee_edit_title %}
+        {{ 'employee-management.employeeEdit.title'|trans|sw_sanitize }}
+    {% endblock %}
+{% endblock %}
+
+{% block b2b_components_employee_create_form_content_role_options_none %}
+    {% block b2b_components_employee_edit_form_content_role_options_none %}
+        <option
+            class="b2b-create-form-role no-selected-role"
+            value=""
+            {% if role.id == employee.roleId %}selected="selected"{% endif %}
+        >
+            {{ 'employee-management.roles.noRoleSelected'|trans|sw_sanitize }}
+        </option>
+    {% endblock %}
+{% endblock %}
+
+{% block b2b_components_employee_create_form_content_role_options_all %}
+    {% block b2b_components_employee_edit_form_content_role_options_all %}
+        {% for role in page.getAvailableRoles() %}
+            <option
+                class="b2b-create-form-role"
+                value="{{ role.id }}"
+                {% if role.id == employee.roleId %}selected="selected"{% endif %}
+            >
+                {{ role.name }}
+            </option>
+        {% endfor %}
+    {% endblock %}
+{% endblock %}
+
+{% block b2b_components_employee_create_form_content_hidden_inputs %}
+  <input type="checkbox" hidden="hidden" name="active" {% if employee.active %}checked{% endif %} />
+{% endblock %}

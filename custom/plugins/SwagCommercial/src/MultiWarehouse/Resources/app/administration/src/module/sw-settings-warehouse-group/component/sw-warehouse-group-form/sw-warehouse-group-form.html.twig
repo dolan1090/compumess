@@ -1,0 +1,51 @@
+<sw-card
+    :title="$tc('sw-settings-warehouse-group.detail.titleCardMain')"
+    position-identifier="sw-settings-warehouse-group-form"
+>
+    <sw-container
+        columns="1fr 175px"
+        gap="0px 30px"
+    >
+        <sw-field
+            v-model="warehouseGroup.name"
+            type="text"
+            required
+            validation="required"
+            :error="warehouseGroupNameError"
+            :label="$tc('sw-settings-warehouse-group.detail.labelName')"
+            :placeholder="$tc('sw-settings-warehouse-group.detail.placeholderName')"
+        />
+        <sw-field
+            v-model="warehouseGroup.priority"
+            type="number"
+            :label="$tc('sw-settings-warehouse-group.detail.labelPriority')"
+            :placeholder="$tc('sw-settings-warehouse-group.detail.placeholderPriority')"
+        />
+    </sw-container>
+
+    <sw-field
+        v-model="warehouseGroup.description"
+        type="textarea"
+        :label="$tc('sw-settings-warehouse-group.detail.labelDescription')"
+        :placeholder="$tc('sw-settings-warehouse-group.detail.placeholderDescription')"
+    />
+
+    <span class="sw-warehouse-group-form__title">
+        {{ $tc('sw-settings-warehouse-group.detail.ruleInfoTitle') }}
+    </span>
+
+    <p class="sw-warehouse-group-form__body">
+        {{ $tc('sw-settings-warehouse-group.detail.ruleInfoText') }}
+    </p>
+
+    <sw-entity-single-select
+        :label="$tc('sw-settings-warehouse-group.detail.labelRule')"
+        :placeholder="$tc('sw-settings-warehouse-group.detail.placeholderRule')"
+        id="warehouse-group-rule-selection"
+        entity="rule"
+        :value="warehouseGroup.ruleId"
+        show-clearable-button
+        @change="setRuleId"
+        validation="required"
+    />
+</sw-card>

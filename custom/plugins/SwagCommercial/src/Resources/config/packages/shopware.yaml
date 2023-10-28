@@ -1,0 +1,4 @@
+shopware:
+    logger:
+        error_code_log_levels:
+            SAAS_EXTENSION_RESSOURCE_NOT_FOUND__BINARY: notice

@@ -1,0 +1,40 @@
+{% block quick_order_items_alert %}
+    <div role="alert"
+         id="{{ id }}"
+         class="alert-{{type}} alert alert-dismissible alert-has-icon fade show d-none">
+        {% block quick_order_items_alert_icon %}
+            {% if type == "danger" %}
+                {% sw_icon 'x-circle' %}
+            {% elseif type == "warning" %}
+                {% sw_icon 'warning' %}
+            {% elseif type == "info" %}
+                {% sw_icon 'info' %}
+            {% elseif type == "success" %}
+                {% sw_icon 'checkmark-circle' %}
+            {% else %}
+                {% sw_icon 'alert' %}
+            {% endif %}
+        {% endblock %}
+
+        {% block quick_order_items_alert_content_container %}
+            <div class="alert-content-container">
+                {% block quick_order_items_alert_content %}
+                    <div class="alert-content">
+                        <strong class="alert-content-title">{{ contentTitle|trans|sw_sanitize }}</strong>
+                        <span class="alert-content-content"></span>
+                    </div>
+                {% endblock %}
+
+                {% block quick_order_items_alert_close %}
+                    <button
+                        class="btn quick-order-alert__close close-{{type}}"
+                        aria-label="Close"
+                        data-bs-dismiss="alert"
+                    >
+                        {% sw_icon 'x' %}
+                    </button>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

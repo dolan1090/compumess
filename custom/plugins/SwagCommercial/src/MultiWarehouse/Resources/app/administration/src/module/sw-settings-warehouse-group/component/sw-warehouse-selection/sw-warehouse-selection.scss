@@ -1,0 +1,19 @@
+@import "~scss/variables";
+
+.sw-warehouse-selection .sw-modal__body {
+    padding: 0;
+}
+
+.sw-warehouse-selection .sw-warehouse-selection__toolbar {
+    padding: 20px 30px;
+    background-color: $color-gray-100;
+}
+
+.sw-warehouse-selection__whitespace {
+    position: relative;
+    padding: 0 0 1rem;
+}
+
+.sw-warehouse-selection__whitespace .sw-button {
+    margin-top: 1rem;
+}

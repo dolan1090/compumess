@@ -1,0 +1,45 @@
+<style>
+    th, td {
+        padding: 0 15px;
+    }
+</style>
+<div style="font-family:arial; font-size:12px;">
+    {% set currencyIsoCode = order.currency.isoCode %}
+    {% set return = order.extensions.returns|first %}
+    Hallo {% if order.orderCustomer.salutation %}{{ order.orderCustomer.salutation.translated.letterName ~ ' ' }}{% endif %}{{ order.orderCustomer.firstName }} {{ order.orderCustomer.lastName }},<br>
+    <br>
+    Ihr Retourenantrag ist am {{ return.createdAt|format_datetime('medium', 'short', locale='de-DE') }} bei uns eingegangen.<br>
+    <br>
+    Bestellnummer: {{ order.orderNumber }}<br>
+    Retourennummer: {{ return.returnNumber }}<br>
+    <br>
+    <strong>Informationen zu Ihrer Retoure:</strong><br>
+    <br>
+
+    <table border="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
+        <tr>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Mengen.</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Name des Produkts</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Preis pro Einheit</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Steuer</strong></td>
+            <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Insgesamt</strong></td>
+        </tr>
+
+        {% for returnItem in return.lineItems %}
+            <tr>
+                <td style="text-align: center">{{ returnItem.quantity }}</td>
+                <td>{{ returnItem.lineItem.label|u.wordwrap(80) }}</td>
+                <td>{{ returnItem.price.unitPrice|currency(currencyIsoCode) }}</td>
+                <td>{%if returnItem.price.taxRules|length > 0 %} {{ (returnItem.price.taxRules|first).taxRate }}% {% endif %}</td>
+                <td>{{ returnItem.price.totalPrice|currency(currencyIsoCode) }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p>
+        <br>
+        Den aktuellen Status Ihrer Retoure können Sie auch jederzeit auf unserer Webseite im  Bereich "Mein Konto" - "Meine Bestellungen" abrufen: {{ rawUrl('frontend.account.order.single.page', { 'deepLinkCode': order.deepLinkCode }, salesChannel.domains|first.url) }}
+        </br>
+        Für Rückfragen stehen wir Ihnen jederzeit gerne zur Verfügung.
+    </p>
+    <br>
+</div>

@@ -1,0 +1,117 @@
+<div>
+    <template v-if="isPlanLoading">
+        <sw-skeleton variant="detail-bold" />
+        <sw-skeleton />
+        <sw-skeleton />
+    </template>
+
+    <template v-else>
+        <sw-card
+            position-identifier="sw-settings-subscription-plans-detail-general"
+            :title="$tc('commercial.subscriptions.settings.generalTitle')"
+            class="sw-settings-subscription-plan-general"
+        >
+            <sw-field
+                v-model="plan.name"
+                class="sw-settings-subscription-plan-general__name"
+                type="text"
+                required
+                :label="$tc('commercial.subscriptions.settings.nameLabel')"
+                :placeholder="$tc('commercial.subscriptions.settings.namePlaceholder')"
+                :error="planNameError"
+                :disabled="!acl.can('plans_and_intervals.editor')"
+            />
+
+
+            <sw-switch-field
+                v-model="plan.activeStorefrontLabel"
+                class="sw-settings-subscription-plan-general__label-active"
+                :label="$tc('commercial.subscriptions.settings.labelStorefrontLabel')"
+                :disabled="!acl.can('plans_and_intervals.editor')"
+            />
+            <sw-field
+                v-model="plan.label"
+                class="sw-settings-subscription-plan-general__label"
+                type="text"
+                :label="$tc('commercial.subscriptions.settings.labelLabel')"
+                :placeholder="$tc('commercial.subscriptions.settings.labelPlaceholder')"
+                :error="planLabelError"
+                :disabled="labelFieldDisabled"
+            />
+            <sw-textarea-field
+                v-model="plan.description"
+                class="sw-settings-subscription-plan-general__description"
+                type="text"
+                :label="$tc('commercial.subscriptions.settings.descriptionLabel')"
+                :placeholder="$tc('commercial.subscriptions.settings.descriptionPlaceholder')"
+                :disabled="!acl.can('plans_and_intervals.editor')"
+            />
+            <sw-switch-field
+                v-model="plan.active"
+                class="sw-settings-subscription-plan-general__active"
+                :label="$tc('commercial.subscriptions.settings.activeLabel')"
+                :disabled="!acl.can('plans_and_intervals.editor')"
+            />
+        </sw-card>
+
+        <sw-card
+            position-identifier="sw-settings-subscription-plans-detail-availability"
+            :title="$tc('commercial.subscriptions.settings.availability')"
+            class="sw-settings-subscription-plan-general__availability"
+        >
+            <sw-select-rule-create
+                class="sw-settings-subscription-plan-general__availability-select"
+                rule-aware-group-key="subscriptionPlans"
+                :label="$tc('commercial.subscriptions.settings.availability')"
+                :placeholder="$tc('commercial.subscriptions.settings.availabilityPlaceholder')"
+                :rule-id="plan.availabilityRuleId"
+                @save-rule="onSaveRule"
+                :disabled="!acl.can('plans_and_intervals.editor')"
+            />
+        </sw-card>
+
+        <sw-card
+            position-identifier="sw-settings-subscription-plans-detail-plans"
+            :title="$tc('commercial.subscriptions.settings.intervals')"
+            class="sw-settings-subscription-plan-general__intervals"
+        >
+            <sw-entity-many-to-many-select
+                class="sw-settings-subscription-plan-general__intervals-select"
+                :label="$tc('commercial.subscriptions.settings.intervals')"
+                :entity-collection="plan.subscriptionIntervals"
+                :local-mode="true"
+                @change="onChangeIntervals"
+                :disabled="!acl.can('plans_and_intervals.editor')"
+            />
+
+            <sw-container
+                columns="1fr 1fr"
+                gap="0px 15px"
+                class="sw-settings-subscription-plan-general__intervals-settings"
+            >
+                <sw-field
+                    v-model="plan.minimumExecutionCount"
+                    class="sw-settings-subscription-plan-general__intervals-settings__minimum-execution-count"
+                    type="number"
+                    :label="$tc('commercial.subscriptions.settings.minimumExecutionCountLabel')"
+                    :placeholder="$tc('commercial.subscriptions.settings.minimumExecutionCountPlaceholder')"
+                    :error="planMinimumExecutionCountError"
+                    :disabled="!acl.can('plans_and_intervals.editor')"
+                />
+
+                <sw-field
+                    v-model="plan.discountPercentage"
+                    class="sw-settings-subscription-plan-general__discount-percentage-label"
+                    type="number"
+                    min="0"
+                    max="100"
+                    :label="$tc('commercial.subscriptions.settings.discountPercentageLabel')"
+                    :placeholder="$tc('commercial.subscriptions.settings.discountPercentagePlaceholder')"
+                    :error="planDiscountPercentageError"
+                    :disabled="!acl.can('plans_and_intervals.editor')"
+                />
+            </sw-container>
+        </sw-card>
+    </template>
+
+</div>

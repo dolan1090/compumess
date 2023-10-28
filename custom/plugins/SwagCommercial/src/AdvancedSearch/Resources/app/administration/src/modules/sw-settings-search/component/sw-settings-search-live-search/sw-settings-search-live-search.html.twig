@@ -1,0 +1,93 @@
+{% block sw_settings_search_view_live_search_sales_channel %}
+{% endblock %}
+
+{% block sw_settings_search_view_live_search_input %}
+<template v-if="esEnabled">
+    <sw-container columns="1fr minmax(100px, 200px)" gap="0 10px">
+        <sw-simple-search-field
+            v-model="previewSearchTerm"
+            class="sw-settings-search-preview-search__search_box"
+            variant="form"
+            :delay="1000"
+            @search-term-change="onChangePreviewSearchTerm"
+        >
+            <template #sw-simple-search-field-icon>
+                <sw-icon
+                    class="sw-settings-search-live-search__search-icon"
+                    small
+                    name="regular-search-s"
+                    @click="onChangePreviewSearchTerm"
+                />
+            </template>
+        </sw-simple-search-field>
+
+        <sw-single-select
+            class="sw-settings-search__live-search-select-entity"
+            :value="entity"
+            :options="entities"
+            @change="onChangeEntity"
+        />
+    </sw-container>
+</template>
+
+<template v-else>
+    {% parent %}
+</template>
+{% endblock %}
+
+{% block sw_settings_search_view_live_search_results_no_result %}
+<template v-if="showEmptyState">
+    <div class="sw-settings-search-live-search__no-result">
+        {{ $tc('sw-settings-search.liveSearchTab.textNoResult') }}
+    </div>
+</template>
+
+<template v-else>
+    {% parent %}
+</template>
+{% endblock %}
+
+{% block sw_settings_search_view_live_search_results_search_grid %}
+<template v-if="esEnabled">
+    <sw-data-grid
+        v-if="previewResults.length > 0"
+        class="sw-settings-search-live-search__grid-result"
+        :plain-appearance="true"
+        :show-selection="false"
+        :show-actions="false"
+        :data-source="previewResults"
+        :is-loading="searchInProgress"
+        :columns="searchColumns"
+    >
+        <template #column-name="{ item }">
+            <sw-product-variant-info
+                :variations="item.variation"
+                :show-tooltip="false"
+            >
+                <sw-settings-search-live-search-keyword
+                    :text="(item.name || item.translated.name)"
+                    :search-term="previewSearchTerm"
+                />
+            </sw-product-variant-info>
+        </template>
+
+        <template #column-score="{ item }">
+            <span class="sw-settings-search-live-search__grid-result__score">
+                {{ Math.round(parseFloat(item.extensions.search._score)) }}
+            </span>
+        </template>
+
+        <template #pagination>
+            <sw-pagination
+                v-bind="{ page, limit, total }"
+                @page-change="onChangePage"
+            />
+        </template>
+    </sw-data-grid>
+</template>
+
+<template v-else>
+    {% parent %}
+</template>
+{% endblock %}
+

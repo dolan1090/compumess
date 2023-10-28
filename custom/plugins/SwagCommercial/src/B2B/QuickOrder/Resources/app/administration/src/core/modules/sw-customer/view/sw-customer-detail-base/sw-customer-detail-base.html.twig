@@ -1,0 +1,17 @@
+{% block sw_customer_detail_custom_field_sets %}
+{% parent %}
+
+<sw-card
+    v-if="features.length && showFeatureCard"
+    class="swag-b2b-features-customer-specific-features-card"
+    position-identifier="sw-customer-detail-base-specific-features"
+    :title="$tc('swag-b2b-features.specificFeaturesCard.title')"
+    :is-loading="customer.isLoading"
+>
+    <swag-b2b-features-customer-specific-features
+        :customer="customer"
+        :features="features"
+        :customer-edit-mode="customerEditMode"
+    />
+</sw-card>
+{% endblock %}

@@ -1,0 +1,31 @@
+@import "~scss/variables";
+
+.sw-permission-tree {
+    &__switch-all, &__group-switch {
+        .sw-field__label label {
+            font-weight: $font-weight-semi-bold;
+            font-size: $font-size-xs;
+        }
+    }
+
+    &__group-divider {
+        background-color: $color-gray-300;
+        height: 1px;
+        width: 100%;
+        border: 0;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    &__group {
+        margin-left: 20px;
+
+        &-switch {
+            margin-bottom: 24px;
+        }
+
+        &-permission-switch {
+            margin-left: 20px;
+        }
+    }
+}

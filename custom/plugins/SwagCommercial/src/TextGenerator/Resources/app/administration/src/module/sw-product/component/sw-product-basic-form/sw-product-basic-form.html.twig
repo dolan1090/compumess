@@ -1,0 +1,22 @@
+{% block sw_product_basic_form_description_field %}
+    {% parent %}
+    <sw-container
+        v-if="getLicense('TEXT_GENERATOR-2209427')"
+        columns="1fr"
+        justify="end"
+        class="sw-product-basic-form__text-generator-button"
+    >
+        <sw-button
+            @click="onModalProductGenerationOpen"
+            :disabled="isDisabled">
+            <sw-icon name="solid-sparkles" small color="#189eff"/>
+            {{ $tc('sw-label-ai.AITextButton') }}
+        </sw-button>
+    </sw-container>
+    {% block sw_product_basic_form_generated_description_modal %}
+    <sw-product-generated-description-modal
+        v-if="displayProductGeneration"
+        @modal-close="onProductGenerationModalClose">
+    </sw-product-generated-description-modal>
+    {% endblock %}
+{% endblock %}

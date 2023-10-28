@@ -1,0 +1,40 @@
+{% block sw_productadd_properties_selection_search_field %}
+    <sw-property-assistant-modal
+        v-if="showAssistantModal"
+        @close-property-assistant-modal="onCloseAssistantModal"
+        @modal-save="onAssistantModalSave"
+    />
+
+    <sw-card-section
+        secondary
+        divider="bottom"
+    >
+        <sw-container
+            columns="1fr auto"
+            gap="0 8px"
+        >
+            <sw-simple-search-field
+                ref="searchField"
+                variant="form"
+                class="sw-product-add-properties-modal__search"
+                size="small"
+                :placeholder="$tc('sw-property-search.placeholderSearch')"
+                @focus="focus"
+                @input="input"
+                @option-select="onSelectOption"
+            />
+
+            <sw-button
+                class="sw-product-add-properties-modal__assistant-link"
+                @click="onOpenAssistantModal"
+            >
+                <sw-icon
+                    name="solid-sparkles"
+                    size="14px"
+                />
+
+                {{ $tc('property-extractor.property-modal.assistant-label') }}
+            </sw-button>
+        </sw-container>
+    </sw-card-section>
+{% endblock %}

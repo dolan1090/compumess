@@ -1,0 +1,33 @@
+{% sw_extends '@Storefront/storefront/page/account/index.html.twig' %}
+
+{% block page_account_overview_welcome_intro %}
+    {% if not isB2bEmployee() %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_account_overview_main %}
+    {% if isB2bEmployee() %}
+        {% sw_include '@Storefront/storefront/page/account/b2b/overview.html.twig' %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_account_overview_newsletter %}
+    {% if not isB2bEmployee() %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_account_overview_addresses_include %}
+    {% if not isB2bEmployee() %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_account_overview_newest_order %}
+    {% if not isB2bEmployee() %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

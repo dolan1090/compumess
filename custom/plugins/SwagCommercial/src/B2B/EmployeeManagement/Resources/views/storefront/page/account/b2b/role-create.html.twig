@@ -1,0 +1,169 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+
+{% block page_account_main_content %}
+    {% set roleEdit = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::ROLE_EDIT') %}
+    {% set role = page.role %}
+    {% set permissions = page.permissions %}
+    {% set permissionsGrouped = permissions.getGroupedPermissions() %}
+    {% set defaultRoleId = page.getDefaultRoleId() %}
+    {% set isDefaultRole = defaultRoleId is not null and defaultRoleId === role.id %}
+    {% set editDisabled = not isB2bAdmin() and not isB2bAllowed(roleEdit) %}
+    {% set defaultRoleModalId = 'b2b-default-role-modal' %}
+    {% set defaultRoleSwitchId = 'b2b-create-form-default-role-switch' %}
+
+    {% block b2b_components_role_create %}
+        <div class="b2b-role-create b2b-create">
+            <div class="account-address">
+                <div class="account-welcome">
+                    <h1 class="b2b-create-title">
+                        {% block b2b_components_role_create_back %}
+                            <a
+                                href="{{ path('frontend.business-partner.roles.list') }}"
+                                class="btn btn-light b2b-create-back align-self-center"
+                            >
+                                {% sw_icon 'arrow-head-left' style { 'size': 'sm' } %}
+                            </a>
+                        {% endblock %}
+
+                        <span class="b2b-create-title-text">
+                            {% block b2b_components_role_create_title %}
+                                {{ 'employee-management.roleCreate.title'|trans|sw_sanitize }}
+                            {% endblock %}
+                        </span>
+                    </h1>
+                </div>
+            </div>
+
+            {% block b2b_components_role_create_form %}
+                <form
+                    action="{{ path('frontend.business-partner.roles.create.submit') }}"
+                    method="post"
+                    class="mt-4 card b2b-create-form b2b-create-role-form"
+                >
+                    {% block b2b_components_role_create_form_content %}
+                        {% block b2b_components_role_create_form_content_general %}
+                            <div class="row">
+                                {% block b2b_components_role_create_form_content_general_name %}
+                                    <div class="form-group col-10 col-md-6 b2b-create-form-name">
+                                        <label class="form-label" for="b2b-create-form-name-input">{{ 'employee-management.roleCreate.labelName'|trans|sw_sanitize }}{{ 'general.required'|trans|sw_sanitize }}</label>
+                                        <input
+                                            id="b2b-create-form-name-input"
+                                            class="form-control{% if formViolations.getViolations('/name') is not empty %} is-invalid{% endif %}"
+                                            type="text"
+                                            name="name"
+                                            placeholder="{{ 'employee-management.roleCreate.placeholderName'|trans|sw_sanitize }}"
+                                            value="{{ role.name }}"
+                                            {% if editDisabled %}
+                                                disabled="disabled"
+                                            {% endif %}
+                                        />
+
+                                        {% if formViolations.getViolations('/name') is not empty %}
+                                            {% sw_include '@Storefront/storefront/utilities/form-violation.html.twig' with {
+                                                violationPath: '/name'
+                                            } %}
+                                        {% endif %}
+                                    </div>
+                                {% endblock %}
+                                {% block b2b_components_role_create_form_content_general_default_role %}
+                                    <div class="form-check form-switch b2b-checkbox-group form-group col-10 col-sm-6 mx-4 mx-md-0 b2b-create-form-default-role">
+                                        <input
+                                            id="{{ defaultRoleSwitchId }}"
+                                            class="form-check-input"
+                                            name="isDefaultRole"
+                                            type="checkbox"
+                                            role="switch"
+                                            value="1"
+                                            {% if editDisabled %}
+                                                disabled="disabled"
+                                            {% endif %}
+                                            {% if isDefaultRole %}
+                                                checked="checked"
+                                            {% elseif defaultRoleId is not null %}
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#{{ defaultRoleModalId }}"
+                                            {% endif %}
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="{{ defaultRoleSwitchId }}"
+                                        >
+                                            {{ 'employee-management.roleCreate.labelDefaultRole'|trans|sw_sanitize }}
+                                        </label>
+                                    </div>
+                                {% endblock %}
+                            </div>
+
+                            <p>{{ 'global.default.noteRequiredFields'|trans|sw_sanitize }}</p>
+                        {% endblock %}
+
+                        {% block b2b_components_role_create_form_content_permissions %}
+                            <h2 class="card-title b2b-create-form-permission-title mt-4">{{ 'employee-management.roleCreate.permissionsTitle'|trans|sw_sanitize }}</h2>
+
+                            <div class="b2b-create-role-form-permission-content mb-4">
+                                {% set options = {
+                                    permissionGroupSelector: '.b2b-tree-group-select input[type="checkbox"]',
+                                    permissionSelector: '.b2b-tree-permission-select input[type="checkbox"]',
+                                } %}
+
+                                <div
+                                    id="role-permission-tree"
+                                    class="b2b-tree"
+                                    data-b2b-role-permission-tree
+                                    data-b2b-role-permission-tree-options="{{ options|json_encode() }}"
+                                >
+                                    {% block b2b_components_role_create_form_content_permissions_tree %}
+                                        {% for groupName, permissions in permissionsGrouped %}
+                                            {% set treeTarget = 'b2b-permission-tree-collapse-' ~ groupName %}
+
+                                            {% sw_include '@Commercial/storefront/component/b2b/permission-tree/permission-group-select.html.twig' with {
+                                                target: treeTarget,
+                                                groupName: groupName,
+                                                editDisabled,
+                                            }  %}
+
+                                            {% sw_include '@Commercial/storefront/component/b2b/permission-tree/permission-select.html.twig' with {
+                                                target: treeTarget,
+                                                activePermissions: role.permissions,
+                                                permissions,
+                                                editDisabled,
+                                            }  %}
+                                        {% endfor %}
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        {% endblock %}
+
+                        <div class="b2b-create-actions">
+                            {% block b2b_components_role_create_form_actions %}
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary b2b-create-actions-save"
+                                    {% if editDisabled %}
+                                        disabled="disabled"
+                                    {% endif %}
+                                >
+                                    {{ 'global.default.save'|trans|sw_sanitize }}
+                                </button>
+
+                                <a
+                                    href="{{ path('frontend.business-partner.roles.list') }}"
+                                    class="btn btn-outline-secondary b2b-create-actions-cancel"
+                                >
+                                    {{ 'global.default.cancel'|trans|sw_sanitize }}
+                                </a>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </form>
+            {% endblock %}
+
+            {% block b2b_components_role_create_default_role_modal %}
+                {% sw_include '@Commercial/storefront/component/b2b/default-role-confirm-modal.html.twig' with {
+                    defaultRoleModalId,
+                    defaultRoleSwitchId,
+                } %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

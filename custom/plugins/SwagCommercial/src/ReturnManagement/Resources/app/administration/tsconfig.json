@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es2020",
+    "lib": ["ES2020", "DOM"],
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@administration/*": ["../../../../../../../../src/Administration/Resources/app/administration/*"],
+    },
+  },
+  "include": [
+    "src/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+  "files": [
+    "../../../../../../../../src/Administration/Resources/app/administration/src/html-shim.d.ts",
+    "../../../../../../../../src/Administration/Resources/app/administration/src/global.types.ts",
+  ],
+}

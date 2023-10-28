@@ -1,0 +1,58 @@
+<sw-modal
+    :title="$tc('sw-product.modal-warehouse-group.textHeadline')"
+    class="sw-product-warehouse-group-modal"
+    variant="large"
+    @modal-close="closeModal"
+>
+    <sw-container
+        class="sw-product-warehouse-group-modal__content"
+        columns="30% auto"
+    >
+        <div class="sw-product-warehouse-group-modal__navigation">
+            <sw-tabs
+                v-if="!isLoading"
+                :is-vertical="true"
+                @new-item-active="setActiveGroup"
+                position-identifier="sw-product-warehouse-group-modal-tabs"
+            >
+                <sw-tabs-item
+                    v-for="(group, index) in warehouseGroups"
+                    :key="`product-warehouse-stock-tab--${index}`"
+                    :active="group.id === activeGroupId"
+                    :name="group.id"
+                >
+                    <sw-container
+                        :key="`sw-product-warehouse-group-modal__navigation--${index}`"
+                        columns="1fr auto"
+                        justify="stretch"
+                    >
+                        <span
+                            class="sw-product-warehouse-group-modal__navigation-group"
+                            v-tooltip="{ message: group.name }"
+                        >
+                            {{ group.name }}
+                        </span>
+                        <span class="sw-product-warehouse-group-modal__navigation-stock">{{ getTotalStock(group.id) }}</span>
+                    </sw-container>
+                </sw-tabs-item>
+            </sw-tabs>
+        </div>
+
+        <sw-product-warehouse-stock
+            v-if="activeGroupId"
+            :product-id="product.id"
+            :product-version-id="product.versionId"
+            :warehouse-group-id="activeGroupId"
+            @update-records="refreshNavigation"
+        />
+    </sw-container>
+
+    <template slot="modal-footer">
+        <sw-button
+            size="small"
+            @click="closeModal"
+        >
+            {{ $tc('sw-product.modal-warehouse-group.buttonCancel') }}
+        </sw-button>
+    </template>
+</sw-modal>

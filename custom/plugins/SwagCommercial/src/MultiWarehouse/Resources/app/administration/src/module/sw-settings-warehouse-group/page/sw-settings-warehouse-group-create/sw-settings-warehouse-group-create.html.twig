@@ -1,0 +1,40 @@
+<sw-page class="sw-settings-warehouse-group-create">
+    <template #smart-bar-header>
+        <h2>{{ placeholder(warehouseGroup, 'name', $tc('sw-settings-warehouse-group.create.title')) }}</h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button @click.prevent="onCancel">
+            {{ $tc('sw-settings-warehouse-group.detail.buttonCancel') }}
+        </sw-button>
+        <sw-button-process
+            :is-loading="isLoading"
+            :process-success="isSaveSuccessful"
+            variant="primary"
+            @process-finish="saveFinish"
+            @click.prevent="onSave"
+        >
+            {{ $tc('sw-settings-warehouse-group.detail.buttonSave') }}
+        </sw-button-process>
+    </template>
+
+    <template #content>
+        <sw-card-view>
+            <template v-if="isLoading">
+                <sw-skeleton />
+                <sw-skeleton v-if="acl.can('warehouse.viewer')" />
+            </template>
+
+            <template v-else>
+                <sw-warehouse-group-form :warehouseGroup="warehouseGroup" />
+
+                <sw-settings-warehouse-group-warehouses
+                    v-if="acl.can('warehouse.viewer')"
+                    :warehouseGroupId="warehouseGroup.id"
+                    :local-mode="true"
+                    @selected-entities="setWarehouseGroupWarehouses"
+                />
+            </template>
+        </sw-card-view>
+    </template>
+</sw-page>

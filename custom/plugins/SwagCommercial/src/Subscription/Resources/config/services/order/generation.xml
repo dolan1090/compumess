@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Shopware\Commercial\Subscription\Checkout\Order\Generation\ScheduledSubscriptionsTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Checkout\Order\Generation\GenerateSubscriptionOrderService">
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="subscription.repository"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Interval\IntervalCalculator"/>
+            <argument type="service" id="Shopware\Core\System\NumberRange\ValueGenerator\NumberRangeValueGeneratorInterface"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Order\OrderConverter"/>
+            <argument type="service" id="Shopware\Core\Checkout\Payment\Cart\PaymentRecurringProcessor"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Entity\Subscription\Aggregate\SubscriptionStateHandler"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Checkout\Order\Generation\ScheduledSubscriptionsTaskHandler">
+            <argument type="service" id="subscription.repository"/>
+            <argument type="service" id="messenger.bus.shopware"/>
+            <argument type="service" id="logger"/>
+            <argument type="service" id="scheduled_task.repository"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Checkout\Order\Generation\GenerateSubscriptionOrderHandler">
+            <argument type="service" id="Shopware\Commercial\Subscription\Checkout\Order\Generation\GenerateSubscriptionOrderService"/>
+            <argument type="service" id="logger"/>
+
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Checkout\Order\SubscriptionCheckoutOrderPlacedSubscriber">
+            <argument type="service" id="subscription.repository"/>
+            <argument type="service" id="Shopware\Commercial\Subscription\Entity\Subscription\Aggregate\SubscriptionStateHandler"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

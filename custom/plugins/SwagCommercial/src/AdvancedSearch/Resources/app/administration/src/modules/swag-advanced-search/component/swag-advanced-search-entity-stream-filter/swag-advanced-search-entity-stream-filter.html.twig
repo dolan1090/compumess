@@ -1,0 +1,57 @@
+{% block sw_condition_base %}
+<div
+    class="swag-advanced-search-entity-stream-filter"
+    :class="conditionClasses"
+>
+    {% block sw_condition_base_inner %}
+    <div class="swag-advanced-search-entity-stream-filter__container">
+        {% block sw_condition_entity_stream_filter %}
+        <div class="swag-advanced-search-entity-stream-filter__selects">
+            {% block sw_condition_entity_stream_filter_select %}
+            <template v-for="(definition, index) in fieldDefinitions">
+                <swag-advanced-search-entity-stream-field-select
+                    v-bind="{ field: fields[index], definition, index }"
+                    @field-changed="updateFields"
+                />
+            </template>
+
+            <swag-advanced-search-entity-stream-value
+                v-bind="{ condition, ...lastField }"
+                @type-change="changeType"
+            />
+            {% endblock %}
+        </div>
+
+        <sw-context-button class="swag-advanced-search-entity-stream-filter__context-button">
+            {% block sw_condition_entity_stream_filter_context_button %}
+            <sw-context-menu-item
+                class="swag-advanced-search-entity-stream-filter__create-before-action"
+                @click="onCreateBefore"
+            >
+                {{ $tc('global.sw-condition.condition.createBefore') }}
+            </sw-context-menu-item>
+
+            <sw-context-menu-item
+                class="swag-advanced-search-entity-stream-filter__create-after-action"
+                @click="onCreateAfter"
+            >
+                {{ $tc('global.sw-condition.condition.createAfter') }}
+            </sw-context-menu-item>
+
+            <sw-context-menu-item
+                variant="danger"
+                @click="onDeleteCondition"
+            >
+                {{ $tc('global.default.delete') }}
+            </sw-context-menu-item>
+            {% endblock %}
+        </sw-context-button>
+        {% endblock %}
+    </div>
+
+    <sw-field-error
+        :error="currentError"
+    />
+    {% endblock %}
+</div>
+{% endblock %}

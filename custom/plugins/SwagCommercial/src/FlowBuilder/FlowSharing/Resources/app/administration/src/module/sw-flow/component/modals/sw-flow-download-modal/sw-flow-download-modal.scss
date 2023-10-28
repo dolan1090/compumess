@@ -1,0 +1,17 @@
+.sw-flow-download-modal {
+    &.sw-modal .sw-modal__body {
+        padding: 24px;
+    }
+
+    &__description p {
+        margin-bottom: 24px;
+    }
+
+    &__included:not(:last-child) {
+        margin-bottom: 24px;
+    }
+
+    &__included ul > li {
+        list-style: none;
+    }
+}

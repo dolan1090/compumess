@@ -1,0 +1,36 @@
+<div
+    v-if="previewEnabled"
+    class="sw-rule-builder-preview-indicator"
+    :class="indicatorClasses"
+>
+    <sw-label
+        v-if="ruleMatch === null"
+        variant="warning"
+        size="medium"
+        appearance="pill"
+    >
+        <slot name="preview-invalid">
+            {{ $tc('sw-rule-builder-preview-indicator.invalid') }}
+        </slot>
+    </sw-label>
+    <sw-label
+        v-else-if="ruleMatch"
+        variant="success"
+        size="medium"
+        appearance="pill"
+    >
+        <slot name="preview-true">
+            {{ $tc('sw-rule-builder-preview-indicator.true') }}
+        </slot>
+    </sw-label>
+    <sw-label
+        v-else
+        variant="danger"
+        size="medium"
+        appearance="pill"
+    >
+        <slot name="preview-false">
+            {{ $tc('sw-rule-builder-preview-indicator.false') }}
+        </slot>
+    </sw-label>
+</div>

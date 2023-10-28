@@ -1,0 +1,83 @@
+.subscription-item-header {
+    @extend .order-item-header;
+}
+
+.subscription-item-detail {
+    @extend .order-item-detail;
+
+    &-footer {
+        @extend .order-item-detail-footer;
+    }
+
+    &-labels {
+        @extend .order-item-detail-labels;
+
+        &-value {
+            @extend .order-item-detail-labels-value;
+        }
+    }
+
+    &-summary {
+        @extend .order-item-detail-summary;
+    }
+}
+
+.subscription-item-status-badge {
+    @extend .order-item-status-badge;
+
+    &-active {
+        background-color: $sw-color-success;
+    }
+
+    &-paused {
+        background-color: $sw-color-warning;
+    }
+
+    &-cancelled,
+    &-flagged_cancelled,
+    &-payment_failed {
+        background-color: $sw-color-danger;
+    }
+}
+
+.subscription-detail-content {
+    @extend .order-detail-content;
+
+    &-header {
+        @extend .order-detail-content-header;
+
+        &-cell {
+            @extend .order-detail-content-header-cell;
+        }
+    }
+
+    &-body {
+        @extend .order-detail-content-body;
+    }
+
+    &-list {
+        @extend .order-detail-content-list !optional;
+    }
+
+    &-footer {
+        @extend .order-detail-content-footer !optional;
+    }
+}
+
+.subscription-header {
+    &-name {
+        @extend .order-header-name !optional;
+    }
+
+    &-quantity {
+        @extend .order-header-quantity;
+    }
+
+    &-price {
+        @extend .order-header-price;
+    }
+
+    &-total {
+        @extend .order-header-total;
+    }
+}

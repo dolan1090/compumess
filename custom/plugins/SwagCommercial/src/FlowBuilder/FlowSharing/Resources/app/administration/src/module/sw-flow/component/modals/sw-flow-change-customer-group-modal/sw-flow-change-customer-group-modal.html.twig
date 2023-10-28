@@ -1,0 +1,6 @@
+{% block sw_flow_change_customer_group_modal_content_custom %}
+<sw-flow-sequence-modal-error
+    v-if="sequence.error && Object.keys(sequence.error).length > 0"
+    :sequence="sequence"
+/>
+{% endblock %}

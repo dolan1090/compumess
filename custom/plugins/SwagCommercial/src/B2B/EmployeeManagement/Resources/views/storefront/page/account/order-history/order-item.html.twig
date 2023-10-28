@@ -1,0 +1,24 @@
+{% sw_extends '@Storefront/storefront/page/account/order-history/order-item.html.twig' %}
+
+{% block page_account_order_item_order_number_col %}
+    {{ parent() }}
+
+    {% if isB2bAdmin() or isB2bEmployee() %}
+        {% block b2b_components_order_item %}
+            {% if order.extensions.orderEmployee|length > 0 %}
+                {% set orderer = order.extensions.orderEmployee|first %}
+            {% else %}
+                {% set orderer = order.orderCustomer %}
+            {% endif %}
+
+            {% if orderer %}
+                <div class="col-12 order-table-b2b-employee">
+                    {% block b2b_components_order_item_employee %}
+                        <strong class="order-table-b2b-employee-label">{{ "employee-management.account.orderedBy"|trans|sw_sanitize }}</strong>
+                        <span class="order-table-b2b-employee-value">{{ orderer.firstName }} {{ orderer.lastName }}</span>
+                    {% endblock %}
+                </div>
+            {% endif %}
+        {% endblock %}
+    {% endif %}
+{% endblock %}

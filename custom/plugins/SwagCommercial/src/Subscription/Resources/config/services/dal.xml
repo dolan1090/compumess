@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- entity definitions -->
+
+        <service id="Shopware\Commercial\Subscription\Entity\SubscriptionPlan\SubscriptionPlanDefinition">
+            <tag name="shopware.entity.definition" entity="subscription_plan" />
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\SubscriptionPlan\SalesChannel\SalesChannelSubscriptionPlanDefinition">
+            <tag name="shopware.sales_channel.entity.definition"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\Subscription\SubscriptionDefinition">
+            <tag name="shopware.entity.definition" entity="subscription"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\Subscription\Aggregate\SubscriptionAddress\SubscriptionAddressDefinition">
+            <tag name="shopware.entity.definition" entity="subscription_address"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\Subscription\Aggregate\SubscriptionCustomer\SubscriptionCustomerDefinition">
+            <tag name="shopware.entity.definition" entity="subscription_customer"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\Subscription\Aggregate\SubscriptionTag\SubscriptionTagMappingDefinition">
+            <tag name="shopware.entity.definition" entity="subscription_tag_mapping"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\SubscriptionInterval\SubscriptionIntervalDefinition">
+            <tag name="shopware.entity.definition" entity="subscription_interval" />
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\SubscriptionPlan\Aggregate\Product\SubscriptionPlanProductMappingDefinition">
+            <tag name="shopware.entity.definition" entity="subscription_plan_product_mapping" />
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\SubscriptionPlan\Aggregate\SubscriptionInterval\SubscriptionPlanSubscriptionIntervalMappingDefinition">
+            <tag name="shopware.entity.definition" entity="subscription_plan_interval_mapping" />
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\SubscriptionInterval\Aggregate\SubscriptionIntervalTranslation\SubscriptionIntervalTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="subscription_interval_translation"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Entity\SubscriptionPlan\Aggregate\SubscriptionPlanTranslation\SubscriptionPlanTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="subscription_plan_translation"/>
+        </service>
+
+        <!-- entity extensions -->
+
+        <service id="Shopware\Commercial\Subscription\Extension\CountryStateSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\CountrySubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\CurrencySubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\CustomerSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\OrderSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\PaymentMethodSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\ProductSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\RuleSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\SalesChannelSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\SalutationSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\ShippingMethodSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\TagSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\LanguageSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\Subscription\Extension\StateMachineStateSubscriptionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+    </services>
+</container>

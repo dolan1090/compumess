@@ -1,0 +1,13 @@
+{
+  "global": {
+    "entities": {
+      "export_assistant": "Export assistant",
+      "search_assistant": "AI Copilot"
+    },
+    "swag-search-assistant": {
+      "messageTryAgain": "Assistant: Please try again",
+      "messageEmpty": "No entities found for this prompt",
+      "messageMissingEntityOrCriteria": "Cannot detect entity or criteria from your prompt"
+    }
+  }
+}

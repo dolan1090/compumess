@@ -1,0 +1,13 @@
+<sw-arrow-field
+    class="swag-advanced-search-entity-stream-field-select"
+    primary="#758ca3"
+    secondary="#ffffff"
+>
+    <sw-single-select
+        size="medium"
+        :value="field"
+        :options="options"
+        :placeholder="$tc('swag-advanced-search.boostingTab.filter.placeholderFieldSelect')"
+        @change="changeField"
+    />
+</sw-arrow-field>

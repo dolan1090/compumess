@@ -1,0 +1,145 @@
+{
+  "employee-management": {
+    "flash": {
+      "employee": {
+        "createSuccess": "A new employee account has been created. This account has to be activated by the employee via the link in the invitation email.",
+        "resendSuccess": "The invitation email has been resent.",
+        "editSuccess": "The employee account \"%firstName% %lastName%\" has been updated.",
+        "deleteSuccess": "The employee account has been deleted.",
+        "activateSuccess": "The employee account \"%firstName% %lastName%\" has been activated.",
+        "deactivateSuccess": "The employee account \"%firstName% %lastName%\" has been deactivated."
+      },
+      "role": {
+        "createSuccess": "A new role has been created.",
+        "updateSuccess": "The role \"%name%\" has been updated.",
+        "deleteSuccess": "The role has been deleted."
+      }
+    },
+    "tableHeader": {
+      "searchButton": "Search",
+      "searchPlaceholder": "Enter search term..."
+    },
+    "navigation": {
+      "adminPill": "Admin",
+      "employees": "Employees",
+      "roles": "Roles"
+    },
+    "overview": {
+      "profileTitle": "Personal data",
+      "companyTitle": "Your company"
+    },
+    "account": {
+      "orderedBy": "Ordered by:"
+    },
+    "employees": {
+      "title": "Employees",
+      "buttonAdd": "Create account",
+      "tableHeaderFirstName": "First name",
+      "tableHeaderLastName": "Last name",
+      "tableHeaderRole": "Role",
+      "tableHeaderStatus": "Status",
+      "tableHeaderEmail": "Email address",
+      "stateActive": "Active",
+      "stateDeactivated": "Inactive",
+      "stateInvitationSent": "Invitation sent",
+      "stateInvitationExpired": "Invitation expired",
+      "noRole": "None",
+      "emptyState": "You have not added any employees yet.",
+      "resendInvitation": "Resend invitation",
+      "buttonRevoke": "Revoke invitation"
+    },
+    "employeeProfile": {
+      "labelName": "Name",
+      "labelFirstName": "First name",
+      "placeholderFirstName": "Enter first name...",
+      "labelLastName": "Last name",
+      "placeholderLastName": "Enter last name...",
+      "labelEmail": "Email address",
+      "placeholderEmail": "Enter new email address...",
+      "labelRole": "Role"
+    },
+    "employeeCreate": {
+      "title": "Create new employee account",
+      "labelFirstName": "First name",
+      "placeholderFirstName": "Enter first name...",
+      "labelLastName": "Last name",
+      "placeholderLastName": "Enter last name...",
+      "labelEmail": "Email address",
+      "placeholderEmail": "Enter new email address...",
+      "labelRole": "Role"
+    },
+    "employeeEdit": {
+      "title": "Employee details"
+    },
+    "employeeDeactivate": {
+      "title": "Deactivate employee account",
+      "text": "Are you sure you want to deactivate <strong>%firstName% %lastName%'s</strong> account?\n The employee won't be able to use their account unless it is activated again."
+    },
+    "employeeDelete": {
+      "title": "Delete employee account",
+      "text": "Are you sure you want to delete the employee account <strong>%firstName% %lastName%</strong>?"
+    },
+    "employeeRevoke": {
+      "title": "Revoke invitation",
+      "text": "Are you sure you want to revoke the invitation for <strong>%firstName% %lastName%</strong>?",
+      "buttonRevoke": "Revoke invitation"
+    },
+    "employeeSetPassword": {
+      "title": "Complete sign-up",
+      "text": "Create a password to complete the sign-up.",
+      "inviteConfirmNoSuccess": "Password could not be saved.",
+      "inviteConfirmSuccess": "Your password has been saved.",
+      "employeeWithHashNotFound": "The invitation link is invalid or has expired."
+    },
+    "roles": {
+      "title": "Roles",
+      "tableHeaderName": "Role",
+      "buttonAdd": "Create role",
+      "emptyState": "You have not added any roles yet.",
+      "noRoleSelected": "None",
+      "defaultRoleLabel": "Default role"
+    },
+    "roleCreate": {
+      "title": "Create new role",
+      "labelName": "Role",
+      "placeholderName": "Enter role name...",
+      "labelDefaultRole": "Default role for new employees",
+      "defaultModalTitle": "Set default role",
+      "defaultModalText": "You have changed the default role for new employees. Are you sure you want to continue?",
+      "permissionsTitle": "Permissions"
+    },
+    "roleEdit": {
+      "title": "Role details",
+      "permissionTooltip": "This permission depends on:",
+      "permissions": {
+        "employee": {
+          "read": "Can view employees",
+          "edit": "Can edit employees",
+          "create": "Can create employees",
+          "delete": "Can delete employees"
+        },
+        "role": {
+          "read": "Can view roles",
+          "edit": "Can edit roles",
+          "create": "Can create roles",
+          "delete": "Can delete roles"
+        },
+        "order": {
+          "read": {
+            "all": "Can view all orders"
+          }
+        }
+      },
+      "permissionGroups": {
+        "employee": "Employee management",
+        "role": "Role management",
+        "order": "Orders"
+      }
+    },
+    "roleDelete": {
+      "title": "Delete role",
+      "text": "Are you sure you want to delete the role <strong>%name%</strong>?",
+      "hasEmployeesWarningText": "When deleting this role, all assigned employees will lose their permissions."
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<sw-data-grid
+    class="sw-flow-call-webhook-parameter-grid"
+    :data-source="records"
+    :columns="parameterColumns"
+    :show-selection="false"
+    :plain-appearance="true"
+>
+    <template #column-name="{ item, itemIndex }">
+        <sw-text-field
+            v-model="item.name"
+            size="small"
+            :placeholder="$tc('sw-flow-call-webhook.modal.placeholderName')"
+            @change="onChangeItem(item, itemIndex)"
+        />
+    </template>
+
+    <template #column-data="{ item, itemIndex }">
+        <sw-single-select
+            v-if="!item.isCustomData"
+            v-model="item.data"
+            size="small"
+            label-property="value"
+            :options="dataSelection"
+            :placeholder="$tc('sw-flow-call-webhook.modal.placeholderData')"
+            @change="onChangeItem(item, itemIndex)"
+        />
+
+        <sw-text-field
+            v-if="item.isCustomData"
+            v-model="item.data"
+            size="small"
+            :placeholder="$tc('sw-flow-call-webhook.modal.placeholderCustomData')"
+            @change="onChangeItem(item, itemIndex)"
+        />
+    </template>
+
+    <template #actions="{ item, itemIndex }">
+        <sw-context-menu-item
+            class="sw-flow-call-webhook-parameter-grid__choose-parameter"
+            @click="changeToCustomText(item, itemIndex)"
+        >
+                {{ item.isCustomData
+                ? $tc('sw-flow-call-webhook.modal.contextButton.choosePredefinedParam')
+                : $tc('sw-flow-call-webhook.modal.contextButton.useOwnParam') }}
+        </sw-context-menu-item>
+
+        <sw-context-menu-item
+            class="sw-flow-call-webhook-parameter-grid__delete-param"
+            variant="danger"
+            :disabled="disableDelete(itemIndex)"
+            @click="deleteItem(itemIndex)"
+        >
+            {{ $tc('sw-flow-call-webhook.modal.contextButton.deleteParameter') }}
+        </sw-context-menu-item>
+    </template>
+</sw-data-grid>

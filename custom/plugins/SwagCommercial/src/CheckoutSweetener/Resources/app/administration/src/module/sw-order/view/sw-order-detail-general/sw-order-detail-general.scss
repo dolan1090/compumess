@@ -1,0 +1,20 @@
+@import "~scss/variables";
+
+.sw-order-detail-general-checkout-sweetener {
+    &__link {
+        text-align: right;
+
+        .sw-internal-link {
+            display: inline-grid;
+        }
+    }
+}
+
+.sw-order-detail-general-title-container {
+    display: flex;
+    align-items: center;
+
+    & .sw-card__title {
+        margin-right: 8px;
+    }
+}

@@ -1,0 +1,134 @@
+@import "~scss/variables";
+@import "~scss/mixins";
+
+.sw-flow-delay-action {
+    &__wrapper {
+        position: relative;
+        display: grid;
+        grid-template-columns: min-content;
+        grid-template-rows: min-content;
+    }
+
+    &__disabled {
+        cursor: not-allowed;
+
+        img {
+            opacity: 0.6;
+        }
+
+        .sw-flow-delay-action__delay_card
+        .sw-flow-sequence-action__title {
+            color: $color-gray-500;
+        }
+
+        .sw-flow-sequence-action__content h3 {
+            color: $color-gray-500;
+        }
+    }
+
+    &__delay_card {
+        border-color: $color-pumpkin-spice-700;
+        .sw-flow-sequence-action__header {
+            background-color: $color-pumpkin-spice-50;
+        }
+
+        .sw-flow-sequence-action__title {
+            color: $color-pumpkin-spice-800;
+        }
+
+        &.has--then-selector {
+            margin-right: 0;
+        }
+    }
+
+    &__action-header {
+        .sw-icon {
+            color: $color-gray-800;
+        }
+    }
+
+    &__action-name {
+        display: flex;
+        align-items: center;
+
+        h3 {
+            font-size: $font-size-xs;
+            font-weight: $font-weight-semi-bold;
+            color: $color-darkgray-200;
+            margin-left: 8px;
+            margin-bottom: 0;
+        }
+    }
+
+    &__help-text {
+        position: absolute;
+        width: 340px;
+        left: 360px;
+        padding: 32px;
+        border: 2px dashed $color-gray-300;
+        border-radius: 8px;
+        color: $color-darkgray-200;
+        top: 0px;
+
+        h3 {
+            font-size: $font-size-m;
+            font-weight: normal;
+            color: $color-darkgray-200;
+        }
+
+        p {
+            font-size: $font-size-xs;
+            color: $color-darkgray-200;
+        }
+    }
+
+    &__true-label {
+        transform: translate(-50%, -50%);
+        left: 50px;
+
+        &.sw-label {
+            background: $color-emerald-600;
+            color: $color-white;
+            border: none;
+            text-transform: uppercase;
+            font-weight: $font-weight-semi-bold;
+        }
+    }
+
+    &__then-arrow {
+        grid-column: 2;
+        grid-row: 1;
+        position: relative;
+        min-width: 100px;
+        top: 40px;
+
+        .sw-icon.icon--regular-chevron-right-s {
+            position: absolute;
+            top: -7px;
+            right: 0;
+            padding: 0 !important;
+            color: $color-gray-500;
+        }
+    }
+
+    &__then-line {
+        border-top: 2px dashed $color-gray-400;
+        height: 2px;
+        width: calc(100% - 6px);
+        position: absolute;
+    }
+
+    &__then-oval {
+        @include circle(12px);
+
+        position: absolute;
+        background: $color-white;
+        border: 1px solid $color-gray-400;
+        top: -6px;
+        left: -7px;
+    }
+
+    &__popover {
+        text-transform: capitalize;
+    }
+}

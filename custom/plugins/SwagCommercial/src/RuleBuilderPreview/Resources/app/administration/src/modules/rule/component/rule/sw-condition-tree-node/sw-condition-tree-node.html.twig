@@ -1,0 +1,9 @@
+{% block sw_condtion_tree_node %}
+<div class="condition-tree-node-override">
+    {% parent %}
+    <sw-rule-builder-preview-indicator
+        :condition-id="condition.id"
+        :condition-name="condition.type"
+    />
+</div>
+{% endblock %}

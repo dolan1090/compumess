@@ -1,0 +1,1 @@
+(this["webpackJsonpPluginflow-sharing"]=this["webpackJsonpPluginflow-sharing"]||[]).push([[4],{QfLs:function(e,n,s){"use strict";s.r(n);n.default={template:'{% block sw_flow_change_customer_group_modal_content_custom %}\n<sw-flow-sequence-modal-error\n    v-if="sequence.error && Object.keys(sequence.error).length > 0"\n    :sequence="sequence"\n/>\n{% endblock %}\n'}}}]);

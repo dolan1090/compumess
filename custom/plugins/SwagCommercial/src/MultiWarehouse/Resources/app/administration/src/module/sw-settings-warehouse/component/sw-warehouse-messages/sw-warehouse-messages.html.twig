@@ -1,0 +1,12 @@
+{% block sw_warehouse_messages_no_rule_assigned_info %}
+    <sw-alert
+        variant="info"
+        v-if="ruleInfoVisible"
+        class="sw-warehouse-messages-no-rule-assigned-info"
+        :title="$tc('sw-settings-warehouse.list.warehouseMessages.noRuleAssignedMessageTitle')"
+        :closable="true"
+        @close="ruleInfoVisible = false"
+    >
+        <span v-html="buildNoRuleAssignedAlertMessage('sw-settings-warehouse.list.warehouseMessages.noRuleAssignedMessage', warehouseGroups)"></span>
+    </sw-alert>
+{% endblock %}

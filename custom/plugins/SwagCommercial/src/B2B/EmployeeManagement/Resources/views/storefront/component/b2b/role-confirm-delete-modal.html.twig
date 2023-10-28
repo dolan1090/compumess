@@ -1,0 +1,62 @@
+{% block b2b_components_role_delete_modal %}
+    {% set options = {
+        contentId: 'b2b-role-delete-modal-content',
+        confirmButtonId: 'b2b-role-delete-modal-confirm-button',
+    } %}
+
+    <div
+        id="b2b-role-delete-modal"
+        class="b2b-role-delete-modal modal fade"
+        tabindex="-1"
+        aria-labelledby="b2b-role-delete-modal-title"
+        aria-hidden="true"
+        data-b2b-deleter
+        data-b2b-deleter-options='{{ options|json_encode() }}'
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {% block b2b_components_role_delete_modal_header %}
+                    <div class="b2b-role-delete-modal-header modal-header">
+                        <h5 class="modal-title" id="b2b-role-delete-modal-title">
+                            {{ 'employee-management.roleDelete.title'|trans|sw_sanitize }}
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                {% endblock %}
+
+                {% block b2b_components_role_delete_modal_body %}
+                    <div class="b2b-role-delete-modal-body modal-body">
+                        <div id="{{ options.contentId }}" class="b2b-role-delete-modal-content text-center">
+                            <div id="b2b-role-delete-modal-loading" class="spinner-border" role="status"></div>
+                        </div>
+                    </div>
+                {% endblock %}
+
+                {% block b2b_components_role_delete_modal_footer %}
+                    <div class="b2b-role-delete-modal-footer modal-footer">
+                        <button
+                            type="button"
+                            id="b2b-role-delete-modal-cancel-button"
+                            class="btn btn-light"
+                            data-bs-dismiss="modal"
+                        >
+                            {{ 'global.default.cancel'|trans|sw_sanitize }}
+                        </button>
+                        <button
+                            type="button"
+                            id="{{ options.confirmButtonId }}"
+                            class="btn btn-danger"
+                        >
+                            {{ 'global.default.delete'|trans|sw_sanitize }}
+                        </button>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

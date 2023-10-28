@@ -1,0 +1,66 @@
+.b2b-tree {
+    margin: 19px 0 19px 0;
+
+    &-group-select {
+        display: flex;
+        align-items: center;
+
+        .b2b-tree-select {
+            margin: 0;
+        }
+    }
+
+    &-collapse-button {
+        // reset button styles
+        background-color: transparent;
+        border-width: 0;
+        padding: 0;
+
+        position: relative;
+        margin: 0 12px;
+        width: 12px;
+        height: 12px;
+        transform: translateY(-3px);
+        outline-offset: 4px;
+
+        > .icon {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            color: $gray-800;
+        }
+
+        &.collapsed {
+            transform: none;
+
+            > .icon {
+                transform: translateX(-3px) rotate(-90deg);
+            }
+        }
+    }
+
+    &-permission-select {
+        margin-left: 17.5px;
+        border-left: 1px solid $gray-600;
+        padding-left: 17.5px;
+    }
+
+    &-select {
+        margin: 19px 0 19px 0;
+    }
+
+    &-permission {
+        &-tooltip-title {
+            padding: 0;
+            margin: 0;
+        }
+
+        &-tooltip-list {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}

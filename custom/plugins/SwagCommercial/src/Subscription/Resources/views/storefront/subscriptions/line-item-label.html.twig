@@ -1,0 +1,18 @@
+{% block subscription_line_item_details %}
+
+    {% set intervalName = subscription.interval.translated.name ? subscription.interval.translated.name : subscription.subscriptionIntervalName %}
+    {% set nextSchedule = subscription.nextSchedule|format_date('short', locale=app.request.locale) %}
+
+    <div class="subscription-line-item-details-container my-3 fs-6">
+        <div class="subscription-line-item-details-label text-info fw-bold">{{ "commercial.subscriptions.lineItem.label"|trans|sw_sanitize }}:</div>
+        <div>{{ "commercial.subscriptions.lineItem.delivery"|trans({"%intervalName%": intervalName})|sw_sanitize }}</div>
+
+        <div>(
+            {{- ("commercial.subscriptions.lineItem.starting" ~ (subscription.interval.cronInterval.isEmpty ? "Today" : "Date"))|trans({"%date%": nextSchedule})|sw_sanitize -}}
+            {%- if subscription.plan.minimumExecutionCount > 0 -%}
+                , {{ "commercial.subscriptions.lineItem.minimumDeliveries"|trans({"%amount%": subscription.plan.minimumExecutionCount })|sw_sanitize -}}
+            {%- endif -%}
+            )</div>
+    </div>
+
+{% endblock %}

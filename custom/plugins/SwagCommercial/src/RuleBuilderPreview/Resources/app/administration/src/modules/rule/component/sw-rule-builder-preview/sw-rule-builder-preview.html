@@ -1,0 +1,85 @@
+<div
+    v-if="getLicense('RULE_BUILDER-4978012')"
+    class="sw-rule-builder-preview"
+    :class="ruleBuilderPreviewClasses"
+>
+    <sw-container
+        columns="1fr auto"
+        gap="0px 10px"
+    >
+        <div class="sw-rule-builder-preview__headline">
+            <p v-if="previewModeActive">
+                {{ $tc('sw-rule-builder-preview.previewDescription') }}
+            </p>
+        </div>
+        <sw-switch-field
+            v-model="previewModeActive"
+            :label="$tc('sw-rule-builder-preview.previewMode')"
+        />
+    </sw-container>
+
+    <sw-container
+        v-if="previewModeActive"
+        columns="1fr 1fr"
+        gap="0px 10px"
+    >
+        <sw-entity-single-select
+            v-model="orderId"
+            :placeholder="$tc('sw-rule-builder-preview.orderPlaceholder')"
+            entity="order"
+            :criteria="orderCriteria"
+            label-property="orderNumber"
+            :label="$tc('sw-rule-builder-preview.order')"
+            required
+        >
+            <template #selection-label-property="{ item }">
+                {{ item.orderNumber }}
+                <span>
+                    {{ item.orderCustomer.firstName }} {{ item.orderCustomer.lastName }}
+                </span>
+            </template>
+            <template #result-description-property="{ item, searchTerm, highlightSearchTerm }">
+                <sw-highlight-text
+                    v-if="highlightSearchTerm"
+                    :text="`${item.orderCustomer.firstName} ${item.orderCustomer.lastName}`"
+                    :search-term="searchTerm"
+                />
+            </template>
+        </sw-entity-single-select>
+        <sw-container
+            class="sw-rule-builder-preview__datetime-field"
+            columns="1fr"
+        >
+            <sw-datepicker
+                v-model="dateTime"
+                date-type="datetime-local"
+                :label="$tc('sw-rule-builder-preview.dateTime')"
+                :disabled="!hasTimeCondition"
+            />
+            <span v-if="!hasTimeCondition">{{ $tc('sw-rule-builder-preview.dateTimeDescription') }}</span>
+        </sw-container>
+    </sw-container>
+
+    <sw-rule-builder-preview-indicator
+        condition-name="andContainer"
+        size="medium"
+    >
+        <template #preview-invalid>
+            {{ $tc('sw-rule-builder-preview.ruleResultInvalid') }}
+        </template>
+        <template #preview-true>
+            {{ $tc('sw-rule-builder-preview.ruleResultTrue') }}
+            <sw-icon
+                name="regular-checkmark-s"
+                size="10px"
+            />
+        </template>
+        <template #preview-false>
+            {{ $tc('sw-rule-builder-preview.ruleResultFalse') }}
+            <sw-icon
+                name="regular-times-s"
+                size="10px"
+            />
+        </template>
+    </sw-rule-builder-preview-indicator>
+</div>

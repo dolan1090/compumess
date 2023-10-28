@@ -1,0 +1,14 @@
+.sw-settings-warehouse-group-warehouses .sw-card__toolbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.25rem;
+}
+
+.sw-settings-warehouse-group-warehouses__whitespace {
+    position: relative;
+    padding: 0 0 1rem;
+}
+
+.sw-settings-warehouse-group-warehouses__whitespace .sw-button {
+    margin-top: 1rem;
+}

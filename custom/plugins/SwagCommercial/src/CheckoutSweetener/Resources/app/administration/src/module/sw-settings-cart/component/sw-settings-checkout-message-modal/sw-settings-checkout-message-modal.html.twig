@@ -1,0 +1,102 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_settings_checkout_message_modal_index %}
+    <sw-modal @modal-close="onClose">
+
+        <template #modal-header>
+            <div class="sw-settings-checkout-message-modal-header-container">
+                <div class="sw-modal__title">
+                    {{ $tc('commercial.checkout-sweetener.modalTitle') }}
+                </div>
+                <sw-ai-copilot-badge />
+            </div>
+        </template>
+
+        <template #body>
+            <div class="sw-settings-checkout-message-modal-content-container">
+
+                <div>
+                    {{ $tc('commercial.checkout-sweetener.modalDescription') }}
+                </div>
+
+                <div class="sw-settings-checkout-message-modal-products-container">
+                    <sw-multi-select
+                        v-model="keywords"
+                        :label="$tc('commercial.checkout-sweetener.toneOfVoice')"
+                        :placeholder="$tc('commercial.checkout-sweetener.modalToneOfVoicePlaceholder')"
+                        :options="keywordOptions"
+                        :help-text="$tc('commercial.checkout-sweetener.toneOfVoiceHelpText')"
+                        required
+                    />
+                </div>
+
+                <div class="sw-settings-checkout-message-modal-products-container">
+                    <sw-number-field
+                        v-model="maxCharacters"
+                        :label="$tc('commercial.checkout-sweetener.characterLimit')"
+                        :allowEmpty="true"
+                        :help-text="$tc('commercial.checkout-sweetener.characterLimitHelpText')"
+                        :max="600"
+                    />
+                </div>
+
+                <div class="sw-settings-checkout-message-modal-products-container">
+                    <sw-entity-multi-id-select
+                        required
+                        v-model="productIds"
+                        :repository="productRepository"
+                        :label="$tc('commercial.checkout-sweetener.modalProductsSelection')"
+                        :placeholder="$tc('commercial.checkout-sweetener.modalProductsPlaceholder')"
+                        :help-text="$tc('commercial.checkout-sweetener.modalProductsHelperText')"
+                    ></sw-entity-multi-id-select>
+                </div>
+
+                <div>
+                    <sw-button
+                        :disabled="isButtonDisabled"
+                        variant="primary"
+                        @click="generatePreview"
+                    >
+                        {{ $tc('commercial.checkout-sweetener.modalGeneratePreview') }}
+                    </sw-button>
+                </div>
+
+                <div class="sw-settings-checkout-message-modal-preview-container">
+                    <div class="sw-settings-checkout-message-modal-message-label">
+                        {{ $tc('commercial.checkout-sweetener.modalPreview') }}
+                    </div>
+                    <div class="sw-settings-checkout-message-modal__text-output">
+                        <template v-if="isLoading">
+                            <sw-product-generated-description-ellipsis
+                                class="sw-product-generated-description-modal__text-ellipsis">
+                            </sw-product-generated-description-ellipsis>
+                        </template>
+                        <p v-else>{{ previewMessage }}</p>
+                    </div>
+                    <div class="sw-settings-checkout-message-modal__text-details">
+                        <div class="sw-settings-checkout-message-modal__disclaimer">
+                            <sw-icon
+                                size="12px"
+                                name="solid-exclamation-triangle"
+                            />
+                            <p>
+                                {{ $tc('commercial.checkout-sweetener.disclaimer') }}
+                            </p>
+                        </div>
+                        <p class="sw-settings-checkout-message-modal__characters-count">
+                        <span v-if="isCharactersCountVisible">
+                            {{ charactersCount }}
+                        </span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </template>
+
+        <template #modal-footer>
+            <sw-button @click="onClose">
+                {{ $tc('global.sw-modal.labelClose') }}
+            </sw-button>
+        </template>
+    </sw-modal>
+{% endblock %}

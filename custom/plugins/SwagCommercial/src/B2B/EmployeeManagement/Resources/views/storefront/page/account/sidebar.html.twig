@@ -1,0 +1,79 @@
+{% sw_extends '@Storefront/storefront/page/account/sidebar.html.twig' %}
+
+{% set employeeRead = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::EMPLOYEE_READ') %}
+{% set roleRead = constant('Shopware\\Commercial\\B2B\\EmployeeManagement\\Domain\\Permission\\BaseEmployeePermissions::ROLE_READ') %}
+{% set employee = context.customer.extensions.b2bEmployee %}
+
+{% set _isB2bEmployee = isB2bEmployee() %}
+{% set _isB2bAdmin = isB2bAdmin() %}
+
+{% block page_account_sidebar_header %}
+    {% if _isB2bEmployee %}
+        {% block b2b_components_sidebar_header_employee %}
+            {% if not headerWidget %}
+                <div class="card-header account-aside-header ps-3">
+                    {{ "account.greetings"|trans|sw_sanitize }}
+                    {{ employee.firstName }}
+                    {{ employee.lastName }}
+                </div>
+            {% endif %}
+        {% endblock %}
+    {% elseif _isB2bAdmin %}
+        {% if not headerWidget %}
+            {% block b2b_components_sidebar_header_badge %}
+                <div class="b2b-admin-badge ps-3">
+                    <span class="badge badge-lg text-bg-primary m-0 my-3 px-3">{{ "employee-management.navigation.adminPill"|trans|sw_sanitize }}</span>
+                </div>
+            {% endblock %}
+
+            <div class="card-header account-aside-header ps-3">
+                {{ "account.greetings"|trans|sw_sanitize }}
+                {{ context.customer.title }}
+                {{ context.customer.firstName }}
+                {{ context.customer.lastName }}
+            </div>
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_account_sidebar_link_profile %}
+    {{ parent() }}
+
+    {% block b2b_components_sidebar_link_employees %}
+        {% if _isB2bAdmin or isB2bAllowed(employeeRead) %}
+            <a
+                href="{{ path('frontend.business-partner.employees.list') }}"
+                class="list-group-item list-group-item-action account-aside-item{% if activeRoute is same as('frontend.business-partner.employees.list') %} is-active{% endif %}"
+            >
+                {{ 'employee-management.navigation.employees'|trans|sw_sanitize }}
+            </a>
+        {% endif %}
+    {% endblock %}
+
+    {% block b2b_components_sidebar_link_roles %}
+        {% if _isB2bAdmin or isB2bAllowed(roleRead) %}
+            <a
+                href="{{ path('frontend.business-partner.roles.list') }}"
+                class="list-group-item list-group-item-action account-aside-item{% if activeRoute is same as('frontend.business-partner.roles.list') %} is-active{% endif %}"
+            >
+                {{ 'employee-management.navigation.roles'|trans|sw_sanitize }}
+            </a>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
+{% block page_account_sidebar_logout %}
+    {% if not headerWidget and (_isB2bAdmin or _isB2bEmployee) %}
+        <a
+            href="{{ path('frontend.account.logout.page') }}"
+            class="btn btn-link account-aside-btn ms-3"
+        >
+            {% sw_icon 'log-out' %}
+            {{ "account.logout"|trans|sw_sanitize }}
+        </a>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

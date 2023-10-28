@@ -1,0 +1,21 @@
+{% sw_extends {
+    template: "@Storefront/storefront/component/line-item/element/label.html.twig",
+    scopes: ['default', 'subscription']
+} %}
+
+{% block component_line_item_label %}
+
+    {{ parent() }}
+
+    {% if getLicense('SUBSCRIPTIONS-6549379') %}
+        {% set subscription = context.extensions.subscription ? context.extensions.subscription : page.order.extensions.subscription %}
+        {% set discountType = constant('Shopware\\Commercial\\Subscription\\Checkout\\Cart\\Discount\\SubscriptionDiscountProcessor::LINE_ITEM_TYPE') %}
+
+        {% if subscription and not (lineItem.type == discountType) %}
+            {% sw_include '@SwagCommercial/storefront/subscriptions/line-item-label.html.twig' with {
+                subscription: subscription
+            } %}
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

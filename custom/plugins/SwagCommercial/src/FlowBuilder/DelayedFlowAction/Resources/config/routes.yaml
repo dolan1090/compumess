@@ -1,0 +1,3 @@
+swag_delay_action:
+    resource: ../../Api/*Controller.php
+    type: annotation

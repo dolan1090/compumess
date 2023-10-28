@@ -1,0 +1,36 @@
+{% sw_extends '@Storefront/storefront/component/line-item/type/container.html.twig' %}
+
+{% set hasStatus = lineItem.extensions.state is not null %}
+{% set orderData = order ? order : page.order %}
+{% set orderHasLineItemStatus = orderData and orderData.lineItems|filter(lineItem => lineItem.extensions.state is not null)|length %}
+
+{% block component_line_item_type_container %}
+    {% if orderHasLineItemStatus %}
+        {% set lineItemClasses = lineItemClasses ~ ' has-line-item-status' %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block component_line_item_type_container_col_info %}
+    {{ parent() }}
+
+    {% if orderHasLineItemStatus %}
+        {% block component_line_item_type_containe_col_status %}
+            <div class="line-item-status">
+                {% if hasStatus %}
+                    {% block component_line_item_status_label %}
+                        <div class="line-item-status-label">
+                            {{ "swag-return-management.account.orderItemColumnStatus"|trans|sw_sanitize }}
+                        </div>
+                    {% endblock %}
+
+                    {% sw_include '@SwagCommercial/storefront/component/element/status.html.twig' with {
+                        'statusName': lineItem.extensions.state.translated.name,
+                        'technicalName': lineItem.extensions.state.technicalName
+                    } %}
+                {% endif %}
+            </div>
+        {% endblock %}
+    {% endif %}
+{% endblock %}

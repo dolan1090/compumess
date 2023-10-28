@@ -1,0 +1,9 @@
+{% block sw_flow_detail_flow_modal_extension %}
+    <sw-flow-delay-edit-warning-modal
+        v-if="enableWarningModal"
+        :action-type="showWarningModal.actionType"
+        :type="showWarningModal.type"
+        @modal-close="onCloseEditModal"
+        @modal-cancel="onCancelEditModal"
+    />
+{% endblock %}

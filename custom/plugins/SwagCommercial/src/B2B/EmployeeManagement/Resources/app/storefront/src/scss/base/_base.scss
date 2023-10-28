@@ -1,0 +1,10 @@
+.b2b {
+    &-checkbox-group.form-check {
+        display: flex;
+        align-items: center;
+
+        > .form-check-label {
+            margin-left: 8px;
+        }
+    }
+}

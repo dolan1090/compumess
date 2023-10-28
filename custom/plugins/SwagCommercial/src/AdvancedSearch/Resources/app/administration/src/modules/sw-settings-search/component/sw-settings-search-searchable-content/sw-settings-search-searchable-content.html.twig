@@ -1,0 +1,136 @@
+{% block sw_settings_search_searchable_show_example_link %}
+<div class="sw-settings-search__searchable-content-link-text">
+    {% block sw_settings_search_searchable_show_example_link_element %}
+    <a
+        class="sw-settings-search__searchable-content-show-example-link"
+        @click="onShowExampleModal"
+    >
+        {{ $tc('sw-settings-search.generalTab.linkExample') }}
+        <sw-icon
+            name="regular-long-arrow-right"
+            small
+        />
+    </a>
+    {% endblock %}
+
+    <router-link
+        v-if="!esEnabled"
+        class="sw-settings-search__searchable-content-rebuild-link"
+        :to="{ name: 'sw.settings.search.index.liveSearch' }"
+    >
+        {{ $tc('sw-settings-search.liveSearchTab.linkRebuildSearchIndex') }}
+        <sw-icon
+            name="regular-long-arrow-right"
+            small
+        />
+    </router-link>
+</div>
+{% endblock %}
+
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_settings_search_searchable_reset_default %}
+<sw-button
+    v-if="defaultTab === tabNames.generalTab"
+    class="sw-settings-search__searchable-content-reset-button"
+    size="small"
+    :disabled="isEnabledReset || !acl.can('product_search_config.editor')"
+    @click="toggleResetConfirmModal"
+>
+    {{ $tc('sw-settings-search.generalTab.buttonResetDefault') }}
+</sw-button>
+
+<sw-confirm-modal
+    v-if="showResetModalConfirm"
+    type="yesno"
+    :text="$tc('swag-advanced-search.generalTab.resetConfirm')"
+    @confirm="onResetToDefault"
+    @cancel="toggleResetConfirmModal"
+    @close="toggleResetConfirmModal"
+/>
+{% endblock %}
+
+{% block sw_settings_search_searchable_content_tabs %}
+<sw-alert
+    v-if="esEnabled && currentSearchType !== 'product'"
+    class="sw-settings-search__searchable-content-entity-info"
+    variant="info"
+>
+    {{ $tc('swag-advanced-search.generalTab.labelInfoCrossSearch') }}
+</sw-alert>
+
+<div class="sw-settings-search__searchable-entity-selection">
+    <sw-single-select
+        :options="entities"
+        :value="currentSearchType"
+        :disabled="!esEnabled"
+        @change="onChangeEntity"
+    />
+</div>
+
+<sw-tabs
+    :default-item="defaultTab"
+    position-identifier="sw-settings-search-searchable-content-tabs"
+>
+    <template #default="{ active }">
+        <sw-tabs-item
+            v-bind="$props"
+            class="sw-settings-search__searchable-content-tab-title"
+            :name="tabNames.generalTab"
+            :active-tab="active"
+            @click="onChangeTab(tabNames.generalTab)"
+        >
+            {{ $tc('sw-settings-search.generalTab.labelGeneralTab') }}
+        </sw-tabs-item>
+
+        <sw-tabs-item
+            v-if="currentSearchType === 'product'"
+            v-bind="$props"
+            class="sw-settings-search__searchable-content-tab-title"
+            :name="tabNames.customTab"
+            :active-tab="active"
+            @click="onChangeTab(tabNames.customTab)"
+        >
+            {{ $tc('sw-settings-search.generalTab.labelCustomFieldsTab') }}
+        </sw-tabs-item>
+    </template>
+
+    <template #content="{ active }">
+        <template v-if="isLoading">
+            <sw-skeleton />
+            <sw-skeleton />
+        </template>
+
+        <sw-settings-search-searchable-content-general
+            v-if="active === tabNames.generalTab"
+            :is-empty="isListEmpty"
+            :is-loading="isLoading"
+            :columns="getProductSearchFieldColumns"
+            :repository="productSearchFieldRepository"
+            :search-configs="searchConfigFields"
+            :field-configs="fieldConfigs"
+            @data-load="loadData"
+            @config-save="saveConfig"
+        >
+            <template #pagination>
+                <sw-pagination
+                    v-bind="{ page, limit, total }"
+                    @page-change="onPageChange"
+                />
+            </template>
+        </sw-settings-search-searchable-content-general>
+
+        <sw-settings-search-searchable-content-customfields
+            v-if="active === tabNames.customTab && currentSearchType === 'product'"
+            :is-empty="isListEmpty"
+            :is-loading="isLoading"
+            :columns="getProductSearchFieldColumns"
+            :repository="productSearchFieldRepository"
+            :search-configs="searchConfigFields"
+            @data-load="loadData"
+            @config-add="onAddNewConfig"
+            @config-save="saveConfig"
+            @config-delete="deleteConfig"
+        />
+    </template>
+</sw-tabs>
+{% endblock %}

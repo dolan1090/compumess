@@ -1,0 +1,57 @@
+{% block b2b_components_overview %}
+    {% set customer = context.customer %}
+    {% set employee = customer.getExtension('b2bEmployee') %}
+
+    {% block b2b_components_overview_content %}
+        <div class="row">
+            {% block b2b_components_overview_content_employee %}
+                <div class="col-lg-6 card-col account-overview-card account-overview-profile account-overview-employee">
+                    <div class="card">
+                        <div class="card-body">
+                            {% block b2b_components_overview_content_employee_data_name %}
+                                <h2 class="card-title">{{ "employee-management.overview.profileTitle"|trans|sw_sanitize }}</h2>
+                                <p class="account-overview-employee-row">{{ employee.firstName }} {{ employee.lastName }}</p>
+                            {% endblock %}
+
+                            {% block b2b_components_overview_content_employee_data_company %}
+                                {% sw_include '@Storefront/storefront/component/account/customer-overview-personal-company.html.twig' with {
+                                    'customer': customer,
+                                } %}
+                            {% endblock %}
+
+                            {% block b2b_components_overview_content_employee_data_email %}
+                                <p class="account-overview-employee-row">{{ employee.email }}</p>
+                            {% endblock %}
+
+                            {% block b2b_components_overview_content_employee_data_role %}
+                                {% if employee.role.name != null %}
+                                    <p class="account-overview-employee-row">{{ employee.role.name }}</p>
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block b2b_components_overview_content_company %}
+                <div class="col-lg-6 card-col account-overview-card account-overview-profile account-overview-company">
+                    <div class="card">
+                        <div class="card-body">
+                            {% block b2b_components_overview_content_company_data %}
+                                <h2 class="card-title">
+                                    {{ "employee-management.overview.companyTitle"|trans|sw_sanitize }}
+                                </h2>
+                                <div class="address">
+                                    {% sw_include '@Framework/snippets/render.html.twig' with {
+                                        format: customer.defaultBillingAddress.country.translated.addressFormat,
+                                        address: customer.defaultBillingAddress
+                                    } %}
+                                </div>
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        {% endblock %}
+    </div>
+{% endblock %}

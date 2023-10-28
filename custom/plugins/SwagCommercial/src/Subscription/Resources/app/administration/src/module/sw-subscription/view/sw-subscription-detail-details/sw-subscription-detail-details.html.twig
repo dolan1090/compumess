@@ -1,0 +1,143 @@
+<div>
+    <template>
+        <sw-card
+            position-identifier="sw-subscription-detail-details-payment"
+            :title="$tc('commercial.subscriptions.subscriptions.detail.details.paymentCardTitle')"
+            class="sw-subscription-detail-details-payment"
+        >
+            <sw-container
+                columns="1fr 1fr"
+                gap="0px 30px"
+            >
+                <sw-field
+                    :value="billingAddress"
+                    type="text"
+                    disabled
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.billingAddressLabel')"
+                    class="sw-subscription-detail-details-payment__billing-address"
+                />
+                <sw-field
+                    :value="paymentMethod"
+                    type="text"
+                    disabled
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.paymentMethodLabel')"
+                    class="sw-subscription-detail-details-payment__payment-method"
+                />
+            </sw-container>
+        </sw-card>
+
+        <sw-card
+            position-identifier="sw-subscription-detail-details-shipping"
+            :title="$tc('commercial.subscriptions.subscriptions.detail.details.shippingCardTitle')"
+            class="sw-subscription-detail-details-shipping"
+        >
+            <sw-container
+                columns="1fr 1fr"
+                gap="0px 30px"
+            >
+                <sw-field
+                    :value="shippingAddress"
+                    type="text"
+                    disabled
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.shippingAddressLabel')"
+                    class="sw-subscription-detail-details-shipping__shipping-address"
+                />
+                <sw-field
+                    :value="shippingMethod"
+                    type="text"
+                    disabled
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.shippingMethodLabel')"
+                    class="sw-subscription-detail-details-shipping__shipping-method"
+                />
+            </sw-container>
+
+            <sw-container
+                columns="1fr 1fr"
+                gap="0px 30px"
+            >
+                <sw-number-field
+                    :value="shippingCosts"
+                    disabled
+                    fill-digits
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.shippingCostsLabel')"
+                    class="sw-subscription-detail-details-shipping__shipping-costs"
+                >
+                    <template #suffix>
+                        {{ currencySymbol }}
+                    </template>
+                </sw-number-field>
+                <sw-datepicker
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.nextOrderDateLabel')"
+                    v-model="subscription.nextSchedule"
+                    :config="datepickerConfig"
+                    :error="subscriptionNextScheduleError"
+                    :disabled="!acl.can('subscription.editor')"
+                />
+            </sw-container>
+        </sw-card>
+
+        <sw-card
+            position-identifier="sw-subscription-detail-details-overview"
+            :title="$tc('commercial.subscriptions.subscriptions.detail.details.overviewCardTitle')"
+            class="sw-subscription-detail-details-overview"
+        >
+            <sw-container
+                columns="1fr 1fr"
+                gap="0px 30px"
+            >
+                <sw-field
+                    :value="customerEmail"
+                    type="text"
+                    disabled
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.emailLabel')"
+                    class="sw-subscription-detail-details-overview__email"
+                />
+                <sw-field
+                    :value="customerPhoneNumber"
+                    type="text"
+                    disabled
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.phoneNumberLabel')"
+                    class="sw-subscription-detail-details-overview__phone-number"
+                />
+            </sw-container>
+            <sw-container
+                columns="1fr 1fr"
+                gap="0px 30px"
+            >
+                <sw-field
+                    :value="salesChannel"
+                    type="text"
+                    disabled
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.salesChannelLabel')"
+                    class="sw-subscription-detail-details-overview__sales-channel"
+                />
+                <sw-field
+                    :value="orderLanguage"
+                    type="text"
+                    disabled
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.orderLanguageLabel')"
+                    class="sw-subscription-detail-details-overview__order-language"
+                />
+            </sw-container>
+            <sw-container
+                columns="1fr 1fr"
+                gap="0px 30px"
+            >
+                <sw-number-field
+                    v-model="subscription.remainingExecutionCount"
+                    :digits="0"
+                    :min="0"
+                    :max="subscription.initialExecutionCount"
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.orderRemaining')"
+                    class="sw-subscription-detail-details-overview__remaining-order"
+                />
+                <sw-number-field
+                    :value="numberOfDeliveries"
+                    disabled
+                    :label="$tc('commercial.subscriptions.subscriptions.detail.details.orderNumberOfDeliveries')"
+                    class="sw-subscription-detail-details-overview__number-of-deliveries"
+                />
+            </sw-container>
+        </sw-card>
+    </template>
+</div>

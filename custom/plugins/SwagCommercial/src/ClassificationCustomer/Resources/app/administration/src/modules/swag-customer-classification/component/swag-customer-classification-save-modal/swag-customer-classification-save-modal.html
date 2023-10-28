@@ -1,0 +1,45 @@
+<sw-modal
+    class="swag-customer-classification-save-modal"
+    :title="title"
+    variant="small"
+    @modal-close="onModalClose"
+>
+
+    <div class="swag-customer-classification-save-modal-body">
+        <router-view
+            :item-total="itemTotal"
+            @start-classify="startClassify"
+            @buttons-update="updateButtons"
+            @redirect="redirect"
+            @title-set="setTitle"
+        />
+    </div>
+
+    <template #modal-footer>
+        <div class="footer-left">
+            <sw-button
+                v-for="button in buttons.left"
+                :key="button.key"
+                size="small"
+                :variant="button.variant"
+                :disabled="button.disabled"
+                @click="onButtonClick(button.action)"
+            >
+                {{ button.label }}
+            </sw-button>
+        </div>
+
+        <div class="footer-right">
+            <sw-button
+                v-for="button in buttons.right"
+                :key="button.key"
+                size="small"
+                :variant="button.variant"
+                :disabled="button.disabled"
+                @click="onButtonClick(button.action)"
+            >
+                {{ button.label }}
+            </sw-button>
+        </div>
+    </template>
+</sw-modal>

@@ -1,0 +1,83 @@
+{% set order = subscription.convertedOrder %}
+{% set currencyIsoCode = subscription.currency.isoCode %}
+{% set subscriptionPlanName = subscription.subscriptionPlan.activeStorefrontLabel ? subscription.subscriptionPlan.translated.label : subscription.subscriptionPlan.translated.name %}
+{% if subscription.subscriptionCustomer.salutation %}{{ subscription.subscriptionCustomer.salutation.translated.letterName ~ ' ' }}{% endif %}{{ subscription.subscriptionCustomer.firstName }} {{ subscription.subscriptionCustomer.lastName }},
+
+Wir haben Ihr Abonnement vom {{ subscription.createdAt|format_datetime('medium', 'short', locale='de-DE') }} erhalten.
+
+Abonnementnummer: {{ subscription.subscriptionNumber }}
+
+Sobald Ihre Zahlung erfolgt ist, erhalten Sie eine separate Benachrichtigung und Ihr Abonnement wird bearbeitet.
+
+Den aktuellen Status Ihrer Bestellung können Sie jederzeit über diesen Link abrufen:
+Sie können die automatische Verlängerung Ihres Abonnements jederzeit in Ihren persönlichen Kontoeinstellungen pausieren oder kündigen.
+
+Informationen zu Ihrem Abonnement:
+
+Abonnement-Plan: {{ subscriptionPlanName }}
+Startdatum: {{ subscription.createdAt|format_datetime('medium', 'short', locale='de-DE') }}
+
+Pos.   Artikel-Nr.			Produktbild(Alt-Text) 			Beschreibung			Menge			Preis			Summe
+
+{% for lineItem in order.lineItems %}
+{% if lineItem.coverId is defined and lineItem.coverId is not null %}
+    {% set cover = searchMedia([lineItem.coverId], context).first %}
+{% endif %}
+{{ loop.index }}      {% if lineItem.payload.productNumber is defined %}{{ lineItem.payload.productNumber|u.wordwrap(80) }}{% endif %}        {% if cover is defined and cover is not null %}{{ cover.alt }}{% endif %}        {{ lineItem.label|u.wordwrap(80) }}{% if lineItem.payload.options is defined and lineItem.payload.options|length >= 1 %}, {% for option in lineItem.payload.options %}{{ option.group }}: {{ option.option }}{% if lineItem.payload.options|last != option %}{{ " | " }}{% endif %}{% endfor %}{% endif %}{% if lineItem.payload.features is defined and lineItem.payload.features|length >= 1 %}{% set referencePriceFeatures = lineItem.payload.features|filter(feature => feature.type == 'referencePrice') %}{% if referencePriceFeatures|length >= 1 %}{% set referencePriceFeature = referencePriceFeatures|first %}, {{ referencePriceFeature.value.purchaseUnit }} {{ referencePriceFeature.value.unitName }}({{ referencePriceFeature.value.price|currency(currencyIsoCode) }}* / {{ referencePriceFeature.value.referenceUnit }} {{ referencePriceFeature.value.unitName }}){% endif %}{% endif %}
+    {{ lineItem.quantity }}			{{ lineItem.price.unitPrice|currency(currencyIsoCode) }}			{{ lineItem.price.totalPrice|currency(currencyIsoCode) }}
+{% endfor %}
+
+Abonnement Kosten: {{ order.price.totalPrice|currency(currencyIsoCode,decimals=order.totalRounding.decimals) }}
+Abrechnungszeitraum: {{ subscription.subscriptionInterval.translated.name }}
+{% set delivery = order.deliveries[0] | default(null) %}
+
+{% set displayRounded = order.totalRounding.interval != 0.01 or order.totalRounding.decimals != order.itemRounding.decimals %}
+{% set decimals = order.totalRounding.decimals %}
+{% set total = order.price.totalPrice %}
+{% if displayRounded %}
+    {% set total = order.price.rawTotal %}
+    {% set decimals = order.itemRounding.decimals %}
+{% endif %}
+
+{% for shippingCost in order.deliveries %}
+Lieferkosten: {{ shippingCost.shippingCosts.totalPrice|currency(currencyIsoCode) }}
+{% endfor %}
+Gesamtkosten Netto:{{ order.price.netPrice|currency(currencyIsoCode) }}
+{% for calculatedTax in order.price.calculatedTaxes %}
+    {% if order.price.taxStatus is same as('net') %}exkl.{% else %}inkl.{% endif %} {{ calculatedTax.taxRate }}% MwSt. {{ calculatedTax.tax|currency(currencyIsoCode) }}
+{% endfor %}
+Gesamtkosten Brutto: {{ total|currency(currencyIsoCode,decimals=decimals) }}
+{% if displayRounded %}
+Gesamtkosten Brutto gerundet: {{ order.price.totalPrice|currency(currencyIsoCode,decimals=order.totalRounding.decimals) }}
+{% endif %}
+
+{% if delivery %}
+Gewählte Versandart:  {{ subscription.shippingMethod.translated.name }}
+{{ subscription.shippingMethod.translated.description }}
+{% endif %}
+
+{% set billingAddress = subscription.billingAddress %}
+Rechnungsadresse:
+{{ billingAddress.company }}
+{{ billingAddress.firstName }} {{ billingAddress.lastName }}
+{{ billingAddress.street }}
+{{ billingAddress.zipcode }} {{ billingAddress.city }}
+{{ billingAddress.country.translated.name }}
+
+{% set shippingAddress = subscription.shippingAddress %}
+Lieferadresse:
+{{ shippingAddress.company }}
+{{ shippingAddress.firstName }} {{ shippingAddress.lastName }}
+{{ shippingAddress.street }}
+{{ shippingAddress.zipcode}} {{ shippingAddress.city }}
+{{ shippingAddress.country.translated.name }}
+
+{% if subscription.subscriptionCustomer.vatIds %}
+Ihre Umsatzsteuer-ID:  {{ subscription.subscriptionCustomer.vatIds|first }}
+Bei erfolgreicher Prüfung und sofern Sie aus dem EU-Ausland
+bestellen, erhalten Sie Ihre Ware umsatzsteuerbefreit.
+{% endif %}
+
+Den aktuellen Status Ihres Abonnements können Sie auch jederzeit auf unserer Webseite im Bereich "Mein Konto" - "Meine Abonnements" abrufen:
+Für Rückfragen stehen wir Ihnen jederzeit gerne zur Verfügung.
+

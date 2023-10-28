@@ -1,0 +1,104 @@
+<div class="sw-flow-call-webhook-log">
+    <sw-card
+        position-identifier=""
+        class="sw-flow-call-webhook-log__card"
+        :title="$tc('sw-flow-call-webhook.labelWebhookLog')"
+        :is-loading="isLoading"
+    >
+        <template #grid>
+            <sw-container rows="auto 400px">
+                <sw-card-section secondary>
+                    <sw-container columns="1fr 1fr 150px" gap="14px">
+                        <sw-datepicker
+                            v-model="fromDate"
+                            class="sw-flow-call-webhook-log__from-date"
+                            dateType="datetime"
+                            size="medium"
+                            :label="$tc('sw-flow-call-webhook.log.list.labelFrom')"
+                        />
+
+                        <sw-datepicker
+                            v-model="toDate"
+                            class="sw-flow-call-webhook-log__to-date"
+                            dateType="datetime"
+                            size="medium"
+                            :label="$tc('sw-flow-call-webhook.log.list.labelTo')"
+                        />
+
+                        <sw-select-field
+                            v-model="selectedStatus"
+                            class="sw-flow-call-webhook-log__status-select"
+                            size="medium"
+                            :label="$tc('sw-flow-call-webhook.log.list.labelStatus')"
+                            :options="statusOptions"
+                            :placeholder="$tc('sw-flow-call-webhook.log.list.placeholderStatus')"
+                        />
+                    </sw-container>
+                </sw-card-section>
+
+                <sw-card-section divider="top">
+                    <sw-entity-listing
+                        :data-source="webhookLogs"
+                        :columns="logColumns"
+                        :show-settings="false"
+                        :show-actions="true"
+                        :sort-by="sortBy"
+                        :sort-direction="sortDirection"
+                        :is-loading="isLoading || isWebhookLogLoading"
+                        :show-selection="false"
+                        :repository="webhookLogRepository"
+                    >
+                        <template #column-createdAt="{ item }">
+                            {{ item.createdAt | date({ hour: '2-digit', minute: '2-digit' }) }}
+                        </template>
+
+                        <template #column-deliveryStatus="{ item }">
+                            <sw-label
+                                appearance="pill"
+                                :variant="getLabelVariant(item)"
+                            >
+                                {{ getLabelStatus(item) }}
+                            </sw-label>
+                        </template>
+
+                        <template #pagination>
+                            <sw-pagination
+                                :page="page"
+                                :limit="limit"
+                                :total="total"
+                                :total-visible="7"
+                                @page-change="onPageChange"
+                            />
+                        </template>
+
+                        <template #actions="{ item }">
+                            <sw-context-menu-item @click="showInfoModal(item)">
+                                {{ $tc('sw-flow-call-webhook.log.list.actionShowInfo') }}
+                            </sw-context-menu-item>
+                        </template>
+                    </sw-entity-listing>
+
+                    <sw-empty-state
+                        v-if="!total && !isWebhookLogLoading"
+                        class="sw-flow-call-webhook-log__empty-state"
+                        :show-description="false"
+                        :title="$tc('sw-flow-call-webhook.log.list.emptyStateTitle')"
+                    >
+                        <template #icon>
+                            <img
+                                :alt="$tc('sw-flow-call-webhook.log.list.emptyStateTitle')"
+                                :src="'/administration/static/img/empty-states/settings-empty-state.svg' | asset"
+                            >
+                        </template>
+                    </sw-empty-state>
+                </sw-card-section>
+            </sw-container>
+
+            <sw-flow-call-webhook-log-detail-modal
+                v-if="displayedLog !== null"
+                :log-entry="displayedLog"
+                @close="closeInfoModal"
+            />
+        </template>
+    </sw-card>
+</div>

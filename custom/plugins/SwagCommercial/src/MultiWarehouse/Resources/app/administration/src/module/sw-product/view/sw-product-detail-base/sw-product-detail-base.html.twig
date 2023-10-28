@@ -1,0 +1,15 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_product_detail_deliverability_info_card %}
+    <sw-card
+        v-show="showProductCard('deliverability')"
+        class="sw-product-detail-base__deliverability"
+        position-identifier="sw-product-detail-base-deliverability"
+        :title="$tc('sw-product.card.textHeadline')"
+    >
+
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block sw_product_detail_deliverability_info_form %}
+            <sw-product-deliverability-form :allow-edit="acl.can('product.editor')" />
+        {% endblock %}
+    </sw-card>
+{% endblock %}

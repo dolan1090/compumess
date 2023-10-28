@@ -1,0 +1,59 @@
+<sw-page class="sw-settings-subscription-plans-detail">
+    <template #smart-bar-header>
+        <h2>{{ placeholder(plan, 'name', $tc('commercial.subscriptions.settings.plan.headlineNew')) }}</h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button
+            class="sw-settings-subscription-plan-detail__cancel-btn"
+            @click="onCancel"
+        >
+            {{ $tc('global.default.cancel') }}
+        </sw-button>
+
+        <sw-button-process
+            class="sw-settings-subscription-plan-detail__save-btn"
+            variant="primary"
+            :is-loading="isProcessLoading"
+            :process-success="isSaveSuccessful"
+            @click.prevent="onSave"
+            :disabled="!acl.can('plans_and_intervals.editor')"
+        >
+            {{ $tc('global.default.save') }}
+        </sw-button-process>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch @on-change="onChangeLanguage" />
+    </template>
+
+    <template #content>
+        <sw-card-view class="sw-settings-subscription-plan-detail__card-view">
+            <sw-tabs
+                class="sw-settings-subscription-plans-detail__tabs"
+                position-identifier="sw-settings-subscription-plans-detail"
+            >
+                <sw-tabs-item
+                    class="sw-settings-subscription-plan-detail__tab-general"
+                    :route="{ name: `${routeBaseName}.general` }"
+                    :title="$tc('commercial.subscriptions.settings.plan.tabGeneral')"
+                >
+                    {{ $tc('commercial.subscriptions.settings.plan.tabGeneral') }}
+                </sw-tabs-item>
+
+                <sw-tabs-item
+                    v-if="$route.params.id"
+                    class="sw-settings-subscription-plan-detail__tab-products"
+                    :route="{ name: `${routeBaseName}.products` }"
+                    :title="$tc('commercial.subscriptions.settings.plan.tabProducts')"
+                >
+                    {{ $tc('commercial.subscriptions.settings.plan.tabProducts') }}
+                </sw-tabs-item>
+            </sw-tabs>
+
+            <router-view
+                :is-plan-loading="isPlanLoading"
+            />
+        </sw-card-view>
+    </template>
+</sw-page>

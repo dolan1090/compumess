@@ -1,0 +1,61 @@
+{% block confirm_modal %}
+<div class="modal fade {{ class }}"
+     id="{{ id }}"
+     tabindex="-1"
+     aria-hidden="true">
+
+    {% block confirm_modal_dialog %}
+    <div class="modal-dialog modal-dialog-centered" role="dialog">
+
+        {% block confirm_modal_content %}
+        <div class="modal-content">
+            {% block confirm_modal_header %}
+                <div class="modal-header">
+                    {% block confirm_modal_header_title %}
+                    <h4 class="modal-title" id="modalLabel">
+                        {{ title|trans|sw_sanitize }}
+                    </h4>
+                    {% endblock %}
+
+                    {% block confirm_modal_header_close_button %}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                    </button>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% block confirm_modal_body %}
+            <div class="modal-body">
+                <strong>{{ description|trans|sw_sanitize }}</strong>
+            </div>
+            {% endblock %}
+
+            {% block confirm_modal_footer %}
+            <div class="modal-footer">
+                {% block confirm_modal_footer_button_cancel %}
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                    {{ buttonCancel|trans|sw_sanitize }}
+                </button>
+                {% endblock %}
+
+                {% block confirm_modal_footer_button_add_to_shopping_cart %}
+                <button
+                    type="button"
+                    class="btn btn-primary {{ btnConfirm }}">
+                    {{ buttonConfirm|trans|sw_sanitize }}
+                </button>
+                {% endblock %}
+            </div>
+            {% endblock %}
+        </div>
+        {% endblock %}
+    </div>
+    {% endblock %}
+</div>
+{% endblock %}

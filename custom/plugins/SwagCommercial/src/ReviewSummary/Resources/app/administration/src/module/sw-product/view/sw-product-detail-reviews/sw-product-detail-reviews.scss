@@ -1,0 +1,98 @@
+@import '~scss/variables';
+
+.sw-product-detail-reviews-summary__generate {
+    .sw-skeleton__detail {
+        width: 100%;
+        margin-bottom: 32px;
+        background: none;
+    }
+
+    .sw-alert {
+        font-size: $font-size-xs;
+    }
+
+    .sw-alert__message {
+        color: $color-darkgray-200;
+    }
+
+    #sw-field--reviewSummary {
+        min-height: 240px;
+    }
+}
+
+.sw-product-detail-reviews-summary {
+    margin-bottom: 8px;
+
+    .sw-card__titles-right-slot {
+        display: flex;
+    }
+
+    .sw-field--switch {
+        margin: 0;
+    }
+
+    .sw-field__label label {
+        padding: 5px 10px;
+    }
+
+    .sw-field--switch__input {
+        padding: 5px 0;
+    }
+
+    .sw-empty-state__icon {
+        .sw-icon {
+            width: 40px;
+            height: 40px;
+            color: $color-module-green-500;
+        }
+    }
+
+    .sw-empty-state {
+        height: auto;
+    }
+
+    .sw-ai-copilot-badge {
+        margin-left: 8px;
+    }
+}
+
+.product-detail-reviews-summary__text {
+    font-size: $font-size-xs;
+    line-height: 24px;
+}
+
+.sw-product-detail-reviews-summary__textarea {
+    margin-bottom: 8px;
+}
+
+.sw-product-detail-reviews-summary__empty-state {
+    margin: 0 auto;
+    max-width: $content-width;
+
+    .sw-alert {
+        margin-bottom: 8px;
+    }
+
+    .sw-alert__title,
+    .sw-alert__message {
+        color: $color-darkgray-200;
+    }
+
+    .sw-alert__message {
+        font-size: $font-size-xs;
+    }
+
+    .sw-product-detail-reviews-summary__empty-state-text {
+        margin-bottom: $line-height-xs;
+    }
+}
+
+.sw-product-detail-reviews-summary__generate-action {
+    .sw-icon {
+        color: $color-shopware-brand-500
+    }
+}
+
+.sw-product-detail-reviews-summary__re-generate {
+    margin-top: 30px;
+}

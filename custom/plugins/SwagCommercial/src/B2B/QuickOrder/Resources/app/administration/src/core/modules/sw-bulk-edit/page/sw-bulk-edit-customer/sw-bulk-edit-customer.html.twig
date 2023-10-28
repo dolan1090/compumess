@@ -1,0 +1,21 @@
+{% block sw_bulk_edit_customer_custom_field_card %}
+{% parent %}
+
+<sw-card
+    v-if="features.length"
+    class="sw-bulk-edit-customer-base__specific-features"
+    position-identifier="sw-bulk-edit-customer-specific-features"
+    :title="$tc('swag-b2b-features.specificFeaturesCard.title')"
+    :is-loading="isLoading"
+>
+    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+    {% block sw_bulk_edit_customer_tags %}
+        <sw-bulk-edit-change-type-field-renderer
+            :form-fields="specificFeaturesFormFields"
+            :bulk-edit-data="bulkEditData"
+            :entity="customer"
+        />
+    {% endblock %}
+</sw-card>
+
+{% endblock %}

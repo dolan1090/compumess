@@ -1,0 +1,7 @@
+/**
+ * @package checkout
+ */
+
+export const TOGGLE_KEY = 'CUSTOMER_CLASSIFICATION-8634272';
+export const TRAP_KEY_1 = 'CUSTOMER_CLASSIFICATION-9819811';
+export const TRAP_KEY_2 = 'CUSTOMER_CLASSIFICATION-9136958';

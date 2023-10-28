@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Shopware\Commercial\ReturnManagement\Extension\OrderLineItemExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Extension\OrderExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Extension\LanguageExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Extension\StateMachineStateExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Domain\Extension\UserDefinitionExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Entity\OrderReturn\OrderReturnDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Entity\OrderReturnLineItem\OrderReturnLineItemDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Entity\OrderReturnLineItemReason\OrderReturnLineItemReasonDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Entity\OrderReturnLineItemReasonTranslation\OrderReturnLineItemReasonTranslationDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnLineItemFactory" public="true">
+            <argument type="service" id="order_line_item.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\StateHandler\PositionStateHandler"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnRouteValidator" public="true">
+            <argument type="service" id="order_line_item.repository"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\Validation\OrderReturnValidationFactory"/>
+            <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnRoute" public="true">
+            <argument type="service" id="order_return.repository"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnLineItemFactory"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnRouteValidator"/>
+            <argument type="service" id="Shopware\Core\System\NumberRange\ValueGenerator\NumberRangeValueGeneratorInterface"/>
+            <argument type="service" id="Shopware\Core\System\StateMachine\Loader\InitialStateIdLoader"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\StateHandler\PositionStateHandler"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\AmountCalculator"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Api\OrderReturnProxyController" public="true">
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnRoute"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextRestorer"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Api\OrderReturnCalculationController" public="true">
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="order_return.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\CashRounding"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnCalculator"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Api\OrderReturnController" public="true">
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\StateHandler\PositionStateHandler"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextRestorer"/>
+            <argument type="service" id="Shopware\Core\Framework\Validation\DataValidator"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\Validation\OrderReturnValidationFactory"/>
+            <argument type="service" id="order_line_item.repository"/>
+            <argument type="service" id="order_return_line_item.repository"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnLineItemFactory"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnCalculator"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Api\OrderReturnStateController" public="true">
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Domain\StateHandler\PositionStateHandler"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Domain\StateHandler\PositionStateHandler" public="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="order_line_item.repository"/>
+            <argument type="service" id="order_return_line_item.repository"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Domain\Validation\OrderReturnValidationFactory">
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Subscriber\OrderRouteRequestEventListener">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Subscriber\DocumentReturnCalculator">
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Subscriber\InvoiceOrdersSubscriber">
+            <argument type="service" id="order_line_item.repository"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Subscriber\DocumentReturnCalculator"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextRestorer" />
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\AmountCalculator"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Subscriber\DeliveryNoteSubscriber">
+            <argument type="service" id="order_line_item.repository"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Subscriber\DocumentReturnCalculator"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextRestorer" />
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\AmountCalculator"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Subscriber\StornoOrdersSubscriber">
+            <argument type="service" id="order_line_item.repository"/>
+            <argument type="service" id="Shopware\Commercial\ReturnManagement\Subscriber\DocumentReturnCalculator"/>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextRestorer" />
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\AmountCalculator"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Domain\Returning\OrderReturnCalculator">
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextRestorer"/>
+            <argument type="service" id="order_return.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\AmountCalculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Tax\PercentageTaxRuleBuilder"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Domain\Document\PartialCancellationRenderer">
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Document\Service\DocumentConfigLoader"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="Shopware\Core\Checkout\Document\Twig\DocumentTemplateRenderer"/>
+            <argument type="service" id="Shopware\Core\System\NumberRange\ValueGenerator\NumberRangeValueGeneratorInterface"/>
+            <argument type="service" id="Shopware\Core\Checkout\Document\Service\ReferenceInvoiceLoader" />
+            <argument>%kernel.project_dir%</argument>
+            <argument type="service" id="Shopware\Core\System\SalesChannel\Context\SalesChannelContextRestorer"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\AmountCalculator"/>
+            <tag name="document.renderer"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Subscriber\ReturnStateChangeEventListener">
+            <argument type="service" id="order_return.repository"/>
+            <argument type="service" id="Shopware\Core\Framework\Event\BusinessEventCollector"/>
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Shopware\Commercial\ReturnManagement\Subscriber\OrderStorerSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

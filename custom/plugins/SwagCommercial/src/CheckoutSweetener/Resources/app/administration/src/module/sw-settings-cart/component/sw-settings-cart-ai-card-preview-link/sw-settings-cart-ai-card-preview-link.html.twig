@@ -1,0 +1,15 @@
+{% block sw_settings_cart_ai_card_preview_link %}
+    <div class="sw-settings-cart-ai-card-preview-button">
+        <sw-button @click="togglePreviewModal">
+            <sw-icon
+                name="solid-sparkles"
+                size="12px"
+            />
+            {{ $tc('commercial.checkout-sweetener.preview') }}
+        </sw-button>
+        <sw-settings-checkout-message-modal
+            v-if="showPreviewModal"
+            @modal-close="togglePreviewModal"
+        />
+    </div>
+{% endblock %}

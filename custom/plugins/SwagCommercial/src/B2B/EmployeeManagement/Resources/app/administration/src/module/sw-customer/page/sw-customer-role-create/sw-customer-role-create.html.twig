@@ -1,0 +1,82 @@
+{% block sw_customer_role_create %}
+    <sw-page class="sw-customer-role-create">
+        {% block sw_customer_role_create_header %}
+            <template #smart-bar-header>
+                <h2>{{ $tc('sw-customer.role.create.title') }}</h2>
+            </template>
+        {% endblock %}
+
+        {% block sw_customer_role_create_actions %}
+            <template #smart-bar-actions>
+                <sw-button
+                    class="sw-customer-role-create__cancel-button"
+                    @click="onCancel"
+                >
+                    {{ $tc('global.default.cancel') }}
+                </sw-button>
+
+                <sw-button-process
+                    class="sw-customer-role-create__save-button"
+                    variant="primary"
+                    :is-loading="isLoading"
+                    :process-success="isSaveSuccessful"
+                    @process-finish="onSaveFinish"
+                    @click.prevent="onSave"
+                >
+                    {{ $tc('global.default.save') }}
+                </sw-button-process>
+            </template>
+        {% endblock %}
+
+        {% block sw_customer_role_create_content %}
+            <template #content>
+                <sw-card-view>
+                    {% block sw_customer_employee_create_basic_information_card %}
+                        <sw-card
+                            class="sw-customer-role-create__basic-information-card"
+                            positionIdentifier="sw-customer-role-create__basic-information"
+                            :title="$tc('sw-customer.role.create.basicInformation.title')"
+                            :isLoading="isLoading"
+                        >
+                            {% block sw_customer_employee_create_basic_information_card_role_name %}
+                                <sw-text-field
+                                    v-if="entity"
+                                    class="sw-customer-role-create__basic-information-card-name-field"
+                                    v-model="entity.name"
+                                    :error="errorName"
+                                    :label="$tc('sw-customer.role.create.basicInformation.labelName')"
+                                    :placeholder="$tc('sw-customer.role.create.basicInformation.placeholderName')"
+                                    required
+                                ></sw-text-field>
+                            {% endblock %}
+
+                            {% block sw_customer_employee_create_basic_information_card_role_default_switch %}
+                                <sw-switch-field
+                                    class="sw-customer-role-create__basic-information-card-default-switch"
+                                    v-model="isDefaultRole"
+                                    :label="$tc('sw-customer.role.create.basicInformation.defaultRoleLabel')"
+                                    size="medium"
+                                ></sw-switch-field>
+                            {% endblock %}
+                        </sw-card>
+                    {% endblock %}
+
+                    {% block sw_customer_employee_create_permissions_card %}
+                        <sw-card
+                            class="sw-customer-role-create__permissions-card"
+                            positionIdentifier="sw-customer-role-create__permissions"
+                            :title="$tc('sw-customer.role.create.permissions.title')"
+                            :isLoading="isLoading"
+                        >
+                            <sw-permission-tree
+                                :permissions="permissions"
+                                :preSelectedPermissions="selectedPermissions"
+                                @change-permissions="onChangePermissions"
+                            ></sw-permission-tree>
+                        </sw-card>
+                    {% endblock %}
+                </sw-card-view>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}
