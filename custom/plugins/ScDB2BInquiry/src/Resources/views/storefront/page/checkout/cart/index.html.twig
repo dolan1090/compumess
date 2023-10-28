@@ -1,0 +1,179 @@
+{% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
+
+{% block page_checkout_container %}
+	{% set ScDB2BInquiry = config('ScDB2BInquiry') %}
+	{% set messages = app.flashes %}
+
+	{% if messages.success|length > 0 %}
+		<div class="flashbags">
+			{% sw_include '@Storefront/storefront/utilities/alert.html.twig' with { type: 'success', list: messages.success } %}
+		</div>
+	{% endif %}
+
+	{% if ScDB2BInquiry.config.ScDInquiryBasketType != "typeActivated" %}
+		{% if page.cart.lineItems.count is same as(0) %}
+			{% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                type: "info",
+                content: "checkout.cartEmpty"|trans|sw_sanitize
+            } %}
+
+			{% if messages.danger|length > 0 %}
+				<div class="flashbags">
+					{% sw_include '@Storefront/storefront/utilities/alert.html.twig' with { type: 'danger', list: messages.danger } %}
+				</div>
+			{% endif %}
+		{% else %}
+			{{ parent() }}
+		{% endif %}
+	{% endif %}
+
+	{% if context.currentCustomerGroup.customFields.scd_customergroup_hideinquiry != true %}
+		{% set scdInquiryBasket = app.session.get('scdInquiryBasket') %}
+		{% if scdInquiryBasket|length is same as(0) %}
+			{% else %}
+				<div class="inquiry-container col-12 col-md-8" style="padding: 0;">
+
+					<p class="h1 inquiry-main-header">
+						{{ "scd.inquiryHeader"|trans|sw_sanitize }}
+					</p>
+
+					<div class="card checkout-product-table">
+						<div class="card-body">
+							{% block page_checkout_inquiry_table_header %}
+								{% sw_include '@Storefront/storefront/page/checkout/cart/cart-inquiry-product-header.html.twig' %}
+							{% endblock %}
+
+							{% block page_checkout_inquiry_table_items %}
+								{% for product in scdInquiryBasket %}
+									{% block page_checkout_inquiry_table_item %}
+										{% block page_checkout_inquiry_item %}
+											{% sw_include '@Storefront/storefront/page/checkout/checkout-inquiry-item.html.twig' %}
+										{% endblock %}
+									{% endblock %}
+								{% endfor %}
+							{% endblock %}
+						</div>
+					</div>
+
+					<button class="btn btn-primary btn-lg" title="{{ "scd.inquirySend"|trans|striptags }}" aria-label="{{ "scd.inquirySend"|trans|striptags }}" data-bs-toggle="modal" data-bs-target="#inquiryForm">
+						{{ "scd.inquirySend"|trans|sw_sanitize }}
+					</button>
+					<div id="inquiryForm" class="modal fade inquiry-form-container" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+						<form action="{{ path("frontend.inquiry.send") }}" method="post" data-form-csrf-handler="true" data-form-validation="true" enctype="multipart/form-data">
+
+							<div class="hidden-fields">
+								<input type="hidden" name="currentUrl" value="{{ app.request.uri }}"/>
+								<input type="hidden" name="redirectTo" value="frontend.checkout.cart.page"/>
+							</div>
+
+							<div class="modal-dialog" role="dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">{{ "scd.inquirySend"|trans|sw_sanitize }}</h5>
+										<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close">
+										</button>
+									</div>
+									<div class="modal-body">
+										<p>{{ "scd.inquirySendText"|trans }}</p>
+										<div class="row g-2">
+											{% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                            with {
+                                            fieldName: 'firstName',
+                                            required: true,
+                                            additionalClass: 'col-md-6',
+                                            label: 'account.personalFirstNameLabel'
+                                        }
+                                        %}
+
+											{% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                            with {
+                                            fieldName: 'lastName',
+                                            required: true,
+                                            additionalClass: 'col-md-6',
+                                            label: 'account.personalLastNameLabel'
+                                        }
+                                        %}
+										</div>
+										<div class="row g-2">
+											{% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                            with {
+                                            fieldName: 'email',
+                                            type: 'email',
+                                            required: true,
+                                            additionalClass: 'col-md-6',
+                                            label: 'account.profileMailTitle',
+                                        }
+                                        %}
+											{% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                            with {
+                                            fieldName: 'phone',
+                                            type: 'phone',
+                                            additionalClass: 'col-md-6',
+                                            label: 'account.personalPhoneLabel',
+                                        }
+                                        %}
+										</div>
+										<div class="row g-2">
+											{% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                            with {
+                                            fieldName: 'company',
+                                            additionalClass: 'col-md-6',
+                                            label: 'checkout.companyLabel',
+                                        }
+                                        %}
+											{% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                            with {
+                                            fieldName: 'department',
+                                            additionalClass: 'col-md-6',
+                                            label: 'checkout.departmentLabel',
+                                        }
+                                        %}
+										</div>
+										<div class="row g-2">
+											{% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                            with {
+                                            fieldName: 'customernumber',
+                                            additionalClass: 'col-12',
+                                            label: 'checkout.customernumberLabel',
+                                        }
+                                        %}
+										</div>
+										<div class="row g-2">
+											{% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-textarea.html.twig'
+                                            with {
+                                            rows: 5,
+                                            fieldName: 'comment',
+                                            required: false,
+                                            additionalClass: 'col-12',
+                                            label: 'checkout.comment',
+                                        }
+                                        %}
+										</div>
+										<div class="additional-product-info">
+											<input type="hidden" name="inquiryProductsCount" value="{{ scdInquiryBasket|length }}"/>
+											{% for product in scdInquiryBasket %}
+												<input type="hidden" name="productNumber{{ loop.index }}" value="{{ product.productNumber }}"/>
+												<input type="hidden" name="productLabel{{ loop.index }}" value="{{ product.label }}"/>
+												<input type="hidden" name="productQuantity{{ loop.index }}" value="{{ product.quantity }}"/>
+												{% sw_include '@Storefront/storefront/page/checkout/checkout-inquiry-item.html.twig' with {'inquiryModal': true} %}
+											{% endfor %}
+										</div>
+										{% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-privacy.html.twig' %}
+									</div>
+									<div class="modal-footer">
+										<button class="btn" type="button" data-bs-dismiss="modal">
+											{{ "account.editOrderCancelOrderModalFooterButtonBack"|trans|sw_sanitize }}
+										</button>
+
+										<button type="submit" class="btn btn-primary">
+											{{ "scd.inquirySend"|trans|sw_sanitize }}
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+		{% endif %}
+	{% endif %}
+{% endblock %}

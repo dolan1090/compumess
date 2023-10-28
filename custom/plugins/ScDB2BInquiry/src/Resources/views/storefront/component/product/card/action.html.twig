@@ -1,0 +1,40 @@
+{% sw_extends '@Storefront/storefront/component/product/card/action.html.twig' %}
+
+{% block component_product_box_action_buy %}
+	{% set ScDB2BInquiry = config('ScDB2BInquiry') %}
+	{% set activeRules = context.context.ruleIds %}
+	{% set scdRule = ScDB2BInquiry.config.scdRule %}
+
+	{% if ((ScDB2BInquiry.config.ScDInquiryBasketType == "typeActivated" or
+        (ScDB2BInquiry.config.ScDInquiryBasketType == "typeProductspecific" and product.translated.customFields.scd_activate_inquiry_basket))
+        or (scdRule !== null and ScDB2BInquiry.config.ScDInquiryBasketType == "typeRule" and (scdRule in activeRules)))
+        and (context.currentCustomerGroup.customFields.scd_customergroup_hideinquiry != true) %}
+		<form action="{{ path("frontend.inquiry.add") }}" method="post" data-form-csrf-handler="true" data-form-validation="true" enctype="multipart/form-data" data-add-to-cart="true">
+
+			<div class="hidden-fields">
+				<input type="hidden" name="currentUrl" value="{{ app.request.uri }}"/>
+				<input type="hidden" name="productNumber" value="{{ product.productNumber }}"/>
+				<input type="hidden" name="quantity" value="1"/>
+				<input type="hidden" name="id" value="{{ product.id }}"/>
+				<input type="hidden" name="label" value="{{ product.translated.name }}"/>
+				<input type="hidden" name="mediaId" value="{{ product.cover.media.id }}"/>
+				<input type="hidden" name="redirectTo" value="frontend.cart.offcanvas"/>
+			</div>
+			<div class="d-grid">
+				<button class="btn btn-buy" title="{{ "scd.scdInquiryBasketBtn"|trans|striptags }}">
+					{{ "scd.scdInquiryBasketBtn"|trans|sw_sanitize }}
+				</button>
+			</div>
+		</form>
+	{% else %}
+		{% if context.customer or (not context.customer and (ScDB2BInquiry.config.scdHideLoggedOutPrices == null or ScDB2BInquiry.config.scdHideLoggedOutPrices == false)) %}
+			{{ parent() }}
+		{% else %}
+			<div class="d-grid">
+				<a href="{{ seoUrl('frontend.detail.page', {'productId': id}) }}" class="btn btn-block btn-light" title="{{ "listing.boxProductDetails"|trans|striptags }}">
+					{{ "listing.boxProductDetails"|trans|sw_sanitize }}
+				</a>
+			</div>
+		{% endif %}
+	{% endif %}
+{% endblock %}
