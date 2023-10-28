@@ -1,0 +1,14 @@
+@import "~scss/variables";
+
+.swag-customized-products-product-assignment {
+    &__info-headline {
+        font-weight: $font-weight-bold;
+        font-size: $font-size-s;
+        margin-bottom: 12px;
+    }
+
+    &__info-text {
+        font-size:  $font-size-xxs;
+        margin-bottom: 24px;
+    }
+}

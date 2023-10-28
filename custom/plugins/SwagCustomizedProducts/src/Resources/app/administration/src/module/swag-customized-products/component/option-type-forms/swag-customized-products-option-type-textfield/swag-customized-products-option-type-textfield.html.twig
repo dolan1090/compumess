@@ -1,0 +1,84 @@
+{% block swag_customized_products_option_type_base_content %}
+    {% block swag_customized_products_option_type_textfield_content %}
+        <div class="swag-customized-products-option-type-textfield__content">
+
+            {% block swag_customized_products_option_type_textfield_field_group %}
+                <sw-container
+                    class="swag-customized-products-option-type-textfield__field-group"
+                    columns="repeat(auto-fit, minmax(150px, 1fr))"
+                    gap="0px 30px">
+
+                    {% block swag_customized_products_option_type_textfield_field_item_number %}
+                        <sw-text-field
+                            {% if VUE3 %}
+                                v-model:value="option.itemNumber"
+                            {% else %}
+                                v-model="option.itemNumber"
+                            {% endif %}
+                            class="swag-customized-products-option-type-textfield__field-item-number"
+                            :disabled="!acl.can('swag_customized_products_template.editor')"
+                            :placeholder="$tc('swag-customized-products.optionDetailModal.optionType.placeholderItemNumber')"
+                            :label="$tc('swag-customized-products.optionDetailModal.optionType.itemNumberLabel')"
+                            :helpText="$tc('swag-customized-products.optionDetailModal.optionType.itemNumberHelpText')">
+                        </sw-text-field>
+                    {% endblock %}
+
+                    {% block swag_customized_products_option_type_textfield_field_group_placeholder %}
+                        <sw-text-field
+                            {% if VUE3 %}
+                                v-model:value="option.placeholder"
+                            {% else %}
+                                v-model="option.placeholder"
+                            {% endif %}
+                            class="swag-customized-products-option-type-textfield__field-placeholder"
+                            :disabled="!acl.can('swag_customized_products_template.editor')"
+                            :placeholder="$tc('swag-customized-products.optionDetailModal.optionType.placeholderPlaceholder')"
+                            :label="$tc('swag-customized-products.optionDetailModal.optionType.placeholderLabel')">
+                        </sw-text-field>
+                    {% endblock %}
+
+                </sw-container>
+            {% endblock %}
+
+            {% block swag_customized_products_option_type_textfield_container_min_max %}
+                <sw-container
+                    class="swag-customized-products-option-type-textfield__field-group"
+                    columns="repeat(auto-fit, minmax(150px, 1fr))"
+                    gap="0px 30px">
+
+                    {% block swag_customized_products_option_type_textfield_field_min_length %}
+                        <sw-number-field
+                            {% if VUE3 %}
+                                v-model:value="option.typeProperties.minLength"
+                            {% else %}
+                                v-model="option.typeProperties.minLength"
+                            {% endif %}
+                            class="swag-customized-products-option-type-textfield__fiel-min-length"
+                            :disabled="!acl.can('swag_customized_products_template.editor')"
+                            :label="$tc('swag-customized-products.optionDetailModal.optionType.textfield.minLengthLabel')"
+                            numberType="int"
+                            required>
+                        </sw-number-field>
+                    {% endblock %}
+
+                    {% block swag_customized_products_option_type_textfield_field_max_length %}
+                        <sw-number-field
+                            {% if VUE3 %}
+                                v-model:value="option.typeProperties.maxLength"
+                            {% else %}
+                                v-model="option.typeProperties.maxLength"
+                            {% endif %}
+                            class="swag-customized-products-option-type-textfield__field-max-length"
+                            :disabled="!acl.can('swag_customized_products_template.editor')"
+                            :label="$tc('swag-customized-products.optionDetailModal.optionType.textfield.maxLengthLabel')"
+                            numberType="int"
+                            required>
+                        </sw-number-field>
+                    {% endblock %}
+
+                </sw-container>
+            {% endblock %}
+
+        </div>
+    {% endblock %}
+{% endblock %}

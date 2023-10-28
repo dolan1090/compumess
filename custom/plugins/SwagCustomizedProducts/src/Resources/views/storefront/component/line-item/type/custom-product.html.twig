@@ -1,0 +1,74 @@
+{% set childrenCollapseId = 'collapse-line-item-contains-' ~ lineItem.id ~ '-' ~ displayMode %}
+
+{% set lineItemClasses = 'line-item line-item-' ~ lineItem.type ~ ' is-' ~ displayMode %}
+
+{% if displayMode === 'offcanvas' %}
+    {% set lineItemClasses = lineItemClasses ~ ' js-cart-item' %}
+{% endif %}
+{% set productLink = true %}
+
+{% block swag_customized_products_line_item %}
+    <div class="swag-customized-products__line-item-grid_component {{ lineItemClasses }}">
+        <div class="swag-customized-products__line-item-image">
+            {% block swag_customized_products_line_item_image %}
+                <div class="swag-customized-products__line-item-image-container">
+                    {% sw_include '@Storefront/storefront/component/line-item/element/image.html.twig' %}
+                </div>
+            {% endblock %}
+        </div>
+        <div class="swag-customized-products__line-item-label">
+            {% block swag_customized_products_line_item_label %}
+                {% sw_include '@Storefront/storefront/component/line-item/element/label.html.twig' %}
+            {% endblock %}
+        </div>
+        <div class="swag-customized-products__line-item-quantity">
+            {% block swag_customized_products_line_item_qunatity %}
+                {% sw_include '@Storefront/storefront/component/line-item/element/quantity.html.twig' %}
+            {% endblock %}
+        </div>
+        <div class="swag-customized-products__line-item-unit-price">
+            {% block swag_customized_products_line_item_unit_price %}
+                {% if showTaxPrice %}
+                    {% if context.salesChannel.taxCalculationType == 'horizontal' %}
+                        {% sw_include '@Storefront/storefront/component/line-item/element/tax-price.html.twig' %}
+                    {% endif %}
+                {% else %}
+                    {% sw_include '@Storefront/storefront/component/line-item/element/unit-price.html.twig' %}
+                {% endif %}
+            {% endblock %}
+        </div>
+        <div class="swag-customized-products__line-item-total-price">
+            {% block swag_customized_products_line_item_total_price %}
+                {% sw_include '@Storefront/storefront/component/line-item/element/total-price.html.twig' %}
+            {% endblock %}
+        </div>
+        <div class="swag-customized-products__line-item-remove">
+            {% block swag_customized_products_line_item_remove %}
+                {% if lineItem.removable and nestingLevel < 1 %}
+                    {% sw_include '@Storefront/storefront/component/line-item/element/remove.html.twig' %}
+                {% endif %}
+            {% endblock %}
+        </div>
+        <div class="swag-customized-products__line-item-collapse-options">
+            {% block swag_customized_products_line_item_collapse_options %}
+                {% sw_include '@SwagCustomizedProducts/storefront/component/line-item/element/custom-product-option-control.html.twig'%}
+                {% sw_include '@SwagCustomizedProducts/storefront/component/line-item/element/custom-product-option.html.twig'%}
+            {% endblock %}
+        </div>
+        <div class="swag-customized-products__line-item-collapse-unit-price">
+            {% block swag_customized_products_line_item_collapes_unit_price %}
+                {% sw_include '@SwagCustomizedProducts/storefront/component/line-item/element/custom-product-unit-price.html.twig'%}
+            {% endblock %}
+        </div>
+        <div class="swag-customized-products__line-item-collapse-total-price">
+            {% block swag_customized_products_line_item_collapse_total_price %}
+                {% sw_include '@SwagCustomizedProducts/storefront/component/line-item/element/custom-product-total-price.html.twig'%}
+            {% endblock %}
+        </div>
+        <div class="swag-customized-products__line-item-details">
+            {% block swag_customized_products_line_item_details %}
+                {% sw_include '@SwagCustomizedProducts/storefront/component/line-item/element/custom-product-details.html.twig'%}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

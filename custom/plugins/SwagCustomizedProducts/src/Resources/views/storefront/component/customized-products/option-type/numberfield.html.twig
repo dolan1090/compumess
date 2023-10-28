@@ -1,0 +1,40 @@
+{% block swag_customized_products_option_type_template_numberfield %}
+    {% set inConfigurationExtension = configurationExtension.configuration[option.id] %}
+
+    {% set validationOptions = {
+        translations: {
+            numberfield: {
+                required: 'customizedProducts.optionTypes.numberfield.errors.required'|trans,
+                min: 'customizedProducts.optionTypes.numberfield.errors.min'|trans,
+                max: 'customizedProducts.optionTypes.numberfield.errors.max'|trans
+            }
+        }
+    } | json_encode %}
+
+    {% block swag_customized_products_option_type_template_numberfield_input %}
+        <input type="number"
+               class="form-control swag-customized-products-form-control number-field"
+               data-swag-customized-products-field-validation="true"
+               data-swag-customized-products-field-validation-options="{{ validationOptions }}"
+               id="swag-customized-products-option-id-{{ option.id }}"
+               name="{{ constant('Swag\\CustomizedProducts\\Storefront\\Controller\\CustomizedProductsCartController::CUSTOMIZED_PRODUCTS_TEMPLATE_REQUEST_PARAMETER') }}[options][{{ option.id }}][value]"
+               min="{{ props.minValue }}"
+               max="{{ props.maxValue }}"
+               step="{{ props.interval }}"
+               {% if inConfigurationExtension %}
+                   value="{{ inConfigurationExtension.value }}"
+               {% else %}
+                   value="{{ props.defaultValue }}"
+               {% endif %}
+               {% if option.required %}
+                   required
+               {% else %}
+                   placeholder="{{ "customizedProducts.optionTypes.selectNoValueText"|trans }}"
+               {% endif %}>
+    {% endblock %}
+
+    {% block swag_customized_products_option_type_template_numberfield_error %}
+        <span class="customized-products-error-subtitle"></span>
+    {% endblock %}
+
+{% endblock %}
