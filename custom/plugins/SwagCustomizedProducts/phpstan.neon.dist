@@ -1,0 +1,44 @@
+includes:
+    - phpstan-baseline.neon
+    - ../../../vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+    phpVersion: 80100
+    level: 8
+    treatPhpDocTypesAsCertain: false
+    checkMissingIterableValueType: true
+    inferPrivatePropertyTypeFromConstructor: true
+    reportUnmatchedIgnoredErrors: true # Could be set to false if necessary during PHPStan update
+    tmpDir: ../../../var/cache/phpstan
+    scanDirectories:
+        - ../SwagMigrationAssistant
+
+    bootstrapFiles:
+        - ../../../src/Core/DevOps/StaticAnalyze/phpstan-bootstrap.php
+    symfony:
+        constantHassers: false
+        containerXmlPath: '../../../var/cache/customized_products_phpstan/Shopware_Core_DevOps_StaticAnalyze_StaticAnalyzeKernelCustomized_products_phpstanDebugContainer.xml'
+        consoleApplicationLoader: ../../../src/Core/DevOps/StaticAnalyze/console-application.php
+    excludePaths:
+        - vendor
+        - var
+        - ecs.php
+        - tests/Profile
+        - tests/phpstan/bootstrap.php
+
+    checkGenericClassInNonGenericObjectType: false
+
+    paths:
+        - src
+        - tests
+
+    type_coverage:
+       return_type: 99
+       param_type: 99
+       property_type: 45
+
+    ignoreErrors:
+        # @deprecated tag:v6.6.0 - Can be removed, once the ScheduledTaskHandler does not implement the deprecated interface anymore
+        - '#extends deprecated class Shopware\\Core\\Framework\\MessageQueue\\ScheduledTask\\ScheduledTaskHandler#'
+        - '#Call to method (__construct|rescheduleTask)\(\) of deprecated class Shopware\\Core\\Framework\\MessageQueue\\ScheduledTask\\ScheduledTaskHandler#'
+        - '#Instantiation of deprecated class Swag\\CustomizedProducts\\Template\\Message\\GenerateDecisionTreeHandler#'

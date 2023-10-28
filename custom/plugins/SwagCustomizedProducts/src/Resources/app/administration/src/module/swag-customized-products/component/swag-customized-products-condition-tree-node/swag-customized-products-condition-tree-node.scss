@@ -1,0 +1,53 @@
+@import "~scss/variables";
+$placeholder-color: #94a6b7;
+
+.swag-customized-products-condition-tree-node {
+    padding:32px 32px 0;
+
+    &.is--disabled {
+        .sw-condition__container,
+        .sw-block-field__block,
+        .sw-block-field__block input {
+            background-color: $color-gray-300;
+        }
+
+        .sw-arrow-field__arrow svg > {
+            path {
+                fill: $color-gray-300;
+            }
+            polyline {
+                stroke: #fff;
+            }
+        }
+
+        .sw-entity-single-select__selection .sw-entity-single-select__selection-text {
+            color: $color-darkgray-200;
+        }
+    }
+
+    .sw-condition-type-select {
+        .sw-block-field input::-moz-placeholder {
+            color: $placeholder-color;
+        }
+
+        .sw-block-field input::-webkit-input-placeholder{
+            color: $placeholder-color;
+        }
+
+        .sw-block-field input::placeholder {
+            color: $placeholder-color;
+        }
+
+        .sw-entity-single-select__selection-text.is--placeholder {
+            color: $placeholder-color;
+        }
+    }
+
+    .sw-condition-type-select .sw-select.sw-block-field input {
+        color: inherit;
+    }
+
+    .sw-condition__condition-value {
+        grid-template-columns: auto;
+    }
+}

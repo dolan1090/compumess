@@ -1,0 +1,36 @@
+.swag-customized-products-option-detail-modal {
+    .sw-modal__dialog {
+        .swag-customized-products-option-type-modal-content-tree {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            height: 100%;
+            overflow: hidden;
+
+            .swag-customized-products-option-type-modal-content-tree__tree {
+                border: none;
+                border-right: 1px solid #D1D9E0;
+                grid-column: 1;
+                overflow-y: scroll;
+            }
+
+            .swag-customized-products-option-type-modal-content-tree__form {
+                padding: 25px;
+                grid-column: 2;
+                overflow-y: scroll;
+            }
+        }
+
+        .sw-modal__body {
+            padding: 0;
+            height: 100%;
+        }
+    }
+
+    .swag-customized-products-option-type-no-tree {
+        padding: 25px;
+    }
+}
+
+.swag-customized-products-option-detail-modal + .sw-media-modal .sw-modal__dialog {
+    max-width: 90%;
+}

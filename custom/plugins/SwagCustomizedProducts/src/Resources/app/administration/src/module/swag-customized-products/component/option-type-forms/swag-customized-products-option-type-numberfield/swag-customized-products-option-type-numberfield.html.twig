@@ -1,0 +1,100 @@
+{% block swag_customized_products_option_type_base_content %}
+    <div class="swag-customized-products-option-type-numberfield__content">
+
+        {% block swag_customized_products_option_type_numberfield_field_item_number %}
+            <sw-text-field
+                    {% if VUE3 %}
+                        v-model:value="option.itemNumber"
+                    {% else %}
+                        v-model="option.itemNumber"
+                    {% endif %}
+                    :disabled="!acl.can('swag_customized_products_template.editor')"
+                    :placeholder="$tc('swag-customized-products.optionDetailModal.optionType.placeholderItemNumber')"
+                    :label="$tc('swag-customized-products.optionDetailModal.optionType.itemNumberLabel')"
+                    :helpText="$tc('swag-customized-products.optionDetailModal.optionType.itemNumberHelpText')">
+            </sw-text-field>
+        {% endblock %}
+
+        {% block swag_customized_products_option_type_numberfield_field_group %}
+            <sw-container
+                    class="swag-customized-products-option-type-numberfield__field_group"
+                    columns="repeat(4, minmax(150px, 1fr))"
+                    gap="0px 32px">
+
+                {% block swag_customized_products_option_type_numberfield_field_min_value %}
+                    <sw-number-field
+                        {% if VUE3 %}
+                            v-model:value="option.typeProperties.minValue"
+                        {% else %}
+                            v-model="option.typeProperties.minValue"
+                        {% endif %}
+                        class="swag-customized-products-option-type-numberfield__field_min_value"
+                        name="sw-field--option-typeProperties-minValue"
+                        :disabled="!acl.can('swag_customized_products_template.editor')"
+                        :label="$tc('swag-customized-products.optionDetailModal.optionType.numberfield.minimumValueLabel')"
+                        :step="0.1"
+                        :max="option.typeProperties.maxValue"
+                        placeholder="0"
+                        required>
+                    </sw-number-field>
+                {% endblock %}
+
+                {% block swag_customized_products_option_type_numberfield_field_max_value %}
+                    <sw-number-field
+                        {% if VUE3 %}
+                            v-model:value="option.typeProperties.maxValue"
+                        {% else %}
+                            v-model="option.typeProperties.maxValue"
+                        {% endif %}
+                        class="swag-customized-products-option-type-numberfield__field_max_value"
+                        name="sw-field--option-typeProperties-maxValue"
+                        :disabled="!acl.can('swag_customized_products_template.editor')"
+                        :label="$tc('swag-customized-products.optionDetailModal.optionType.numberfield.maximumValueLabel')"
+                        :step="0.1"
+                        :min="option.typeProperties.minValue"
+                        placeholder="1"
+                        required>
+                    </sw-number-field>
+                {% endblock %}
+
+                {% block swag_customized_products_option_type_numberfield_field_interval %}
+                    <sw-number-field
+                        {% if VUE3 %}
+                            v-model:value="option.typeProperties.interval"
+                        {% else %}
+                            v-model="option.typeProperties.interval"
+                        {% endif %}
+                        class="swag-customized-products-option-type-numberfield__field_interval"
+                        name="sw-field--option-typeProperties-interval"
+                        :disabled="!acl.can('swag_customized_products_template.editor')"
+                        :label="$tc('swag-customized-products.optionDetailModal.optionType.numberfield.stepLabel')"
+                        numberType="float"
+                        :step="0.1"
+                        :digits="10"
+                        placeholder="1"
+                        required>
+                    </sw-number-field>
+                {% endblock %}
+
+                {% block swag_customized_products_option_type_numberfield_field_default_value %}
+                    <swag-customized-products-nullable-number-field
+                        {% if VUE3 %}
+                            v-model:value="option.typeProperties.defaultValue"
+                        {% else %}
+                            v-model="option.typeProperties.defaultValue"
+                        {% endif %}
+                        class="swag-customized-products-option-type-numberfield__field_default_value"
+                        name="sw-field--option-typeProperties-defaultValue"
+                        :disabled="!acl.can('swag_customized_products_template.editor')"
+                        :label="$tc('swag-customized-products.optionDetailModal.optionType.defaultLabel')"
+                        :step="0.1"
+                        :max="option.typeProperties.maxValue"
+                        :placeholder="$tc('swag-customized-products.optionDetailModal.optionType.defaultPlaceholder')">
+                    </swag-customized-products-nullable-number-field>
+                {% endblock %}
+
+            </sw-container>
+        {% endblock %}
+
+    </div>
+{% endblock %}

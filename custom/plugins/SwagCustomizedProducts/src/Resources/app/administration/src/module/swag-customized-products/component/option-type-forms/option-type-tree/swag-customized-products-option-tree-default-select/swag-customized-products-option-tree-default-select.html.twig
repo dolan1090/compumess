@@ -1,0 +1,43 @@
+{% block swag_customized_products_option_tree_default_select %}
+    <div class="swag-customized-products-option-tree-default-select-default">
+
+        {% block swag_customized_products_option_tree_default_select_multi %}
+            <sw-multi-select
+                    v-if="option.typeProperties.isMultiSelect"
+                    {% if VUE3 %}
+                        v-model:value="defaultMultiValue"
+                    {% else %}
+                        v-model="defaultMultiValue"
+                    {% endif %}
+                    class="swag-customized-products-option-tree-default-select--default__multi"
+                    :label="$tc('swag-customized-products.optionDetailModal.optionType.defaultLabel')"
+                    :placeholder="$tc('swag-customized-products.optionDetailModal.optionType.defaultPlaceholderSelect')"
+                    :options="defaultValueOptions"
+                    :disabled="defaultValueOptions.length === 0"
+                    labelProperty="displayName"
+                    valueProperty="id"
+                    @change="onChangeDefault">
+            </sw-multi-select>
+        {% endblock %}
+
+        {% block swag_customized_products_option_tree_default_select_single %}
+            <sw-single-select
+                    v-else
+                    {% if VUE3 %}
+                        v-model:value="defaultSingleValue"
+                    {% else %}
+                        v-model="defaultSingleValue"
+                    {% endif %}
+                    class="swag-customized-products-option-tree-default-select-default__multi"
+                    :label="$tc('swag-customized-products.optionDetailModal.optionType.defaultLabel')"
+                    :placeholder="$tc('swag-customized-products.optionDetailModal.optionType.defaultPlaceholderSelect')"
+                    :options="defaultValueOptions"
+                    :disabled="defaultValueOptions.length === 0"
+                    labelProperty="displayName"
+                    valueProperty="id"
+                    @change="onChangeDefault">
+            </sw-single-select>
+        {% endblock %}
+
+    </div>
+{% endblock %}

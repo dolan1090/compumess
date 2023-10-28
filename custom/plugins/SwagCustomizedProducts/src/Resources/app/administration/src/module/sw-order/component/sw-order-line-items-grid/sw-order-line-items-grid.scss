@@ -1,0 +1,7 @@
+.sw-order-line-items-grid {
+    /** Fixes line item height when a customized product is in the order table */
+    .sw-data-grid .sw-data-grid__body .sw-data-grid__cell--multi-line .sw-data-grid__cell-content {
+      min-height: 64px;
+      height: auto;
+    }
+}

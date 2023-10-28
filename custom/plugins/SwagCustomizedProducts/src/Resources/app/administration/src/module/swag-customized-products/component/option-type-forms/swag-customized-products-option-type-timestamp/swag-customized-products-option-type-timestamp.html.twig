@@ -1,0 +1,81 @@
+{% block swag_customized_products_option_type_base_content %}
+    {% block swag_customized_products_option_type_timestamp_field_group_general %}
+        <sw-container
+                class="swag-customized-products-option-type-textarea__field_group"
+                columns="repeat(auto-fit, minmax(250px, 1fr))"
+                gap="0px 30px">
+
+            {% block swag_customized_products_option_type_timestamp_field_group_content_general %}
+                {% block swag_customized_products_option_type_textarea_field_item_number %}
+                    <sw-text-field
+                            {% if VUE3 %}
+                                v-model:value="option.itemNumber"
+                            {% else %}
+                                v-model="option.itemNumber"
+                            {% endif %}
+                            :disabled="!acl.can('swag_customized_products_template.editor')"
+                            :placeholder="$tc('swag-customized-products.optionDetailModal.optionType.placeholderItemNumber')"
+                            :label="$tc('swag-customized-products.optionDetailModal.optionType.itemNumberLabel')"
+                            :helpText="$tc('swag-customized-products.optionDetailModal.optionType.itemNumberHelpText')">
+                    </sw-text-field>
+                {% endblock %}
+
+                {% block swag_customized_products_option_type_timestamp_field_group_placeholder %}
+                    <sw-text-field
+                            {% if VUE3 %}
+                                v-model:value="option.placeholder"
+                            {% else %}
+                                v-model="option.placeholder"
+                            {% endif %}
+                            class="swag-customized-products-option-type-textarea__field_placeholder"
+                            :disabled="!acl.can('swag_customized_products_template.editor')"
+                            :label="$tc('swag-customized-products.optionDetailModal.optionType.placeholderLabel')"
+                            :placeholder="$tc('swag-customized-products.optionDetailModal.optionType.placeholderPlaceholder')">
+                    </sw-text-field>
+                {% endblock %}
+            {% endblock %}
+        </sw-container>
+    {% endblock %}
+
+    {% block swag_customized_products_option_type_timestamp_field_group_timestamp %}
+        <sw-container class="swag-customized-products-option-type-textarea__field_group"
+                      columns="repeat(auto-fit, minmax(250px, 1fr))"
+                      gap="0px 30px">
+
+            {% block swag_customized_products_option_type_timestamp_field_group_content_timestamp %}
+                {% block swag_customized_products_option_type_timestamp_field_group_min_date %}
+                    <sw-datepicker
+                        {% if VUE3 %}
+                            v-model:value="option.typeProperties.startTime"
+                        {% else %}
+                            v-model="option.typeProperties.startTime"
+                        {% endif %}
+                        name="sw-field--option-typeProperties-startTime"
+                        :disabled="!acl.can('swag_customized_products_template.editor')"
+                        :label="$tc('swag-customized-products.optionDetailModal.optionType.datetime.minDate')"
+                        ref="minTimeField"
+                        dateType="time"
+                        size="default">
+                    </sw-datepicker>
+                {% endblock %}
+
+                {% block swag_customized_products_option_type_timestamp_field_group_max_date %}
+                    <sw-datepicker
+                        {% if VUE3 %}
+                            v-model:value="option.typeProperties.endTime"
+                            @base-field-mounted="initializeStartTime"
+                        {% else %}
+                            v-model="option.typeProperties.endTime"
+                        {% endif %}
+                        :disabled="!acl.can('swag_customized_products_template.editor')"
+                        :label="$tc('swag-customized-products.optionDetailModal.optionType.datetime.maxDate')"
+                        ref="maxTimeField"
+                        :config="maxTimeConfig"
+                        dateType="time"
+                        size="default">
+                    </sw-datepicker>
+                {% endblock %}
+            {% endblock %}
+        </sw-container>
+    {% endblock %}
+{% endblock %}

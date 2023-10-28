@@ -1,0 +1,58 @@
+{% block swag_customized_products_option_type_base_tree_content_root_component %}
+    {% block swag_customized_products_option_type_imageselect_field_container %}
+        <sw-container
+                columns="1fr 1fr"
+                gap="30px">
+
+            {% block swag_customized_products_option_type_imageselect_field_placeholder %}
+                <sw-text-field
+                        {% if VUE3 %}
+                            v-model:value="option.placeholder"
+                        {% else %}
+                            v-model="option.placeholder"
+                        {% endif %}
+                        :disabled="!acl.can('swag_customized_products_template.editor')"
+                        class="swag-customized-products-option-type-imageselect__field-placeholder"
+                        :placeholder="$tc('swag-customized-products.optionDetailModal.optionType.placeholderPlaceholder')"
+                        :label="$tc('swag-customized-products.optionDetailModal.optionType.placeholderLabel')">
+                </sw-text-field>
+            {% endblock %}
+
+            {% block swag_customized_products_option_type_imageselect_field_default %}
+                <swag-customized-products-option-tree-default-select
+                        :option="option"
+                        :optionValues="optionValues">
+                </swag-customized-products-option-tree-default-select>
+            {% endblock %}
+
+        </sw-container>
+    {% endblock %}
+{% endblock %}
+
+{% block swag_customized_products_option_type_base_tree_content_component %}
+    {% block swag_customized_products_option_type_imageselect_content_listener %}
+        <sw-upload-listener
+                :uploadTag="uploadTag"
+                autoUpload
+                @media-upload-finish="setMediaItem">
+        </sw-upload-listener>
+    {% endblock %}
+
+    {% block swag_customized_products_option_type_imageselect_content_component %}
+        <sw-media-compact-upload-v2
+                v-if="data.value"
+                class="swag-customized-products-option-type-imageselect__imageupload"
+                required
+                :label="$tc('swag-customized-products.detail.tabGeneral.labelImage')"
+                :defaultFolder="templateRepository.schema.entity"
+                :source="displayMediaItem"
+                :allowMultiSelect="false"
+                :uploadTag="uploadTag"
+                :error="activeItemValueValueError"
+                :disabled="!acl.can('swag_customized_products_template.editor')"
+                @selection-change="setMediaFromSelection"
+                @media-drop="({ targetId }) => { data.value._value = targetId }"
+                @media-upload-remove-image="onUnlinkImage">
+        </sw-media-compact-upload-v2>
+    {% endblock %}
+{% endblock %}

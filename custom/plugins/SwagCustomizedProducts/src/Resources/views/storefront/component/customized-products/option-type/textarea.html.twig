@@ -1,0 +1,56 @@
+{% block swag_customized_products_option_type_template_textarea %}
+    <div class="swag-customized-products__type-textarea">
+        {% set validationOptions = {
+            fieldType: 'textfield',
+            translations: {
+                textfield: {
+                    required: "customizedProducts.optionTypes.textarea.errors.required"|trans,
+                    min: "customizedProducts.optionTypes.textarea.errors.min"|trans,
+                    max: "customizedProducts.optionTypes.textarea.errors.max"|trans
+                }
+            }
+        } | json_encode %}
+
+        {% set inConfigurationExtension = configurationExtension.configuration[option.id] %}
+        {% set clearInputConfig = {
+            clearButtonSelector: '#clear-textarea-' ~ option.id
+        } %}
+
+        {% block swag_customized_products_option_type_template_textarea_input %}
+            {% apply spaceless %}
+                <textarea id="swag-customized-products-option-id-{{ option.id }}"
+                          class="form-control swag-customized-products-form-control"
+                          name="{{ constant('Swag\\CustomizedProducts\\Storefront\\Controller\\CustomizedProductsCartController::CUSTOMIZED_PRODUCTS_TEMPLATE_REQUEST_PARAMETER') }}[options][{{ option.id }}][value]"
+                          data-swag-customized-products-field-validation="true"
+                          data-swag-customized-products-field-validation-options="{{ validationOptions }}"
+                          placeholder="{{ props.placeholder }}"
+                          minlength="{{ props.minLength }}"
+                          maxlength="{{ props.maxLength }}"
+                          data-clear-input="true"
+                          data-clear-input-options="{{ clearInputConfig|json_encode }}"
+                          {{ option.required ? 'required' : '' }}
+                >{% if inConfigurationExtension %}{{ inConfigurationExtension.value }}{% endif %}</textarea>
+            {% endapply %}
+        {% endblock %}
+
+        {% block swag_customized_products_option_type_template_textarea_error %}
+            <span class="customized-products-error-subtitle"></span>
+        {% endblock %}
+
+        {% block swag_customized_products_option_type_template_textarea_clear %}
+            <div class="w-100 text-right swag-customized-products__type-textarea-clear">
+
+                {% block swag_customized_products_option_type_template_textarea_clear_anchor %}
+                    <button id="clear-textarea-{{ option.id }}"
+                            class="swag-customized-products__type-textarea-clear-button"
+                            type="button"
+                            tabindex="-1">
+                        {{ "customizedProducts.optionTypes.textareaClearButton"|trans }}
+                    </button>
+                {% endblock %}
+
+            </div>
+        {% endblock %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% block sw_order_line_items_grid_grid_columns_label_link %}
+    <router-link v-else-if="!isInlineEdit && item.type === 'product' && !productHasCustomizedProduct(item)"
+                 :title="$tc('sw-order.detailBase.contextMenuShowProduct')"
+                 :to="{ name: 'sw.product.detail', params: { id: item.productId } }">
+
+        {% block sw_order_line_items_grid_columns_name_label %}
+            <div v-if="item.payload && item.payload.options"
+                 class="sw-order-line-items-grid__item-payload-options">
+                <sw-product-variant-info :variations="item.payload.options">
+                    {{ item.label }}
+                </sw-product-variant-info>
+            </div>
+        {% endblock %}
+    </router-link>
+
+    <template v-else-if="!isInlineEdit && item.type ==='product' && productHasCustomizedProduct(item)">
+        <a href="#" class="swag-customized-product__open-product-link" @click.prevent="onOpenCustomProductConfiguration(item)">
+
+            {% block swag_customized_products_order_line_items_grid_columns_name_label %}
+                <strong v-if="productHasCustomizedProduct(item)" class="swag-customized-products-order-line-item-prefix">
+                    {{ $tc('swag-customized-products.extension.textOrderItemPrefix') }}:
+                </strong>
+
+                <div v-if="item.payload && item.payload.options"
+                     class="sw-order-line-items-grid__item-payload-options">
+                    <sw-product-variant-info :variations="item.payload.options">
+                        {{ item.label }}
+                    </sw-product-variant-info>
+                </div>
+            {% endblock %}
+        </a>
+    </template>
+
+    {% parent %}
+{% endblock %}
+
+{# Modify the name to pretend an indicator when we're dealing with a product #}
+{% block sw_order_line_items_grid_grid_columns_label_content %}
+    <template v-else>
+        <strong v-if="productHasCustomizedProduct(item)" class="swag-customized-products-order-line-item-prefix">
+            {{ $tc('swag-customized-products.extension.textOrderItemPrefix') }}:
+        </strong>
+        {{ item.label }}
+    </template>
+{% endblock %}
+
+{# Replace the original product price with the calculated custom product price #}
+{% block sw_order_line_items_grid_grid_columns_unit_price_inline_edit %}
+    <template v-if="productHasCustomizedProduct(item)">
+        <template v-if="item.parent">
+            {{ item.parent.unitPrice | currency(order.currency.shortName) }}
+        </template>
+
+        <template v-else>
+            {{ item.unitPrice | currency(order.currency.shortName) }}
+        </template>
+    </template>
+
+    <template v-else>
+        {% parent %}
+    </template>
+{% endblock %}
+
+{% block sw_order_line_items_grid_grid_columns_unit_price_content %}
+    <template v-if="!productHasCustomizedProduct(item) && (!isInlineEdit || itemCreatedFromProduct(item.id))">
+        {{ item.unitPrice | currency(order.currency.shortName) }}
+    </template>
+{% endblock %}
+
+{# Replace the original product price with the calculated custom product price #}
+{% block sw_order_line_items_grid_grid_columns_total_price_content %}
+    <template v-if="item.parent">
+        {{ item.parent.totalPrice | currency(order.currency.shortName) }}
+    </template>
+
+    <template v-else>
+        {% parent %}
+    </template>
+{% endblock %}
+
+{# Append "view configuration" button to the action column of the grid #}
+{% block sw_order_line_items_grid_grid_actions_show %}
+    {% parent %}
+    <sw-context-menu-item :disabled="!productHasCustomizedProduct(item) || !acl.can('swag_customized_products_template.viewer')"
+                          @click="onOpenCustomProductConfiguration(item)">
+        {{ $tc('swag-customized-products.extension.buttonViewConfiguration') }}
+    </sw-context-menu-item>
+{% endblock %}
+
+{# Append custom products configuration modal window #}
+{% block sw_order_line_items_grid_actions %}
+    {% parent %}
+
+    <swag-customized-products-configuration-modal
+        v-if="currentProduct && isCustomProductModalOpen"
+        :orderLineItems="unfilteredOrderLineItems"
+        :currentProduct="currentProduct"
+        :currency="order.currency"
+        @modal-close="onCloseCustomProductConfigurationModal">
+    </swag-customized-products-configuration-modal>
+{% endblock %}
