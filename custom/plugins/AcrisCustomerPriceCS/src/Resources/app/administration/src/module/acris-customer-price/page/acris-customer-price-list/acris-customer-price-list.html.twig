@@ -1,0 +1,171 @@
+{% block acris_customer_price_list %}
+<sw-page class="acris-customer-price-list">
+    {% block acris_customer_price_list_search_bar %}
+        <template slot="search-bar">
+            <sw-search-bar initialSearchType="Customer price"
+                           :placeholder="$tc('acris-customer-price.general.placeholderSearchBar')"
+                           :initialSearch="term"
+                           @search="onSearch" id="customerPrice">
+            </sw-search-bar>
+        </template>
+    {% endblock %}
+
+    {% block acris_customer_price_list_smart_bar_header %}
+        <template slot="smart-bar-header">
+            {% block acris_customer_price_list_smart_bar_header_title %}
+                <h2>
+                    {% block acris_customer_price_list_smart_bar_header_title_text %}
+                        {{ $tc('acris-customer-price.list.textHeadline') }}
+                        {% endblock %}
+
+                        {% block acris_customer_price_list_smart_bar_header_amount %}
+                        <span v-if="!isLoading" class="sw-page__smart-bar-amount">
+                        ({{ total }})
+                        </span>
+                    {% endblock %}
+                </h2>
+            {% endblock %}
+        </template>
+    {% endblock %}
+
+    {% block acris_customer_price_list_smart_bar_actions %}
+    <template slot="smart-bar-actions">
+        {% block acris_customer_price_list_smart_bar_actions_add %}
+        <sw-button variant="primary" :routerLink="{ name: 'acris.customer.price.create' }">
+            {{ $tc('acris-customer-price.list.buttonAdd') }}
+        </sw-button>
+        {% endblock %}
+    </template>
+    {% endblock %}
+
+    {% block acris_customer_price_list_cardview %}
+    <template slot="content">
+        <div class="acris-customer-price-list__content">
+            {% block acris_customer_price_list_content %}
+            <sw-entity-listing class="acris-customer-price-list-grid"
+                               v-if="items && total > 0"
+                               :items="items"
+                               :repository="entityRepository"
+                               detailRoute="acris.customer.price.detail"
+                               :showSeleciton="true"
+                               :isLoading="isLoading"
+                               :columns="columns">
+
+                {% block acris_customer_price_list_grid_columns_rules %}
+                <template #column-rules="{ item }">
+                    <div v-bind:class="{ 'acris-no-rule' : item.rules.length == 0}">
+                        <sw-label
+                                v-for="rule in item.rules"
+                                appearance="default"
+                                size="default">
+                            {{ rule.name }}
+                        </sw-label>
+                    </div>
+                </template>
+                {% endblock %}
+
+                {% block acris_customer_price_list_grid_columns_active %}
+                <template #column-active="{ item, isInlineEdit }">
+                    {% block acris_customer_price_list_grid_columns_active_inline_edit %}
+                    <template v-if="isInlineEdit">
+                        <sw-checkbox-field v-model="item.active"></sw-checkbox-field>
+                    </template>
+                    {% endblock %}
+
+                    {% block acris_customer_price_list_grid_columns_active_content %}
+                    <template v-else>
+                        <sw-icon v-if="item.active" name="regular-checkmark-xs" small
+                                 class="is--active"></sw-icon>
+                        <sw-icon v-else name="small-default-x-line-medium" small class="is--inactive"></sw-icon>
+                    </template>
+                    {% endblock %}
+                </template>
+                {% endblock %}
+
+                {% block acris_customer_price_list_grid_columns_product_name %}
+                <template #column-product="{ item, isInlineEdit }">
+                    {% block acris_customer_price_list_grid_columns_product_inline_edit %}
+                    <template v-if="item.product">
+                        <sw-product-variant-info :variations="item.product.variation">
+                            <a @click="onEditCustomerPrice(item.id)">{{ item.product.translated.name || item.product.name }}</a>
+                        </sw-product-variant-info>
+                    </template>
+                    <template v-else>
+                        <a @click="onEditCustomerPrice(item.id)">{{ item.productId }}</a>
+                    </template>
+                    {% endblock %}
+                </template>
+                {% endblock %}
+
+                {% block acris_customer_price_list_grid_columns_customer %}
+                    <template #column-customer="{ item, isInlineEdit }">
+                        {% block acris_customer_price_list_grid_columns_customer_inline_edit %}
+                            <template v-if="item.customer">
+                                <a @click="onEditCustomerPrice(item.id)">{{ item.customer.firstName }} {{ item.customer.lastName }}</a>
+                            </template>
+                        {% endblock %}
+                    </template>
+                {% endblock %}
+
+                {% block acris_customer_price_list_grid_columns_acris_prices %}
+                    <template #column-acrisPrices="{ item, isInlineEdit }">
+                        {% block acris_customer_price_list_grid_columns_acris_prices_inline_edit %}
+                            <template v-if="item.acrisPrices && item.acrisPrices.length > 0 && item.acrisPrices[0] && item.acrisPrices[0].price[0]">
+                                <a @click="onEditCustomerPrice(item.id)">{{ $tc('acris-customer-price.list.acrisPricesLabel', 0, { netPrice: item.acrisPrices[0].price[0].net, grossPrice: item.acrisPrices[0].price[0].gross }) }}</a>
+                            </template>
+                            <template v-else>
+                                {{ $tc('acris-customer-price.list.emptyAcrisPrices') }}
+                            </template>
+                        {% endblock %}
+                    </template>
+                {% endblock %}
+
+                {% block acris_customer_price_list_grid_columns_actions %}
+                <template #more-actions="{ item }">
+                    {% block acris_customer_price_list_grid_columns_actions_duplicate %}
+                    <sw-context-menu-item
+                        @click="onDuplicate(item)">
+                        {{ $tc('acris-customer-price.list.contextMenuDuplicate') }}
+                    </sw-context-menu-item>
+                    {% endblock %}
+                </template>
+                {% endblock %}
+
+                <template #pagination>
+                    {% block sw_order_list_grid_pagination %}
+                    <sw-pagination :page="page"
+                                   :limit="limit"
+                                   :total="total"
+                                   :total-visible="7"
+                                   @page-change="onPageChange">
+                    </sw-pagination>
+                    {% endblock %}
+                </template>
+
+            </sw-entity-listing>
+            {% endblock %}
+
+            {% block acris_customer_price_list_empty_state %}
+            <sw-empty-state v-if="!isLoading && total === 0" :title="$tc('acris-customer-price.list.contentEmpty')"></sw-empty-state>
+            {% endblock %}
+
+        </div>
+    </template>
+    {% endblock %}
+
+    {% block acris_customer_price_list_sidebar %}
+    <template #sidebar>
+        <sw-sidebar class="acris-customer-price-list__sidebar">
+            {% block acris_customer_price_list_sidebar_item %}
+            <sw-sidebar-item
+                icon="regular-undo"
+                :title="$tc('acris-customer-price.list.titleSidebarItemRefresh')"
+                @click="onRefresh">
+            </sw-sidebar-item>
+            {% endblock %}
+        </sw-sidebar>
+    </template>
+    {% endblock %}
+
+</sw-page>
+{% endblock %}

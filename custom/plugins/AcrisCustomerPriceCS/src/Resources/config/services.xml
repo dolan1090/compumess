@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Extensions -->
+        <service id="Acris\CustomerPrice\Custom\ProductExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Acris\CustomerPrice\Custom\RuleExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Acris\CustomerPrice\Custom\CustomerExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <!-- Definitions -->
+        <service id="Acris\CustomerPrice\Custom\CustomerPriceDefinition">
+            <tag name="shopware.entity.definition" entity="acris_customer_price" />
+        </service>
+
+        <service id="Acris\CustomerPrice\Custom\CustomerAdvancedPriceDefinition">
+            <tag name="shopware.entity.definition" entity="acris_customer_advanced_price" />
+        </service>
+
+        <service id="Acris\CustomerPrice\Custom\Aggregate\CustomerPriceRule\CustomerPriceRuleDefinition">
+            <tag name="shopware.entity.definition" entity="acris_customer_price_rule" />
+        </service>
+
+        <!-- Service -->
+        <service id="Acris\CustomerPrice\Components\CustomerPrice\CustomerPriceService">
+            <argument id="Acris\CustomerPrice\Components\CustomerPrice\CustomerPriceGateway" type="service"/>
+            <argument type="service" id="Acris\CustomerPrice\Components\PriceRoundingService" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+        </service>
+
+        <service id="Acris\CustomerPrice\Components\PriceRoundingService" />
+
+        <!-- Gateway -->
+        <service id="Acris\CustomerPrice\Components\CustomerPrice\CustomerPriceGateway">
+            <argument id="acris_customer_price.repository" type="service"/>
+            <argument id="event_dispatcher" type="service"/>
+        </service>
+
+        <!-- Product price calculator extension -->
+        <service id="Acris\CustomerPrice\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator" decorates="Shopware\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator" decoration-priority="4000">
+            <argument type="service" id="Acris\CustomerPrice\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator.inner"/>
+            <argument id="Acris\CustomerPrice\Components\CustomerPrice\CustomerPriceService" type="service"/>
+        </service>
+
+        <!-- Subscriber -->
+        <service id="Acris\CustomerPrice\Storefront\Subscriber\CustomerPriceSubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheInvalidator"/>
+            <argument type="service" id="acris_customer_price.repository"/>
+            <argument type="service" id="product.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <!-- Import customer price via Api sync -->
+        <service id="Acris\CustomerPrice\Core\Framework\DataAbstractionLayer\Write\WriteCommandExtractor"
+                 decorates="Shopware\Core\Framework\DataAbstractionLayer\Write\WriteCommandExtractor">
+            <argument type="service" id="Acris\CustomerPrice\Core\Framework\DataAbstractionLayer\Write\WriteCommandExtractor.inner"/>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <!-- Cart Collector -->
+        <service id="Acris\CustomerPrice\Core\Content\Product\Cart\CustomerPriceCartProcessor">
+            <tag name="shopware.cart.collector" priority="5000"/>
+        </service>
+    </services>
+</container>
