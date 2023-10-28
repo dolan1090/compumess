@@ -1,0 +1,56 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget-form.html.twig' %}
+
+{% block buy_widget_buy_form_inner %}
+	{% set ScDB2BInquiry = config('ScDB2BInquiry') %}
+	{% set activeRules = context.context.ruleIds %}
+	{% set scdRule = ScDB2BInquiry.config.scdRule %}
+
+	{% if ((ScDB2BInquiry.config.ScDInquiryBasketType == "typeActivated" or
+        (ScDB2BInquiry.config.ScDInquiryBasketType == "typeProductspecific" and product.translated.customFields.scd_activate_inquiry_basket))
+        or (scdRule !== null and ScDB2BInquiry.config.ScDInquiryBasketType == "typeRule" and (scdRule in activeRules)))
+        and (context.currentCustomerGroup.customFields.scd_customergroup_hideinquiry != true) %}
+		<form action="{{ path("frontend.inquiry.add") }}" method="post" data-form-csrf-handler="true" data-form-validation="true" enctype="multipart/form-data" data-add-to-cart="true" data-offcanvas-cart="true">
+
+			<div class="hidden-fields">
+				<input type="hidden" name="currentUrl" value="{{ app.request.uri }}"/>
+				<input type="hidden" name="productNumber" value="{{ product.productNumber }}"/>
+				<input type="hidden" name="id" value="{{ product.id }}"/>
+				<input type="hidden" name="label" value="{{ product.translated.name }}"/>
+				<input type="hidden" name="mediaId" value="{{ product.cover.media.id }}"/>
+				<input type="hidden" name="redirectTo" value="frontend.cart.offcanvas"/>
+			</div>
+
+			<div class="row g-2 buy-widget-container">
+				<div class="col-4">
+					<select name="quantity" class="form-select product-detail-quantity-select">
+						{% for quantity in range(product.minPurchase, product.calculatedMaxPurchase, product.purchaseSteps) %}
+							<option value="{{ quantity }}">
+								{{ quantity }}
+								{% if quantity == 1 %}
+									{% if product.translated.packUnit %}
+										{{ product.translated.packUnit }}
+									{% endif %}
+								{% else %}
+									{% if product.translated.packUnitPlural %}
+										{{ product.translated.packUnitPlural }}
+									{% elseif product.translated.packUnit %}
+										{{ product.translated.packUnit }}
+									{% endif %}
+								{% endif %}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="col-8">
+					<div class="d-grid">
+						<button class="btn btn-buy" title="{{ "scd.scdInquiryBasketBtn"|trans|striptags }}" aria-label="{{ "scd.scdInquiryBasketBtn"|trans|striptags }}">
+							{{ "scd.scdInquiryBasketBtn"|trans|sw_sanitize }}
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock %}
