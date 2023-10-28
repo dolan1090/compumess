@@ -1,0 +1,25 @@
+<div
+    v-if="hasActivity"
+    class="publisher-activity-stack"
+>
+    <div
+        v-for="log, index in displayUserActivity"
+        v-if="log.user"
+        :key="`activity-stack-${index}`"
+        class="publisher-activity-stack__item"
+        v-tooltip="getTooltipOptions(log)"
+    >
+        <sw-avatar
+            :firstName="log.user.firstName || log.user.userName"
+            :lastName="log.user.lastName"
+            :imageUrl="log.user.avatar"
+        ></sw-avatar>
+    </div>
+
+    <div
+        v-if="additionalUserActivityLength > 0"
+        class="publisher-activity-stack__additional-counter"
+    >
+        +{{ additionalUserActivityLength }}
+    </div>
+</div>

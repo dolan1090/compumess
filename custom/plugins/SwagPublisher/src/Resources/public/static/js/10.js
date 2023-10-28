@@ -1,0 +1,1 @@
+(this["webpackJsonpPluginswag-publisher"]=this["webpackJsonpPluginswag-publisher"]||[]).push([[10],{kgWv:function(n,e,s){"use strict";s.r(e);e.default=Shopware.Component.wrapComponentConfig({template:'{% block sw_cms_slot_component %}\n    <span :data-publisher-selector="element.id"></span>\n\n    {% parent() %}\n{% endblock %}\n'})}}]);
