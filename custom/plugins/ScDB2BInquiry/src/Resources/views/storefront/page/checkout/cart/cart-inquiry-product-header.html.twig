@@ -1,0 +1,17 @@
+{% block page_checkout_cart_header_container %}
+    <div class="card-title cart-table-header">
+        <div class="row cart-header-row">
+            {% block page_checkout_cart_header_product_info %}
+                <div class="col-8 cart-header-info">
+                    {{ "checkout.cartHeaderInfo"|trans|sw_sanitize }}
+                </div>
+            {% endblock %}
+
+            {% block page_checkout_cart_header_quantity %}
+                <div class="col-4 cart-header-quantity">
+                    {{ "checkout.cartHeaderQuantity"|trans|sw_sanitize }}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
