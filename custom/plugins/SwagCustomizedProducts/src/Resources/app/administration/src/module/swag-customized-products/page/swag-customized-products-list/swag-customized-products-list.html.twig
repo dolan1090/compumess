@@ -1,0 +1,140 @@
+{% block swag_customized_products_list %}
+    <sw-page class="swag-customized-products-list">
+
+        {% block swag_customized_products_list_smart_bar_header %}
+            <template #smart-bar-header>
+
+                {% block swag_customized_products_list_smart_bar_header_title %}
+                    <h2>
+
+                        {% block swag_customized_products_list_smart_bar_header_title_text %}
+                            {{ $tc('swag-customized-products.list.templateTitle') }}
+                        {% endblock %}
+
+                        {% block swag_customized_products_list_smart_bar_header_amount %}
+                            <span v-if="!isLoading"
+                                  class="sw-page__smart-bar-amount swag-customized-products-list__smart-bar-amount">
+                                ({{ total }})
+                            </span>
+                        {% endblock %}
+                    </h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block swag_customized_products_list_smart_bar_actions %}
+            <template #smart-bar-actions>
+
+                {% block swag_customized_products_list_smart_bar_actions_add %}
+                    <sw-button
+                        :routerLink="{ name: 'swag.customized.products.create' }"
+                        variant="primary"
+                        :disabled="!acl.can('swag_customized_products_template.creator')"
+                        v-tooltip="{
+                            message: $tc('sw-privileges.tooltip.warning'),
+                            disabled: acl.can('swag_customized_products_template.creator'),
+                            showOnDisabledElements: true
+                        }">
+                        {{ $tc('swag-customized-products.list.buttonAddTemplate') }}
+                    </sw-button>
+                {% endblock %}
+
+            </template>
+        {% endblock %}
+
+        {% block swag_customized_products_list_language_switch %}
+            <template #language-switch>
+                <sw-language-switch @on-change="onChangeLanguage"></sw-language-switch>
+            </template>
+        {% endblock %}
+
+        <template #content>
+
+            {% block swag_customized_products_list_content %}
+                <sw-entity-listing
+                    v-if="items"
+                    class="swag-customized-products-list-grid"
+                    :items="items"
+                    :columns="templateColumns"
+                    :repository="templateRepository"
+                    detailRoute="swag.customized.products.detail"
+                    :showSelection="true"
+                    :isLoading="isLoading"
+                    :allowDelete="acl.can('swag_customized_products_template.deleter')"
+                    @inline-edit-save="onInlineEditSave"
+                    @select-item="updateSelection"
+                    @update-records="updateTotal">
+
+                    {% block sw_product_list_grid_columns_name_preview %}
+                        <template #preview-internalName="{ item }">
+                            <sw-media-preview-v2 :source="item.media"></sw-media-preview-v2>
+                        </template>
+                    {% endblock %}
+
+                    {% block swag_customized_products_list_grid_columns %}
+                        {% block swag_customized_products_list_grid_columns_options %}
+                            <template #column-options="{ item }">
+                                {{ item.options.length }}
+                            </template>
+                        {% endblock %}
+
+                        {% block swag_customized_products_list_grid_columns_description %}
+                            <template #column-description="{ item }">
+                                {{ item.description|striphtml }}
+                            </template>
+                        {% endblock %}
+                    {% endblock %}
+
+                    {% block swag_customized_products_list_grid_context_actions %}
+                        {% block swag_customized_products_list_grid_context_actions_duplicate %}
+                            <template #more-actions="{ item }">
+                                <sw-context-menu-item
+                                    @click="onDuplicate(item)"
+                                    :disabled="!acl.can('swag_customized_products_template.creator')">
+                                    {{ $tc('swag-customized-products.general.duplicate') }}
+                                </sw-context-menu-item>
+                            </template>
+                        {% endblock %}
+
+                        {% block swag_customized_products_list_grid_context_actions_delete %}
+                            <template #delete-action="{ item, showDelete, allowDelete }">
+                                <sw-context-menu-item @click="showDelete(item.id)"
+                                                      :disabled="!allowDelete || !acl.can('swag_customized_products_template.deleter')"
+                                                      class="sw-entity-listing__context-menu-edit-delete"
+                                                      variant="danger">
+                                    {{ $tc('global.default.delete') }}
+                                </sw-context-menu-item>
+                            </template>
+                        {% endblock %}
+                    {% endblock %}
+
+                </sw-entity-listing>
+
+                <div class="swag-customized-products-list__content">
+
+                    {% block swag_customized_products_list_grid %}
+                    {% endblock %}
+
+                    {% block swag_customized_products_list_empty_state %}
+                        <sw-empty-state v-if="!isLoading && !total" :title="$tc('swag-customized-products.list.messageEmpty')"></sw-empty-state>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </template>
+
+        {% block swag_customized_products_list_sidebar %}
+            <template #sidebar>
+                <sw-sidebar>
+
+                    {% block swag_customized_products_list_sidebar_refresh %}
+                        <sw-sidebar-item
+                            icon="regular-undo"
+                            :title="$tc('swag-customized-products.list.titleSidebarItemRefresh')"
+                            @click="onRefresh">
+                        </sw-sidebar-item>
+                    {% endblock %}
+                </sw-sidebar>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

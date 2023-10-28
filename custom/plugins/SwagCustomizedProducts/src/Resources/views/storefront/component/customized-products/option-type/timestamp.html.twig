@@ -1,0 +1,18 @@
+{% block swag_customized_products_option_type_template_timestamp %}
+    {% set pickerProperties = '{
+        "locale": "' ~ app.request.locale ~ '",
+        "noCalendar": true,
+        "enableTime": true,
+        "minDate": "' ~ "now"|date("Y-m-d") ~ 'T' ~ props.startTime ~ '",
+        "maxDate": "' ~ "now"|date("Y-m-d") ~ 'T' ~ props.endTime ~ '",
+        "selectors": {
+            "openButton": "#open-button-option-id-' ~ option.id ~ '",
+            "clearButton": "#clear-button-option-id-' ~ option.id ~ '"
+        }
+    }' %}
+
+    {% sw_include customizedProductsOptionTemplatePrefix ~ 'datepicker/component.html.twig' with {
+        'pickerProperties': pickerProperties,
+        'type': 'time'
+    } %}
+{% endblock %}

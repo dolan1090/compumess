@@ -1,0 +1,19 @@
+.swag-customized-products-options-datetime-wrapper {
+    .swag-customized-products-options-datetime[disabled] {
+        background-color: #eee;
+        opacity: 1;
+    }
+
+    .swag-customized-products-date-picker-button {
+        border: none;
+        background-color: transparent;
+
+        & > span {
+            color: $sw-text-color
+        }
+    }
+
+    .date-picker-clear[disabled] > span {
+        color: transparentize($sw-text-color, 0.7);
+    }
+}

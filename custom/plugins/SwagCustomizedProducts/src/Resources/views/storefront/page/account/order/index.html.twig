@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/page/account/order/index.html.twig' %}
+
+{% block page_checkout_confirm_table_items %}
+    {% for lineItem in page.order.nestedLineItems %}
+        {% block page_checkout_confirm_table_item %}
+            {% sw_include '@Storefront/storefront/component/line-item/line-item.html.twig' %}
+        {% endblock %}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{# @deprecated tag:v5.0.0 - Template is deprecated. Use new line item template. #}
+{% sw_extends '@Storefront/storefront/page/checkout/checkout-aside-item.html.twig' %}
+
+{% set lineItemTemplateType = constant('Swag\\CustomizedProducts\\Core\\Checkout\\CustomizedProductsCartDataCollector::CUSTOMIZED_PRODUCTS_TEMPLATE_LINE_ITEM_TYPE') %}
+{% set isCustomizedProduct = lineItem.type == lineItemTemplateType %}
+{% set cover, label, referencedId = null, null, null %}
+
+{% block page_checkout_aside_item_children_template %}
+    {% if isCustomizedProduct %}
+        {% set isNested = true %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block page_checkout_aside_item_container %}
+    {% if isCustomizedProduct %}
+        {% set isNested = false %}
+        {% for child in lineItem.children %}
+            {% if child.type == 'product' %}
+                {% set label = child.label %}
+                {% set referencedId = child.referencedId %}
+                {% set productNumber = lineItem.payload|merge({ 'productNumber': child.payload.productNumber }) %}
+
+                {% if child.cover.url %}
+                    {% set cover = child.cover %}
+                {% endif %}
+
+                {% do lineItem.setLabel(label) %}
+                {% do lineItem.setCover(cover) %}
+                {% do lineItem.setReferencedId(referencedId) %}
+                {% do lineItem.setPayload(productNumber) %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

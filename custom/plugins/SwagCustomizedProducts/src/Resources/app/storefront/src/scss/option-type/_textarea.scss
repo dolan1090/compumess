@@ -1,0 +1,15 @@
+.swag-customized-products__type-textarea {
+    &-clear-button {
+        border: none;
+        background-color: transparent;
+        color: $sw-text-color;
+
+        &:hover {
+            color: $primary;
+        }
+
+        &[disabled] {
+            color: transparentize($sw-text-color, 0.7);
+        }
+    }
+}

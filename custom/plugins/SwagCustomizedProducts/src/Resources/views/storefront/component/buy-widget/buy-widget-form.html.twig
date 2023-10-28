@@ -1,0 +1,36 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget-form.html.twig' %}
+
+{% if pageType == 'product_detail' %}
+    {% set customizedProductsTemplate = page.product.extensions.swagCustomizedProductsTemplate %}
+{% else %}
+    {% set customizedProductsTemplate = product.extensions.swagCustomizedProductsTemplate %}
+{% endif %}
+
+{% block buy_widget_buy_container %}
+    {% if customizedProductsTemplate %}
+        {% if pageType == 'product_detail' %}
+            {% sw_include '@Storefront/storefront/component/buy-widget/buy-widget-form-customized-products.html.twig' %}
+
+            {{ parent() }}
+        {% else %}
+            <a class="btn btn-primary"
+               href="{{ seoUrl('frontend.detail.page', { 'productId': product.id }) }}"
+               title="{{ 'customizedProducts.stepByStep.navigation.btnConfigureProduct'|trans|striptags }}"
+               aria-label="{{ 'customizedProducts.stepByStep.navigation.btnConfigureProduct'|trans|striptags }}">
+                {{ 'customizedProducts.stepByStep.navigation.btnConfigureProduct'|trans|striptags }}
+            </a>
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block buy_widget_buy_form_action %}
+    {% apply spaceless %}
+        {% if customizedProductsTemplate and customizedProductsTemplate.active and customizedProductsTemplate.options|length %}
+            {{ path('frontend.checkout.customized-products.add') }}
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% endapply %}
+{% endblock %}
