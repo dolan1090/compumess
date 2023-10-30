@@ -1,8 +1,0 @@
-{
-    "global": {
-        "error-codes": {
-            "ADVANCED_SEARCH_BOOSTING_BOOST_INVALID": "The boost number must be a positive value",
-            "ADVANCED_SEARCH_BOOSTING_VALID_TO_INVALID": "The activation date should be set in the future"
-        }
-    }
-}

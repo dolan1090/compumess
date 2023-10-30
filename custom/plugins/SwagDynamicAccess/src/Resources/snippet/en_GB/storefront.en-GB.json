@@ -1,5 +1,0 @@
-{
-    "checkout": {
-        "product-invalid": "The product \"%id%\" is no longer available."
-    }
-}

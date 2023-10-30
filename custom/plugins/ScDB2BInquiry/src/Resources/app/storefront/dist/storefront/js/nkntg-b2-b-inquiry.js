@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([["scd-b2-b-inquiry"],{bGI1:function(n,b){}},[["bGI1","runtime"]]]);

@@ -1,1 +1,0 @@
-(this["webpackJsonpPluginquick-order"]=this["webpackJsonpPluginquick-order"]||[]).push([[2],{aLi6:function(i,e,r){"use strict";r.r(e);var t=Shopware.Component;e.default=t.wrapComponentConfig({computed:{defaultCriteria:function(){var i=this.$super("defaultCriteria");return i.addAssociation("specificFeatures"),i}}})}}]);

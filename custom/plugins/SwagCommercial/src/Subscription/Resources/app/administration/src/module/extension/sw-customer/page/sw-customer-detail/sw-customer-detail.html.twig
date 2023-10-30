@@ -1,9 +1,0 @@
-{% block sw_customer_detail_content_tab_order %}
-    <sw-tabs-item
-        class="sw-customer-detail__tab-subscriptions"
-        :route="{ name: 'sw.customer.detail.order', params: { id: $route.params.id } }"
-        :title="$tc('commercial.subscriptions.subscriptions.customer-detail.labelOrderCard')"
-    >
-        {{ $tc('commercial.subscriptions.subscriptions.customer-detail.labelOrderCard') }}
-    </sw-tabs-item>
-{% endblock %}

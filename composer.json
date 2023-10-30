@@ -3,7 +3,6 @@
     "type": "project",
     "require": {
         "composer-runtime-api": "^2.0",
-        "moorl/foundation": "1.5.23",
         "shopware/administration": "~v6.5.0",
         "shopware/commercial": "5.6.3",
         "shopware/core": "~v6.5.0",

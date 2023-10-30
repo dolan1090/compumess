@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([["scd-b2-b-inquiry"],{r6Fq:function(n,i){}},[["r6Fq","runtime"]]]);

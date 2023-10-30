@@ -1,9 +1,0 @@
-{
-  "sw-flow": {
-    "triggers": {
-      "invite": "Invite",
-      "employee": "Employee",
-      "status": "Status"
-    }
-  }
-}

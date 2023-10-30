@@ -1,3 +1,0 @@
-swag_rule_builder_preview:
-    resource: ../../Api/*Controller.php
-    type: annotation
