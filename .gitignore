@@ -7,7 +7,13 @@
 .env.local
 .env.local.php
 .env.*.local
+.env.test
 # custom/*
+/tests
+/config
+
+/custom/plugins/
+!custom/plugins/Compumess
 !custom/plugins/.gitkeep
 !custom/static-plugins/
 /public/compumess/
@@ -38,3 +44,8 @@
 /install.lock
 public/asset-manifest.json
 ###< shopware/core ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
