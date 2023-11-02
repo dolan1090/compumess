@@ -12,9 +12,9 @@
 /tests
 /config
 
-/custom/plugins/
-!custom/plugins/Compumess
-!custom/plugins/.gitkeep
+custom/plugins/*
+!custom/plugins/Compumess/
+
 !custom/static-plugins/
 /public/compumess/
 /public/fonts/*

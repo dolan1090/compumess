@@ -126,3 +126,19 @@ table td {
   color: #5f7285;
   border: 1px solid #fff;
 }
+
+button.product--action.action--note {
+  background: unset;
+  border: none;
+  align-items: center;
+  gap: 5px;
+  display: flex;
+
+  span.action--text {
+    text-decoration: none;
+  }
+}
+
+button.btn.btn-buy {
+  max-width: max-content;
+}
