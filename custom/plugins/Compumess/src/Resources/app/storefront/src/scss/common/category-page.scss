@@ -107,6 +107,11 @@
       width: 180px;
       flex-grow: unset;
       margin: 0;
+
+      .product-action {
+        position: absolute;
+        bottom: 0;
+      }
     }
 
     .product-info {
