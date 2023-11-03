@@ -10,7 +10,9 @@
 				{% block layout_breadcrumb_list %}
 					<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
 						<li class="breadcrumb-item">
-							<i class="fas fa-home"></i>
+							<a href="/" class="breadcrumb-link ">
+								<i class="fas fa-home"></i>
+							</a>
 						</li>
 						{% for breadcrumbCategory in breadcrumbCategories %}
 							{% set key = breadcrumbCategory.id %}

@@ -90,4 +90,39 @@
             </div>
         {% endblock %}
     </div>
+
+        <script>
+        // Hàm kiểm tra URL và thêm lớp "active" vào phần tử có id="produktblatt-tab" nếu đúng URL
+        function addActiveClassToTabDetailProduct() {
+            const currentURL = window.location.href;
+
+            const technischeTab = document.getElementById("technische-tab");
+            const technischeTabPane = document.getElementById("technische-tab-pane");
+
+            const produktblattTab = document.getElementById("produktblatt-tab");
+            const produktblattTabPane = document.getElementById("produktblatt-tab-pane");
+
+            if (window.location.hash === "#download-tab" && produktblattTab && technischeTab && technischeTabPane) {
+                produktblattTab.classList.add("active");
+                technischeTab.classList.remove("active");
+                produktblattTabPane.classList.add("show");
+                produktblattTabPane.classList.add("active");
+                technischeTabPane.classList.remove("show");
+                technischeTabPane.classList.remove("active");
+            }
+
+            const seriesAndModelOverviewTab = document.getElementById("SeriesAndModelOverview-tab");
+            const seriesAndModelOverviewTabPane = document.getElementById("SeriesAndModelOverview-tab-pane");
+
+            if (window.location.hash === "#description-tab" && seriesAndModelOverviewTab && technischeTab && technischeTabPane) {
+                seriesAndModelOverviewTab.classList.add("active");
+                technischeTab.classList.remove("active");
+                seriesAndModelOverviewTabPane.classList.add("show");
+                seriesAndModelOverviewTabPane.classList.add("active");
+                technischeTabPane.classList.remove("show");
+                technischeTabPane.classList.remove("active");
+            }
+        }
+        document.addEventListener("DOMContentLoaded", addActiveClassToTabDetailProduct);
+    </script>
 {% endblock %}

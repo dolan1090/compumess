@@ -1,6 +1,6 @@
 @font-face {
   font-family: Lato;
-  src: url('/custom/plugins/Compumess/src/Resources/app/storefront/src/scss/common/Lato/Lato-Regular.ttf');
+  src: url('#{$my-asset-path}/fonts/Lato/Lato-Regular.ttf');
   font-display: swap;
 }
 
@@ -27,13 +27,32 @@
 body {
   font-family: Lato;
   font-size: 16px;
+  background-color: #E6E6E4;
+  color: #5f7285;
 }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
   font-family: Lato;
 }
 
-textarea, input[type="text"], input[type="search"], input[type="password"], input[type="number"], input[type="email"], input[type="tel"] {
+textarea,
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="tel"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -93,7 +112,8 @@ table {
   border-spacing: 1px;
 }
 
-table th, table thead td {
+table th,
+table thead td {
   background: #5f7285;
   color: #fff;
   font-weight: 700;
@@ -105,4 +125,20 @@ table td {
   background: #fff;
   color: #5f7285;
   border: 1px solid #fff;
+}
+
+button.product--action.action--note {
+  background: unset;
+  border: none;
+  align-items: center;
+  gap: 5px;
+  display: flex;
+
+  span.action--text {
+    text-decoration: none;
+  }
+}
+
+button.btn.btn-buy {
+  max-width: max-content;
 }

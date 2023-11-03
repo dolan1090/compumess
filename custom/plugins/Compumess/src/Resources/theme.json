@@ -8,7 +8,9 @@
     "app/storefront/src/scss/base.scss"
   ],
   "script": [
-    "@Storefront",
+    "@Storefront",    
+    "app/storefront/src/assets/fontawesome-640/js/all.min.js",
+    "app/storefront/src/js/main.js",
     "app/storefront/dist/storefront/js/compumess.js"
   ],
   "asset": ["@Storefront", "app/storefront/src/assets"],
