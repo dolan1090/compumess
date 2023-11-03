@@ -1,6 +1,6 @@
 # Shopware 6 production template
 
-Version Shopware 6.5.6.1
+Version Shopware 6.5.6
 
 This repository contains the production template that enables you to build,
 package and deploy Shopware 6 to production shops.
