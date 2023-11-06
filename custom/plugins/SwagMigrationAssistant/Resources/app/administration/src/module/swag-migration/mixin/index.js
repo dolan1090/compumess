@@ -1,1 +1,0 @@
-import './swag-wizard.mixin';
