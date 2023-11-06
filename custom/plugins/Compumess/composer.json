@@ -1,0 +1,18 @@
+{
+  "name": "compumess/theme-skeleton",
+  "description": "Theme skeleton plugin",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Compumess\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "Compumess\\Compumess",
+    "label": {
+      "de-DE": "Theme Compumess plugin",
+      "en-GB": "Theme Compumess plugin"
+    }
+  }
+}

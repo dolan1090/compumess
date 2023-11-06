@@ -1,0 +1,46 @@
+:root {
+    --black-1: #000000;
+    --black-2: #5A5A5A;
+    --black-3: #444;
+    --white-1: #ffffff;
+    --white-3: #787878;
+    --blue-1: #024e75;
+    --semibold: 600;
+    --bold: 700;
+    --mobile-padding: 1.5rem;
+  }
+  
+  $mobile-mini-width: 480px;
+  $mobile-large-width: 991px;
+  $tablet-width: 768px;
+  $desktop-width: 1025px;
+  
+  @mixin mobilemini {
+    @media (max-width: #{$mobile-mini-width}) {
+      @content;
+    }
+  }
+  
+  @mixin mobile {
+    @media (max-width: #{$tablet-width - 1px}) {
+      @content;
+    }
+  }
+  
+  @mixin mobilelarge {
+    @media (max-width: #{$mobile-large-width}) {
+      @content;
+    }
+  }
+  
+  @mixin tablet {
+    @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+      @content;
+    }
+  }
+  
+  @mixin desktop {
+    @media (min-width: #{$desktop-width}) {
+      @content;
+    }
+  }

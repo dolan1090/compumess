@@ -1,0 +1,68 @@
+<div class="row navigation-flyout-bar">
+	<div class="col">
+		<div class="navigation-flyout-category-link">
+			<a class="nav-link" href="{{ category_url(navigationTree.category) }}" itemprop="url" title="{{ navigationTree.category.translated.name }}">
+				Zur Kategorie
+				{{ navigationTree.category.translated.name }}
+				<span class="icon icon-arrow-right icon-primary">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewbox="0 0 16 16">
+						<defs>
+							<path id="icons-solid-arrow-right" d="M6.7071 6.2929c-.3905-.3905-1.0237-.3905-1.4142 0-.3905.3905-.3905 1.0237 0 1.4142l3 3c.3905.3905 1.0237.3905 1.4142 0l3-3c.3905-.3905.3905-1.0237 0-1.4142-.3905-.3905-1.0237-.3905-1.4142 0L9 8.5858l-2.2929-2.293z"></path>
+						</defs>
+						<use transform="rotate(-90 9 8.5)" xlink:href="#icons-solid-arrow-right" fill="#758CA3" fill-rule="evenodd"></use>
+					</svg>
+				</span>
+			</a>
+		</div>
+	</div>
+
+	<div class="col-auto">
+		<div class="navigation-flyout-close js-close-flyout-menu">
+			<span class="icon icon-x">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewbox="0 0 24 24">
+					<defs>
+						<path d="m10.5858 12-7.293-7.2929c-.3904-.3905-.3904-1.0237 0-1.4142.3906-.3905 1.0238-.3905 1.4143 0L12 10.5858l7.2929-7.293c.3905-.3904 1.0237-.3904 1.4142 0 .3905.3906.3905 1.0238 0 1.4143L13.4142 12l7.293 7.2929c.3904.3905.3904 1.0237 0 1.4142-.3906.3905-1.0238.3905-1.4143 0L12 13.4142l-7.2929 7.293c-.3905.3904-1.0237.3904-1.4142 0-.3905-.3906-.3905-1.0238 0-1.4143L10.5858 12z" id="icons-default-x"></path>
+					</defs>
+					<use xlink:href="#icons-default-x" fill="#758CA3" fill-rule="evenodd"></use>
+				</svg>
+			</span>
+		</div>
+	</div>
+</div>
+
+<div
+	class="row navigation-flyout-categories is-level-0">
+
+	{# {{ dump(navigationTree) }} #}
+	<div class="col-6 ">
+		<div class="row">
+			{% for treeItem0 in navigationTree.children %}
+				<div class="col-6 navigation-flyout-col box-is-level-0">
+					<a class="nav-item nav-link navigation-flyout-link is-level-0" href="{{ category_url(treeItem0.category) }}" itemprop="url" title="{{ treeItem0.category.translated.name }}">
+						<span itemprop="name">{{ treeItem0.category.translated.name }}</span>
+					</a>
+					<div class="navigation-flyout-categories is-level-1">
+						{% for treeItem1 in treeItem0.children %}
+							<div class="navigation-flyout-col">
+								<a class="nav-item nav-link navigation-flyout-link is-level-1" href="{{ category_url(treeItem1.category) }}" itemprop="url" title="{{treeItem1.category.name}}">
+									<span itemprop="name">{{treeItem1.category.name}}</span>
+								</a>
+
+								<div class="navigation-flyout-categories is-level-2"></div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="menu--teaser col-6">
+		<div class="teaser--headline">{{navigationTree.category.name}}</div>
+		<div class="teaser--text">
+			{{navigationTree.category.description|striptags}}
+			<a class="teaser--text-link" href="{{ category_url(navigationTree.category) }}" aria-label="mehr erfahren" title="mehr erfahren">
+				mehr erfahren
+			</a>
+		</div>
+	</div>
+</div>

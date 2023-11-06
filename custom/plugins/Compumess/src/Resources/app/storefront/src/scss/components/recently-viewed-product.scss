@@ -1,0 +1,87 @@
+.cms-block-recently-viewed-product-slider,
+.cms-element-recently-viewed-product-slider {
+    .base-slider {
+        padding: 0;
+
+        .product-slider-controls-container {
+            .base-slider-controls-next  {
+                right: 0;
+                width: 1.875rem;
+                height: 3.75rem;
+                line-height: normal;
+                font-size: .75rem;
+                border-radius: 3px;
+                background: rgba(255, 255, 255, 0.5);
+                color: #5f7285;
+                border: 1px solid #dadae5;
+            }
+
+            .base-slider-controls-prev  {
+                right: 0;
+                width: 1.875rem;
+                height: 3.75rem;
+                line-height: normal;
+                font-size: .75rem;
+                border-radius: 3px;
+                background: rgba(255, 255, 255, 0.5);
+                color: #5f7285;
+                border: 1px solid #dadae5;
+            }
+        }
+
+        @include desktop {
+            .product-slider-controls-container {
+                display: none;
+            }
+        }
+    }
+
+    .cms-element-title-paragraph {
+        padding: 0.625rem 0rem 0.625rem 0rem;
+        border-bottom: 1px solid #dadae5;
+        font-size: 1rem;
+        display: block;
+        font-weight: 700;
+        color: #3f4c58;
+        margin: 0;
+    }
+
+    #tns1>.tns-item {
+        padding-right: 15px;
+    }
+
+    .box-recently-viewed {
+        border: none;
+
+        .product-wishlist {
+            display: none;
+        }
+
+        .product-info {
+            a.product-name {
+                user-select: none;
+                display: block;
+                color: #5f7285;
+                font-weight: 500;
+                white-space: normal;
+                font-size: 1rem;
+                text-align: center;
+                height: auto;
+                line-height: normal;
+                -webkit-line-clamp: 3;
+            }
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        &:hover {
+            .product-info {
+                a.product-name {
+                    color: $theme-category-navigation-link-color-hover;
+                }
+            }
+        }
+    }
+}

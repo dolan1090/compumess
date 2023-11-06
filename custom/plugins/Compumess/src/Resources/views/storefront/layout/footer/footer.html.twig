@@ -1,0 +1,217 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{% block layout_footer_navigation_hotline %}
+	<div class="col-md-3 footer-column js-footer-column item-1">
+		{% block layout_footer_navigation_hotline_headline %}
+			<div
+				class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger" id="collapseFooterHotlineTitle" data-bs-target="#collapseFooterHotline" aria-expanded="true" aria-controls="collapseFooterHotline" role="listitem">
+				{# {{ 'footer.serviceHotlineHeadline'|trans|sw_sanitize }} #}
+				☎ Rufen Sie uns an.
+				{% block layout_footer_navigation_hotline_icons %}
+					<div class="footer-column-toggle">
+						<span class="footer-plus-icon">
+							{% sw_icon 'plus' %}
+						</span>
+						<span class="footer-minus-icon">
+							{% sw_icon 'minus' %}
+						</span>
+					</div>
+				{% endblock %}
+			</div>
+		{% endblock %}
+
+		{% block layout_footer_navigation_hotline_content %}
+			<div id="collapseFooterHotline" class="footer-column-content collapse js-footer-column-content footer-contact" aria-labelledby="collapseFooterHotlineTitle">
+				<div class="footer-column-content-inner">
+					<p
+						class="footer-contact-hotline">
+						{# {{ 'footer.serviceHotline'|trans|sw_sanitize }} #}
+						Wir sind Montag bis Freitag
+						<br/>von 9:00 bis 17:00 Uhr<br/>
+						für Sie erreichbar:<br/><br/>
+						<a href="tel:+49893215010" class="footer--phone-link">
+							+49 89 321501 0
+						</a>
+					</p>
+				</div>
+			</div>
+		{% endblock %}
+	</div>
+	<div class="col-md-3 footer-column js-footer-column item-2">
+		<div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger" id="collapseFooterEmailTitle" data-bs-target="#collapseFooterEmail" aria-expanded="true" aria-controls="collapseFooterEmail" role="listitem">
+			✉ Schreiben Sie eine E-Mail.
+			<div class="footer-column-toggle">
+				<span class="footer-plus-icon">
+					{% sw_icon 'plus' %}
+				</span>
+				<span class="footer-minus-icon">
+					{% sw_icon 'minus' %}
+				</span>
+			</div>
+		</div>
+		<div id="collapseFooterEmail" class="footer-column-content collapse js-footer-column-content footer-contact" aria-labelledby="collapseFooterEmailTitle">
+			<div class="footer-column-content-inner">
+				<p class="footer-contact-hotline">
+					Ihre Zeit ist uns sehr wichtig.<br>Sie erhalten deshalb immer<br>schnellstmöglich Antwort von uns.
+					<br><br><a href="mailto:info@compumess.de" class="footer--phone-link">info@compumess.de</a>
+				</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block layout_footer_navigation_column %}
+	<div class="col-md-3 footer-column js-footer-column">
+		{% block layout_footer_navigation_information_headline %}
+			<div class="footer-column-headline footer-headline js-collapse-footer-column-trigger" data-bs-target="#collapseFooterTitle{{ loop.index }}" aria-expanded="true" aria-controls="collapseFooter{{ loop.index }}">
+
+				{% if root.category.type == 'folder' %}
+					{{ root.category.translated.name }}
+				{% else %}
+					{{ root.category.translated.name }}
+				{% endif %}
+				{% block layout_footer_navigation_information_icons %}
+					<div class="footer-column-toggle">
+						<span class="footer-plus-icon">
+							{% sw_icon 'plus' %}
+						</span>
+						<span class="footer-minus-icon">
+							{% sw_icon 'minus' %}
+						</span>
+					</div>
+				{% endblock %}
+			</div>
+		{% endblock %}
+
+		{% block layout_footer_navigation_information_content %}
+			<div id="collapseFooter{{ loop.index }}" class="footer-column-content collapse js-footer-column-content" aria-labelledby="collapseFooterTitle{{ loop.index }}">
+				<div class="footer-column-content-inner">
+					{% block layout_footer_navigation_information_links %}
+						<ul class="list-unstyled">
+							{% for treeItem in root.children %}
+								{% set category = treeItem.category %}
+								{% set name = category.translated.name %}
+
+								{% block layout_footer_navigation_information_link_item %}
+									<li class="footer-link-item">
+										{% block layout_footer_navigation_information_link %}
+											{% if category.type == 'folder' %}
+												<div>{{ name }}</div>
+											{% else %}
+												<a class="footer-link" href="{{ category_url(category) }}" {% if category_linknewtab(category) %} target="_blank" {% endif %} title="{{ name }}">
+													{{ name }}
+												</a>
+											{% endif %}
+										{% endblock %}
+									</li>
+								{% endblock %}
+							{% endfor %}
+						</ul>
+					{% endblock %}
+				</div>
+			</div>
+		{% endblock %}
+	</div>
+	<div class="col-md-3 footer-column js-footer-column newsletter-bottom">
+		<div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger" id="collapseFooterNewsletterTitle" data-bs-target="#collapseFooterNewsletter" aria-expanded="true" aria-controls="collapseFooterNewsletter" role="listitem">
+			Newsletter
+			<div class="footer-column-toggle">
+				<span class="footer-plus-icon">
+					<span class="icon icon-plus">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewbox="0 0 24 24">
+							<use xlink:href="#icons-default-plus" fill="#758CA3" fill-rule="evenodd"></use>
+						</svg>
+					</span>
+				</span>
+				<span class="footer-minus-icon">
+					<span class="icon icon-minus">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewbox="0 0 24 24">
+							<use xlink:href="#icons-default-minus" fill="#758CA3" fill-rule="evenodd"></use>
+						</svg>
+					</span>
+				</span>
+			</div>
+		</div>
+		<div id="collapseFooterNewsletter" class="footer-column-content collapse js-footer-column-content footer-contact" aria-labelledby="collapseFooterNewsletterTitle">
+			<div class="footer-column-content-inner">
+				<p class="footer-contact-Newsletter">
+					Abonnieren Sie den kostenlosen Newsletter und verpassen Sie keine Neuigkeit oder Aktion mehr von CompuMess Elektronik GmbH.
+				</p>
+				<form class="newsletter--form" action="https://compumess.de/newsletter" method="post">
+					<input type="hidden" value="1" name="subscribeToNewsletter">
+					<div class="content">
+						<input type="email" aria-label="Ihre E-Mail Adresse" name="newsletter" class="newsletter--field" placeholder="Ihre E-Mail Adresse">
+						<button type="submit" aria-label="Newsletter abonnieren" class="newsletter--button btn">
+							<i class="fa-solid fa-envelope"></i>
+						</button>
+					</div>
+					<p class="privacy-information block-group">
+						Ich habe die
+						<a title="Datenschutzbestimmungen" href="https://compumess.de/datenschutz/" target="_blank">Datenschutzbestimmungen</a>
+						zur Kenntnis genommen./ I have read the
+						<a title="Datenschutzbestimmungen" href="https://compumess.de/datenschutz/" target="_blank">data protection regulations</a>.
+					</p>
+					<input type="hidden" name="__csrf_token" value="uRUHkyi06qhsK30Yw4FBKY4IgfN4L1">
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block layout_footer_vat %}
+	<div class="footer-vat">
+		© 2023 CompuMess Elektronik GmbH
+	</div>
+{% endblock %}
+
+{% block layout_footer_copyright %}
+	<div class="footer-copyright">
+		<div class='box-item'>
+			<div class='item'>
+				<a href="https://www.facebook.com/compumess" target="_blank" rel="nofollow noopener">
+					<i class="fa-brands fa-square-facebook"></i>
+				</a>
+			</div>
+			<div class='item'>
+				<a href="https://www.linkedin.com/company/compumess-elektronik-gmbh" target="_blank" rel="nofollow noopener">
+					<i class="fa-brands fa-linkedin-in"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="info--bar info--bar-top info--bar-mobile">
+		<ul>
+			<li class="more-hover">
+				<div>
+					<i class="fa-solid fa-phone-flip"></i>
+					<span>Rufen Sie uns an:<br><a href="tel:+49893215010">
+							<u>+49 89 321501-0</u>
+						</a>
+					</span>
+				</div>
+			</li>
+			<li class="more-hover">
+				<div>
+					<i class="fa-solid fa-comments"></i>
+					<span>Schreiben Sie uns:<br><a href="/kontakt">
+							<u>E-Mail an CME</u>
+						</a>
+					</span>
+				</div>
+			</li>
+			<li class="more-hover">
+				<div>
+					<i class="fa-solid fa-circle-question"></i>
+					<span>Technischer Support:<br><a href="/service">
+							<u>Zum Service</u>
+						</a>
+					</span>
+				</div>
+				<a href="/service"></a>
+			</li>
+			<a href="/service"></a>
+		</ul>
+		<a href="/service"></a>
+	</div>
+{% endblock %}
