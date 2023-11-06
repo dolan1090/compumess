@@ -1,6 +1,6 @@
 {
   "name": "Compumess",
-  "author": "Shopware AG",
+  "author": "Ecentura",
   "views": ["@Storefront", "@Plugins", "@Compumess"],
   "style": [
     "app/storefront/src/scss/overrides.scss",

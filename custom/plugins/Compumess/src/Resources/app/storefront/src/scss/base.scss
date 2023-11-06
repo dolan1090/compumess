@@ -1,3 +1,4 @@
+@import 'common/variables.scss';
 @import '#{$my-asset-path}/fontawesome-640/css/all.min.css';
 @import 'common/default.scss';
 @import 'common/header.scss';
@@ -16,3 +17,4 @@
 @import 'components/offcanvas.scss';
 @import 'components/swkwe-infobar.scss';
 @import 'components/slide-home.scss';
+@import 'components/recently-viewed-product.scss';
