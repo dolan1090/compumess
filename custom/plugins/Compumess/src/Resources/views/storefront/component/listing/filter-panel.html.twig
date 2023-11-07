@@ -45,6 +45,8 @@
                             {% endif %}
                         {% endblock %}
 
+                        
+
                         {# We'll include our filter element here #}
                         {# {% sw_include '@Storefront/storefront/component/listing/filter/filter-multi-select.html.twig' with {
                             name: 'migration_ComuMess5_product_series',
@@ -74,8 +76,7 @@
                                 {% endfor %}
                             {% endif %}
                         {% endblock %}
-
-                        {#
+                        
                         {% block component_filter_panel_item_price %}
                             {% set price = listing.aggregations.get('price') %}
 
@@ -92,7 +93,6 @@
                                 } %}
                             {% endif %}
                         {% endblock %}
-                        #}
 
                         {% block component_filter_panel_item_rating_select %}
                             {% set rating = listing.aggregations.get('rating') %}
