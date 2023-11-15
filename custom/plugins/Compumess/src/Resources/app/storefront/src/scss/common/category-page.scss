@@ -204,6 +204,29 @@
       &.active {
         display: flex;
       }
+
+      .filter-panel-item {
+        @include desktop {
+          width: calc(33.33% - 12px);
+
+          button {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            .icon.icon-filter-panel-item-toggle>svg {
+              top: 0;
+            }
+          }
+        }
+
+        .filter-boolean-label {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
+      }
     }
 
     .filter-panel-active-container {
