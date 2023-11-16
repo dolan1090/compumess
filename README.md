@@ -1,7 +1,7 @@
 # Shopware 6 production template
 
-Author: Ecentura
-Website: ecentura.com
+Author: Ecentura<br>
+Website: ecentura.com<br>
 Version Shopware 6.5.6.1
 
 This repository contains the production template that enables you to build,
