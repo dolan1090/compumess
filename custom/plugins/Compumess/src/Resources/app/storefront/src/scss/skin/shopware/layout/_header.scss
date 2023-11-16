@@ -2,6 +2,7 @@
     padding-top: 30px;
     background: $theme-header-bg;
     position: relative;
+    overflow: hidden;
 
     .header-box-top {
         max-width: 1020px;
@@ -85,10 +86,14 @@
 
     .header-actions-col {
         @include mobilemini {
-            padding: 0 0 15px 0;
+            padding: 0 0 10px 0;
 
             .column-hotline-header {
                 display: none;
+            }
+
+            .col.d-sm-none {
+                display: flex;
             }
         }
 
@@ -105,7 +110,12 @@
         @include mobilemini {
             .search-toggle {
                 max-height: 38px;
-                margin-right: 15px;
+                margin-right: 5px;
+
+                button.btn.header-actions-btn.search-toggle-btn.js-search-toggle-btn {
+                    background-image: linear-gradient(to bottom, #fff 0%, #f8f8fa 100%);
+                    border: 1px solid #dadae5;
+                }
 
                 // svg {
                 //   color: $theme-header-text-color;
@@ -169,6 +179,31 @@
         .container {
             padding-right: 10px;
             padding-left: 10px;
+        }
+
+        .menu-button {
+            display: flex;
+            color: #fff;
+            align-items: center;
+
+            button.btn.nav-main-toggle-btn.header-actions-btn {
+                background: unset;
+                border: unset;
+                padding: 0;
+                margin-right: 12px;
+                line-height: 1;
+
+                svg {
+                    color: #fff;
+                    width: 28px;
+                    height: 28px;
+                }
+
+                + span {
+                    font-size: 1.0625rem;
+                    font-weight: 700;
+                }
+            }
         }
     }
 }
