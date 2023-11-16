@@ -585,7 +585,9 @@
     "reviewLoginCancelButton": "Abbrechen",
     "reviewAvgRate": "von",
     "reviewAvgRateElements": "Sternen",
-    "reviewNotPublicYetAlert": "Ihre Bewertung wurde noch nicht freigeschaltet"
+    "reviewNotPublicYetAlert": "Ihre Bewertung wurde noch nicht freigeschaltet",
+    "tabsTechnische": "Technische Details",
+    "tabsSeriesAndModelOverview": "Serien- und Modellübersicht"
   },
   "wishlist": {
     "cartTitle": "Ihr Merkzettel",
