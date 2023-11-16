@@ -49,6 +49,38 @@
                 box-shadow: unset;
             }
         }
+
+        @include mobile {
+            .row {
+                background: #efeff4;
+                border-bottom: 1px solid var(--blue-1);
+
+                .header-search-form {
+                    border-radius: 3px;
+                    box-shadow: inset 0 1px 1px #dadae5;
+                    border: 1px solid #dadae5;
+                    border-top-color: #cbcbdb;
+                    color: #8798a9;
+
+                    input {
+                        border: none;
+
+                        &:focus {
+                            background: #f8f8fa;
+                            border: 1px solid var(--blue-1) !important;
+                        }
+                    }
+
+                    button {
+                        border: none;
+                        position: absolute;
+                        right: 0;
+                        background: transparent;
+                        z-index: 5;
+                    }
+                }
+            }
+        }
     }
 
     .header-actions-col {
@@ -289,5 +321,11 @@
             padding-left: 27px;
             color: #004b93;
         }
+    }
+}
+
+.navigation-offcanvas {
+    .navigation-offcanvas-headline {
+        color: #3f4c58;
     }
 }
