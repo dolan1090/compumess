@@ -14,5 +14,19 @@
         text-decoration: none;
       }
     }
+
+    .item {
+      position: relative;
+
+      .cms-element-text {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+
+      @include mobile {
+        width: 100%;
+      }
+    }
   }
 }

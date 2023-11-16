@@ -1,0 +1,45 @@
+.breadcrumb.container {
+    background: #fff;
+    border-bottom: 1px solid #dadae5;
+    margin-bottom: 0;
+    padding: 15px 40px 0 40px;
+    
+
+    span.breadcrumb-title {
+        font-weight: 400;
+        color: #004b93;
+    }
+
+    li.breadcrumb-item {
+        &:first-child {
+            svg {
+                color: #5f7285;
+            }
+        }
+    }
+
+    @include mobile {
+        padding: 15px 10px 0 10px;
+
+        li.breadcrumb-item {
+            display: none;
+
+            &:first-child {
+                display: block;
+                margin-right: 20px;
+
+                svg {
+                    color: #5f7285;
+                }
+            }
+
+            &:last-child {
+                display: block;
+            }
+        }
+
+        .breadcrumb-placeholder {
+            display: none;
+        }
+    }
+}

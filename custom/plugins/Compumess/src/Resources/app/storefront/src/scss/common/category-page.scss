@@ -1,4 +1,13 @@
-.cms-section-sidebar-sidebar-content {
+.category-layout-1 {
+  .cms-section-sidebar-sidebar-content {
+    @include mobile {
+      display: none;
+    }
+  }
+}
+
+.cms-section-sidebar-sidebar-content,
+.cms-section-sidebar-main-content {
   padding: 0;
 }
 
@@ -101,12 +110,23 @@
     align-items: center;
     width: 100%;
 
+    @include mobile {
+      flex-direction: column;
+    }
+
     .product-image-wrapper {
       height: 96px;
       padding-right: 20px;
       width: 180px;
       flex-grow: unset;
       margin: 0;
+
+      @include mobile {
+        height: auto;
+        padding: 0;
+        width: 100%;
+        margin-bottom: 20px;
+      }
 
       .product-action {
         position: absolute;
@@ -132,6 +152,11 @@
         justify-content: space-between;
         align-items: center;
 
+        @include mobile {
+          flex-wrap: wrap;
+          line-height: 40px;
+        }
+
         .product-wishlist {
           margin-top: 0px;
         }
@@ -142,6 +167,10 @@
           align-items: center;
           gap: 5px;
           display: flex;
+
+          @include mobile {
+            padding: 0;
+          }
 
           &.product-wishlist-added {
             .icon-wishlist-added {
@@ -203,6 +232,29 @@
 
       &.active {
         display: flex;
+      }
+
+      .filter-panel-item {
+        @include desktop {
+          width: calc(33.33% - 12px);
+
+          button {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            .icon.icon-filter-panel-item-toggle>svg {
+              top: 0;
+            }
+          }
+        }
+
+        .filter-boolean-label {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
       }
     }
 
@@ -278,6 +330,10 @@
   font-weight: 700;
   color: #3f4c58;
 
+  @include mobile {
+    font-size: 1rem;
+  }
+
   .cms-element-text {
     padding-top: 2.5rem;
     padding-bottom: 1rem;
@@ -286,14 +342,20 @@
   .cms-block-container-row {
     border: 1px solid #dadae5;
     border-bottom: none;
+    margin: auto;
   }
 }
 
 .box-category-style-2-des {
   color: #3f4c58;
 
+  @include mobile {
+    font-size: 0.875rem;
+  }
+
   .cms-block-container-row {
     border: 1px solid #dadae5;
     border-top: none;
+    margin: auto;
   }
 }

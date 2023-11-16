@@ -1,0 +1,12 @@
+button.btn.btn-outline-primary.filter-panel-wrapper-toggle {
+    background-image: linear-gradient(to bottom, #f6a124 0%, #ffd663 100%);
+    color: #333;
+}
+
+@include mobile {
+    .offcanvas-filter {
+        .action--filter-btn {
+            display: none;
+        }
+    }
+}
