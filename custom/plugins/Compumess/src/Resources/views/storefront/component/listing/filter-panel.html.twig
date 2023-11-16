@@ -1,17 +1,41 @@
 {% sw_extends '@Storefront/storefront/component/listing/filter-panel.html.twig' %}
-
+{% set rangeSliderFilters = ["ausgangsspannungnum"] %}
+{% set templateBasePath = "@Storefront/storefront/component/listing/filter/" %}
 {% block component_filter_panel_items_container %}
-    <div class="action--filter-btn">
-        <div class="filter-actived filter--trigger btn is--small">
-            <span>
-                <i class="fa-solid fa-filter"></i>
-                Filtern                                    
-            </span>
-            <span class="action--collapse-icon">
-                <i class="fa-solid fa-chevron-down"></i>
-                <i class="fa-solid fa-chevron-up"></i>
-            </span>
-        </div>
+  <div class="action--filter-btn">
+    <div class="filter-actived filter--trigger btn is--small">
+      <span>
+        <i class="fa-solid fa-filter"></i>
+        Filtern
+      </span>
+      <span class="action--collapse-icon">
+        <i class="fa-solid fa-chevron-down"></i>
+        <i class="fa-solid fa-chevron-up"></i>
+      </span>
     </div>
-    {{ parent() }}
-{% endblock %}
+  </div>
+  {{ parent() }}
+{% endblock component_filter_panel_items_container %}
+{% block component_filter_panel_item_shipping_free %}
+  {% block component_filter_panel_item_gbmed_custom_fields_filter_filter %}
+    {% for gbmedCustomFieldsFilter in listing.extensions.gbmedCustomFieldsFilters.all() %}
+      {% set templateData = {
+              elements: gbmedCustomFieldsFilter.aggregation.buckets,
+              name: gbmedCustomFieldsFilter.customFieldsFilters.requestParameter,
+              unit: gbmedCustomFieldsFilter.customFieldsFilters.translated.unit,
+              displayName: gbmedCustomFieldsFilter.customFieldsFilters.translated.name,
+              minInputValue:gbmedCustomFieldsFilter.customFieldsFilters.customField.config.min,
+              maxInputValue:gbmedCustomFieldsFilter.customFieldsFilters.customField.config.max,
+              minKey: 'min-'~gbmedCustomFieldsFilter.customFieldsFilters.requestParameter,
+              maxKey: 'max-'~gbmedCustomFieldsFilter.customFieldsFilters.requestParameter,
+              currencySymbol: '',
+            } %}
+      {% if gbmedCustomFieldsFilter.customFieldsFilters.requestParameter in rangeSliderFilters %}
+        {% sw_include templateBasePath ~ 'range-slider-filter.html.twig' with templateData %}
+      {% else %}
+        {% sw_include templateBasePath ~ 'gbmed-custom-fields-filter-' ~ gbmedCustomFieldsFilter.customFieldsFilters.type ~ '.html.twig' with templateData
+        %}
+      {% endif %}
+    {% endfor %}
+  {% endblock component_filter_panel_item_gbmed_custom_fields_filter_filter %}
+{% endblock component_filter_panel_item_shipping_free %}
