@@ -1,0 +1,115 @@
+footer {
+    background: $theme-footer-bg;
+    color: $theme-footer-color;
+
+    .footer-column-headline {
+        color: $theme-footer-column-headline-color;
+    }
+
+    #footerColumns {
+        border-bottom: 1px solid $theme-footer-border-color;
+
+        @media (min-width: 768px) {
+            .item-1 {
+                padding-left: 0;
+            }
+        }
+    }
+
+    .newsletter-bottom {
+        .newsletter--field {
+            border-top-left-radius: 3px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 3px;
+            background-clip: padding-box;
+            margin: 0rem 0rem 0.625rem 0rem;
+            position: relative;
+            width: 80%;
+            float: left;
+        }
+
+        .newsletter--button {
+            box-shadow: 0 0 0 transparent;
+            border-top-left-radius: 0;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            border-bottom-left-radius: 0;
+            background-clip: padding-box;
+            margin: 0rem 0rem 0.625rem 0rem;
+            padding: 0.1875rem 0.3125rem 0.1875rem 0.3125rem;
+            margin-left: -0.0625rem;
+            position: relative;
+            width: 20%;
+            text-align: center;
+            float: left;
+            border-color: #dadae5;
+        }
+    }
+
+    .footer-bottom {
+        background: $theme-footer-bottom-bg;
+        color: $theme-footer-bottom-color;
+
+        .footer-copyright {
+            margin-top: 15px;
+
+            .box-item {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+
+                .item {
+                    font-size: 32px;
+
+                    a {
+                        color: $theme-footer-link-color;
+
+                        &:hover {
+                            color: $theme-footer-link-hover-color;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    a.footer-link {
+        color: $theme-footer-link-color;
+
+        &:hover {
+            color: $theme-footer-link-hover-color;
+            text-decoration: underline;
+        }
+    }
+
+    a.footer--phone-link {
+        color: $theme-footer-link-color;
+
+        &:hover {
+            color: $theme-footer-link-hover-color;
+            text-decoration: underline;
+        }
+    }
+
+    .privacy-information.block-group a {
+        color: $theme-footer-link-color;
+
+        &:hover {
+            color: $theme-footer-link-hover-color;
+            text-decoration: underline;
+        }
+    }
+
+    .footer-contact-hotline a {
+        font-size: 1.1875rem;
+    }
+}
+
+.scroll-up-container {
+    button.btn {
+        background: #000;
+        border: none;
+    }
+}

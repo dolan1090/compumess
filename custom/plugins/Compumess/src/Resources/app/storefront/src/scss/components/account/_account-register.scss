@@ -1,0 +1,21 @@
+.account-register {
+    background: var(--bg-container-1);
+    padding: 15px;
+
+    form.login-form {
+        input[type='text'], input[type='email'], input[type='password'] {
+            width: 100%;
+        }
+    }
+
+    .register-form {
+        input[type='text'], input[type='email'], input[type='password'] {
+            width: 100%;
+        }
+
+        .register-submit {
+            width: max-content;
+            margin: auto;
+        }
+    }
+}

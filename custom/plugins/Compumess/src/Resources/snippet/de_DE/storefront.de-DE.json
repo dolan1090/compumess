@@ -55,7 +55,7 @@
   "header": {
     "logoLink": "Zur Startseite gehen",
     "searchButton": "Suchen",
-    "searchPlaceholder": "Suchbegriff eingeben ...",
+    "searchPlaceholder": "Suchbegriff...",
     "searchAllResults": "Alle Suchergebnisse anzeigen",
     "searchResults": "{1} 1 Ergebnis|]1,Inf[ %count% Ergebnisse",
     "supportInfo": "<strong>Fragen zu Ihrer Bestellung?</strong><br /><strong><a href=\"tel:+4912345-123456789\">12345-123456789</a></strong> <small>Täglich 7:30 bis 22:00 Uhr</small>",
@@ -585,7 +585,9 @@
     "reviewLoginCancelButton": "Abbrechen",
     "reviewAvgRate": "von",
     "reviewAvgRateElements": "Sternen",
-    "reviewNotPublicYetAlert": "Ihre Bewertung wurde noch nicht freigeschaltet"
+    "reviewNotPublicYetAlert": "Ihre Bewertung wurde noch nicht freigeschaltet",
+    "tabsTechnische": "Technische Details",
+    "tabsSeriesAndModelOverview": "Serien- und Modellübersicht"
   },
   "wishlist": {
     "cartTitle": "Ihr Merkzettel",

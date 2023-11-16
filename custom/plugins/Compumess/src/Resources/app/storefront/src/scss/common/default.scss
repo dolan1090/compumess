@@ -18,6 +18,45 @@
 
 .cms-section .boxed {
   background: #fff;
+
+  @include mobile {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.cms-block-container {
+  @include mobile {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.heading-default-h {
+
+  @include mobile {
+    .cms-element-text {
+      padding: 30px 15px 10px 10px;
+      border: 1px solid #dadae5;
+
+      h2 {
+        border-bottom: 1px solid;
+        padding-bottom: 6px;
+        font-size: 1.125rem;
+      }
+
+      h3 {
+        padding-bottom: 6px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.is-act-home {
+  .breadcrumb.cms-breadcrumb {
+    display: none;
+  }
 }
 
 .has--border {
