@@ -159,29 +159,29 @@
 			<meta itemprop="priceCurrency" content="{{ context.currency.translated.shortName }}"/>
 		{% endblock %}
 
-		{# {% block page_product_detail_price %}
-																<div class="product-detail-price-container">
-																	{% sw_include '@Storefront/storefront/page/product-detail/buy-widget-price.html.twig' %}
-																</div>
-															{% endblock %} #}
+		{% block page_product_detail_price %}
+			<div class="product-detail-price-container">
+				{% sw_include '@Storefront/storefront/page/product-detail/buy-widget-price.html.twig' %}
+			</div>
+		{% endblock %}
 
-		{# {% block page_product_detail_tax %}
-						<div class="product-detail-tax-container">
-							{% if context.taxState == "gross" %}
-								{% set taxText = "general.grossTaxInformation"|trans|sw_sanitize %}
-							{% else %}
-								{% set taxText = "general.netTaxInformation"|trans|sw_sanitize %}
-							{% endif %}
+		{% block page_product_detail_tax %}
+			<div class="product-detail-tax-container">
+				{% if context.taxState == "gross" %}
+					{% set taxText = "general.grossTaxInformation"|trans|sw_sanitize %}
+				{% else %}
+					{% set taxText = "general.netTaxInformation"|trans|sw_sanitize %}
+				{% endif %}
 
-							<p class="product-detail-tax">
-								{% block page_product_detail_tax_link %}
-									<a class="product-detail-tax-link" href="{{ path('frontend.cms.page',{ id: config('core.basicInformation.shippingPaymentInfoPage') }) }}" title="{{ taxText }}" data-ajax-modal="true" data-url="{{ path('frontend.cms.page',{ id: config('core.basicInformation.shippingPaymentInfoPage') }) }}">
-										{{ taxText }}
-									</a>
-								{% endblock %}
-							</p>
-						</div>
-					{% endblock %} #}
+				<p class="product-detail-tax">
+					{% block page_product_detail_tax_link %}
+						<a class="product-detail-tax-link" href="{{ path('frontend.cms.page',{ id: config('core.basicInformation.shippingPaymentInfoPage') }) }}" title="{{ taxText }}" data-ajax-modal="true" data-url="{{ path('frontend.cms.page',{ id: config('core.basicInformation.shippingPaymentInfoPage') }) }}">
+							{{ taxText }}
+						</a>
+					{% endblock %}
+				</p>
+			</div>
+		{% endblock %}
 
 			{% set remoteClickOptions = {
                         selector: "#review-tab",
