@@ -28,8 +28,8 @@ export default class FilterRangeSliderPlugin extends FilterRangePlugin {
     );
     this.slider.slider({
       range: true,
-      min: min || minInputValue,
-      max: max || maxInputValue,
+      min: minInputValue,
+      max: maxInputValue,
       values: [minInputValue, maxInputValue],
       stop: me._onSliderStop.bind(me),
       slide: me._onSliderSlide.bind(me),
@@ -55,13 +55,14 @@ export default class FilterRangeSliderPlugin extends FilterRangePlugin {
       }
     });
 
-    this.setSliderValues(values);
+    this._setSliderValues(values);
+    this._updateRangeInfo(values);
 
     return stateChanged;
   }
 
   getValues() {
-    const [minValue, maxValue] = this.getSliderValues();
+    const [minValue, maxValue] = this._getSliderValues();
     const { name, minKey, maxKey } = this.options;
 
     return {
@@ -70,11 +71,11 @@ export default class FilterRangeSliderPlugin extends FilterRangePlugin {
     };
   }
 
-  getSliderValues() {
+  _getSliderValues() {
     return this.slider.slider('values');
   }
 
-  setSliderValues(values) {
+  _setSliderValues(values) {
     this.slider.slider('values', values);
   }
 
@@ -91,7 +92,26 @@ export default class FilterRangeSliderPlugin extends FilterRangePlugin {
   }
 
   _onSliderSlide(_, ui) {
-    const [minValue, maxValue] = ui.values;
+    this._updateRangeInfo(ui.values);
+  }
+
+  _updateRangeInfo(values = []) {
+    let [minValue, maxValue] = values;
+    const { decimals, currencySymbol } = this.options;
+
+    minValue = Number(minValue);
+    maxValue = Number(maxValue);
+
+    if (decimals) {
+      minValue = minValue.toFixed(decimals);
+      maxValue = maxValue.toFixed(decimals);
+    }
+
+    if (currencySymbol && currencySymbol.length) {
+      minValue = `${minValue} ${currencySymbol}`;
+      maxValue = `${maxValue} ${currencySymbol}`;
+    }
+
     this.rangeInfoMin.textContent = minValue;
     this.rangeInfoMax.textContent = maxValue;
   }
