@@ -20,11 +20,17 @@
 {% if unit is not defined %}
   {% set unit = page.header.activeCurrency.symbol %}
 {% endif %}
+{% if currencySymbol is not defined %}
+  {% set currencySymbol = page.header.activeCurrency.symbol %}
+{% endif %}
 {% if minInputValue is not defined %}
   {% set minInputValue = 0 %}
 {% endif %}
 {% if maxInputValue is not defined %}
   {% set maxInputValue = 1 %}
+{% endif %}
+{% if decimals is not defined %}
+  {% set decimals = 0 %}
 {% endif %}
 {% set rangeSliderFilterOptions = {
   name,
@@ -34,6 +40,7 @@
   maxInputValue,
   unit,
   currencySymbol,
+  decimals,
   snippets: {
     filterRangeActiveMinLabel,
     filterRangeActiveMaxLabel,
