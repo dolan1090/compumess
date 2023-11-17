@@ -6,7 +6,6 @@
             {% block element_product_listing_col %}
                 {% if boxLayout == 'standard' %}
                     {% for product in searchResult %}
-                        {{ dump(product) }}
                         <div class="ec-list-product-custom cms-listing-col col-12">
                             {% sw_include '@Storefront/storefront/component/product/card/box-standard-ecentura.html.twig' %}
                         </div>
