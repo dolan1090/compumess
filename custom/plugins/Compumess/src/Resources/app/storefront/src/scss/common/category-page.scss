@@ -147,6 +147,19 @@
         margin-bottom: 15px;
       }
 
+      .product-price-info {
+        .product-price-unit {
+          display: none;
+        }
+        .product-price-wrapper {
+          margin-bottom: 10px;
+          
+          .product-cheapest-price {
+            display: none;
+          }
+        }
+      }
+
       .product--actions {
         display: flex;
         justify-content: space-between;

@@ -3,7 +3,6 @@
 @import 'common/default.scss';
 
 @import 'common/category-page.scss';
-@import 'common/detail-product.scss';
 @import 'common/service-page.scss';
 @import 'common/wishlist-page.scss';
 @import 'common/cart-page.scss';
@@ -19,7 +18,9 @@
 @import 'component/_breadcrumb.scss';
 @import 'component/_filter-panel.scss';
 @import 'component/_payment-method.scss';
+@import 'component/_product-wishlist.scss';
 @import 'page/checkout/_confirm.scss';
 @import 'page/checkout/_register.scss';
+@import 'page/product-detail/_product-detail.scss';
 @import 'skin/shopware/layout/_header.scss';
 @import 'skin/shopware/layout/_footer.scss';

@@ -7,7 +7,6 @@
 		{% set displayParent = product.variantListingConfig.displayParent and product.parentId === null %}
 
 		<div class="card product-box box-{{ layout }}">
-		{# {{ dump() }} #}
 			{% block component_product_box_content %}
 				<div class="card-body">
 
@@ -58,14 +57,6 @@
 
 							{% sw_include '@Storefront/storefront/component/product/card/action-ecentura.html.twig' %}
 
-							{# {% if config('core.cart.wishlistEnabled') %}
-								{% block component_product_box_wishlist_action %}
-									{% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
-                                    appearance: 'circle',
-                                    productId: id
-                                } %}
-								{% endblock %}
-							{% endif %} #}
 						</div>
 					{% endblock %}
 
@@ -84,6 +75,10 @@
 									{# {{ product.translated.description|striptags|raw }} #}
 									{{ product.customFields.migration_ComuMess5_product_subtitle }}
 								</div>
+							{% endblock %}
+
+							{% block component_product_box_price %}
+								{% sw_include '@Storefront/storefront/component/product/card/price-unit.html.twig' %}
 							{% endblock %}
 
 							{% block component_product_box_action %}
