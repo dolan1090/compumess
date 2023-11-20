@@ -4,6 +4,12 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('#{$my-asset-path}/fonts/Roboto/Roboto-Regular.ttf');
+  font-display: swap;
+}
+
 .container {
   max-width: 78.75rem;
 }
@@ -64,7 +70,7 @@
 }
 
 body {
-  font-family: Lato;
+  font-family: 'Roboto';
   font-size: 16px;
   background-color: #E6E6E4;
   color: #5f7285;
