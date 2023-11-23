@@ -147,6 +147,19 @@
         margin-bottom: 15px;
       }
 
+      .product-price-info {
+        .product-price-unit {
+          display: none;
+        }
+        .product-price-wrapper {
+          margin-bottom: 10px;
+          
+          .product-cheapest-price {
+            display: none;
+          }
+        }
+      }
+
       .product--actions {
         display: flex;
         justify-content: space-between;
@@ -210,106 +223,6 @@
         }
       }
 
-    }
-  }
-}
-
-.filter-panel-wrapper {
-  border-radius: 3px;
-  margin: 0rem 0rem 1.25rem 0rem;
-  padding-top: 0.625rem;
-  border: 1px solid #dadae5;
-  background: #f5f5f8;
-
-  .filter-panel {
-    margin-bottom: 0;
-
-    .filter-panel-items-container {
-      margin-bottom: 0;
-      padding: 0 1rem;
-      display: none;
-      justify-content: space-between;
-
-      &.active {
-        display: flex;
-      }
-
-      .filter-panel-item {
-        @include desktop {
-          width: calc(33.33% - 12px);
-
-          button {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-
-            .icon.icon-filter-panel-item-toggle>svg {
-              top: 0;
-            }
-          }
-        }
-
-        .filter-boolean-label {
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 1;
-          overflow: hidden;
-        }
-      }
-    }
-
-    .filter-panel-active-container {
-      padding: 0 1rem;
-    }
-  }
-
-  .action--filter-btn {
-    padding-bottom: 0.625rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    width: 100%;
-
-    .filter--trigger.btn.is--small {
-      padding: 0.125rem 0.75rem 0.125rem 0.75rem;
-      line-height: 2.125rem;
-      background-color: #006ad0;
-      background-image: linear-gradient(to bottom, #f6a124 0%, #ffd663 100%);
-      border: 0 none;
-      color: #333;
-      width: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      &:hover {
-        background: linear-gradient(to bottom, #fff550 0%, #f6a124 100%);
-        color: #333;
-      }
-    }
-
-    .action--collapse-icon {
-      .fa-chevron-down {
-        display: block;
-      }
-
-      .fa-chevron-up {
-        display: none;
-      }
-    }
-
-    &.filter-actived {
-      border-bottom: 1px solid #dadae5;
-      margin-bottom: 0.625rem;
-
-      .action--collapse-icon {
-        .fa-chevron-down {
-          display: none;
-        }
-
-        .fa-chevron-up {
-          display: block;
-        }
-      }
     }
   }
 }
