@@ -305,7 +305,7 @@
 
         a.nav-item.nav-link.navigation-flyout-link {
             color: #330330;
-            font-size: 1rem;
+            font-size: 15px;
             padding-right: 0;
 
             &:hover {
@@ -357,9 +357,10 @@
     a.nav-item.nav-link.navigation-flyout-link.is-level-1 {
         color: #3f4c58;
         padding-right: 0;
+        padding-left: 45px;
 
         &:hover {
-            padding-left: 27px;
+            padding-left: 47px;
             color: #004b93;
         }
     }
