@@ -93,6 +93,69 @@
                 margin: 20px 0 25px 0;
             }
         }
+
+        .filter-multi-select {
+            .form-check {
+                display: flex;
+                align-items: center;
+
+                .form-check-input {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 0;
+                    box-shadow: unset;
+                    margin-top: 0;
+
+                    &:hover {
+                        border-color: var(--blue-1);
+                    }
+
+                    &:checked {
+                        background-color: var(--blue-1);
+                        border-color: var(--blue-1);
+                    }
+                }
+
+                &:hover {
+                    border-color: var(--blue-1);
+                    color: var(--blue-1);
+                }
+            }
+
+            .filter-panel-item-dropdown {
+                width: 100%;
+            }
+        }
+
+        .filter-boolean {
+            .form-check {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+
+                .form-check-input {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 0;
+                    box-shadow: unset;
+                    margin-top: 0;
+
+                    &:hover {
+                        border-color: var(--blue-1);
+                    }
+
+                    &:checked {
+                        background-color: var(--blue-1);
+                        border-color: var(--blue-1);
+                    }
+                }
+
+                &:hover {
+                    border-color: var(--blue-1);
+                    color: var(--blue-1);
+                }
+            }
+        }
     }
 
     .action--filter-btn {
