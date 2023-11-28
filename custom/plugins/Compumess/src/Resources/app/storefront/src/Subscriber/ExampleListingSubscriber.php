@@ -16,11 +16,11 @@ class ExampleListingSubscriber implements EventSubscriberInterface
         $filters = $event->getFilters();
         $request = $event->getRequest();
 
-        $filtered = (bool) $request->get('migration_ComuMess5_product_series');
+        $filtered = (bool) $request->get('migration_Compumess57Live_product_series');
 
         $filter = new Filter(
             // unique name of the filter
-            'migration_ComuMess5_product_series',
+            'migration_Compumess57Live_product_series',
 
             // defines if this filter is active
             $filtered,
@@ -29,14 +29,14 @@ class ExampleListingSubscriber implements EventSubscriberInterface
             [
                 new FilterAggregation(
                     'active-filter',
-                    new MaxAggregation('active', 'product.customFields.migration_ComuMess5_product_series'),
-                    [new EqualsFilter('product.customFields.migration_ComuMess5_product_series', true)]
+                    new MaxAggregation('active', 'product.customFields.migration_Compumess57Live_product_series'),
+                    [new EqualsFilter('product.customFields.migration_Compumess57Live_product_series', true)]
                 ),
             ],
 
 
             // defines the DAL filter which should be added to the criteria   
-            new EqualsFilter('product.customFields.migration_ComuMess5_product_series', true),
+            new EqualsFilter('product.customFields.migration_Compumess57Live_product_series', true),
 
             // defines the values which will be added as currentFilter to the result
             $filtered
