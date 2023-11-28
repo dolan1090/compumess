@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f8378dba4132addf3352435eeda0a86",
+    "content-hash": "545c86178b9621b8c26716065e281e0c",
     "packages": [
         {
             "name": "async-aws/core",
@@ -4210,15 +4210,15 @@
         },
         {
             "name": "moorl/foundation",
-            "version": "1.5.23",
+            "version": "1.5.34",
             "dist": {
                 "type": "path",
                 "url": "custom/plugins/MoorlFoundation",
-                "reference": "c9d6aee7b9abaf0cea040eaf6889a9530220a735"
+                "reference": "f1b79fef57ffb3924194a1e035334e8567772c7f"
             },
             "require": {
                 "deeplcom/deepl-php": "*",
-                "shopware/core": "^6.5.0"
+                "shopware/core": "6.5.*"
             },
             "type": "shopware-platform-plugin",
             "extra": {
