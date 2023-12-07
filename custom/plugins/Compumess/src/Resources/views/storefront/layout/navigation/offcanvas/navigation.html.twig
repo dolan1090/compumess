@@ -1,0 +1,52 @@
+{% sw_extends '@Storefront/storefront/layout/navigation/offcanvas/navigation.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+    {{ parent() }}
+
+    <div class="navigation-offcanvas-container js-navigation-offcanvas">
+        <div class="navigation-offcanvas-overlay-content js-navigation-offcanvas-overlay-content">
+            <div class="navigation-offcanvas-headline">
+                Informationen
+            </div>
+
+            <ul class="list-unstyled navigation-offcanvas-list">
+                <li class="navigation-offcanvas-list-item">
+                    <a class="navigation-offcanvas-link nav-item nav-link js-navigation-offcanvas-link" href="/agb/" itemprop="url" title="AGB">
+                        <span itemprop="name">
+                            AGB                 
+                        </span>
+                    </a>
+                </li>
+                <li class="navigation-offcanvas-list-item">
+                    <a class="navigation-offcanvas-link nav-item nav-link js-navigation-offcanvas-link" href="/Cookie-Einstellungen/" itemprop="url" title="Cookie-Einstellungen">
+                        <span itemprop="name">
+                            Cookie-Einstellungen
+                        </span>
+                    </a>
+                </li>
+                <li class="navigation-offcanvas-list-item">
+                    <a class="navigation-offcanvas-link nav-item nav-link js-navigation-offcanvas-link" href="/Datenschutz/" itemprop="url" title="Datenschutz">
+                        <span itemprop="name">
+                            Datenschutz                   
+                        </span>
+                    </a>
+                </li>
+                <li class="navigation-offcanvas-list-item">
+                    <a class="navigation-offcanvas-link nav-item nav-link js-navigation-offcanvas-link" href="/Impressum/" itemprop="url" title="Impressum">
+                        <span itemprop="name">
+                            Impressum
+                        </span>
+                    </a>
+                </li>
+                <li class="navigation-offcanvas-list-item">
+                    <a class="navigation-offcanvas-link nav-item nav-link js-navigation-offcanvas-link" href="/ueber-uns/" itemprop="url" title="Über uns">
+                        <span itemprop="name">
+                            Über uns
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
