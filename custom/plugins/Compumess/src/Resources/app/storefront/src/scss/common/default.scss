@@ -14,6 +14,47 @@
   max-width: 78.75rem;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.625rem;
+  margin: 1.75rem 0rem 0.625rem 0rem;
+  font-weight: 700;
+  color: #3f4c58;
+}
+
+h1 {
+  font-size: 1.9375rem;
+  line-height: 1.75rem;
+  margin: 2.125rem 0rem 1.25rem 0rem;
+  color: #3f4c58;
+}
+
+h2 {
+  font-size: 1.5625rem;
+}
+
+h3 {
+  font-size: 1.3125rem;
+}
+
+h4 {
+  font-size: 1.1875rem;
+}
+
+a {
+  color: #004b93;
+  text-decoration: none;
+
+  &:hover {
+    color: #004b93;
+    text-decoration: none;
+  }
+}
+
 .mr-20 {
   margin: 20px;
 }

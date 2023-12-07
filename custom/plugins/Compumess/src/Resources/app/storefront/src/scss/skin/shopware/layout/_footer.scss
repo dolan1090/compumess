@@ -9,6 +9,10 @@ footer {
     #footerColumns {
         border-bottom: 1px solid $theme-footer-border-color;
 
+        &.row {
+            --bs-gutter-x: 16px;
+        }
+
         @media (min-width: 768px) {
             .item-1 {
                 padding-left: 0;
