@@ -63,6 +63,15 @@ a {
   padding: 0;
 }
 
+@include mobile {
+  .pt-10-mobi .cms-block-container {
+    padding-top: 10px !important;
+  }
+  .pb-10-mobi .cms-block-container {
+    padding-bottom: 10px !important;
+  }
+}
+
 .cms-section .boxed {
   background: #fff;
 

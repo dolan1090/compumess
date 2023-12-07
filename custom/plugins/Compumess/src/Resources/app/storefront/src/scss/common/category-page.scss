@@ -151,9 +151,10 @@
         .product-price-unit {
           display: none;
         }
+
         .product-price-wrapper {
           margin-bottom: 10px;
-          
+
           .product-cheapest-price {
             display: none;
           }
@@ -270,5 +271,19 @@
     border: 1px solid #dadae5;
     border-top: none;
     margin: auto;
+  }
+}
+
+.category-navigation-link.in-path {
+  color: #004b93;
+}
+
+a.category-navigation-link.is-active {
+  color: #004b93;
+}
+
+@include mobile {
+  .cms-section-sidebar-sidebar-content {
+    display: none;
   }
 }

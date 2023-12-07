@@ -13,13 +13,11 @@
 	<nav class="product--actions">
 
 		{% if config('core.cart.wishlistEnabled') %}
-			{% block page_product_detail_wishlist %}
-				{% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
+			{% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
 				showText: true,
 				size: 'md',
 				productId: page.product.id
 			} %}
-			{% endblock %}
 		{% endif %}
 
 		<a href="mailto:?body=Hallo,%0D%0A Ich möchte dir dieses produkt zeigen, dass ich beim  gefunden habe showroom.compumess.de {{ seoUrl('frontend.detail.page', { 'productId': page.product.id }) }}" class="icon-mail-to product--actions-detail">
@@ -75,9 +73,11 @@
 
 	<div class="base-info--entry entry-attribute">
 		{{ page.product.translated.customFields.migration_Compumess57Live_product_glossarlink|raw }}
-	</div>
+	</div>	
 
 	{{ parent() }}
+
+	{% block page_product_detail_wishlist %}{% endblock %}
 {% endblock %}
 
 {% block page_product_detail_ordernumber_container %}{% endblock %}
