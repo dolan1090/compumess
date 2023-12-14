@@ -98,6 +98,15 @@
 
         .header-cart {
             margin-left: 6px;
+
+            .header-cart-badge {
+                display: block;
+                top: 0px;
+            }
+
+            .header-cart-total {
+                display: none !important;
+            }
         }
 
         // .menu-button {
