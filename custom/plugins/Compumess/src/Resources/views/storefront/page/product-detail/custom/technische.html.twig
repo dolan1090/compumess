@@ -1,5 +1,17 @@
 {% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
 
+{% set productSeries = page.product.translated.customFields.migration_Compumess57Live_product_series %}
+{% set productMarke = page.product.translated.customFields.migration_Compumess57Live_product_marke %}
+{% set productLeistungnum = page.product.translated.customFields.migration_Compumess57Live_product_leistungnum %}
+{% set productAusgangsleistung = page.product.translated.customFields.migration_Compumess57Live_product_attr2 %}
+{% set productAusgangsspannung = page.product.translated.customFields.migration_Compumess57Live_product_ausgangsspannung %}
+{% set productAusgangsstrom = page.product.translated.customFields.migration_Compumess57Live_product_attr4 %}
+{% set productAusgange = page.product.translated.customFields.migration_Compumess57Live_product_attr6 %}
+{% set productKategorie = page.product.translated.customFields.migration_Compumess57Live_product_kategorie %}
+{% set productSchnittstellen = page.product.translated.customFields.migration_Compumess57Live_product_schnittstellen %}
+{% set productBeschreibung = page.product.translated.customFields.migration_Compumess57Live_product_bullet_point %}
+{% set productAbmessungenHohe = page.product.translated.customFields.migration_Compumess57Live_product_abmessungen_h_he %}
+
 {% block utilities_offcanvas_content %}
     <div class="content--description">
         <table class="product--properties-table">
@@ -15,46 +27,116 @@
         <div class="product--properties panel has--border">
             <table class="product--properties-table">
                 <tbody>
-                    <tr class="product--properties-row">
-                        <td class="product--properties-label is--bold">
-                            Serie
-                        </td>
-                        <td class="product--properties-value">
-                            {{ page.product.translated.customFields.migration_Compumess57Live_product_series }}
-                        </td>
-                    </tr>
-                    <tr class="product--properties-row">
-                        <td class="product--properties-label is--bold">
-                            Ausgangsspannung
-                        </td>
-                        <td class="product--properties-value">
-                            {{ page.product.translated.customFields.migration_Compumess57Live_product_ausgangsspannung }}
-                        </td>
-                    </tr>
-                    <tr class="product--properties-row">
-                        <td class="product--properties-label is--bold">
-                            Ausgänge
-                        </td>
-                        <td class="product--properties-value">
-                            {{ page.product.translated.customFields.migration_Compumess57Live_product_attr6 }}
-                        </td>
-                    </tr>
-                    <tr class="product--properties-row">
-                        <td class="product--properties-label is--bold">
-                            Kategorie
-                        </td>
-                        <td class="product--properties-value">
-                            {{ page.product.translated.customFields.migration_Compumess57Live_product_kategorie }}
-                        </td>
-                    </tr>
-                    <tr class="product--properties-row">
-                        <td class="product--properties-label is--bold">
-                            Beschreibung
-                        </td>
-                        <td class="product--properties-value">
-                            {{ page.product.translated.customFields.migration_Compumess57Live_product_bullet_point|raw }}
-                        </td>
-                    </tr>
+                    {% if productSeries %}
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Serie
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productSeries }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if productMarke %}
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Marke
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productMarke }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if productLeistungnum %}
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                LeistungNum
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productLeistungnum }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if productAusgangsleistung %}
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Ausgangsleistung
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productAusgangsleistung }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if productAusgangsspannung %}
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Ausgangsspannung
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productAusgangsspannung }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if productAusgangsstrom %}
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Ausgangsstrom
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productAusgangsstrom }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if productAusgange %}                
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Ausgänge
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productAusgange }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if productKategorie %}
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Kategorie
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productKategorie }}
+                            </td>
+                        </tr>
+                    {% endif %}                    
+                    {% if productSchnittstellen %}
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Schnittstellen
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productSchnittstellen }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if productBeschreibung %}                
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Beschreibung
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productBeschreibung|raw }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if productAbmessungenHohe %}                
+                        <tr class="product--properties-row">
+                            <td class="product--properties-label is--bold">
+                                Abmessungen Höhe
+                            </td>
+                            <td class="product--properties-value">
+                                {{ productAbmessungenHohe|raw }}
+                            </td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>
