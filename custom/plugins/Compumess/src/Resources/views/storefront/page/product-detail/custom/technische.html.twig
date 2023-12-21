@@ -1,37 +1,40 @@
 {% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
 
-{% set productSeries = page.product.translated.customFields.migration_Compumess57Live_product_series %}
-{% set productMarke = page.product.translated.customFields.migration_Compumess57Live_product_marke %}
-{% set productLeistungnum = page.product.translated.customFields.migration_Compumess57Live_product_leistungnum %}
-{% set productAusgangsleistung = page.product.translated.customFields.migration_Compumess57Live_product_attr2 %}
-{% set productEingangsspannung = page.product.translated.customFields.migration_Compumess57Live_product_attr3 %}
-{% set productAusgangsspannung = page.product.translated.customFields.migration_Compumess57Live_product_ausgangsspannung %}
-{% set productAusgangsstrom = page.product.translated.customFields.migration_Compumess57Live_product_attr4 %}
-{% set productAusgange = page.product.translated.customFields.migration_Compumess57Live_product_attr6 %}
-{% set productEinAusgangsisolation = page.product.translated.customFields.migration_Compumess57Live_product_attr9 %}
-{% set productMTBF = page.product.translated.customFields.migration_Compumess57Live_product_attr14 %}
-{% set productTyp = page.product.translated.customFields.migration_Compumess57Live_product_typ %}
-{% set productBauform = page.product.translated.customFields.migration_Compumess57Live_product_bauform %}
-{% set productEingang = page.product.translated.customFields.migration_Compumess57Live_product_eingang %}
-{% set productKategorie = page.product.translated.customFields.migration_Compumess57Live_product_kategorie %}
-{% set productSchnittstellen = page.product.translated.customFields.migration_Compumess57Live_product_schnittstellen %}
-{% set productBeschreibung = page.product.translated.customFields.migration_Compumess57Live_product_bullet_point %}
-{% set productTechnologie = page.product.translated.customFields.migration_Compumess57Live_product_technologie %}
-{% set productSchutzmechanismen = page.product.translated.customFields.migration_Compumess57Live_product_subkategorie %}
-{% set productEingangsbereich = page.product.translated.customFields.migration_Compumess57Live_product_eingangsbereich %}
-{% set productArbeitstemperatur = page.product.translated.customFields.migration_Compumess57Live_product_arbeitstemperatur %}
-{% set productBauformDetail = page.product.translated.customFields.migration_Compumess57Live_product_bauform_detail %}
-{% set productAnwendung = page.product.translated.customFields.migration_Compumess57Live_product_anwendung %}
-{% set productRegelung = page.product.translated.customFields.migration_Compumess57Live_product_regelung %}
-{% set productSpezielleZulassungen = page.product.translated.customFields.migration_Compumess57Live_product_spezielle_zulassungen %}
-{% set productAhnlichesProdukt = page.product.translated.customFields.migration_Compumess57Live_product_related_product %}
-{% set productKuhlung = page.product.translated.customFields.migration_Compumess57Live_product_k_hlung %}
-{% set productSubKategorie = page.product.translated.customFields.migration_Compumess57Live_product_subkategorie %}
-{% set productWirkungsgrad = page.product.translated.customFields.migration_Compumess57Live_product_wirkungsgrad %}
-{% set productAbmessungenLange = page.product.translated.customFields.migration_Compumess57Live_product_abmessungen_l_nge %}
-{% set productAbmessungenBreite = page.product.translated.customFields.migration_Compumess57Live_product_abmessungen_breite %}
-{% set productAbmessungenHohe = page.product.translated.customFields.migration_Compumess57Live_product_abmessungen_h_he %}
-{% set productSchaltfrequenzTyp = page.product.translated.customFields.migration_Compumess57Live_product_schaltfrequenz_typ %}
+{% set customFields = {
+    'Serie': 'migration_Compumess57Live_product_series',
+    'Marke': 'migration_Compumess57Live_product_marke',
+    'LeistungNum': 'migration_Compumess57Live_product_leistungnum',
+    'Ausgangsleistung': 'migration_Compumess57Live_product_attr2',
+    'Eingangsspannung': 'migration_Compumess57Live_product_attr3',
+    'Ausgangsspannung': 'migration_Compumess57Live_product_ausgangsspannung',
+    'Ausgangsstrom': 'migration_Compumess57Live_product_attr4',
+    'Ausgange': 'migration_Compumess57Live_product_attr6',
+    'EinAusgangsisolation': 'migration_Compumess57Live_product_attr9',
+    'GenauigkeitSpannung': 'migration_Compumess57Live_product_attr18',
+    'MTBF': 'migration_Compumess57Live_product_attr14',
+    'Typ': 'migration_Compumess57Live_product_typ',
+    'Bauform': 'migration_Compumess57Live_product_bauform',
+    'Eingang': 'migration_Compumess57Live_product_eingang',
+    'Kategorie': 'migration_Compumess57Live_product_kategorie',
+    'Schnittstellen': 'migration_Compumess57Live_product_schnittstellen',
+    'Beschreibung': 'migration_Compumess57Live_product_bullet_point',
+    'Technologie': 'migration_Compumess57Live_product_technologie',
+    'Schutzmechanismen': 'migration_Compumess57Live_product_subkategorie',
+    'Eingangsbereich': 'migration_Compumess57Live_product_eingangsbereich',
+    'Arbeitstemperatur': 'migration_Compumess57Live_product_arbeitstemperatur',
+    'BauformDetail': 'migration_Compumess57Live_product_bauform_detail',
+    'Anwendung': 'migration_Compumess57Live_product_anwendung',
+    'Regelung': 'migration_Compumess57Live_product_regelung',
+    'SpezielleZulassungen': 'migration_Compumess57Live_product_spezielle_zulassungen',
+    'AhnlichesProdukt': 'migration_Compumess57Live_product_related_product',
+    'Kuhlung': 'migration_Compumess57Live_product_k_hlung',
+    'SubKategorie': 'migration_Compumess57Live_product_subkategorie',
+    'Wirkungsgrad': 'migration_Compumess57Live_product_wirkungsgrad',
+    'AbmessungenLange': 'migration_Compumess57Live_product_abmessungen_l_nge',
+    'AbmessungenBreite': 'migration_Compumess57Live_product_abmessungen_breite',
+    'AbmessungenHohe': 'migration_Compumess57Live_product_abmessungen_h_he',
+    'SchaltfrequenzTyp': 'migration_Compumess57Live_product_schaltfrequenz_typ',
+} %}
 
 {% block utilities_offcanvas_content %}
     <div class="content--description">
@@ -48,326 +51,15 @@
         <div class="product--properties panel has--border">
             <table class="product--properties-table">
                 <tbody>
-                    {% if productSeries %}
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Serie
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productSeries }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productMarke %}
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Marke
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productMarke }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productLeistungnum %}
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                LeistungNum
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productLeistungnum }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productAusgangsleistung %}
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Ausgangsleistung
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productAusgangsleistung }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productEingangsspannung %}
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Eingangsspannung
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productEingangsspannung }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productAusgangsspannung %}
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Ausgangsspannung
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productAusgangsspannung }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productAusgangsstrom %}
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Ausgangsstrom
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productAusgangsstrom }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productAusgange %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Ausgänge
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productAusgange }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productEinAusgangsisolation %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Ein-/Ausgangsisolation
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productEinAusgangsisolation }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productMTBF %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                MTBF≥
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productMTBF }}
-                            </td>
-                        </tr>
-                    {% endif %}      
-                    {% if productTyp %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Typ
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productTyp }}
-                            </td>
-                        </tr>
-                    {% endif %}    
-                    {% if productBauform %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Bauform
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productBauform }}
-                            </td>
-                        </tr>
-                    {% endif %}   
-                    {% if productEingang %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Eingang
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productEingang }}
-                            </td>
-                        </tr>
-                    {% endif %}                                                                  
-                    {% if productKategorie %}
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Kategorie
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productKategorie }}
-                            </td>
-                        </tr>
-                    {% endif %}                    
-                    {% if productSchnittstellen %}
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Schnittstellen
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productSchnittstellen }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productBeschreibung %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Beschreibung
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productBeschreibung|raw }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productTechnologie %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Technologie
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productTechnologie }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productSchutzmechanismen %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Schutzmechanismen
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productSchutzmechanismen }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productEingangsbereich %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Eingangsbereich
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productEingangsbereich }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productArbeitstemperatur %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Arbeitstemperatur
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productArbeitstemperatur }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productBauformDetail %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Bauform Detail
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productBauformDetail }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productAnwendung %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Anwendung
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productAnwendung }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productRegelung %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Regelung
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productRegelung }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productSpezielleZulassungen %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Spezielle Zulassungen
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productSpezielleZulassungen }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productAhnlichesProdukt %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Ähnliches Produkt
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productAhnlichesProdukt|raw }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productKuhlung %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Kühlung
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productKuhlung }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productSubKategorie %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                SubKategorie
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productSubKategorie }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productWirkungsgrad %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Wirkungsgrad ≥
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productWirkungsgrad }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productAbmessungenLange %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Abmessungen Länge
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productAbmessungenLange }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productAbmessungenBreite %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Abmessungen Breite
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productAbmessungenBreite }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productAbmessungenHohe %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Abmessungen Höhe
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productAbmessungenHohe|raw }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                    {% if productSchaltfrequenzTyp %}                
-                        <tr class="product--properties-row">
-                            <td class="product--properties-label is--bold">
-                                Schaltfrequenz typ.
-                            </td>
-                            <td class="product--properties-value">
-                                {{ productSchaltfrequenzTyp }}
-                            </td>
-                        </tr>
-                    {% endif %}                    
+                    {% for label, field in customFields %}
+                        {% set value = page.product.translated.customFields[field] %}
+                        {% if value %}
+                            <tr class="product--properties-row">
+                                <td class="product--properties-label is--bold">{{ label }}</td>
+                                <td class="product--properties-value">{{ value|raw }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
