@@ -35,10 +35,12 @@
 
 	{% set productNumber = page.product.productNumber %}
 	{% set productAttr2 = page.product.translated.customFields.migration_Compumess57Live_product_attr2 %}
+	{% set productEingangssspannung = page.product.translated.customFields.migration_Compumess57Live_product_attr3 %}
 	{% set productAusgangsspannung = page.product.translated.customFields.migration_Compumess57Live_product_ausgangsspannung %}
 	{% set productAttr4 = page.product.translated.customFields.migration_Compumess57Live_product_attr4 %}
 	{% set productAttr6 = page.product.translated.customFields.migration_Compumess57Live_product_attr6 %}
 	{% set productDownloads = page.product.translated.customFields.migration_Compumess57Live_product_produkblaetter_downloads %}
+	{% set productGenauigkeitVaus = page.product.translated.customFields.migration_Compumess57Live_product_attr18 %}
 
 	<ul class="product--base-info list--unstyled">
 		{% if productNumber is defined %}
@@ -59,6 +61,16 @@
 				</strong>
 				<span class="entry--content">
 					{{ productAttr2 }}
+				</span>
+			</li>
+		{% endif %}
+		{% if productEingangssspannung %}
+			<li class="base-info--entry entry-attribute">
+				<strong class="entry--label">
+					Eingangssspannung:
+				</strong>
+				<span class="entry--content">
+					{{ productEingangssspannung }}
 				</span>
 			</li>
 		{% endif %}
@@ -83,15 +95,25 @@
 			</li>
 		{% endif %}
 		{% if productAttr6 %}
-		<li class="base-info--entry entry-attribute">
-			<strong class="entry--label">
-				Ausgänge:
-			</strong>
-			<span class="entry--content">
-				{{ productAttr6 }}
-			</span>
-		</li>
+			<li class="base-info--entry entry-attribute">
+				<strong class="entry--label">
+					Ausgänge:
+				</strong>
+				<span class="entry--content">
+					{{ productAttr6 }}
+				</span>
+			</li>
 		{% endif %}
+		{% if productGenauigkeitVaus %}
+			<li class="base-info--entry entry-attribute">
+				<strong class="entry--label">
+					Genauigkeit Vaus:
+				</strong>
+				<span class="entry--content">
+					{{ productGenauigkeitVaus }}
+				</span>
+			</li>
+		{% endif %}		
 		{% if productDownloads %}
 			<br>			
 			<span class="entry--content">
