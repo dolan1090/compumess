@@ -67,9 +67,28 @@ function addToCartInquiry() {
 
 //SEO
 document.addEventListener('DOMContentLoaded', function() {
+
     var titleTag = document.querySelector('title');
-    if (titleTag && titleTag.innerText.includes('&amp;')) {
-        titleTag.innerText = titleTag.innerText.replace(/&amp;/g, '&');
+    if (titleTag) {
+        titleTag.innerText = replaceSpecialCharacters(titleTag.innerText);
+    }
+
+    var metaDescriptionTag = document.querySelector('meta[name="description"]');
+    if (metaDescriptionTag) {
+        metaDescriptionTag.content = replaceSpecialCharacters(metaDescriptionTag.content);
+    }
+
+    function replaceSpecialCharacters(text) {
+        if (text.includes('&amp;')) {
+            text = text.replace(/&amp;/g, '&');
+        }
+        if (text.includes('&gt;')) {
+            text = text.replace(/&gt;/g, '>');
+        }
+        if (text.includes('&lt;')) {
+            text = text.replace(/&lt;/g, '<');
+        }
+        return text;
     }
 });
 
