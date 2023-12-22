@@ -1,0 +1,29 @@
+{
+    "scd": {
+        "successTitle": "Vielen Dank für Ihre Anfrage.",
+        "successSubtitle": "Wir melden uns bei Ihnen, sobald wir Ihre Anfrage bearbeiten.",
+        "backToCart": "Zurück zum Warenkorb",
+        "scdInquiryBasketBtn": "Angebot anfordern",
+        "inquiryPrice": "Preis auf Anfrage",
+        "inquiryAddSuccess": "Das Produkt wurde erfolgreich zu Ihrem Anfragekorb hinzugefügt.",
+        "inquiryUpdateQuantity": "Die Produktmenge wurde erfolgreich angepasst.",
+        "inquiryRemoveSuccess": "Das Produkt wurde erfolgreich aus Ihrem Anfragekorb entfernt.",
+        "inquiryFormSuccess": "Ihre Anfrage wurde erfolgreich übermittelt. Wir melden uns umgehend bei Ihnen!",
+        "inquiryHeader": "Merkliste",
+        "inquiryCartEmpty": "Ihr Anfragekorb ist leer.",
+        "inquirySend": "Anfrage abschicken",
+        "inquirySendText": "Durch das Abschicken dieses Formulars werden alle Anfrageartikel an uns verschickt. Wir melden uns dann zeitnahe bei Ihnen.",
+        "customernumberLabel": "Kundennummer",
+        "companyLabel": "Unternehmen",
+        "departmentLabel": "Abteilung",
+        "comment": "Kommentar",
+        "proceedToOffercart": "Merkliste anzeigen",
+        "missingEmailError": "Fehlende Sender-Email-Adresse in der Plugin-Konfiguration. Bitte trage eine gültige Email-Adresse in der Plugin-Konfiguration ein."
+    },
+    "checkout": {
+        "customernumberLabel": "Kundennummer",
+        "companyLabel": "Unternehmen",
+        "departmentLabel": "Abteilung",
+        "comment": "Kommentar"
+    }
+}

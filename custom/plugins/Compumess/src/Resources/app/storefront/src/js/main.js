@@ -64,3 +64,22 @@ function addToCartInquiry() {
         }
     }
 }
+
+//SEO
+document.addEventListener('DOMContentLoaded', function() {
+    var titleTag = document.querySelector('title');
+    if (titleTag && titleTag.innerText.includes('&amp;')) {
+        titleTag.innerText = titleTag.innerText.replace(/&amp;/g, '&');
+    }
+});
+
+function lineCardCME() {
+    var currentPath = window.location.pathname;
+
+    if (currentPath.match(/\/line-card-cme\.pdf/i)) {
+        var newPath = currentPath.replace(/\/line-card-cme\.pdf/i, '/Line-Card-CME.pdf');
+        window.location.href = newPath;
+    }
+}
+lineCardCME();
+
