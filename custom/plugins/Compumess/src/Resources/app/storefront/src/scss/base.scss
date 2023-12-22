@@ -6,6 +6,12 @@
 @import 'common/service-page.scss';
 @import 'common/wishlist-page.scss';
 @import 'common/cart-page.scss';
+@import 'component/_breadcrumb.scss';
+@import 'component/_filter-panel.scss';
+@import 'component/_form.scss';
+@import 'component/_news_page.scss';
+@import 'component/_payment-method.scss';
+@import 'component/_product-wishlist.scss';
 @import 'components/account.scss';
 @import 'components/content-bottom-h.scss';
 @import 'components/manufacture-h.scss';
@@ -15,11 +21,7 @@
 @import 'components/slide-home.scss';
 @import 'components/recently-viewed-product.scss';
 @import 'components/range-slider.scss';
-@import 'component/_breadcrumb.scss';
-@import 'component/_filter-panel.scss';
-@import 'component/_form.scss';
-@import 'component/_payment-method.scss';
-@import 'component/_product-wishlist.scss';
+@import 'layout/_offcanvas-cart.scss';
 @import 'page/checkout/_confirm.scss';
 @import 'page/checkout/_register.scss';
 @import 'page/old-page.scss';

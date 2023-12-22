@@ -1,0 +1,27 @@
+.news-category-items {
+    .cms-element-text {
+        background: url('/bundles/compumess/assets/zeitung-stander_1280x1280.jpg');
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        min-height: 210px;
+        align-items: flex-end;
+
+        @include desktop {
+            max-width: 81.9%;
+            margin: auto;
+        }
+
+        .emotion--category-teaser {
+            background: rgba(0,0,0,0.5);
+            padding: 12px;
+            color: #fff;
+            width: 100%;
+
+            a {
+                color: #fff;
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+.offcanvas-cart {
+    .offcanvas-cart-header {
+        display: none;
+    }
+
+    p.h4.inquiry-main-header {
+        margin-top: 0;
+    }
+
+    .alert {
+        display: none;
+    }
+
+    a.btn.begin-checkout-btn.btn-light.disabled {
+        display: none;
+    }
+}
