@@ -4,13 +4,17 @@
     'Serie': 'migration_Compumess57Live_product_series',
     'Marke': 'migration_Compumess57Live_product_marke',
     'LeistungNum': 'migration_Compumess57Live_product_leistungnum',
+    'Phasen': 'migration_Compumess57Live_product_phasengenauigkeit',
     'Ausgangsleistung': 'migration_Compumess57Live_product_attr2',
     'Eingangsspannung': 'migration_Compumess57Live_product_attr3',
+    'Frequenzbereich': 'migration_Compumess57Live_product_frequenzbereich',
     'Ausgangsspannung': 'migration_Compumess57Live_product_ausgangsspannung',
     'Ausgangsstrom': 'migration_Compumess57Live_product_attr4',
-    'Ausgange': 'migration_Compumess57Live_product_attr6',
+    'Anzeige': 'migration_Compumess57Live_product_anzeige',
+    'Ausgänge': 'migration_Compumess57Live_product_attr6',
     'Ein-/Ausgangsisolation': 'migration_Compumess57Live_product_attr9',
     'GenauigkeitSpannung': 'migration_Compumess57Live_product_attr18',
+    'Genauigkeit Strom': 'migration_Compumess57Live_product_attr19',
     'MTBF': 'migration_Compumess57Live_product_attr14',
     'Typ': 'migration_Compumess57Live_product_typ',
     'Bauform': 'migration_Compumess57Live_product_bauform',
@@ -21,7 +25,18 @@
     'Technologie': 'migration_Compumess57Live_product_technologie',
     'Technologie': 'migration_Compumess57Live_product_technologie',
     'Produktalternative': 'migration_Compumess57Live_product_alternative_product',
+    'Eigenschaften der Serie': 'migration_Compumess57Live_product_key_features',
     'Eingangsbereich': 'migration_Compumess57Live_product_eingangsbereich',
+    'Eingangspannung (VDC) nominal': 'migration_Compumess57Live_product_eingangsspannung_vdc_nominal',
+    'Eingangsspannung (VDC) Bereich': 'migration_Compumess57Live_product_eingangsspannung_vdc_bereich',
+    'Eingangsstrom (mA) Volllast': 'migration_Compumess57Live_product_eingangsstrom_ma_volllast',
+    'Eingangsstrom (mA) ohne Last': 'migration_Compumess57Live_product_eingangsstrom_ma_ohne_last',
+    'Ausgangsspannung (VDC)': 'migration_Compumess57Live_product_ausgangsspannung_vdc',
+    'Ausgangsstrom (mA, Max)': 'migration_Compumess57Live_product_ausgangsstrom_ma_max',
+    'Ausgangsstrom (mA, Min)': 'migration_Compumess57Live_product_ausgangsstrom_ma_min',
+    'Effizienz (%, Typ)': 'migration_Compumess57Live_product_effizienz_typ',
+    'Reflektierte Welligkeit Strom (mA Pk-Pk)': 'migration_Compumess57Live_product_reflektierte_welligkeit',
+    'Fuse Rating Slow-Blow (mA)': 'migration_Compumess57Live_product_fuse_rating_slow_blow',
     'Arbeitstemperatur': 'migration_Compumess57Live_product_arbeitstemperatur',
     'BauformDetail': 'migration_Compumess57Live_product_bauform_detail',
     'Anwendung': 'migration_Compumess57Live_product_anwendung',
@@ -54,7 +69,8 @@
                 <tbody>
                     {% for label, field in customFields %}
                         {% set value = page.product.translated.customFields[field] %}
-                        {% if value %}
+                        {% set valueTrim = value|trim %}
+                        {% if valueTrim %}
                             <tr class="product--properties-row">
                                 <td class="product--properties-label is--bold">{{ label }}</td>
                                 <td class="product--properties-value">{{ value|raw }}</td>
