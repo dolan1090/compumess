@@ -47,13 +47,15 @@
 			<div class='get-handbuch-anfragen-productURL'>{{ seoUrl('frontend.detail.page', { 'productId': page.product.id }) }}</div>
 		</div>
 		<script>
-			const handbuchAnfragenProductNumber = document.querySelector('.get-handbuch-anfragen .get-handbuch-anfragen-productNumber');
-			const handbuchAnfragenProductURL = document.querySelector('.get-handbuch-anfragen .get-handbuch-anfragen-productURL');
-		
-			if (handbuchAnfragenProductNumber && handbuchAnfragenProductURL) {
-				localStorage.setItem('currentProductNumber', handbuchAnfragenProductNumber.innerText);
-				localStorage.setItem('currentProductURL', handbuchAnfragenProductURL.innerText);
-			}
+			document.addEventListener('DOMContentLoaded', function() {
+				const handbuchAnfragenProductNumber = document.querySelector('.get-handbuch-anfragen .get-handbuch-anfragen-productNumber');
+				const handbuchAnfragenProductURL = document.querySelector('.get-handbuch-anfragen .get-handbuch-anfragen-productURL');
+			
+				if (handbuchAnfragenProductNumber && handbuchAnfragenProductURL) {
+					localStorage.setItem('currentProductNumber', handbuchAnfragenProductNumber.innerText);
+					localStorage.setItem('currentProductURL', handbuchAnfragenProductURL.innerText);
+				}
+			});
 		</script>
 	</nav>
 
