@@ -54,6 +54,12 @@
     }
 }
 
+.navigation-offcanvas {
+    .navigation-offcanvas-overlay {
+        z-index: 1;
+    }
+}
+
 @media (max-width: 420px) {
     .navigation-offcanvas.offcanvas.offcanvas-start {
         width: calc(100% - 58px);
