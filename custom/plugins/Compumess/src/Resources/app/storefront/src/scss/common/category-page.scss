@@ -275,6 +275,25 @@
   }
 }
 
+.box-category-style-3-heading {
+  font-size: 1.9375rem;
+  font-weight: 700;
+  color: #3f4c58;
+
+  @include mobile {
+    font-size: 1rem;
+  }
+
+  .cms-element-text {
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .cms-block-container-row {
+    margin: auto;
+  }
+}
+
 .category-navigation-link.in-path {
   color: #004b93;
 }
