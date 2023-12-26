@@ -102,3 +102,20 @@ function lineCardCME() {
 }
 lineCardCME();
 
+//handbuch-anfragen-page
+const handbuchAnfragenPageArea = document.querySelector('.handbuch-anfragen-page textarea.form-control');
+if (handbuchAnfragenPageArea) {
+    const getCurrentProductNumber = localStorage.getItem('currentProductNumber');
+    const getCurrentProductURL = localStorage.getItem('currentProductURL');
+    handbuchAnfragenPageArea.value = 'Ich wünsche das Handbuch zu folgendem Artikel und bitte um zeitnahe Kontaktaufnahme:' + '\n' + getCurrentProductURL + '\n' + '(' + getCurrentProductNumber + ')';
+}
+
+//News White Paper
+const newsWhitePaperForm = document.querySelector('.newsWhitePaperForm form');
+const newsWhitePaperHeading = document.querySelector('h1.forms--title');
+if (newsWhitePaperForm && newsWhitePaperHeading) {
+    const newsWhitePaperFormTitle = newsWhitePaperForm.querySelector('.card a.card-title');
+    const newsWhitePaperFormArea = newsWhitePaperForm.querySelector('textarea.form-control');
+    newsWhitePaperFormTitle.textContent = newsWhitePaperHeading.textContent;    
+    newsWhitePaperFormArea.value = 'Ich interessiere mich für das White Paper dieses Produkts. Bitte lassen Sie mir dieses zeitnah zukommen.'
+}

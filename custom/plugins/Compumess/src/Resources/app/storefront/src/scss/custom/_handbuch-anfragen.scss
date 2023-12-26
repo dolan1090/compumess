@@ -1,0 +1,21 @@
+.handbuch-anfragen-page {
+    form {
+
+        input.form-control[type="email"],
+        input.form-control[type="text"],
+        input.form-control[type="tel"] {
+            width: 100%;
+            max-width: 100%;
+            color: #8798a9;
+            box-shadow: none;
+        }
+
+        textarea.form-control {
+            width: 100%;
+            max-width: 100%;
+            color: #8798a9;
+            min-height: 150px;
+            box-shadow: none;
+        }
+    }
+}
