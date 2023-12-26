@@ -7,13 +7,13 @@
 
     {% block layout_navigation_categories_list %}
         <ul class="category-navigation vfcdgfth level-{{ level }}">
+            <li class="category-navigation-entry">
+                <a class="category-navigation-link" href="/abverkauf/">
+                    Abverkauf                                      
+                </a>
+            </li>
             {% for item in navigationTree %}
                 {% block layout_navigation_categories_list_entry %}
-                    <li class="category-navigation-entry">
-                        <a class="category-navigation-link" href="/abverkauf/">
-                            Abverkauf                                      
-                        </a>
-                    </li>
                     <li class="category-navigation-entry">
                         {% if (item.category.id in activeResult.id) or (item.category.id in activeResult.path) %}
                             {% if item.category.type == 'folder' %}
@@ -58,13 +58,13 @@
                             {% endif %}
                         {% endif %}
                     </li>
-                    <li class="category-navigation-entry">
-                        <a class="category-navigation-link" href="/glossar/">
-                            Glossar                                     
-                        </a>
-                    </li>
                 {% endblock %}
             {% endfor %}
+            <li class="category-navigation-entry">
+                <a class="category-navigation-link" href="/glossar/">
+                    Glossar                                     
+                </a>
+            </li>
         </ul>
     {% endblock %}
 {% endblock %}
