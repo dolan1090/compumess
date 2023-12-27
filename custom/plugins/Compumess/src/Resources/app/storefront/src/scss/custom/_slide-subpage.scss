@@ -1,0 +1,79 @@
+.slide-subpage-1 {
+    .cms-element-product-slider {
+        border: 1px solid #dadae5;
+        padding: 15px 0;
+        overflow: hidden;
+
+        .cms-element-title {
+            border-bottom: 1px solid #dadae5;
+            margin-bottom: 15px;
+
+            p {
+                margin-bottom: 10px;
+            }
+        }
+
+        .product-slider-item  {
+            .product-box {
+                border: none;
+
+                .product-info {
+                    .product-rating {
+                        display: none;
+                    }
+
+                    a.product-name {
+                        font-size: 1rem;
+                        font-weight: normal;
+                        line-height: normal;
+                        text-align: center;
+
+                        &:hover {
+                            color: var(-blue-1);
+                        }
+                    }
+
+                    .product-variant-characteristics {
+                        display: none;
+                    }
+
+                    .product-action {
+                        display: none;
+                    }
+                    
+                }
+            }
+        }
+
+        .product-slider-controls-container {
+            button.base-slider-controls-next.product-slider-controls-next {
+                border: 1px solid #aeaeae;
+                border-right: none;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                right: 0;
+
+                span.icon.icon-arrow-head-right {
+                    width: 14px;
+                    font-weight: 600;
+                    color: #000;
+                }
+            }
+
+            button.base-slider-controls-prev.product-slider-controls-prev {
+                border: 1px solid #aeaeae;
+                border-left: none;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                left: 0;
+
+                span.icon.icon-arrow-head-left {
+                    width: 14px;
+                    font-weight: 600;
+                    color: #000;
+                }
+            }
+        }
+
+    }
+}
