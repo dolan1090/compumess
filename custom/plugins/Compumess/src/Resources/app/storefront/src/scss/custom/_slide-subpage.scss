@@ -80,6 +80,14 @@
     }
 }
 
+.moorl-column-layout-h-100 {
+    .moorl-column-layout {
+        .emotion--html.panel {
+            height: 100%;
+        }        
+    }
+}
+
 @media (min-width: 768px) {
     .slide-subpage-1.cms-block-moorl-column-layout-2-3 .moorl-column-layout {
         grid-template-columns: 30% 70%;
