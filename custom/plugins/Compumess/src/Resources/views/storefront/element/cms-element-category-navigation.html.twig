@@ -1,0 +1,23 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-category-navigation.html.twig' %}
+
+{% block element_category_navigation_element %}
+    <div class="category-navigation-box">
+        <ul class="category-navigation vfcdgfth level-0">
+            <li class="category-navigation-entry">
+                <a class="category-navigation-link" href="/abverkauf/">
+                    Abverkauf
+                </a>
+            </li>
+        </ul>
+        {% block element_category_navigation_box %}
+            {{ parent() }}
+        {% endblock %}
+        <ul class="category-navigation vfcdgfth level-0">
+            <li class="category-navigation-entry">
+                <a class="category-navigation-link" href="/glossar/">
+                    Glossar
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

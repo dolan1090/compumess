@@ -7,11 +7,6 @@
 
     {% block layout_navigation_categories_list %}
         <ul class="category-navigation vfcdgfth level-{{ level }}">
-            <li class="category-navigation-entry">
-                <a class="category-navigation-link" href="/abverkauf/">
-                    Abverkauf                                      
-                </a>
-            </li>
             {% for item in navigationTree %}
                 {% block layout_navigation_categories_list_entry %}
                     <li class="category-navigation-entry">
@@ -60,11 +55,6 @@
                     </li>
                 {% endblock %}
             {% endfor %}
-            <li class="category-navigation-entry">
-                <a class="category-navigation-link" href="/glossar/">
-                    Glossar                                     
-                </a>
-            </li>
         </ul>
     {% endblock %}
 {% endblock %}
