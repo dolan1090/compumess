@@ -21,7 +21,7 @@ function filterBtnCustom() {
 function addToCartInquiry_category() {
     var inquiryPriceInfoList = document.querySelectorAll('.product-price-info');
 
-    inquiryPriceInfoList.forEach(function(inquiryPriceInfo) {
+    inquiryPriceInfoList.forEach(function (inquiryPriceInfo) {
         var inquiryPrice = inquiryPriceInfo.querySelector('.product-price-wrapper .product-price');
 
         if (inquiryPrice && inquiryPrice.innerHTML.trim() === 'Preis auf Anfrage') {
@@ -66,7 +66,7 @@ function addToCartInquiry() {
 }
 
 //SEO
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     var titleTag = document.querySelector('title');
     if (titleTag) {
@@ -102,7 +102,7 @@ function lineCardCME() {
 }
 lineCardCME();
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     //handbuch-anfragen-page
     const handbuchAnfragenPageArea = document.querySelector('.handbuch-anfragen-page textarea.form-control');
     if (handbuchAnfragenPageArea) {
@@ -117,7 +117,26 @@ document.addEventListener('DOMContentLoaded', function() {
     if (newsWhitePaperForm && newsWhitePaperHeading) {
         const newsWhitePaperFormTitle = newsWhitePaperForm.querySelector('.card a.card-title');
         const newsWhitePaperFormArea = newsWhitePaperForm.querySelector('textarea.form-control');
-        newsWhitePaperFormTitle.textContent = newsWhitePaperHeading.textContent;    
+        newsWhitePaperFormTitle.textContent = newsWhitePaperHeading.textContent;
         newsWhitePaperFormArea.value = 'Ich interessiere mich für das White Paper dieses Produkts. Bitte lassen Sie mir dieses zeitnah zukommen.'
+    }
+});
+
+//5 column custom
+document.addEventListener("DOMContentLoaded", function () {
+    var containers = document.querySelectorAll('.box-category-content-3 .box-item-5-colums');
+
+    if (containers) {
+        containers.forEach(function (container) {
+            var textElements = container.querySelectorAll('.item .cms-element-text');
+            var shouldHide = Array.from(textElements).every(function (textElement) {
+                var textContent = textElement.textContent.trim();
+                return textContent === '';
+            });
+
+            if (shouldHide) {
+                container.style.display = 'none';
+            }
+        });
     }
 });

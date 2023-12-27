@@ -59,11 +59,10 @@
 .box-category-content-3 {
   .cms-block-container-row {
     gap: 5px;
-    justify-content: space-between;
   }
 
   .box-item-5-colums {
-    width: calc(20% - 8px);
+    width: calc(20% - 4px);
     border: 1px solid #dadae5;
 
     .item {
