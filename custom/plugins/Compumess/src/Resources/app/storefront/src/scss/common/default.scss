@@ -67,6 +67,13 @@ img {
   max-width: 100%;
 }
 
+@include desktop {
+  .w-70-ds {
+    max-width: 70%;
+    margin: auto;
+  }
+}
+
 @include mobile {
   .pt-10-mobi .cms-block-container {
     padding-top: 10px !important;
