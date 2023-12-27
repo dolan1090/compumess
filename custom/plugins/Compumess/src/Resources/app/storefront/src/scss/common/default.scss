@@ -63,6 +63,10 @@ a {
   padding: 0;
 }
 
+img {
+  max-width: 100%;
+}
+
 @include mobile {
   .pt-10-mobi .cms-block-container {
     padding-top: 10px !important;
