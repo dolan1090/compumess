@@ -88,10 +88,10 @@
     .moorl-column-layout {
         .emotion--html.panel, .emotion--manufacturer.panel {
             height: 100%;
-        } 
-        .col-md-4 > .cms-element-text {
-            height: 100%;
         }
+    }
+    .col-md-4 > .cms-element-text {
+        height: 100%;
     }
 }
 
