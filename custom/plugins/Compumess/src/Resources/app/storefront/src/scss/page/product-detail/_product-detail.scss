@@ -1,6 +1,10 @@
 .product-detail {
   padding: 40px;
 
+  @include mobile {
+    padding: 12px;
+  }
+
   a {
     color: #004b93;
     text-decoration: none;
@@ -229,6 +233,25 @@
 
   .product-detail-tabs {
     margin: 0rem 0rem 1.875rem 0rem;
+
+    a.nav-link .product-detail-tab-preview {
+      max-width: 100%;
+      text-wrap: wrap;
+      text-align: left;
+
+      span.product-detail-tab-preview-more {
+          color: var(--blue-1);
+          font-weight: normal;
+      }
+    }
+
+    a#technische-tab span.product-detail-tab-preview {
+      display: none;
+    }
+
+    a#produktblatt-tab span.product-detail-tab-preview {
+      display: none;
+    }
 
     .nav.nav-tabs.product-detail-tab-navigation-list {
       margin-bottom: -1px;
