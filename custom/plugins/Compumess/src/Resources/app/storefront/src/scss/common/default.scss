@@ -67,6 +67,10 @@ img {
   max-width: 100%;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
 @include desktop {
   .w-70-ds {
     max-width: 70%;

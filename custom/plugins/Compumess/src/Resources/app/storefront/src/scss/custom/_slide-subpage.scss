@@ -92,6 +92,13 @@
     }
 }
 
+.moorl-flex-h-100 {
+    .emotion--html.panel {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 @media (min-width: 768px) {
     .slide-subpage-1.cms-block-moorl-column-layout-2-3 .moorl-column-layout {
         grid-template-columns: 30% 70%;
