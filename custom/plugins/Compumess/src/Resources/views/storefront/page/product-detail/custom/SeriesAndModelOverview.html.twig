@@ -18,9 +18,11 @@
                     <th data-label="Ausgangsleistung" scope="col">
                         Ausgangsleistung
                     </th>
-                    <th data-label="Ausgange" scope="col">
-                        Ausgänge
-                    </th>
+                    {% if page.product.translated.customFields.migration_Compumess57Live_product_attr6 %}
+                        <th data-label="Ausgange" scope="col">
+                            Ausgänge
+                        </th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -50,9 +52,11 @@
                         <span id='maxValue-Ausgangsleistung'></span>
                         kW
                     </td>
-                    <td data-label="Ausgange">
-                        {{ page.product.translated.customFields.migration_Compumess57Live_product_attr6 }}
-                    </td>
+                    {% if page.product.translated.customFields.migration_Compumess57Live_product_attr6 %}
+                        <td data-label="Ausgange">
+                            {{ page.product.translated.customFields.migration_Compumess57Live_product_attr6 }}
+                        </td>
+                    {% endif %}
                 </tr>
                 <tr class='get--all-item-table'>
                     <td></td>
@@ -65,9 +69,11 @@
                     <td data-label="Ausgangsleistung">
                         <span id='sortedValues-Ausgangsleistung'></span>
                     </td>
-                    <td data-label="Ausgange">
-                        {{ page.product.translated.customFields.migration_Compumess57Live_product_attr6 }}
-                    </td>
+                    {% if page.product.translated.customFields.migration_Compumess57Live_product_attr6 %}
+                        <td data-label="Ausgange">
+                            {{ page.product.translated.customFields.migration_Compumess57Live_product_attr6 }}
+                        </td>
+                    {% endif %}
                 </tr>
             </tbody>
         </table>
