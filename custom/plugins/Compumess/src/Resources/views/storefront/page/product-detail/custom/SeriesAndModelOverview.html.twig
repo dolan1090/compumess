@@ -2,14 +2,12 @@
 
 {% block utilities_offcanvas_content %}
     <div class="content--description">
-        <div class="content--title">
-            Produktinformationen "{{ page.product.translated.name }}"        
-        </div>
-        <table class="dcf-table dcf-table-responsive dcf-table-bordered dcf-table-striped dcf-w-10%">
+        <div class="content--title">Produktinformationen "{{ page.product.translated.name }}"</div>
+        <table class="dcf-table dcf-table-responsive dcf-table-bordered dcf-table-striped dcf-w-10% total-series-table">
             <thead>
                 <tr>
                     <th data-label="Serie" scope="col">
-                        Serie
+                        Serie                        
                     </th>
                     <th data-label="Ausgangsspannung" scope="col">
                         Ausgangsspannung
@@ -35,13 +33,37 @@
                         </a>
                     </td>
                     <td data-label="Ausgangsspannung">
-                        {{ page.product.translated.customFields.migration_Compumess57Live_product_ausgangsspannung }}
+                        <span id='minValue-Ausgangsspannung'></span>
+                        -                                                
+                        <span id='maxValue-Ausgangsspannung'></span>
+                        V DC
                     </td>
                     <td data-label="Ausgangsstrom">
-                        {{ page.product.translated.customFields.migration_Compumess57Live_product_attr4 }}
+                        <span id='minValue-Ausgangsstrom'></span>
+                        -                                                
+                        <span id='maxValue-Ausgangsstrom'></span>
+                        A DC
                     </td>
                     <td data-label="Ausgangsleistung">
-                        {{ page.product.translated.customFields.migration_Compumess57Live_product_attr2 }}
+                        <span id='minValue-Ausgangsleistung'></span>
+                        -                                                
+                        <span id='maxValue-Ausgangsleistung'></span>
+                        kW
+                    </td>
+                    <td data-label="Ausgange">
+                        {{ page.product.translated.customFields.migration_Compumess57Live_product_attr6 }}
+                    </td>
+                </tr>
+                <tr class='get--all-item-table'>
+                    <td></td>
+                    <td data-label="Ausgangsspannung">
+                        <span id='sortedValues-Ausgangsspannung'></span>
+                    </td>
+                    <td data-label="Ausgangsstrom">
+                        <span id='sortedValues-Ausgangsstrom'></span>
+                    </td>
+                    <td data-label="Ausgangsleistung">
+                        <span id='sortedValues-Ausgangsleistung'></span>
                     </td>
                     <td data-label="Ausgange">
                         {{ page.product.translated.customFields.migration_Compumess57Live_product_attr6 }}
@@ -49,43 +71,117 @@
                 </tr>
             </tbody>
         </table>
-        <table class="dcf-table dcf-table-responsive dcf-table-bordered dcf-table-striped dcf-w-10%">
-            <thead>
-                <tr>
-                    <th data-label="Modell" scope="col">
-                        Modell
-                    </th>
-                    <th data-label="Ausgangsspannung" scope="col">
-                        Ausgangsspannung
-                    </th>
-                    <th data-label="Ausgangsstrom" scope="col">
-                        Ausgangsstrom
-                    </th>
-                    <th data-label="Ausgangsleistung" scope="col">
-                        Ausgangsleistung
-                    </th>
-                    <th data-label="Ausgange" scope="col">
-                        Ausgänge
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        {% set productSeriesList = page.product.customFields.migration_Compumess57Live_product_series %}
+        {% set productSeriesListLink = productSeriesList|replace({' ': '%20'}) %}
+
+        {% if productSeriesList is not empty %}
+            <div style='display:none'>
+                {% sw_include '@EcenturaProductsSeries/storefront/page/productseries.html.twig' with {'seriesValue': productSeriesList} %}
+            </div>
+            <div id="external-content"></div>
+
+            <script>
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', '/productseries?series_value={{ productSeriesListLink }}', true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Khi yêu cầu AJAX hoàn thành, gọi hàm xử lý dữ liệu cho Ausgangsspannung
+                        processTabSeries(xhr.responseText, 'Ausgangsspannung', 'ausgangsspannung-tab-series');
+            
+                        // Gọi hàm xử lý dữ liệu cho Ausgangsstrom
+                        processTabSeries(xhr.responseText, 'Ausgangsstrom', 'ausgangsstrom-tab-series');
+            
+                        // Gọi hàm xử lý dữ liệu cho Ausgangsleistung
+                        processTabSeries(xhr.responseText, 'Ausgangsleistung', 'ausgangsleistung-tab-series');
+                    }
+                };
+                xhr.send();
+            
+                function processTabSeries(responseText, label, className) {
+                    // Hiển thị dữ liệu từ yêu cầu AJAX
+                    document.getElementById('external-content').innerHTML = responseText;
+            
+                    // Lấy tất cả các phần tử có class "value" trong .ausgangsspannung-tab-series
+                    const tabSeriesValues = document.querySelectorAll('td.' + className);
+            
+                    // Get value min max
+                    const numericValues = [];            
+
+                    tabSeriesValues.forEach(function (element) {
+                        const value = element.textContent || element.innerText;
+                        const numericValue = parseFloat(value.toLowerCase().replace(/[^0-9.]/g, '').trim());
+            
+                        if (!isNaN(numericValue)) {
+                            numericValues.push(numericValue);
+                        }
+                    });            
+
+                    const maxValue = Math.max.apply(null, numericValues);
+                    const minValue = Math.min.apply(null, numericValues);
+            
+                    const maxValueElement = document.getElementById('maxValue-' + label);
+                    const minValueElement = document.getElementById('minValue-' + label);
+
+                    if (!isNaN(maxValue) && isFinite(maxValue)) {
+                        maxValueElement.textContent = maxValue;
+                    } else {
+                        document.querySelector(".total-series-table th[data-label='" + label + "']").style.display = 'none';
+                        document.querySelectorAll(".total-series-table td[data-label='" + label + "']").forEach(function(td) {
+                            td.style.display = 'none';
+                        });
+                    }
+
+                    if (!isNaN(minValue) && isFinite(minValue)) {
+                        minValueElement.textContent = minValue;
+                    }                    
+
+                    // Delete same value
+                    const uniqueNumericValues = [];
+
+                    tabSeriesValues.forEach(function (element) {
+                        const value = element.textContent || element.innerText;
+                        const numericValue = parseFloat(value.toLowerCase().replace(/[^0-9.]/g, '').trim());
+
+                        if (!isNaN(numericValue) && uniqueNumericValues.indexOf(numericValue) === -1) {
+                            uniqueNumericValues.push(numericValue);
+                        }
+                    });
+
+                    if (uniqueNumericValues.length === 0) {
+                        const get_all_item_table = document.querySelector('tr.get--all-item-table');
+                        if (get_all_item_table) {
+                            get_all_item_table.style.display = 'none';
+                        }
+                    }
+
+                    // Sort value
+                    const sortedValues = uniqueNumericValues.sort(function(a, b) {
+                        return a - b;
+                    });
+                    document.getElementById('sortedValues-' + label).textContent = sortedValues.join('; ');
+                }
+            </script>
+        {% else %}
+            <div>
+                Not product with this series                            
+                            
+            </div>
+        {% endif %}
+
         <div class="content--title">
-            Weiterführende Links zu "{{ page.product.translated.name }}"        
-        </div>
+            Weiterführende Links zu "{{ page.product.translated.name }}"</div>
         <ul class="content--list list--unstyled pd-0">
             <li class="list--entry">
                 <a href="/ihr-persoenliches-angebot/?sInquiry=detail&amp;sOrdernumber={{ page.product.productNumber }}" rel="nofollow" class="content--link link--contact" title="Fragen zum Artikel?">
                     <i class="fa-solid fa-chevron-right"></i>
-                    Fragen zum Artikel?                
+                    Fragen zum Artikel?
                 </a>
             </li>
             <li class="list--entry">
                 <a href="/chroma/" target="_parent" class="content--link link--supplier" title="Weitere Artikel von {{ page.product.manufacturer.name }}">
                     <i class="fa-solid fa-chevron-right"></i>
-                    Weitere Artikel von {{ page.product.manufacturer.name }}
+                    Weitere Artikel von
+                    {{ page.product.manufacturer.name }}
                 </a>
             </li>
         </ul>
